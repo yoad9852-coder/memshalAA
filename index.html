@@ -2741,5 +2741,91 @@ window.__mountLessonsForCourse = async function(courseId){
     if (!a) return;
     a.href = `https://github.com/${cfg.owner}/${cfg.repo}/upload/${cfg.branch}/lessons/${enc}/`;
   });
-})();</script></body>
+})();</script><script>
+// --- HARDENED ADMIN BUTTON + DIAGNOSTICS ---
+(function(){
+  const log = (...args)=>console.log('%c[Lessons Admin]', 'color:#0a7', ...args);
+
+  function ensureConfig(){
+    const cfg = window.SEMESTER_CONFIG || {};
+    if(!cfg.owner || !cfg.repo || !cfg.branch){
+      log('Missing SEMESTER_CONFIG. Using fallback placeholders.');
+    } else {
+      log('SEMESTER_CONFIG OK:', cfg);
+    }
+    return cfg;
+  }
+
+  function wireCourse(container){
+    const courseId = container.id.replace('page-course-','');
+    const lessonsFolder = container.getAttribute('data-lessons-folder') || courseId;
+    const enc = encodeURIComponent(lessonsFolder);
+
+    // find lessons grid
+    const ul = container.querySelector('ul.lesson-grid');
+    if(!ul){
+      log('No lesson-grid found for', courseId);
+      return;
+    }
+    // ensure list id exists for mount
+    if(!ul.id) ul.id = 'lesson-list-' + courseId;
+
+    // ensure admin box
+    let admin = container.querySelector('.admin-tools');
+    if(!admin){
+      admin = document.createElement('div');
+      admin.className = 'admin-tools admin-tools-' + courseId;
+      admin.style.display = 'block';
+      admin.style.margin = '8px 0';
+      ul.insertAdjacentElement('afterend', admin);
+      log('Created admin-tools for', courseId);
+    } else {
+      admin.style.display = 'block';
+    }
+
+    // ensure link
+    let a = admin.querySelector('a');
+    if(!a){
+      a = document.createElement('a');
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = 'העלה שיעור חדש ↗';
+      admin.appendChild(a);
+      log('Created upload link for', courseId);
+    }
+    // set href from config
+    const cfg = ensureConfig();
+    if(cfg.owner && cfg.repo && cfg.branch){
+      a.href = `https://github.com/${cfg.owner}/${cfg.repo}/upload/${cfg.branch}/lessons/${enc}/`;
+    }
+
+    // auto-mount lessons list if the function exists
+    if(typeof window.__mountLessonsForCourse === 'function'){
+      try { window.__mountLessonsForCourse(courseId); } catch(e){ console.error(e); }
+    }
+  }
+
+  function run(){
+    document.querySelectorAll('[id^="page-course-"]').forEach(wireCourse);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+
+  // expose a quick self-test
+  window.__lessonsAdminSelfTest = function(){
+    const results = [];
+    document.querySelectorAll('[id^="page-course-"]').forEach(container=>{
+      const courseId = container.id.replace('page-course-','');
+      const admin = container.querySelector('.admin-tools a');
+      results.push([courseId, !!admin, admin && admin.href]);
+    });
+    console.table(results.map(([id, ok, href])=>({course:id, hasButton:ok, href})));
+    return results;
+  };
+})();
+</script></body>
 </html>
