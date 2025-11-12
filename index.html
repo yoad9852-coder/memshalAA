@@ -628,7 +628,19 @@
             display: block; /* העמוד הפעיל מוצג */
         }
 
-    </style>
+    
+/* === PDF Export (minimal additions) === */
+.actions{display:flex;gap:8px;align-items:center}
+.btn{font:inherit;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer}
+.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+@media print{
+  body{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  body.printing>*:not(#print-sheet){display:none !important}
+  #print-sheet{display:block}
+  @page{size:A4;margin:18mm 14mm}
+}
+#print-sheet{display:none;max-width:800px;margin-inline:auto}
+</style>
 
 <!-- קוד הגנה של Firebase (להדביק ב-<head> של כל דף מוגן) -->
 <script type="module">
@@ -689,6 +701,40 @@
         #logoutButton { display: none; } 
     </style>
         
+<style>
+/* === PDF floating widget (only shows when no course header found) === */
+.pdf-widget{position:fixed;inset-inline-end:16px;inset-block-start:16px;z-index:9999;display:flex;gap:8px}
+.pdf-widget .btn{font:inherit;border:1px solid var(--border);background:var(--surface, #10151e);color:var(--text, #e8f0fe);padding:8px 12px;border-radius:10px;cursor:pointer}
+.pdf-widget .btn.primary{background:var(--primary, #4fc3f7);color:#00131d;border-color:transparent}
+@media print{
+  body{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  body.printing>*:not(#print-sheet){display:none !important}
+  #print-sheet{display:block}
+  @page{size:A4;margin:18mm 14mm}
+}
+#print-sheet{display:none;max-width:800px;margin-inline:auto}
+</style>
+<style>
+/* ===== High-Contrast Print Palette + 1/3 Smaller Text ===== */
+@media print{
+  :root{
+    --bg:#ffffff !important;
+    --fg:#111111 !important;
+    --muted:#2b2b2b !important;
+    --card:#ffffff !important;
+    --border:#000000 !important;
+    --primary:#000000 !important;
+  }
+  /* Smaller text for print: about one-third smaller (≈66.7%) */
+  html{ font-size:66.6667% !important; }
+  body{ font-size:0.6667em !important; background:#ffffff !important; color:#111111 !important; }
+  #print-sheet{ background:#ffffff !important; color:#111111 !important; }
+  #print-sheet .section{ background:#ffffff !important; border-color:#000000 !important; }
+  #print-sheet .byline, #print-sheet .meta, #print-sheet [class*="muted"]{ color:#222 !important; }
+  a{ color:#000 !important; text-decoration:underline !important; }
+  body{ print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+}
+</style>
 </head>
 <body>
 <div class="page-container active" id="page-main">
@@ -2887,5 +2933,135 @@ window.__mountLessonsForCourse = async function(courseId){
     return results;
   };
 })();
-</script></body>
+</script><!-- PDF: קנבס זמני להדפסה/ייצוא -->
+<div id="print-sheet" aria-hidden="true" style="display:none"></div>
+
+<script>
+// === Semester A PDF addon (non-invasive) ===
+(function(){
+  const $  = (s,c=document)=>c.querySelector(s);
+  const $$ = (s,c=document)=>Array.from(c.querySelectorAll(s));
+
+  function titleFrom(page){
+    const t = (page && page.querySelector ? (page.querySelector('.brand h1')?.textContent || '') : '') || document.title || '';
+    return t.replace(/\s*\/\s*$/, '').replace(/^.*?\/\s*/, '').trim() || 'עמוד';
+  }
+  function sanitize(root){
+    (root.querySelectorAll?.('[data-print-hide]')||[]).forEach(el=>el.remove());
+    (root.querySelectorAll?.('details')||[]).forEach(d=> d.open = true);
+    (root.querySelectorAll?.('[role=tabpanel]')||[]).forEach(p=> p.removeAttribute('aria-hidden'));
+    return root;
+  }
+  function collect(page){
+    const root = (page && page.querySelector) ? page : document;
+    const tabs = [];
+    const btns = Array.from(root.querySelectorAll('.tab-navigation .tab-btn'));
+    if(btns.length){
+      btns.forEach((btn,idx)=>{
+        const key   = btn.getAttribute('data-tab');
+        const panel = key ? root.querySelector('.tab-pane#'+CSS.escape(key)) : null;
+        if(panel){ tabs.push({ title: btn.textContent.trim() || `חלק ${idx+1}`, panel }); }
+      });
+      return tabs;
+    }
+    const panes = Array.from(root.querySelectorAll('.tab-pane'));
+    if(panes.length){
+      panes.forEach((panel,idx)=>{
+        const title = panel.querySelector('h2,h3,h4')?.textContent?.trim() || `חלק ${idx+1}`;
+        tabs.push({ title, panel });
+      });
+      return tabs;
+    }
+    const main = root.querySelector('main') || root.body;
+    tabs.push({ title:'תוכן העמוד', panel: main });
+    return tabs;
+  }
+  function build(page){
+    const sheet = document.getElementById('print-sheet');
+    sheet.innerHTML = '';
+    sheet.setAttribute('aria-hidden','false');
+    const h1 = document.createElement('h1'); h1.textContent = titleFrom(page); sheet.appendChild(h1);
+    collect(page).forEach(({title,panel},i)=>{
+      const section = document.createElement('section'); section.className='section';
+      const h2 = document.createElement('h2'); h2.textContent = title || `חלק ${i+1}`; section.appendChild(h2);
+      const node = panel.cloneNode ? panel.cloneNode(true) : panel;
+      sanitize(node);
+      if(node.style) node.style.display='block';
+      node.removeAttribute && node.removeAttribute('aria-hidden');
+      const firstHeading = node.querySelector && node.querySelector('h1,h2');
+      if(firstHeading && firstHeading.textContent.trim()===h2.textContent.trim()){ firstHeading.remove(); }
+      section.appendChild(node); sheet.appendChild(section);
+    });
+    return sheet;
+  }
+  function printNow(page){
+    const sheet = build(page);
+    document.body.classList.add('printing');
+    sheet.style.display='block';
+    window.print();
+  }
+  window.addEventListener('afterprint', ()=>{
+    document.body.classList.remove('printing');
+    const sheet = document.getElementById('print-sheet');
+    if(sheet){
+      sheet.setAttribute('aria-hidden','true');
+      if(!document.body.classList.contains('pending-download')){
+        sheet.style.display='none'; sheet.innerHTML='';
+      }
+    }
+  });
+  async function ensureHtml2Pdf(){
+    if(window.html2pdf) return true;
+    try{
+      await new Promise((resolve,reject)=>{
+        const s=document.createElement('script');
+        s.src='https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js';
+        s.onload=resolve; s.onerror=reject; document.head.appendChild(s);
+      });
+      return !!window.html2pdf;
+    }catch(e){ return false; }
+  }
+  async function download(page){
+    const ok = await ensureHtml2Pdf();
+    const sheet = build(page);
+    const filename = titleFrom(page).replace(/\s+/g,'_') + '.pdf';
+    if(!ok){ printNow(page); return; }
+    document.body.classList.add('printing','pending-download');
+    sheet.style.display='block';
+    const opt = { margin:[10,10,10,10], filename, image:{type:'jpeg',quality:0.98}, html2canvas:{scale:2,useCORS:true, backgroundColor:'#ffffff'}, jsPDF:{unit:'mm',format:'a4',orientation:'portrait'} };
+    try{ await html2pdf().from(sheet).set(opt).save(); }
+    finally{
+      document.body.classList.remove('pending-download','printing');
+      sheet.setAttribute('aria-hidden','true'); sheet.style.display='none'; sheet.innerHTML='';
+    }
+  }
+  function mount(){
+    const targets = document.querySelectorAll('.page-container[id^="page-course-"] .site-header .nav');
+    if(targets.length){
+      targets.forEach(nav=>{
+        if(nav.querySelector('.actions')) return;
+        const actions = document.createElement('div');
+        actions.className = 'actions';
+        actions.innerHTML = '<button class="btn primary" id="__exportBtn">הפק PDF</button><button class="btn" id="__downloadBtn">הורד PDF</button>';
+        nav.appendChild(actions);
+        const page = nav.closest('.page-container');
+        actions.querySelector('#__exportBtn').addEventListener('click', ()=> printNow(page));
+        actions.querySelector('#__downloadBtn').addEventListener('click', ()=> download(page));
+      });
+      return;
+    }
+    if(!document.querySelector('.pdf-widget')){
+      const w = document.createElement('div');
+      w.className = 'pdf-widget';
+      w.innerHTML = '<button class="btn primary" id="__exportBtnFloat">הפק PDF</button><button class="btn" id="__downloadBtnFloat">הורד PDF</button>';
+      document.body.appendChild(w);
+      const page = document;
+      w.querySelector('#__exportBtnFloat').addEventListener('click', ()=> printNow(page));
+      w.querySelector('#__downloadBtnFloat').addEventListener('click', ()=> download(page));
+    }
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', mount); } else { mount(); }
+})();
+</script>
+</body>
 </html>
