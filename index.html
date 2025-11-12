@@ -628,18 +628,53 @@
             display: block; /* העמוד הפעיל מוצג */
         }
 
-    
-/* === PDF Export (minimal additions) === */
-.actions{display:flex;gap:8px;align-items:center}
-.btn{font:inherit;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer}
-.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+    /* === Minimal PDF controls (compact) – NO global overrides === */
+.sa-actions{display:flex;gap:8px;align-items:center}
+.sa-actions .sa-divider{width:1px;height:22px;background:#d0d5dd}
+.sa-btn{font:inherit;line-height:1;border:1px solid #d0d5dd;background:#ffffff;color:#0f172a;padding:6px 8px;border-radius:10px;cursor:pointer;display:inline-flex;gap:6px;align-items:center;font-size:12px}
+.sa-btn.primary{background:#0ea5e9;color:#00131d;border-color:transparent}
+.sa-btn svg{width:14px;height:14px;display:block}
+
+/* Print sheet ONLY (for contrast & size) */
+#print-sheet{display:none;max-width:800px;margin-inline:auto;background:#ffffff;color:#111111}
+#print-sheet h1{font-size:20px;margin:0 0 8px}
+#print-sheet h2{font-size:16px;margin:18px 0 8px}
+#print-sheet .sa-sec{background:#ffffff;border:1px solid #000000;border-radius:10px;padding:12px}
 @media print{
   body{print-color-adjust:exact;-webkit-print-color-adjust:exact}
-  body.printing>*:not(#print-sheet){display:none !important}
+  body.sa-printing>*:not(#print-sheet){display:none !important}
   #print-sheet{display:block}
-  @page{size:A4;margin:18mm 14mm}
+  #print-sheet, #print-sheet *{color:#111111 !important}
+  html{font-size:66.6667% !important}
 }
-#print-sheet{display:none;max-width:800px;margin-inline:auto}
+/* floating widget on pages without header slot */
+.sa-widget{position:fixed;inset-inline-end:16px;inset-block-start:16px;z-index:9999}
+.sa-widget .sa-actions{background:#ffffff;border:1px solid #d0d5dd;border-radius:12px;padding:6px 8px}
+/* === SA PDF Controls – adjustments === */
+.sa-actions{display:flex;gap:8px;align-items:center;direction:ltr} /* enforce visual order: theme | divider | print | download */
+.sa-actions .sa-divider{width:1px;height:22px;background:#d0d5dd}
+.sa-btn{font:inherit;line-height:1;border:1px solid #d0d5dd;background:#ffffff;color:#0f172a;padding:6px 8px;border-radius:10px;cursor:pointer;display:inline-flex;gap:6px;align-items:center;font-size:12px}
+.sa-btn.primary{background:#0ea5e9;color:#00131d;border-color:transparent}
+.sa-btn svg{width:14px;height:14px;display:block}
+/* icon-only buttons: hide labels */
+.sa-btn .lbl{display:none}
+
+/* robust black-on-white for generated sheet in both flows */
+#print-sheet{background:#ffffff !important;color:#111111 !important}
+#print-sheet *{color:#111111 !important}
+@media print{
+  html{font-size:66.6667% !important}
+  body{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  body.sa-printing>*:not(#print-sheet){display:none !important}
+  #print-sheet{display:block}
+}
+
+/* Theme toggle via whole-page filter (works desktop & mobile) */
+html.sa-dark{ filter: invert(1) hue-rotate(180deg); }
+html.sa-dark img, html.sa-dark video, html.sa-dark canvas, html.sa-dark svg image{ filter: invert(1) hue-rotate(180deg); }
+html.sa-light{ filter:none; }
+.sa-widget{position:fixed;inset-inline-end:16px;inset-block-start:16px;z-index:9999}
+.sa-widget .sa-actions{background:#ffffff;border:1px solid #d0d5dd;border-radius:12px;padding:6px 8px}
 </style>
 
 <!-- קוד הגנה של Firebase (להדביק ב-<head> של כל דף מוגן) -->
@@ -701,40 +736,6 @@
         #logoutButton { display: none; } 
     </style>
         
-<style>
-/* === PDF floating widget (only shows when no course header found) === */
-.pdf-widget{position:fixed;inset-inline-end:16px;inset-block-start:16px;z-index:9999;display:flex;gap:8px}
-.pdf-widget .btn{font:inherit;border:1px solid var(--border);background:var(--surface, #10151e);color:var(--text, #e8f0fe);padding:8px 12px;border-radius:10px;cursor:pointer}
-.pdf-widget .btn.primary{background:var(--primary, #4fc3f7);color:#00131d;border-color:transparent}
-@media print{
-  body{print-color-adjust:exact;-webkit-print-color-adjust:exact}
-  body.printing>*:not(#print-sheet){display:none !important}
-  #print-sheet{display:block}
-  @page{size:A4;margin:18mm 14mm}
-}
-#print-sheet{display:none;max-width:800px;margin-inline:auto}
-</style>
-<style>
-/* ===== High-Contrast Print Palette + 1/3 Smaller Text ===== */
-@media print{
-  :root{
-    --bg:#ffffff !important;
-    --fg:#111111 !important;
-    --muted:#2b2b2b !important;
-    --card:#ffffff !important;
-    --border:#000000 !important;
-    --primary:#000000 !important;
-  }
-  /* Smaller text for print: about one-third smaller (≈66.7%) */
-  html{ font-size:66.6667% !important; }
-  body{ font-size:0.6667em !important; background:#ffffff !important; color:#111111 !important; }
-  #print-sheet{ background:#ffffff !important; color:#111111 !important; }
-  #print-sheet .section{ background:#ffffff !important; border-color:#000000 !important; }
-  #print-sheet .byline, #print-sheet .meta, #print-sheet [class*="muted"]{ color:#222 !important; }
-  a{ color:#000 !important; text-decoration:underline !important; }
-  body{ print-color-adjust:exact; -webkit-print-color-adjust:exact; }
-}
-</style>
 </head>
 <body>
 <div class="page-container active" id="page-main">
@@ -2933,135 +2934,171 @@ window.__mountLessonsForCourse = async function(courseId){
     return results;
   };
 })();
-</script><!-- PDF: קנבס זמני להדפסה/ייצוא -->
-<div id="print-sheet" aria-hidden="true" style="display:none"></div>
+</script><div id="print-sheet" aria-hidden="true" style="display:none"></div>
 
 <script>
-// === Semester A PDF addon (non-invasive) ===
+// === Semester A PDF controls (minimal, icon-only + robust theme + black text) ===
 (function(){
   const $  = (s,c=document)=>c.querySelector(s);
   const $$ = (s,c=document)=>Array.from(c.querySelectorAll(s));
+  const ICONS = {
+    pdf:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 2v4h4" fill="currentColor"/></svg>',
+    print:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6h2a2 2 0 012 2v5h-4v4H8v-4H4v-5a2 2 0 012-2h0zm10-4H8v4h8V5zm-2 10H10v4h4v-4z" transform="translate(-2,0)" fill="currentColor"/></svg>',
+    sun:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8zM1 13h3v-2H1zm9-9h2V1h-2zm7.04 1.62l1.79-1.8-1.41-1.41-1.8 1.79zM17 13h3v-2h-3zM12 6a6 6 0 100 12 6 6 0 000-12z" fill="currentColor"/></svg>',
+    moon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/></svg>'
+  };
 
-  function titleFrom(page){
-    const t = (page && page.querySelector ? (page.querySelector('.brand h1')?.textContent || '') : '') || document.title || '';
-    return t.replace(/\s*\/\s*$/, '').replace(/^.*?\/\s*/, '').trim() || 'עמוד';
-  }
-  function sanitize(root){
-    (root.querySelectorAll?.('[data-print-hide]')||[]).forEach(el=>el.remove());
-    (root.querySelectorAll?.('details')||[]).forEach(d=> d.open = true);
-    (root.querySelectorAll?.('[role=tabpanel]')||[]).forEach(p=> p.removeAttribute('aria-hidden'));
-    return root;
-  }
-  function collect(page){
-    const root = (page && page.querySelector) ? page : document;
-    const tabs = [];
-    const btns = Array.from(root.querySelectorAll('.tab-navigation .tab-btn'));
+  function collectTabs(root){
+    const res = [];
+    const btns = $$('.tab-navigation .tab-btn', root);
     if(btns.length){
-      btns.forEach((btn,idx)=>{
-        const key   = btn.getAttribute('data-tab');
+      btns.forEach((btn,i)=>{
+        const key=btn.getAttribute('data-tab');
         const panel = key ? root.querySelector('.tab-pane#'+CSS.escape(key)) : null;
-        if(panel){ tabs.push({ title: btn.textContent.trim() || `חלק ${idx+1}`, panel }); }
+        if(panel){ res.push({title: btn.textContent.trim()||`חלק ${i+1}`, panel}); }
       });
-      return tabs;
+      return res;
     }
-    const panes = Array.from(root.querySelectorAll('.tab-pane'));
+    const panes = $$('.tab-pane', root);
     if(panes.length){
-      panes.forEach((panel,idx)=>{
-        const title = panel.querySelector('h2,h3,h4')?.textContent?.trim() || `חלק ${idx+1}`;
-        tabs.push({ title, panel });
-      });
-      return tabs;
+      panes.forEach((panel,i)=> res.push({title: panel.querySelector('h2,h3,h4')?.textContent?.trim()||`חלק ${i+1}`, panel}));
+      return res;
     }
     const main = root.querySelector('main') || root.body;
-    tabs.push({ title:'תוכן העמוד', panel: main });
-    return tabs;
+    res.push({title:'תוכן העמוד', panel: main});
+    return res;
   }
-  function build(page){
+
+  function titleFrom(root){
+    const t = (root.querySelector('.brand h1')?.textContent || document.title || '').trim();
+    return t || 'עמוד';
+  }
+
+  function injectStrongBlackCSS(sheet){
+    // Ensures black text regardless of site styles during capture/print
+    const style = document.createElement('style');
+    style.textContent = '#print-sheet, #print-sheet *{color:#111 !important;background-color:transparent !important;} #print-sheet a{color:#000 !important;text-decoration:underline !important}';
+    sheet.prepend(style);
+  }
+
+  function buildSheet(root){
     const sheet = document.getElementById('print-sheet');
-    sheet.innerHTML = '';
-    sheet.setAttribute('aria-hidden','false');
-    const h1 = document.createElement('h1'); h1.textContent = titleFrom(page); sheet.appendChild(h1);
-    collect(page).forEach(({title,panel},i)=>{
-      const section = document.createElement('section'); section.className='section';
-      const h2 = document.createElement('h2'); h2.textContent = title || `חלק ${i+1}`; section.appendChild(h2);
-      const node = panel.cloneNode ? panel.cloneNode(true) : panel;
-      sanitize(node);
-      if(node.style) node.style.display='block';
-      node.removeAttribute && node.removeAttribute('aria-hidden');
-      const firstHeading = node.querySelector && node.querySelector('h1,h2');
-      if(firstHeading && firstHeading.textContent.trim()===h2.textContent.trim()){ firstHeading.remove(); }
-      section.appendChild(node); sheet.appendChild(section);
+    sheet.innerHTML=''; sheet.setAttribute('aria-hidden','false');
+    sheet.style.background='#fff'; sheet.style.color='#111';
+    const h1 = document.createElement('h1'); h1.textContent = titleFrom(root); sheet.appendChild(h1);
+    collectTabs(root).forEach(({title,panel},i)=>{
+      const sec = document.createElement('section'); sec.className='sa-sec';
+      const h2 = document.createElement('h2'); h2.textContent = title || `חלק ${i+1}`; sec.appendChild(h2);
+      const node = panel.cloneNode(true);
+      node.querySelectorAll?.('[data-print-hide]')?.forEach(el=>el.remove());
+      node.querySelectorAll?.('details')?.forEach(d=> d.open = true);
+      node.querySelectorAll?.('[role=tabpanel]')?.forEach(p=> p.removeAttribute('aria-hidden'));
+      node.style.display='block'; node.removeAttribute('aria-hidden');
+      const first=node.querySelector('h1,h2'); if(first && first.textContent.trim()===h2.textContent.trim()){ first.remove(); }
+      sec.appendChild(node); sheet.appendChild(sec);
     });
+    injectStrongBlackCSS(sheet);
     return sheet;
   }
-  function printNow(page){
-    const sheet = build(page);
-    document.body.classList.add('printing');
+
+  function doPrint(root){
+    const sheet = buildSheet(root);
+    document.body.classList.add('sa-printing');
     sheet.style.display='block';
     window.print();
   }
   window.addEventListener('afterprint', ()=>{
-    document.body.classList.remove('printing');
-    const sheet = document.getElementById('print-sheet');
-    if(sheet){
-      sheet.setAttribute('aria-hidden','true');
-      if(!document.body.classList.contains('pending-download')){
-        sheet.style.display='none'; sheet.innerHTML='';
-      }
-    }
+    document.body.classList.remove('sa-printing');
+    const sheet=document.getElementById('print-sheet');
+    if(sheet){ sheet.setAttribute('aria-hidden','true'); sheet.style.display='none'; sheet.innerHTML=''; }
   });
+
   async function ensureHtml2Pdf(){
     if(window.html2pdf) return true;
     try{
-      await new Promise((resolve,reject)=>{
+      await new Promise((res,rej)=>{
         const s=document.createElement('script');
         s.src='https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js';
-        s.onload=resolve; s.onerror=reject; document.head.appendChild(s);
+        s.onload=res; s.onerror=rej; document.head.appendChild(s);
       });
       return !!window.html2pdf;
     }catch(e){ return false; }
   }
-  async function download(page){
+
+  async function doDownload(root){
     const ok = await ensureHtml2Pdf();
-    const sheet = build(page);
-    const filename = titleFrom(page).replace(/\s+/g,'_') + '.pdf';
-    if(!ok){ printNow(page); return; }
-    document.body.classList.add('printing','pending-download');
+    const sheet = buildSheet(root);
+    const filename = titleFrom(root).replace(/\s+/g,'_') + '.pdf';
     sheet.style.display='block';
-    const opt = { margin:[10,10,10,10], filename, image:{type:'jpeg',quality:0.98}, html2canvas:{scale:2,useCORS:true, backgroundColor:'#ffffff'}, jsPDF:{unit:'mm',format:'a4',orientation:'portrait'} };
+    if(!ok){ doPrint(root); return; }
+    const opt = {
+      margin:[10,10,10,10],
+      filename,
+      image:{type:'jpeg',quality:0.98},
+      html2canvas:{scale:2,useCORS:true, backgroundColor:'#ffffff'}, // force white
+      jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
+    };
     try{ await html2pdf().from(sheet).set(opt).save(); }
-    finally{
-      document.body.classList.remove('pending-download','printing');
-      sheet.setAttribute('aria-hidden','true'); sheet.style.display='none'; sheet.innerHTML='';
-    }
+    finally{ sheet.setAttribute('aria-hidden','true'); sheet.style.display='none'; sheet.innerHTML=''; }
   }
+
+  // Theme toggle that flips html.sa-light / html.sa-dark (filter trick), works cross-platform
+  function initTheme(btn){
+    function current(){ return document.documentElement.classList.contains('sa-dark') ? 'dark' : 'light'; }
+    function icon(theme){ return theme==='light' ? ICONS.sun : ICONS.moon; }
+    btn.addEventListener('click', ()=>{
+      const now = current();
+      document.documentElement.classList.toggle('sa-dark', now==='light'); // if it was light -> enable dark
+      const next = current();
+      btn.innerHTML = icon(next); // icon only
+      try{ localStorage.setItem('sa-theme', next); }catch(e){}
+    });
+    let theme='light';
+    try{ theme = localStorage.getItem('sa-theme') || theme; }catch(e){}
+    document.documentElement.classList.toggle('sa-dark', theme==='dark');
+    btn.innerHTML = icon(theme);
+  }
+
+  function makeBar(){
+    const bar = document.createElement('div'); bar.className='sa-actions';
+    const theme = document.createElement('button'); theme.className='sa-btn'; theme.id='saTheme'; theme.type='button';
+    const divider = document.createElement('div'); divider.className='sa-divider';
+    const printBtn = document.createElement('button'); printBtn.className='sa-btn primary'; printBtn.id='saPrint'; printBtn.type='button';
+    printBtn.innerHTML = ICONS.print + '<span class="lbl">הדפס</span>'; // label hidden by CSS
+    const dlBtn = document.createElement('button'); dlBtn.className='sa-btn'; dlBtn.id='saDownload'; dlBtn.type='button';
+    dlBtn.innerHTML = ICONS.pdf + '<span class="lbl">הורד PDF</span>'; // label hidden by CSS
+    // Order: theme | divider | print | download (visual via direction:ltr)
+    bar.appendChild(theme); bar.appendChild(divider); bar.appendChild(printBtn); bar.appendChild(dlBtn);
+    return {bar, theme, printBtn, dlBtn};
+  }
+
   function mount(){
     const targets = document.querySelectorAll('.page-container[id^="page-course-"] .site-header .nav');
     if(targets.length){
       targets.forEach(nav=>{
-        if(nav.querySelector('.actions')) return;
-        const actions = document.createElement('div');
-        actions.className = 'actions';
-        actions.innerHTML = '<button class="btn primary" id="__exportBtn">הפק PDF</button><button class="btn" id="__downloadBtn">הורד PDF</button>';
-        nav.appendChild(actions);
+        if(nav.querySelector('.sa-actions')) return;
+        const {bar,theme,printBtn,dlBtn} = makeBar();
+        nav.appendChild(bar);
         const page = nav.closest('.page-container');
-        actions.querySelector('#__exportBtn').addEventListener('click', ()=> printNow(page));
-        actions.querySelector('#__downloadBtn').addEventListener('click', ()=> download(page));
+        initTheme(theme);
+        printBtn.addEventListener('click', ()=> doPrint(page));
+        dlBtn.addEventListener('click', ()=> doDownload(page));
       });
       return;
     }
-    if(!document.querySelector('.pdf-widget')){
-      const w = document.createElement('div');
-      w.className = 'pdf-widget';
-      w.innerHTML = '<button class="btn primary" id="__exportBtnFloat">הפק PDF</button><button class="btn" id="__downloadBtnFloat">הורד PDF</button>';
-      document.body.appendChild(w);
+    if(!document.querySelector('.sa-widget')){
+      const wrap = document.createElement('div'); wrap.className='sa-widget';
+      const inner = makeBar(); wrap.appendChild(inner.bar);
+      document.body.appendChild(wrap);
       const page = document;
-      w.querySelector('#__exportBtnFloat').addEventListener('click', ()=> printNow(page));
-      w.querySelector('#__downloadBtnFloat').addEventListener('click', ()=> download(page));
+      initTheme(inner.theme);
+      inner.printBtn.addEventListener('click', ()=> doPrint(page));
+      inner.dlBtn.addEventListener('click', ()=> doDownload(page));
     }
   }
   if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', mount); } else { mount(); }
 })();
 </script>
+
 </body>
 </html>
