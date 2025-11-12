@@ -650,7 +650,7 @@
 /* floating widget on pages without header slot */
 .sa-widget{position:fixed;inset-inline-end:16px;inset-block-start:16px;z-index:9999}
 .sa-widget .sa-actions{background:#ffffff;border:1px solid #d0d5dd;border-radius:12px;padding:6px 8px}
-/* === SA PDF Controls – adjustments === */
+/* */
 .sa-actions{display:flex;gap:8px;align-items:center;direction:ltr} /* enforce visual order: theme | divider | print | download */
 .sa-actions .sa-divider{width:1px;height:22px;background:#d0d5dd}
 .sa-btn{font:inherit;line-height:1;border:1px solid #d0d5dd;background:#ffffff;color:#0f172a;padding:6px 8px;border-radius:10px;cursor:pointer;display:inline-flex;gap:6px;align-items:center;font-size:12px}
@@ -675,6 +675,74 @@ html.sa-dark img, html.sa-dark video, html.sa-dark canvas, html.sa-dark svg imag
 html.sa-light{ filter:none; }
 .sa-widget{position:fixed;inset-inline-end:16px;inset-block-start:16px;z-index:9999}
 .sa-widget .sa-actions{background:#ffffff;border:1px solid #d0d5dd;border-radius:12px;padding:6px 8px}
+/* */
+.sa-actions{display:flex;gap:10px;align-items:center;direction:ltr}
+.sa-actions .sa-divider{width:1px;height:22px;background:#d0d5dd}
+.sa-btn{font:inherit;line-height:1;border:1px solid #d0d5dd;background:#ffffff;color:#0f172a;
+  padding:8px 10px;border-radius:10px;cursor:pointer;display:inline-flex;gap:8px;align-items:center;font-size:13px}
+.sa-btn.primary{background:#0ea5e9;color:#00131d;border-color:transparent}
+.sa-btn svg{width:16px;height:16px;display:block}
+.sa-btn .lbl{display:none} /* icon-only */
+
+/* Strong black-on-white inside the print sheet */
+#print-sheet{background:#ffffff !important;color:#111111 !important}
+#print-sheet *{color:#111111 !important;-webkit-text-fill-color:#111111 !important}
+
+/* Print behavior */
+@media print{
+  html{font-size:66.6667% !important}
+  body{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  body.sa-printing>*:not(#print-sheet){display:none !important}
+  #print-sheet{display:block}
+}
+
+/* Floating widget (always available, incl. homepage) */
+.sa-widget{position:fixed;inset-inline-end:16px;inset-block-start:16px;z-index:9999}
+.sa-widget .sa-actions{background:#ffffff;border:1px solid #d0d5dd;border-radius:12px;padding:6px 8px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+/* */
+.sa-actions{display:flex;gap:12px;align-items:center;direction:ltr} /* visual order: theme | divider | print */
+.sa-actions .sa-divider{width:1px;height:24px;background:#d0d5dd}
+.sa-btn{font:inherit;line-height:1;border:1px solid #d0d5dd;background:#ffffff;color:#0f172a;
+  padding:10px 12px;border-radius:12px;cursor:pointer;display:inline-flex;gap:10px;align-items:center;font-size:15px}
+.sa-btn.primary{background:#0ea5e9;color:#00131d;border-color:transparent}
+.sa-btn svg{width:20px;height:20px;display:block}
+.sa-btn .lbl{display:none} /* icon-only */
+
+/* Strong black-on-white inside the print sheet */
+#print-sheet{background:#ffffff !important;color:#111111 !important}
+#print-sheet *{color:#111111 !important;-webkit-text-fill-color:#111111 !important}
+@media print{
+  html{font-size:66.6667% !important}
+  body{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  body.sa-printing>*:not(#print-sheet){display:none !important}
+  #print-sheet{display:block}
+}
+/* === SA Controls – v7 (header-only, responsive, clean) === */
+.sa-actions{display:flex;gap:12px;align-items:center;direction:ltr;flex-wrap:wrap}
+.sa-actions .sa-divider{width:1px;height:24px;background:#d0d5dd}
+.sa-btn{font:inherit;line-height:1;border:1px solid #d0d5dd;background:#ffffff;color:#0f172a;
+  padding:10px 12px;border-radius:12px;cursor:pointer;display:inline-flex;gap:10px;align-items:center;font-size:15px}
+.sa-btn.primary{background:#0ea5e9;color:#00131d;border-color:transparent}
+.sa-btn svg{width:20px;height:20px;display:block}
+.sa-btn .lbl{display:none} /* icon-only */
+
+/* collapse nicely on phones */
+@media (max-width:640px){
+  .sa-actions{gap:8px}
+  .sa-actions .sa-divider{height:20px}
+  .sa-btn{padding:8px 10px;font-size:14px}
+  .sa-btn svg{width:18px;height:18px}
+}
+
+/* Strong black-on-white inside the print sheet */
+#print-sheet{background:#ffffff !important;color:#111111 !important}
+#print-sheet *{color:#111111 !important;-webkit-text-fill-color:#111111 !important}
+@media print{
+  html{font-size:66.6667% !important}
+  body{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  body.sa-printing>*:not(#print-sheet){display:none !important}
+  #print-sheet{display:block}
+}
 </style>
 
 <!-- קוד הגנה של Firebase (להדביק ב-<head> של כל דף מוגן) -->
@@ -2936,17 +3004,31 @@ window.__mountLessonsForCourse = async function(courseId){
 })();
 </script><div id="print-sheet" aria-hidden="true" style="display:none"></div>
 
+
+
+
+
+
 <script>
-// === Semester A PDF controls (minimal, icon-only + robust theme + black text) ===
+// === SA Controls – v9 (toggle-only cleanup; header controls only) ===
 (function(){
   const $  = (s,c=document)=>c.querySelector(s);
   const $$ = (s,c=document)=>Array.from(c.querySelectorAll(s));
-  const ICONS = {
-    pdf:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 2v4h4" fill="currentColor"/></svg>',
-    print:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6h2a2 2 0 012 2v5h-4v4H8v-4H4v-5a2 2 0 012-2h0zm10-4H8v4h8V5zm-2 10H10v4h4v-4z" transform="translate(-2,0)" fill="currentColor"/></svg>',
-    sun:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8zM1 13h3v-2H1zm9-9h2V1h-2zm7.04 1.62l1.79-1.8-1.41-1.41-1.8 1.79zM17 13h3v-2h-3zM12 6a6 6 0 100 12 6 6 0 000-12z" fill="currentColor"/></svg>',
-    moon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/></svg>'
-  };
+
+  // --- Remove ONLY legacy theme toggles in header ---
+  function removeLegacyToggles(){
+    const header = document.querySelector('.site-header') || document.querySelector('header') || document;
+    const badSel = [
+      '.theme-toggle','.toggle','.dark-mode-toggle','.switch',
+      '#toggleTheme','#darkMode','#theme','#__themeToggle','input[type="checkbox"].toggle','label.toggle'
+    ].join(',');
+    $$(badSel, header).forEach(el=> el.remove());
+    // extra: inputs that look like toggles
+    $$('input[type="checkbox"]', header).forEach(inp=>{
+      const id=(inp.id||'').toLowerCase(), cls=(inp.className||'').toLowerCase();
+      if(/toggle|theme|dark|light/.test(id+cls)) inp.remove();
+    });
+  }
 
   function collectTabs(root){
     const res = [];
@@ -2974,13 +3056,6 @@ window.__mountLessonsForCourse = async function(courseId){
     return t || 'עמוד';
   }
 
-  function injectStrongBlackCSS(sheet){
-    // Ensures black text regardless of site styles during capture/print
-    const style = document.createElement('style');
-    style.textContent = '#print-sheet, #print-sheet *{color:#111 !important;background-color:transparent !important;} #print-sheet a{color:#000 !important;text-decoration:underline !important}';
-    sheet.prepend(style);
-  }
-
   function buildSheet(root){
     const sheet = document.getElementById('print-sheet');
     sheet.innerHTML=''; sheet.setAttribute('aria-hidden','false');
@@ -2997,7 +3072,6 @@ window.__mountLessonsForCourse = async function(courseId){
       const first=node.querySelector('h1,h2'); if(first && first.textContent.trim()===h2.textContent.trim()){ first.remove(); }
       sec.appendChild(node); sheet.appendChild(sec);
     });
-    injectStrongBlackCSS(sheet);
     return sheet;
   }
 
@@ -3013,90 +3087,49 @@ window.__mountLessonsForCourse = async function(courseId){
     if(sheet){ sheet.setAttribute('aria-hidden','true'); sheet.style.display='none'; sheet.innerHTML=''; }
   });
 
-  async function ensureHtml2Pdf(){
-    if(window.html2pdf) return true;
-    try{
-      await new Promise((res,rej)=>{
-        const s=document.createElement('script');
-        s.src='https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js';
-        s.onload=res; s.onerror=rej; document.head.appendChild(s);
-      });
-      return !!window.html2pdf;
-    }catch(e){ return false; }
-  }
-
-  async function doDownload(root){
-    const ok = await ensureHtml2Pdf();
-    const sheet = buildSheet(root);
-    const filename = titleFrom(root).replace(/\s+/g,'_') + '.pdf';
-    sheet.style.display='block';
-    if(!ok){ doPrint(root); return; }
-    const opt = {
-      margin:[10,10,10,10],
-      filename,
-      image:{type:'jpeg',quality:0.98},
-      html2canvas:{scale:2,useCORS:true, backgroundColor:'#ffffff'}, // force white
-      jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
-    };
-    try{ await html2pdf().from(sheet).set(opt).save(); }
-    finally{ sheet.setAttribute('aria-hidden','true'); sheet.style.display='none'; sheet.innerHTML=''; }
-  }
-
-  // Theme toggle that flips html.sa-light / html.sa-dark (filter trick), works cross-platform
-  function initTheme(btn){
-    function current(){ return document.documentElement.classList.contains('sa-dark') ? 'dark' : 'light'; }
-    function icon(theme){ return theme==='light' ? ICONS.sun : ICONS.moon; }
-    btn.addEventListener('click', ()=>{
-      const now = current();
-      document.documentElement.classList.toggle('sa-dark', now==='light'); // if it was light -> enable dark
-      const next = current();
-      btn.innerHTML = icon(next); // icon only
-      try{ localStorage.setItem('sa-theme', next); }catch(e){}
-    });
-    let theme='light';
-    try{ theme = localStorage.getItem('sa-theme') || theme; }catch(e){}
-    document.documentElement.classList.toggle('sa-dark', theme==='dark');
-    btn.innerHTML = icon(theme);
-  }
-
   function makeBar(){
     const bar = document.createElement('div'); bar.className='sa-actions';
-    const theme = document.createElement('button'); theme.className='sa-btn'; theme.id='saTheme'; theme.type='button';
+    // theme button (icon only). We keep this minimal and self-contained.
+    const theme = document.createElement('button'); theme.className='sa-btn'; theme.id='saTheme'; theme.type='button'; theme.title='מצב יום/לילה';
+    theme.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1021 12.79z" fill="currentColor"/></svg>';
     const divider = document.createElement('div'); divider.className='sa-divider';
-    const printBtn = document.createElement('button'); printBtn.className='sa-btn primary'; printBtn.id='saPrint'; printBtn.type='button';
-    printBtn.innerHTML = ICONS.print + '<span class="lbl">הדפס</span>'; // label hidden by CSS
-    const dlBtn = document.createElement('button'); dlBtn.className='sa-btn'; dlBtn.id='saDownload'; dlBtn.type='button';
-    dlBtn.innerHTML = ICONS.pdf + '<span class="lbl">הורד PDF</span>'; // label hidden by CSS
-    // Order: theme | divider | print | download (visual via direction:ltr)
-    bar.appendChild(theme); bar.appendChild(divider); bar.appendChild(printBtn); bar.appendChild(dlBtn);
-    return {bar, theme, printBtn, dlBtn};
+    const printBtn = document.createElement('button'); printBtn.className='sa-btn primary'; printBtn.id='saPrint'; printBtn.type='button'; printBtn.title='הדפס';
+    printBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 8H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3zm-4 11H9v-3h6zm1-15H8v3h8z" fill="currentColor"/></svg>';
+    bar.appendChild(theme); bar.appendChild(divider); bar.appendChild(printBtn);
+    return {bar, theme, printBtn};
   }
 
-  function mount(){
-    const targets = document.querySelectorAll('.page-container[id^="page-course-"] .site-header .nav');
-    if(targets.length){
-      targets.forEach(nav=>{
-        if(nav.querySelector('.sa-actions')) return;
-        const {bar,theme,printBtn,dlBtn} = makeBar();
-        nav.appendChild(bar);
-        const page = nav.closest('.page-container');
-        initTheme(theme);
-        printBtn.addEventListener('click', ()=> doPrint(page));
-        dlBtn.addEventListener('click', ()=> doDownload(page));
-      });
-      return;
-    }
-    if(!document.querySelector('.sa-widget')){
-      const wrap = document.createElement('div'); wrap.className='sa-widget';
-      const inner = makeBar(); wrap.appendChild(inner.bar);
-      document.body.appendChild(wrap);
-      const page = document;
-      initTheme(inner.theme);
-      inner.printBtn.addEventListener('click', ()=> doPrint(page));
-      inner.dlBtn.addEventListener('click', ()=> doDownload(page));
-    }
+  // Minimal theme toggle: flip class on <html> and switch icon (no external changes).
+  function initThemeButton(btn){
+    function get(){ return document.documentElement.classList.contains('sa-dark') ? 'dark' : 'light'; }
+    const SUN  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V1h0v3zm0 19v-3h0v3zM4 12H1v0h3zm22 0h-3v0h3zM5.64 5.64L3.51 3.51l0 0 2.13 2.13zM20.49 20.49l-2.13-2.13 0 0 2.13 2.13zM18.36 5.64l2.13-2.13 0 0-2.13 2.13zM3.51 20.49l2.13-2.13 0 0-2.13 2.13zM12 7a5 5 0 100 10 5 5 0 000-10z" fill="currentColor"/></svg>';
+    const MOON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1021 12.79z" fill="currentColor"/></svg>';
+    function icon(){ return (get()==='light') ? SUN : MOON; }
+    btn.addEventListener('click', ()=>{
+      document.documentElement.classList.toggle('sa-dark');
+      btn.innerHTML = icon();
+      try{ localStorage.setItem('sa-theme', get()); }catch(e){}
+    });
+    let t = 'light';
+    try{ t = localStorage.getItem('sa-theme') || t; }catch(e){}
+    document.documentElement.classList.toggle('sa-dark', t==='dark');
+    btn.innerHTML = icon();
   }
-  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', mount); } else { mount(); }
+
+  function mountHeaderControls(){
+    removeLegacyToggles();
+    const navs = document.querySelectorAll('.site-header .nav');
+    navs.forEach(nav=>{
+      if(nav.querySelector('.sa-actions')) return;
+      const {bar, theme, printBtn} = makeBar();
+      nav.appendChild(bar);
+      const page = nav.closest('.page-container') || document;
+      initThemeButton(theme);
+      printBtn.addEventListener('click', ()=> doPrint(page));
+    });
+  }
+
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', mountHeaderControls); } else { mountHeaderControls(); }
 })();
 </script>
 
