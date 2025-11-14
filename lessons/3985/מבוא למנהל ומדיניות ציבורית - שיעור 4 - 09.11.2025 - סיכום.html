@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <!-- 
+    ================================================================
+    מטא-תגיות חובה לזיהוי אוטומטי
+    ================================================================
+    -->
+    <meta name="lesson-title" content="שיעור 4 – ביקורת על המודל הרציונלי והמודל התוספתי">
+    <meta name="lesson-date" content="09.11.2025">
+    <meta name="lesson-teacher" content="פרופ' משה מאור">
+    <meta name="lesson-summary" content="השיעור עסק בביקורת על המודל הרציונלי (קבלת החלטות 'מן השורש') והצגת המודל התוספתי (קבלת החלטות 'מן הענף') של לינדבלום.">
+    <!-- 
+    ================================================================
+    סוף מטא-תגיות חובה
+    ================================================================
+    -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מבוא למנהל ומדיניות ציבורית - שיעור 4 - 09.11.2025 - סיכום</title>
+
+    <!-- קוד הגנה של Firebase (מתוך sec.html) -->
+    <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+            import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+            // 1. אותו Config בדיוק כמו בדף הכניסה
+            const firebaseConfig = {
+              apiKey: "AIzaSyDqxxf434N0wnn6C6AglEEIaqj5TVtoYLQ",
+              authDomain: "memshalaa.firebaseapp.com",
+              projectId: "memshalaa",
+              storageBucket: "memshalaa.firebasestorage.app",
+              messagingSenderId: "324187090365",
+              appId: "1:324187090365:web:8e4956d0d1370b5aab36d4",
+              measurementId: "G-2QHJF3SSJQ"
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+
+            // 2. ה"שומר" - בודק אם יש משתמש מחובר
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // משתמש מחובר - הכל בסדר, מציגים את הדף
+                    console.log("משתמש מורשה:", user.email);
+                    
+                    // --- אופציונלי: עדכון UI ---
+                    const userInfo = document.getElementById('userInfo');
+                    const loginLink = document.getElementById('loginLink');
+                    const logoutButton = document.getElementById('logoutButton');
+
+                    if (userInfo) userInfo.innerText = `מחובר כ: ${user.email}`;
+                    if (loginLink) loginLink.style.display = 'none';
+                    if (logoutButton) logoutButton.style.display = 'block';
+                    // -------------------------
+
+                    document.body.style.display = 'block'; // מציג את הגוף רק אחרי אימות
+                } else {
+                    // אין משתמש מחובר - זרוק אותו לדף הכניסה
+                    window.location.href = 'login.html'; 
+                }
+            });
+            
+            // פונקציית התנתקות גלובלית
+            window.logout = function() {
+                signOut(auth).then(() => {
+                    window.location.href = 'login.html'; 
+                });
+            }
+        </script>
+        
+    <!-- הסתרת הדף עד שהבדיקה מסתיימת כדי למנוע הבהוב (מתוך sec.html) -->
+    <style> 
+        body { display: none; } 
+        /* הסתרת כפתור התנתקות כברירת מחדל */
+        #logoutButton { display: none; } 
+    </style>
+    
+    <!-- שימוש בגופנים וסמלים (מתוך sample1.html) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <!-- כלל ה-CSS מתוך sample1.html -->
+    <style>
+        /* --- מערכת עיצוב (מבוסס על 'קוד מיועל.html') --- */
+        :root {
+            /* ערכי ברירת מחדל (מצב בהיר) */
+            --bg: #f6f8fa; /* רקע דף בהיר */
+            --surface: #ffffff; /* רקע כרטיסייה לבן */
+            --text: #202124;
+            --muted: #5f6368;
+            --primary: #3b82f6; 
+            --primary-ink: #174ea6;
+            --border: #e5e7eb;
+            --highlight: #e8f0fe;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .06);
+            --header-bg: rgba(255, 255, 255, .8);
+            
+            /* מידות רווח */
+            --s1: 8px;
+            --s2: 12px;
+            --s3: 16px;
+            --s4: 24px;
+            --s5: 36px;
+            --content-width: 980px;
+
+            /* צבעים סמנטיים (עבור הדגשות תוכן) */
+            --highlight-yellow-bg: #fff9c4;
+            --highlight-yellow-border: #fdd835;
+            --highlight-blue-bg: #e0f7fa;
+            --highlight-blue-border: #00bcd4;
+            --highlight-green-bg: #e8f5e9;
+            --highlight-green-border: #4caf50;
+            --highlight-red-bg: #ffebee;
+            --highlight-red-border: #f44336;
+            --highlight-orange-bg: #fff3e0;
+            --highlight-orange-border: #ff9800;
+        }
+
+        /* --- מצב לילה (מופעל על ידי JS או הגדרות מערכת) --- */
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #333333; 
+                --surface: #444444; 
+                --text: #eeeeee;
+                --muted: #bbbbbb;
+                --primary: #4b9bff;
+                --border: #555555; 
+                --highlight: #2a3a52;
+                --shadow: 0 0 0 1px var(--border);
+                --header-bg: rgba(51, 51, 51, .8); 
+
+                /* צבעים סמנטיים (מצב כהה) */
+                --highlight-yellow-bg: #4f4b23;
+                --highlight-yellow-border: #fdd835;
+                --highlight-blue-bg: #1a4a52;
+                --highlight-blue-border: #00bcd4;
+                --highlight-green-bg: #1e4620;
+                --highlight-green-border: #4caf50;
+                --highlight-red-bg: #5d1c18;
+                --highlight-red-border: #f44336;
+                --highlight-orange-bg: #593815;
+                --highlight-orange-border: #ff9800;
+            }
+        }
+        
+        /* דריסה ידנית - מצב בהיר */
+        :root.light-mode {
+            --bg: #f6f8fa;
+            --surface: #ffffff;
+            --text: #202124;
+            --muted: #5f6368;
+            --primary: #3b82f6; 
+            --border: #e5e7eb;
+            --highlight: #e8f0fe;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .06);
+            --header-bg: rgba(255, 255, 255, .8);
+
+            --highlight-yellow-bg: #fff9c4;
+            --highlight-yellow-border: #fdd835;
+            --highlight-blue-bg: #e0f7fa;
+            --highlight-blue-border: #00bcd4;
+            --highlight-green-bg: #e8f5e9;
+            --highlight-green-border: #4caf50;
+            --highlight-red-bg: #ffebee;
+            --highlight-red-border: #f44336;
+            --highlight-orange-bg: #fff3e0;
+            --highlight-orange-border: #ff9800;
+        }
+        
+        /* דריסה ידנית - מצב כהה */
+        :root.dark-mode, html.sa-dark {
+            --bg: #333333; 
+            --surface: #444444; 
+            --text: #eeeeee;
+            --muted: #bbbbbb;
+            --primary: #4b9bff;
+            --border: #555555; 
+            --highlight: #2a3a52;
+            --shadow: 0 0 0 1px var(--border);
+            --header-bg: rgba(51, 51, 51, .8); 
+
+            --highlight-yellow-bg: #4f4b23;
+            --highlight-yellow-border: #fdd835;
+            --highlight-blue-bg: #1a4a52;
+            --highlight-blue-border: #00bcd4;
+            --highlight-green-bg: #1e4620;
+            --highlight-green-border: #4caf50;
+            --highlight-red-bg: #5d1c18;
+            --highlight-red-border: #f44336;
+            --highlight-orange-bg: #593815;
+            --highlight-orange-border: #ff9800;
+        }
+
+
+        /* --- איפוס בסיסי ועיצוב גלובלי --- */
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Noto Sans Hebrew", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            font-weight: 400; 
+            line-height: 1.7;
+            text-align: right; 
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* --- טיפוגרפיה --- */
+        
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 0;
+            margin-bottom: var(--s3);
+            font-weight: 600; 
+        }
+        
+        h1 { 
+            font-size: 1.0rem; 
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.4; 
+        }
+        h2 { 
+            font-size: 1.75rem; 
+            text-align: center; 
+            margin-bottom: var(--s5); 
+        }
+        h3 { 
+            font-size: 1.25rem; 
+            margin: 0 0 var(--s2) 0;
+            padding-bottom: var(--s2);
+            border-bottom: 1px solid var(--border);
+            transition: border-color 0.3s;
+        }
+        
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: var(--s4);
+            margin-bottom: var(--s2);
+        }
+        
+        h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: var(--s3);
+            margin-bottom: var(--s1);
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: var(--s3); 
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s, background-color 0.2s;
+        }
+        
+        h1 a {
+            color: var(--text);
+            transition: color 0.3s;
+        }
+        
+        h1 a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        ul, ol {
+            padding-right: var(--s4); 
+        }
+        
+        ul li, ol li {
+            margin-bottom: var(--s2);
+            padding-right: var(--s2);
+        }
+        
+        /* סגנון להערות שוליים */
+        sup {
+            font-size: 0.75em;
+            vertical-align: super;
+            margin-right: 2px;
+            color: var(--primary);
+            font-weight: 600;
+            line-height: 0; 
+        }
+
+        sup a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        sup a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- מבנה וקומפוננטות (מתוך sample1) --- */
+        
+        /* כותרת עליונה (מתוך sample1) */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border);
+            transition: background-color 0.3s, border-color 0.3s;
+            /* שינויים מהתבנית החדשה */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+        }
+
+        /* .nav מוגדר בתבנית ההדר */
+        .site-header .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
+            /* max-width: var(--content-width); */ /* מוסר כדי להתאים לתבנית הדר */
+            margin: 0; /* מוסר */
+            padding: 0; /* מוסר */
+        }
+
+        .brand {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            text-align: right; 
+        }
+        
+        .brand h1 {
+            margin: 0;
+            font-size: 20px; /* התאמה לגודל בתבנית הדר */
+        }
+
+
+        /* קונטיינר ראשי */
+        .container {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: var(--s5) var(--s4);
+        }
+        
+        /* --- כפתורי הדר (מ-lesson_header_template.html) --- */
+        .sa-actions {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+          direction: ltr;
+          flex-wrap: wrap;
+        }
+        .sa-actions .sa-divider {
+          width: 1px;
+          height: 24px;
+          background: var(--border); /* שימוש במשתנה צבע */
+          transition: background-color 0.3s;
+        }
+        .sa-btn {
+          font: inherit;
+          line-height: 1;
+          border: 1px solid var(--border); /* שימוש במשתנה צבע */
+          background: var(--surface); /* שימוש במשתנה צבע */
+          color: var(--text); /* שימוש במשתנה צבע */
+          padding: 10px 12px;
+          border-radius: 12px;
+          cursor: pointer;
+          display: inline-flex;
+          gap: 10px;
+          align-items: center;
+          font-size: 15px;
+          transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+        .sa-btn.primary {
+          background: var(--primary); /* שימוש במשתנה צבע */
+          color: var(--surface); /* שימוש במשתנה צבע */
+          border-color: transparent;
+        }
+        .sa-btn svg {
+          width: 20px;
+          height: 20px;
+          display: block;
+        }
+        .sa-btn .lbl {
+          display: none; /* אייקונים בלבד, ללא טקסט */
+        }
+        
+        /* התאמות למצב כהה בכפתורי הדר */
+        :root.dark-mode .sa-btn.primary,
+        html.sa-dark .sa-btn.primary {
+            color: var(--text);
+        }
+
+        @media (max-width: 640px) {
+          .sa-actions {
+            gap: 8px;
+          }
+          .sa-actions .sa-divider {
+            height: 20px;
+          }
+          .sa-btn {
+            padding: 8px 10px;
+            font-size: 14px;
+          }
+          .sa-btn svg {
+            width: 18px;
+            height: 18px;
+          }
+          .brand h1 {
+            font-size: 16px; /* הקטנה במובייל */
+          }
+        }
+
+        /* פילטר מצב כהה (מ-lesson_header_template.html) */
+        html.sa-dark {
+          filter: invert(1) hue-rotate(180deg);
+          background: #000000;
+        }
+        html.sa-dark img,
+        html.sa-dark video,
+        html.sa-dark canvas,
+        html.sa-dark svg image,
+        html.sa-dark figure { /* תיקון לפילטר */
+          filter: invert(1) hue-rotate(180deg);
+        }
+        /* --- סוף כפתורי הדר --- */
+
+
+        /* --- עיצוב כרטיסיות (Tabs) --- */
+        .tab-navigation {
+            display: flex;
+            gap: var(--s1);
+            border-bottom: 2px solid var(--border);
+            margin-bottom: var(--s4);
+            transition: border-color 0.3s;
+            flex-wrap: wrap; 
+        }
+
+        .tab-btn {
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--muted);
+            background: none;
+            border: none;
+            padding: var(--s2) var(--s3);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: color 0.3s, border-color 0.3s;
+            margin-bottom: -2px; 
+            white-space: nowrap; 
+        }
+
+        .tab-btn:hover {
+            color: var(--text);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-pane {
+            display: none; 
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-pane.active {
+            display: block; 
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* --- כרטיס תוכן פנימי (לרקע, ציון וכו') --- */
+        .page-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: var(--s4);
+            margin-bottom: var(--s4);
+            transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .page-card h3:first-child {
+            margin-top: 0;
+        }
+
+        /* --- סגנון לכרטיס פרטי השיעור (טאב 1) --- */
+        .lesson-details-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .lesson-details-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--s2) 0;
+            border-bottom: 1px dashed var(--border);
+            flex-wrap: wrap;
+        }
+        .lesson-details-list li:last-child {
+            border-bottom: none;
+        }
+        .lesson-details-list strong {
+            color: var(--muted);
+            margin-left: var(--s4);
+            flex-shrink: 0;
+        }
+        .lesson-details-list span {
+            font-weight: 500;
+        }
+
+        /* --- Accordion Styles --- */
+        .accordion details {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px; 
+            margin-bottom: var(--s2);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        
+        .accordion details[open] {
+            box-shadow: var(--shadow);
+        }
+
+        .accordion summary {
+            padding: var(--s3) var(--s4);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .accordion summary::-webkit-details-marker {
+            display: none; 
+        }
+        
+        .accordion summary::marker {
+             display: none; 
+        }
+
+        .accordion summary:after {
+            content: '\f078'; /* Font Awesome chevron-down */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: var(--muted);
+            transition: transform 0.2s ease-out;
+            margin-right: auto; 
+            padding-right: var(--s2);
+        }
+
+        .accordion details[open] summary:after {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            padding: 0 var(--s4) var(--s4) var(--s4);
+            border-top: 1px solid var(--border);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .accordion-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .accordion-content > *:first-child {
+            margin-top: var(--s3);
+        }
+        
+        /* --- Highlight Styles --- */
+        .example-highlight,
+        .external-highlight,
+        .verification-success,
+        .verification-fail,
+        .personal-impression,
+        .reading-material,
+        .external-addition {
+            padding: var(--s3);
+            border-radius: 8px;
+            margin-top: var(--s3);
+            margin-bottom: var(--s3);
+        }
+        
+        .example-highlight p:last-child,
+        .external-highlight p:last-child,
+        .verification-success p:last-child,
+        .verification-fail p:last-child,
+        .personal-impression p:last-child,
+        .reading-material p:last-child,
+        .external-addition p:last-child {
+            margin-bottom: 0;
+        }
+
+        .example-highlight {
+            background-color: var(--highlight-yellow-bg); 
+            border-right: 4px solid var(--highlight-yellow-border); 
+        }
+        
+        .external-highlight {
+            background-color: var(--highlight-blue-bg); 
+            border-right: 4px solid var(--highlight-blue-border); 
+        }
+        
+        .verification-success {
+            background-color: var(--highlight-green-bg); 
+            border-right: 4px solid var(--highlight-green-border); 
+        }
+        
+        .verification-fail {
+            background-color: var(--highlight-red-bg); 
+            border-right: 4px solid var(--highlight-red-border); 
+        }
+
+        /* סגנונות לטאב 5 - רשמים */
+        .personal-impression {
+            background-color: var(--highlight-blue-bg); 
+            border-right: 4px solid var(--highlight-blue-border); 
+        }
+        .reading-material {
+            background-color: var(--highlight-orange-bg); 
+            border-right: 4px solid var(--highlight-orange-border); 
+        }
+        .external-addition {
+            background-color: var(--highlight-green-bg); 
+            border-right: 4px solid var(--highlight-green-border); 
+        }
+        
+        
+        /* --- רשימת הערות ומונחים (טאב 3) --- */
+        #tab-sources ol {
+            padding-right: 20px;
+        }
+        #tab-sources li {
+            margin-bottom: 8px;
+        }
+        #tab-sources li::marker {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- תבנית הדר (מ-lesson_header_template.html) -->
+    <header class="site-header">
+        <div class="brand">
+          <!-- h1 יכיל את כותרת השיעור -->
+          <h1>מבוא למנהל ומדיניות ציבורית | שיעור 4: המודל התוספתי</h1>
+        </div>
+        <!-- div.nav יתמלא אוטומטית על ידי הסקריפט -->
+        <div class="nav"></div>
+    </header>
+
+    <main class="container" role="main">
+        <nav class="tab-navigation" aria-label="ניווט בסיכום השיעור">
+            <button class="tab-btn active" data-tab="overview" role="tab" aria-selected="true" aria-controls="tab-overview">סקירה כללית</button>
+            <button class="tab-btn" data-tab="content" role="tab" aria-selected="false" aria-controls="tab-content">תוכן השיעור</button>
+            <button class="tab-btn" data-tab="qa" role="tab" aria-selected="false" aria-controls="tab-qa">שאלות ודיון</button>
+            <button class="tab-btn" data-tab="sources" role="tab" aria-selected="false" aria-controls="tab-sources">מקורות והערות</button>
+            <button class="tab-btn" data-tab="impressions" role="tab" aria-selected="false" aria-controls="tab-impressions">רשמים נוספים</button>
+            <!-- לא זוהתה מטלה בשיעור, לכן הטאב לא נוצר -->
+        </nav>
+
+        <div class="tab-content">
+
+            <!-- ======================= -->
+            <!-- טאב 1: סקירה כללית -->
+            <!-- ======================= -->
+            <section id="tab-overview" class="tab-pane active" role="tabpanel" aria-labelledby="tab-overview">
+                
+                <article class="page-card" aria-labelledby="details-heading">
+                    <h3 id="details-heading">פרטי השיעור</h3>
+                    <ul class="lesson-details-list">
+                        <li>
+                            <strong>נושא:</strong>
+                            <span>ביקורת על המודל הרציונלי, המודל התוספתי וקבלת החלטות "מן השורש" מול "מן הענף"</span>
+                        </li>
+                        <li>
+                            <strong>מרצה:</strong>
+                            <span>פרופ' משה מאור</span>
+                        </li>
+                        <li>
+                            <strong>תאריך:</strong>
+                            <span>09.11.2025</span>
+                        </li>
+                        <li>
+                            <strong>שעה (מוערכת):</strong>
+                            <span>⚠️ (חלק 2 + 3 של השיעור)</span>
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="page-card" aria-labelledby="summary-heading">
+                    <h3 id="summary-heading">תקציר ונושאים מרכזיים</h3>
+                    
+                    <h4>תקציר</h4>
+                    <p>השיעור עסק בביקורת של צ'ארלס לינדבלום על המודל הרציונלי, והציג את ההבחנה בין קבלת החלטות "מן השורש" (שינוי דרסטי הנוגע בערכי יסוד) לבין קבלת החלטות "מן הענף" (שינוי קטן ותוספתי). המודל התוספתי הוצג כגישה מציאותית יותר במערכות דמוקרטיות, כיוון שהוא מבוסס על "רציונליות מוגבלת" ומאפשר השגת הסכמה על ידי התמקדות בשינויים קטנים שאינם מאיימים על ערכי הליבה. לבסוף, נדונו התנאים שבהם המודל התוספתי נכשל (היעדר רציפות בבעיות או באמצעים) ונדרש שינוי שורש, וכן האסטרטגיות השונות לביצוע שינוי שורש (באמצעות אירוע חיצוני או באמצעות הצטברות "סלמי").</p>
+                    
+                    <h4>נושאים מרכזיים שעלו</h4>
+                    <ul>
+                        <li>תיאוריית האינטרס הציבורי והמודל הרציונלי הטהור (כהקדמה).</li>
+                        <li>הביקורת של צ'ארלס לינדבלום<sup><a href="#term-1">1</a></sup> על המודל הרציונלי.</li>
+                        <li>ההבחנה בין קבלת החלטות "מן השורש" (Root)<sup><a href="#term-2">2</a></sup> לבין קבלת החלטות "מן הענף" (Branch)<sup><a href="#term-3">3</a></sup>.</li>
+                        <li>הקושי בהשגת "הסכמה" (Consensus) על שינויי "שורש" בדמוקרטיה (דוגמת גיוס חרדים).</li>
+                        <li>הצגת המודל התוספתי (Incremental Model)<sup><a href="#term-4">4</a></sup> כחלופה מעשית.</li>
+                        <li>קישור המודל התוספתי ל"רציונליות מוגבלת" (Bounded Rationality)<sup><a href="#term-6">6</a></sup> של הרברט סיימון<sup><a href="#term-5">5</a></sup> וחתירה ל"השבעת רצון" (Satisficing)<sup><a href="#term-7">7</a></sup>.</li>
+                        <li>ביקורת על המודל התוספתי (לינדבלום, 1964): מתי הוא נכשל?</li>
+                        <li>התנאים לכשל המודל התוספתי: 1. תוצאות לא משביעות רצון, 2. היעדר רציפות בבעיות, 3. היעדר רציפות באמצעים.</li>
+                        <li>ניתוח תפיסות ביטחון סטטיות (קו בר-לב<sup><a href="#term-10">10</a></sup>, קו מאז'ינו<sup><a href="#term-9">9</a></sup>, גדר עזה) כדוגמאות לכשל קונספטואלי.</li>
+                        <li>אסטרטגיות לביצוע שינוי "שורש": ניצול אירוע חיצוני קטסטרופלי (7/10) או שיטת ה"סלמי"<sup><a href="#term-11">11</a></sup> (הצטברות החלטות "ענף").</li>
+                    </ul>
+                </article>
+
+            </section>
+
+            <!-- ======================= -->
+            <!-- טאב 2: תוכן השיעור -->
+            <!-- ======================= -->
+            <section id="tab-content" class="tab-pane" role="tabpanel" aria-labelledby="tab-content">
+                
+                <div class="accordion">
+                
+                    <details open>
+                        <summary>תיאוריית האינטרס הציבורי והמודל הרציונלי הטהור (הקדמה)</summary>
+                        <div class="accordion-content">
+                            <div class="external-highlight">
+                                <p><strong>הערה:</strong> חלק זה נוסף כמבוא להבהרת ההקשר לביקורת של לינדבלום, כפי שעלתה בשיעור.</p>
+                                
+                                <h4>תיאוריית האינטרס הציבורי</h4>
+                                <p>זוהי תיאוריה נורמטיבית קלאסית של המנהל הציבורי. התיאוריה מניחה כי מטרת הממשל היא לפעול למען "טובת הכלל" או "האינטרס הציבורי". על פי גישה זו, פקידי ציבור ומקבלי החלטות אמורים להיות מסוגלים לזהות באופן אובייקטיבי מהו האינטרס הציבורי ולפעול למימושו, תוך התעלות מאינטרסים אישיים, קבוצתיים או פוליטיים צרים.</p>
+
+                                <h4>המודל הרציונלי הטהור (Rational Model)</h4>
+                                <p>המודל הרציונלי הוא הדרך "האידיאלית" ליישם את תיאוריית האינטרס הציבורי. הוא מניח שמקבל ההחלטות פועל באופן מדעי ואובייקטיבי, ומבצע סדרה של שלבים לוגיים כדי להגיע להחלטה ה*אופטימלית* שתמקסם את התועלת הציבורית:</p>
+                                <ol>
+                                    <li><strong>הגדרת הבעיה:</strong> זיהוי וניסוח ברור של הבעיה שיש לפתור.</li>
+                                    <li><strong>הגדרת יעדים וערכים:</strong> קביעה מדויקת של המטרות ודירוג הערכים (למשל: יעילות מול שוויון).</li>
+                                    <li><strong>איסוף כל החלופות:</strong> סקירה ממצה של *כל* דרכי הפעולה האפשריות לפתרון הבעיה.</li>
+                                    <li><strong>ניתוח והערכת תוצאות:</strong> בחינה שיטתית של העלויות והתועלות של *כל* חלופה ביחס ליעדים שהוגדרו.</li>
+                                    <li><strong>בחירת החלופה האופטימלית:</strong> בחירת החלופה היחידה שממקסמת את התועלת ומשיגה את היעדים בצורה הטובה ביותר.</li>
+                                </ol>
+                                <p>המודל הרציונלי הטהור הוא הבסיס ("איש הקש") שעליו תתבסס הביקורת של לינדבלום, כפי שהוצגה בשיעור.</p>
+                            </div>
+                        </div>
+                    </details>
+                    
+                    <details open>
+                        <summary>ביקורת על המודל הרציונלי: "שורש" מול "ענף"</summary>
+                        <div class="accordion-content">
+                            <p>המרצה הציג את הביקורת של צ'ארלס לינדבלום<sup><a href="#term-1">1</a></sup> על המודל הרציונלי לקבלת החלטות. לינדבלום טוען שהמודל הרציונלי, הדורש בחינה של כל החלופות ובחירת האופטימלית, הוא לא מציאותי ברוב המקרים.</p>
+                            <p>הוא הציג הבחנה בין שתי גישות לקבלת החלטות:</p>
+                            <ol>
+                                <li><strong>קבלת החלטות מן השורש (Root)<sup><a href="#term-2">2</a></sup>:</strong> זוהי הגישה הרציונלית-אוטופית. היא דורשת "לבנות מחדש את העץ", לבחון את כל החלופות מהיסוד, ולבחור את הטובה ביותר. גישה זו מחייבת שינוי דרסטי, ולעיתים קרובות נוגעת בערכי יסוד.</li>
+                                <li><strong>קבלת החלטות מן הענף (Branch)<sup><a href="#term-3">3</a></sup>:</strong> זוהי הגישה המציאותית יותר. היא יוצאת מנקודת הנחה שהמדיניות הקיימת היא הבסיס, ומנסה לבצע בה רק שינויים קטנים, "תוספתיים" (Incremental).</li>
+                            </ol>
+                            
+                            <div class="example-highlight">
+                                <p><strong>דוגמת המרצה: חוק גיוס החרדים</strong></p>
+                                <p>המרצה הדגים את ההבחנה באמצעות סוגיית גיוס החרדים. קבלת החלטה "מן השורש" בנושא זה תהיה חוק גיוס שוויוני לכולם מגיל 18. עם זאת, החלטה כזו נתקלת בהתנגשות חזיתית עם ערך יסוד של הציבור החרדי – "לימוד תורה".</p>
+                                <p>כיוון שבמערכת דמוקרטית (במיוחד עם קואליציה מגוונת) נדרשת <strong>הסכמה (Consensus)</strong>, ואי אפשר להשיג הסכמה על פגיעה בערכי יסוד, החלטה "מן השורש" אינה אפשרית פוליטית. לכן, הפוליטיקאים פונים להחלטות "מן הענף".</p>
+                            </div>
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary>המודל התוספתי (Incremental Model) והרציונליות המוגבלת</summary>
+                        <div class="accordion-content">
+                            <p>הגישה של קבלת החלטות "מן הענף" נקראת <strong>המודל התוספתי</strong><sup><a href="#term-4">4</a></sup>. מודל זה קשור קשר הדוק לתפיסת ה"רציונליות המוגבלת" (Bounded Rationality)<sup><a href="#term-6">6</a></sup> של הרברט סיימון<sup><a href="#term-5">5</a></sup>.</p>
+                            <p>בעוד שהמודל הרציונלי שואף ל*אופטימיזציה* (ההחלטה הטובה ביותר האפשרית), המודל התוספתי, המכיר במגבלות הזמן, המידע והיכולת הקוגניטיבית שלנו, שואף ל-<strong>Satisficing</strong><sup><a href="#term-7">7</a></sup> (בתרגום חופשי: "השבעת רצון" או "פתרון מספק").</p>
+                            <p>במקום לבחון את כל החלופות, מקבל ההחלטות יבחר בחלופה הראשונה שעונה על סט מינימלי של דרישות ("סט מספק").</p>
+                            
+                            <h5>עקרונות המודל התוספתי:</h5>
+                            <ul>
+                                <li><strong>היעדים והערכים אינם מנותקים:</strong> בניגוד למודל הרציונלי, כאן היעדים והערכים מעורבבים ומשפיעים זה על זה תוך כדי התהליך.</li>
+                                <li><strong>בחינה מצומצמת של חלופות:</strong> בוחנים רק חלופות ששונות במעט מהמצב הקיים.</li>
+                                <li><strong>הסכמה היא המפתח:</strong> קל יותר להשיג הסכמה פוליטית על שינוי קטן מאשר על שינוי "שורש" דרסטי.</li>
+                                <li><strong>קלות הנסיגה:</strong> קל יותר לסגת משינוי מדיניות קטן שנכשל מאשר ממהפכה שלמה.</li>
+                            </ul>
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary>הכשל של המודל התוספתי: אירועים קטסטרופליים (7/10)</summary>
+                        <div class="accordion-content">
+                            <p>המרצה הדגיש את חולשתו העיקרית של המודל התוספתי: הוא עובד טוב כל עוד המדיניות הקיימת היא "בסדר", וצריך רק לשפר אותה. אבל מה קורה כשהמדיניות הקיימת שגויה מיסודה? או כאשר המציאות משתנה באופן פתאומי ודרסטי?</p>
+                            
+                            <div class="example-highlight">
+                                <p><strong>דוגמת המרצה: שבעה באוקטובר ותפיסת הגדר</strong></p>
+                                <p>המרצה השתמש באירועי ה-7 באוקטובר כדוגמה קשה לכשל של חשיבה תוספתית. תפיסת הביטחון של גבול עזה התבססה על "מכשול" (גדר עילית ותחתית). כל שיפור בגדר (עוד סנסור, עוד מצלמה) היה שינוי "תוספתי" (מן הענף), אך הוא לא שינה את ה*קונספציה* (ה"שורש").</p>
+                                <p>המרצה טען כי הגדר יצרה "ביטחון עצמי מופרז" והטיה קוגניטיבית, בדומה לזו של <strong>קו בר-לב</strong><sup><a href="#term-10">10</a></sup> ב-1973 ו<strong>קו מאז'ינו</strong><sup><a href="#term-9">9</a></sup> הצרפתי במלחמת העולם השנייה. כולן היו תפיסות הגנה סטטיות שנכשלו כישלון קולוסאלי.</p>
+                                <p>במצב כזה, שבו הקונספציה הבסיסית קורסת, אי אפשר להמשיך בשינויים "תוספתיים". נדרש שינוי "מן השורש" – חשיבה מחודשת לחלוטין על כל תפיסת ההגנה.</p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>ביקורת על המודל התוספתי (לינדבלום, 1964)</summary>
+                        <div class="accordion-content">
+                            <p>המרצה הציג את הביקורת של לינדבלום (מ-1964) על המודל התוספתי שהוא עצמו הציג. הוא טען שהמודל התוספתי (שינויים קטנים) עובד טוב רק תחת שלושה תנאים מצטברים:</p>
+                            <ol>
+                                <li><strong>תוצאות המדיניות הנוכחית משביעות רצון:</strong> כלומר, הבסיס הקיים הוא טוב, ורק צריך לשפר קלות.</li>
+                                <li><strong>רציפות בטבע הבעיות:</strong> הבעיות החברתיות לא משתנות באופן דרסטי (למשל, אין מלחמה פתאומית, אין אסון טבע ענק).</li>
+                                <li><strong>רציפות באמצעים לפתרון:</strong> יש זמינות קבועה של תקציבים וכוח אדם, ואין קפיצות פתאומיות במשאבים.</li>
+                            </ol>
+                            <p><strong>מסקנה:</strong> כאשר לפחות אחד משלושת התנאים הללו *לא מתקיים* (למשל, התוצאות גרועות, הבעיה משתנה דרסטית כמו ב-7/10, או שיש קיצוץ תקציבי ענק), אי אפשר להמשיך בשינויים קטנים ("מן הענף"). במצב כזה, חייבים לבצע חשיבה מחודשת ושינוי "מן השורש".</p>
+                        </div>
+                    </details>
+                    
+                </div>
+            </section>
+
+            <!-- ======================= -->
+            <!-- טאב 3: שאלות ודיון -->
+            <!-- ======================= -->
+            <section id="tab-qa" class="tab-pane" role="tabpanel" aria-labelledby="tab-qa">
+                
+                <article class="page-card" aria-labelledby="qa-lecturer-heading">
+                    <h3 id="qa-lecturer-heading">שאלות המרצה</h3>
+                    <p><i>(לא זוהו שאלות יזומות מהמרצה לקהל בחלק זה של השיעור.)</i></p>
+                </article>
+
+                <article class="page-card" aria-labelledby="qa-student-heading">
+                    <h3 id="qa-student-heading">שאלות משתתפים</h3>
+                    
+                    <h5 style="margin-top: var(--s3);">שאלה 1: לאור הקושי להשיג הסכמה בדמוקרטיה, האם דיקטטורה היא שיטת שלטון "פרקטית" יותר?</h5>
+                    <p><strong>תשובת המרצה (סיכום):</strong></p>
+                    <div class="verification-fail">
+                        <p><strong>הפרכה:</strong> המרצה שלל את הטענה. הוא הבהיר שהקורס עוסק אך ורק במשטרים דמוקרטיים. בדיקטטורה אולי אין צורך בהסכמה רחבה, אך יש בעיות חמורות לא פחות: כל ההטיות הקוגניטיביות, הרגשיות והאישיות של מנהיג יחיד נכנסות ישירות להחלטה ללא בלמים, איזונים או ביקורת, מה שיכול להוביל לאסונות גדולים (לדוגמה, ההחלטה של פוטין לפלוש לאוקראינה).</p>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px dashed var(--border); margin: var(--s4) 0;">
+                    
+                    <h5 style="margin-top: var(--s3);">שאלה 2: בהמשך לדוגמת החרדים, האם זה לא שהם "תוקעים גלגלים" לממשלה בנושאים אחרים כדי לקבל את מבוקשם בגיוס?</h5>
+                    <p><strong>תשובת המרצה (סיכום):</strong></p>
+                    <div class="verification-success">
+                        <p><strong>הבהרה:</strong> המרצה מיקד את הדיון במונחי הקורס. הוא הסביר שלא מדובר ב"תקיעת גלגלים" לשמה, אלא בהתנגשות חזיתית של <strong>ערכים</strong>. דרישת הגיוס היא החלטה "מן השורש" שמאיימת על ערך הליבה של "לימוד תורה". במצב כזה, לא תיתכן הסכמה.</p>
+                        <p>לכן, הפתרון הפוליטי (כמו "הצעת חוק ביסמוט" שהוזכרה) הוא דוגמה קלאסית לשינוי "מן הענף": יוצרים חוק שנקרא "חוק גיוס", אך בפועל הוא ריק מתוכן – הסנקציות לא רלוונטיות והיעדים קבוצתיים ולא אישיים. באופן זה, הממשלה יכולה להגיד שהיא "מעבירה חוק גיוס", והחרדים יכולים לתמוך בו כי הוא לא מאיים על ערך הליבה שלהם.</p>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px dashed var(--border); margin: var(--s4) 0;">
+
+                    <h5 style="margin-top: var(--s3);">שאלה 3 (איתי): האם המודל של "שורש" מול "ענף" חל גם על תפיסות ביטחון, כמו הגדר בעזה?</h5>
+                    <p><strong>תשובת המרצה (סיכום):</strong></p>
+                    <div class="verification-success">
+                        <p><strong>אימות:</strong> המרצה אישר שזו דוגמה מצוינת. בניית הגדר (גם המשוכללת, העילית והתחתית) הייתה שינוי "מן הענף" – היא הייתה שיפור תוספתי של קונספציה קיימת של הגנה סטטית.</p>
+                        <p>המרצה השווה זאת ל"קו בר-לב" ול"קו מאז'ינו". אירועי ה-7 באוקטובר הוכיחו שהקונספציה (ה"שורש") הייתה שגויה מיסודה. כעת, נדרש שינוי "מן השורש" – חשיבה מחודשת לחלוטין על כל תפיסת ההגנה בגזרה (למשל, הסתמכות על כוחות תגובה מהירים, מסוקי קרב בכוננות מיידית וכו') ולא רק על מכשול סטטי.</p>
+                    </div>
+                    
+                    <hr style="border: 0; border-top: 1px dashed var(--border); margin: var(--s4) 0;">
+
+                    <h5 style="margin-top: var(--s3);">שאלה 4 (סטודנטית): האם שינוי "שורש" חייב לקרות בגלל אירוע דרסטי פתאומי (כמו 7/10), או שהוא יכול לקרות גם בדרכים אחרות?</h5>
+                    <p><strong>תשובת המרצה (סיכום):</strong> זו שאלה מבריקה. יש שתי דרכים עיקריות לשינוי "שורש":</p>
+                    <ol>
+                        <li><strong>אירוע חיצוני מאיץ:</strong> כפי שציינת, אירוע קטסטרופלי ופתאומי (כמו 7 באוקטובר או מלחמה) משנה את כללי המשחק, יוצר לגיטימציה ציבורית ומאלץ קבלת החלטות "מן השורש" באופן מיידי.</li>
+                        <li><strong>אסטרטגיית ה"סלמי" (הצטברות):</strong> זהו תהליך אסטרטגי ומתוחכם. כאשר פוליטיקאי או פקיד רוצה לבצע שינוי "שורש" (למשל, לבטל את הפנסיה התקציבית) אך הוא יודע שתהיה התנגדות חזקה מקבוצות אינטרס מאורגנות, הוא לא עושה זאת בבת אחת. במקום זאת, הוא מבצע סדרה של החלטות "מן הענף" (קטנות) שנראות לא מאיימות. כל החלטה כזו עוברת בקלות, אך ההצטברות שלהן לאורך זמן מובילה בפועל לשינוי "השורש" הרצוי.</li>
+                    </ol>
+                    <div class="example-highlight">
+                        <p><strong>דוגמת המרצה: ביטול הפנסיה התקציבית</strong></p>
+                        <p>המרצה (שהיה האחרון שקיבל פנסיה תקציבית ב-1996) הסביר שכדי לבטל אותה (שינוי שורש), משרד האוצר לא פגע בעובדים הקיימים (שהיו מתנגדים). במקום זאת, האוצר קבע שהחוק החדש (פנסיה צוברת) יחול רק על עובדים שייקלטו *מה-1 בינואר 1997 ואילך*. "הציבור העתידי" הזה עוד לא היה קיים, לא היה מאורגן ולא התנגד. לאט לאט, במשך 20-30 שנה, כל העובדים החדשים נכנסו למסלול הצובר, והפנסיה התקציבית בוטלה בפועל בשיטת "סלמי" – שינוי "שורש" שהושג על ידי הצטברות של החלטות "ענף" קטנות.</p>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px dashed var(--border); margin: var(--s4) 0;">
+
+                    <h5 style="margin-top: var(--s3);">שאלה 5 (סטודנט): האם ועדת שטרום לרפורמה בבנקים היא דוגמה לשינוי "שורש" שהפך ל"ענף"?</h5>
+                    <p><strong>תשובת המרצה (סיכום):</strong></p>
+                    <div class="verification-success">
+                        <p><strong>אימות:</strong> עצם הקמת ועדה היא תמיד החלטה "מן הענף" (היא רק בודקת, לא מבצעת), אך היא יכולה להמליץ על שינוי "שורש". הדוגמה של ועדת שטרום היא טובה – ייתכן שהכוונה הייתה לשינוי "שורש" (פגיעה במונופול הבנקים), אך בפועל, בגלל הקונסטלציה הפוליטית וההתנגדות החזקה של הבנקים, היישום הסתיים בשינוי "ענף" (כמו אפליקציית "ביט"). המרצה המליץ למי שיהיה חבר בוועדה בעתיד תמיד לכלול במסקנות גם המלצות "שורש" וגם המלצות "ענף", כדי לתת לממשלה גמישות פוליטית לבחור מה ליישם.</p>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px dashed var(--border); margin: var(--s4) 0;">
+
+                    <h5 style="margin-top: var(--s3);">שאלה 6 (סטודנט): האם הרחבת יישובים ביהודה ושומרון (כמו מעלה אדומים) היא דוגמה לשיטת ה"סלמי"?</h5>
+                    <p><strong>תשובת המרצה (סיכום):</strong></p>
+                    <div class="verification-success">
+                        <p><strong>אימות:</strong> דוגמה מצוינת. כל החלטה נקודתית על הרחבת יישוב (עוד שכונה, עוד מרפסת) היא החלטת "ענף". עם זאת, ההצטברות של הרבה החלטות "ענף" כאלה לאורך זמן יוצרת רצף טריטוריאלי. רצף זה הוא בפועל שינוי "מן השורש" (יצירת עובדות בשטח) שיהיה קשה מאוד לשנות בהסכם עתידי.</p>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px dashed var(--border); margin: var(--s4) 0;">
+
+                    <h5 style="margin-top: var(--s3);">שאלה 7 (סטודנט, המשך): אז ההתנתקות מעזה הייתה שינוי "שורש"?</h5>
+                    <p><strong>תשובת המרצה (סיכום):</strong></p>
+                    <div class="verification-success">
+                        <p><strong>אימות:</strong> בהחלט. ההתנתקות הייתה קבלת החלטות קלאסית "מן השורש". היא נגעה ישירות בערכי יסוד, לא הייתה עליה הסכמה רחבה, והיא יצרה מחאה ציבורית אדירה (דבר לגיטימי בדמוקרטיה). הממשלה החליטה לבצע את השינוי למרות המחאה.</p>
+                    </div>
+
+                </article>
+                
+            </section>
+
+            <!-- ======================= -->
+            <!-- טאב 4: מקורות והערות -->
+            <!-- ======================= -->
+            <section id="tab-sources" class="tab-pane" role="tabpanel" aria-labelledby="tab-sources">
+                
+                <article class="page-card" aria-labelledby="external-sources-heading">
+                    <h3 id="external-sources-heading">מקורות חיצוניים</h3>
+                    <p>לא נעשה שימוש במקורות חיצוניים להכנת סיכום זה. כל התוכן מבוסס על ההרצאה.</p>
+                </article>
+                
+                <article class="page-card" aria-labelledby="terms-heading">
+                    <h3 id="terms-heading">הערות ומונחים</h3>
+                    <ol>
+                        <li id="term-1"><strong>צ'ארלס לינדבלום (Charles Lindblom):</strong> תיאורטיקן אמריקאי במדעי המדינה, ידוע בביקורתו על המודל הרציונלי ופיתוח המודל התוספתי.</li>
+                        <li id="term-2"><strong>Root Decision-Making (קבלת החלטות מן השורש):</strong> גישה רציונלית-כוללנית הדורשת בחינה מחדש של כל ההנחות, הערכים והחלופות, ובניית פתרון "מהיסוד".</li>
+                        <li id="term-3"><strong>Branch Decision-Making (קבלת החלטות מן הענף):</strong> גישה תוספתית המקבלת את המצב הקיים כנתון ומנסה לבצע בו שינויים קטנים והדרגתיים בלבד.</li>
+                        <li id="term-4"><strong>Incremental Model (המודל התוספתי):</strong> מודל המתאר קבלת החלטות כתהליך של שינויים קטנים והדרגתיים במדיניות קיימת, במקום שינויים דרסטיים.</li>
+                        <li id="term-5"><strong>הרברט סיימון (Herbert Simon):</strong> חוקר רב-תחומי, חתן פרס נובל לכלכלה, שפיתח את מושג הרציונליות המוגבלת.</li>
+                        <li id="term-6"><strong>Bounded Rationality (רציונליות מוגבלת):</strong> הרעיון שלפיו יכולתם של אנשים לקבל החלטות רציונליות מוגבלת על ידי מגבלות קוגניטיביות, מידע לא מושלם ומגבלות זמן.</li>
+                        <li id="term-7"><strong>Satisficing (השבעת רצון / "מספק את הרצון"):</strong> אסטרטגיה של קבלת החלטות שבה בוחרים בחלופה ה"טובה מספיק" הראשונה שפוגשים, במקום לחפש את החלופה האופטימלית.</li>
+                        <li id="term-8"><strong>גיורא איילנד (Giora Eiland):</strong> אלוף (במיל') בצה"ל, כיהן כראש המל"ל. המרצה התייחס להגותו בנושאי ביטחון.</li>
+                        <li id="term-9"><strong>קו מאז'ינו (Maginot Line):</strong> קו ביצורים מבוצר שנבנה על ידי צרפת בגבולה עם גרמניה לפני מלחמת העולם השנייה, ונכשל כישלון חרוץ.</li>
+                        <li id="term-10"><strong>קו בר-לב (Bar-Lev Line):</strong> קו מעוזים וביצורים שהקימה ישראל לאורך תעלת סואץ לאחר מלחמת ששת הימים, ונפרץ על ידי המצרים במלחמת יום הכיפורים.</li>
+                        <li id="term-11"><strong>אסטרטגיית ה"סלמי" (Salami tactics):</strong> מושג המתאר תהליך שבו מטרה גדולה (שינוי "שורש") מושגת באמצעות סדרה של צעדים קטנים והדרגתיים (שינויי "ענף"), כך שאף צעד בודד לא מעורר התנגדות משמעותית, אך הצטברותם מביאה לתוצאה הרצויה.</li>
+                    </ol>
+                </article>
+
+            </section>
+
+            <!-- ======================= -->
+            <!-- טאב 5: רשמים נוספים -->
+            <!-- ======================= -->
+            <section id="tab-impressions" class="tab-pane" role="tabpanel" aria-labelledby="tab-impressions">
+                
+                <article class="page-card" aria-labelledby="impressions-heading">
+                    <h3 id="impressions-heading">רשמים אישיים</h3>
+                    <p><i>(טאב זה נותר ריק בכוונה. כאן תוכל/י להוסיף את הרשמים האישיים שלך מהשיעור, ניתוחים נוספים, או קישורים שברצונך לשמור.)</i></p>
+                    
+                    <!-- דוגמה לאופן הוספת כרטיסים (בטל את ההערה והשתמש):
+                    <div class="personal-impression">
+                        <h5>רשם אישי / מחשבה</h5>
+                        <p>הדוגמה של 7/10 ממחישה בדיוק נמרץ את הסכנה שבחשיבה "תוספתית" (שיפור הגדר) במקום לטפל ב"שורש" (הקונספציה). נקודה חשובה מאוד.</p>
+                    </div>
+                    
+                    <div class="reading-material">
+                        <h5>חומר קריאה קשור</h5>
+                        <p>לקרוא את המאמר המקורי של לינדבלום, "The Science of 'Muddling Through'".</p>
+                    </div>
+                    -->
+                </article>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- סקריפט אחיד (מ-lesson_header_template.html) -->
+    <script>
+    (function(){
+      const HEADER_SELECTOR = '.site-header .nav, header .nav, .site-header nav, header nav';
+
+      function makeBar(){
+        const ICON_PRINT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 8H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3zm-4 11H9v-3h6zm1-15H8v3h8z" fill="currentColor"/></svg>';
+        const ICON_SUN   = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V1h0v3zm0 19v-3h0v3zM4 12H1v0h3zm22 0h-3v0h3zM5.64 5.64L3.51 3.51l0 0 2.13 2.13zM20.49 20.49l-2.13-2.13 0 0 2.13 2.13zM18.36 5.64l2.13-2.13 0 0-2.13 2.13zM3.51 20.49l2.13-2.13 0 0-2.13 2.13zM12 7a5 5 0 100 10 5 5 0 000-10z" fill="currentColor"/></svg>';
+        const ICON_MOON  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1021 12.79z" fill="currentColor"/></svg>';
+
+        const bar = document.createElement('div');
+        bar.className = 'sa-actions';
+
+        const theme = document.createElement('button');
+        theme.className = 'sa-btn';
+        theme.type = 'button';
+        theme.title = 'מצב יום/לילה';
+        theme.dataset.sun = ICON_SUN;
+        theme.dataset.moon = ICON_MOON;
+
+        const divider = document.createElement('div');
+        divider.className = 'sa-divider';
+
+        const printBtn = document.createElement('button');
+        printBtn.className = 'sa-btn primary';
+        printBtn.type = 'button';
+        printBtn.title = 'הדפס';
+        printBtn.innerHTML = ICON_PRINT;
+
+        bar.appendChild(theme);
+        bar.appendChild(divider);
+        bar.appendChild(printBtn);
+
+        return {bar, theme, printBtn};
+      }
+
+      function initThemeButton(btn){
+        function isDark(){ return document.documentElement.classList.contains('sa-dark'); }
+        function icon(){ return isDark() ? btn.dataset.moon : btn.dataset.sun; }
+
+        btn.addEventListener('click', ()=>{
+          document.documentElement.classList.toggle('sa-dark');
+          btn.innerHTML = icon();
+          try{ localStorage.setItem('sa-theme', isDark() ? 'dark' : 'light'); }catch(e){}
+        });
+
+        let t = 'light';
+        try{ t = localStorage.getItem('sa-theme') || t; }catch(e){}
+        document.documentElement.classList.toggle('sa-dark', t === 'dark');
+        btn.innerHTML = icon();
+      }
+
+      function injectButtons(){
+        let navs = document.querySelectorAll(HEADER_SELECTOR);
+        if(!navs.length){
+          const header = document.querySelector('.site-header') || document.querySelector('header');
+          if(header){
+            let aux = header.querySelector('.nav');
+            if(!aux){
+              aux = document.createElement('div');
+              aux.className = 'nav';
+              header.appendChild(aux);
+            }
+            navs = [aux];
+          }
+        }
+
+        navs.forEach(nav=>{
+          if(nav.querySelector('.sa-actions')) return;
+          const {bar, theme, printBtn} = makeBar();
+          nav.appendChild(bar);
+          initThemeButton(theme);
+          printBtn.addEventListener('click', ()=> window.print());
+        });
+      }
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', injectButtons);
+      }else{
+        injectButtons();
+      }
+    })();
+    </script>
+    
+    <!-- סקריפט ניווט טאבים (מ-sample1.html) -->
+    <script>
+        (function() {
+            'use strict';
+            
+            // --- בקר מצב תצוגה (בהיר/כהה) ---
+            // מטופל על ידי הסקריפט של ה-header (למעלה)
+
+            // --- בקר ניווט כרטיסיות (Tabs) ---
+            const tabContainer = document.querySelector('.tab-navigation');
+            
+            if (tabContainer) {
+                const tabButtons = tabContainer.querySelectorAll('.tab-btn');
+                const tabPanes = document.querySelectorAll('.tab-pane');
+
+                tabContainer.addEventListener('click', function(event) {
+                    const clickedButton = event.target.closest('.tab-btn');
+                    
+                    if (!clickedButton || clickedButton.classList.contains('active')) return;
+                    event.preventDefault();
+
+                    // הסר 'active' מכל הכפתורים והחלוניות
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-selected', 'false');
+                    });
+                    tabPanes.forEach(pane => {
+                        pane.classList.remove('active');
+                    });
+
+                    // הוסף 'active' לכפתור ולחלונית שנבחרו
+                    clickedButton.classList.add('active');
+                    clickedButton.setAttribute('aria-selected', 'true');
+                    
+                    const tabId = clickedButton.getAttribute('data-tab');
+                    const activePane = document.getElementById(`tab-${tabId}`);
+                    if (activePane) {
+                        activePane.classList.add('active');
+                    }
+                });
+            }
+
+        })();
+    </script>
+
+</body>
+</html>
