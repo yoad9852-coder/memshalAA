@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    
+    <!-- Meta Tags for Lesson Identification -->
+    <meta name="lesson-title" content="שיעור 3 – סוגי עוצמה, הצדקות להתערבות ומשילות">
+    <meta name="lesson-date" content="02.11.2025">
+    <meta name="lesson-teacher" content="פרופ' משה מאור">
+    <meta name="lesson-summary" content="השיעור עוסק בסוגי עוצמה (ישירה, סמויה, קונספטואלית), השימוש בהם בזירת המדיניות, הצדקות להתערבות ממשלתית (כלכליות, ערכיות) והמעבר מממשל למשילות.">
+    
+    <title>מבוא למנהל ומדיניות ציבורית - שיעור 3 - 02.11.2025 - סיכום</title>
+    
+    <style>
+        /* --- מערכת עיצוב בסיסית (מבוסס על index.html שסופק) --- */
+        :root {
+            /* ערכי ברירת מחדל (מצב בהיר) */
+            --bg: #f6f8fa; /* רקע דף בהיר */
+            --surface: #ffffff; /* רקע כרטיסייה לבן */
+            --text: #202124;
+            --muted: #5f6368;
+            --primary: #3b82f6; 
+            --primary-ink: #174ea6;
+            --border: #e5e7eb;
+            --highlight-yellow: #fffde7; /* צהוב בהיר לדוגמאות מרצה */
+            --highlight-blue: #e8f0fe; /* תכלת בהיר להרחבות */
+            --highlight-green-correct: #e6fffa; /* ירוק בהיר לאימות */
+            --highlight-red-incorrect: #ffebee; /* אדום בהיר להפרכה */
+            --highlight-assignment: #ffebee; /* אדום בהיר למטלות */
+            
+            --shadow: 0 4px 12px rgba(0, 0, 0, .07);
+            --header-bg: rgba(255, 255, 255, .8);
+            
+            --s1: 8px;
+            --s2: 12px;
+            --s3: 16px;
+            --s4: 24px;
+            --s5: 36px;
+            --content-width: 980px;
+        }
+
+        /* מצב לילה */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #202124; 
+                --surface: #303134;
+                --text: #e8eaed;
+                --muted: #9aa0a6;
+                --primary: #8ab4f8; 
+                --primary-ink: #e8f0fe;
+                --border: #5f6368;
+                --highlight-yellow: #4d4633;
+                --highlight-blue: #2a3a52;
+                --highlight-green-correct: #2e4a42;
+                --highlight-red-incorrect: #5c2b29;
+                --highlight-assignment: #5c2b29;
+
+                --shadow: 0 0 0 1px var(--border);
+                --header-bg: rgba(48, 49, 52, .8);
+            }
+        }
+        
+        /* סגנונות שהועתקו מ-index.html */
+        * {
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Noto Sans Hebrew", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            font-weight: 400; 
+            line-height: 1.7;
+            text-align: right;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 0;
+            margin-bottom: var(--s3);
+            font-weight: 600; 
+        }
+        
+        h1 { 
+            font-size: 1.25rem; /* הוגדל מעט לכותרת הדף */
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.4; 
+        }
+        h2 { 
+            font-size: 1.75rem; 
+            text-align: center;
+            margin-bottom: var(--s4); 
+            margin-top: var(--s4);
+        }
+        h3 { 
+            font-size: 1.25rem; 
+            margin: 0 0 var(--s2) 0;
+            padding-bottom: var(--s2);
+            border-bottom: 1px solid var(--border);
+            transition: border-color 0.3s;
+        }
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: var(--s4);
+            margin-bottom: var(--s2);
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: var(--s3);
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s, background-color 0.2s;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            padding-right: var(--s4);
+        }
+        
+        ul li, ol li {
+            margin-bottom: var(--s2);
+            padding-right: var(--s2);
+        }
+        
+        sup {
+            font-size: 0.75em;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline;
+            top: -0.5em;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* כותרת עליונה */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: var(--s3) var(--s4);
+        }
+
+        /* קונטיינר ראשי */
+        .container {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: var(--s4) var(--s4);
+        }
+        
+        /* --- עיצוב כרטיסיות (Tabs) --- */
+        .tab-navigation {
+            display: flex;
+            gap: var(--s1);
+            border-bottom: 2px solid var(--border);
+            margin-bottom: var(--s4);
+            transition: border-color 0.3s;
+            flex-wrap: wrap; /* גלישה למכשירים צרים */
+        }
+
+        .tab-btn {
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--muted);
+            background: none;
+            border: none;
+            padding: var(--s2) var(--s3);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: color 0.3s, border-color 0.3s;
+            margin-bottom: -2px; 
+            display: flex; /* עבור האייקון */
+            align-items: center;
+            gap: var(--s1);
+        }
+        
+        .tab-btn:hover {
+            color: var(--text);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        
+        /* סגנון לטאב מטלה */
+        .tab-btn.assignment-tab.active {
+            background-color: var(--highlight-assignment);
+            color: var(--text);
+            border-bottom-color: #f44336; /* אדום חזק יותר לגבול */
+        }
+        
+        .tab-btn .pulse {
+            display: inline-block;
+            animation: pulse 1.2s infinite;
+            color: #f44336;
+            font-weight: 700;
+        }
+
+        .tab-pane {
+            display: none; 
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-pane.active {
+            display: block; 
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.25; }
+        }
+        
+        /* --- כרטיס תוכן פנימי (לרקע, ציון וכו') --- */
+        .page-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: var(--s4);
+            margin-bottom: var(--s4);
+            transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .page-card.assignment-card {
+            border-color: #f44336;
+            background-color: var(--highlight-assignment);
+        }
+        
+        /* --- סגנונות מיוחדים להדגשות בטקסט (כבלוק נפרד) --- */
+        .highlight-lecturer, .highlight-external, .highlight-correct, .highlight-incorrect {
+            padding: var(--s2) var(--s3);
+            border-radius: 0 8px 8px 0;
+            margin-top: var(--s2);
+            margin-bottom: var(--s3);
+            margin-right: var(--s4); /* הזחה קלה כמו ברשימה */
+        }
+        .highlight-lecturer {
+            background-color: var(--highlight-yellow);
+            border-right: 4px solid #f9a825; /* צהוב כהה */
+        }
+        .highlight-external {
+            background-color: var(--highlight-blue);
+            border-right: 4px solid var(--primary-ink); /* כחול כהה */
+        }
+        .highlight-correct {
+            background-color: var(--highlight-green-correct);
+            border-right: 4px solid #66bb6a;
+        }
+        .highlight-incorrect {
+            background-color: var(--highlight-red-incorrect);
+            border-right: 4px solid #ef5350;
+        }
+        
+        .highlight-lecturer p:last-child, .highlight-external p:last-child {
+             margin-bottom: 0;
+        }
+        .highlight-lecturer strong, .highlight-external strong {
+            color: var(--text);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+
+        /* --- רשת כרטיסים (לסקירה כללית וכו') --- */
+        /* .info-grid הוסר, הכרטיסים יסודרו בטור */
+        #overview-pane .page-card {
+            margin-bottom: var(--s4);
+        }
+
+
+        /* --- אקורדיון --- */
+        .accordion-item {
+            border-bottom: 1px solid var(--border);
+            transition: border-color 0.3s;
+        }
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--s3) 0;
+            cursor: pointer;
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: right;
+            font-family: inherit;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text);
+            transition: color 0.3s;
+        }
+        
+        .accordion-header:hover {
+            color: var(--primary);
+        }
+
+        .accordion-arrow {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-left: var(--s2); /* שונה מ-RTL, לכן margin-left */
+            transition: transform 0.3s ease;
+            transform: rotate(0deg); /* סגור */
+        }
+
+        .accordion-header.active .accordion-arrow {
+            transform: rotate(45deg); /* פתוח - הופך ל-X */
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding: 0 var(--s3);
+        }
+        
+        .accordion-content.active {
+            /* max-height יוגדר על ידי JS */
+            padding: var(--s1) var(--s3) var(--s4) var(--s3);
+        }
+        
+        .accordion-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* --- טבלאות --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--s4) 0;
+        }
+        
+        th, td {
+            border: 1px solid var(--border);
+            padding: var(--s2) var(--s3);
+            text-align: right;
+            transition: border-color 0.3s;
+        }
+        
+        th {
+            background-color: var(--bg);
+            font-weight: 600;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        
+        /* --- שאלות ותשובות --- */
+        .qa-item {
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: var(--s3);
+            margin-bottom: var(--s3);
+        }
+        .qa-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .qa-item h4 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: var(--s2);
+            border-bottom: none; /* לבטל את הקו של H3 הכללי */
+            padding-bottom: 0;
+        }
+        .qa-item .question {
+            font-weight: 500;
+            color: var(--muted);
+            margin-bottom: var(--s2);
+        }
+        .qa-item .answer {
+            margin-bottom: 0;
+        }
+        
+        /* --- הערות שוליים ומונחים --- */
+        .footnotes {
+            font-size: 0.9rem;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+            padding-top: var(--s3);
+            margin-top: var(--s5);
+            transition: border-color 0.3s, color 0.3s;
+        }
+        .footnotes ol, .footnotes ul {
+            padding-right: var(--s3);
+        }
+        .footnotes li {
+            margin-bottom: var(--s2);
+            padding-right: 0;
+        }
+        .term-list li {
+            margin-bottom: var(--s3);
+        }
+        .term-list strong {
+            color: var(--text);
+            font-weight: 600;
+            display: block;
+        }
+        
+        /* --- SVG --- */
+        figure {
+            margin: var(--s4) 0;
+            padding: 0;
+        }
+        figcaption {
+            text-align: center;
+            font-style: italic;
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-top: var(--s1);
+        }
+        .chart-svg {
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--s3);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="nav">
+            <h1>מבוא למנהל ומדיניות ציבורית: שיעור 3</h1>
+            <!-- כאן יכול להתווסף כפתור החלפת ערכת נושא אם רוצים, כרגע מושמט לפשטות -->
+        </div>
+    </header>
+
+    <main class="container">
+        <nav class="tab-navigation">
+            <button class="tab-btn active" data-tab="overview" role="tab" aria-selected="true" aria-controls="overview-pane">
+                <span aria-hidden="true">ℹ️</span> סקירה כללית
+            </button>
+            <button class="tab-btn" data-tab="content" role="tab" aria-selected="false" aria-controls="content-pane">
+                <span aria-hidden="true">📚</span> תוכן מרכזי
+            </button>
+            <button class="tab-btn" data-tab="qa" role="tab" aria-selected="false" aria-controls="qa-pane">
+                <span aria-hidden="true">💬</span> שאלות ודיון
+            </button>
+            <button class="tab-btn" data-tab="notes" role="tab" aria-selected="false" aria-controls="notes-pane">
+                <span aria-hidden="true">📝</span> מקורות והערות
+            </button>
+            <button class="tab-btn" data-tab="impressions" role="tab" aria-selected="false" aria-controls="impressions-pane">
+                <span aria-hidden="true">💡</span> רשמים נוספים
+            </button>
+            <!-- טאב מטלה לא יופיע כי לא זוהתה מטלה מפורשת בשיעור זה -->
+        </nav>
+
+        <div class="tab-content">
+            <!-- כרטיסייה 1: סקירה כללית -->
+            <section class="tab-pane active" id="overview-pane" role="tabpanel" aria-labelledby="overview-tab">
+                <!-- הוסר הקלאס info-grid כדי שהכרטיסים יהיו בטור -->
+                <div> 
+                    <article class="page-card">
+                        <h3>פרטי השיעור</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li><strong>נושא:</strong> סוגי עוצמה, הצדקות להתערבות ומשילות</li>
+                            <li><strong>תאריך:</strong> 02.11.2025</li>
+                            <li><strong>מרצה:</strong> פרופ' משה מאור</li>
+                            <li><strong>זמנים:</strong> 11:30 (משוער) - 12:58</li>
+                        </ul>
+                    </article>
+                    <article class="page-card">
+                        <h3>תקציר ונושאים מרכזיים</h3>
+                        <p>השיעור עוסק בניתוח מושג ה"עוצמה" בזירה הציבורית, בוחן את ההצדקות השונות להתערבות ממשלתית במדיניות, ומציג את המעבר מתפיסה קלאסית של "ממשל" לתפיסה מודרנית ורשתית של "משילות".</p>
+                        <ul style="list-style-type: '✔️';">
+                            <li>הגדרת שלושת סוגי העוצמה (ישירה, סמויה, קונספטואלית).</li>
+                            <li>השימוש בעוצמה לקביעת סדר יום וקבלת החלטות.</li>
+                            <li>ניתוח הצדקות כלכליות (כשלי שוק) וערכיות להתערבות המדינה.</li>
+                            <li>ההבדלים בין "ממשל" (Government) ל"משילות" (Governance).</li>
+                            <li>הצגת מודלים חדשניים: "משילות חדשה" ו"מעבדות מדיניות" (Policy Labs).</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <!-- כרטיסייה 2: תוכן מרכזי -->
+            <section class="tab-pane" id="content-pane" role="tabpanel" aria-labelledby="content-tab">
+                <div class="page-card">
+                    <h3>נושאי הליבה (לפי סדר כרונולוגי)</h3>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            1. סוגי עוצמה בזירת המדיניות
+                            <span class="accordion-arrow">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>המרצה הציג שלושה סוגי עוצמה מרכזיים, המבוססים על עבודתו של התיאורטיקן סטיבן לוקס, כדי להבין כיצד מתקבלות החלטות (או לא מתקבלות) בזירה הציבורית.</p>
+                            <ul>
+                                <li>
+                                    <strong>עוצמה ישירה (The Power of Decision):</strong> זוהי העוצמה הגלויה והברורה ביותר. היכולת של גורם A לגרום לגורם B לעשות משהו ש-B לא היה עושה אחרת, לעיתים קרובות בניגוד לאינטרס של B.
+                                </li>
+                            </ul>
+                            <div class="highlight-lecturer">
+                                <strong>דוגמת המרצה:</strong>
+                                <p style="margin: 8px 0 0 0;">שוטר שעוצר אותך בצד הדרך ומורה לך להציג מסמכים. זוהי הפעלת עוצמה ישירה, גלויה וברורה.</p>
+                            </div>
+                            <ul>
+                                <li>
+                                    <strong>עוצמה סמויה (The Power of Non-decision):</strong> זוהי עוצמה מתוחכמת יותר, שבה גורם A מונע מנושאים מסוימים (שעלולים לפגוע בו) לעלות כלל לסדר היום הציבורי. השאלה המרכזית כאן היא "מה לא קרה?" או "איזה נושאים לא הגיעו לדיון?".
+                                </li>
+                            </ul>
+                            <div class="highlight-lecturer">
+                                <strong>דוגמת המרצה:</strong>
+                                <p style="margin: 8px 0 0 0;">פרשת הפצ"ר (הרפז) שהדיונים הסמויים לגביה התנהלו בקבוצת ווטסאפ סגורה ("סמוי") ורק לאחר מכן דלפו והפכו לגלויים ("מה לא קרה" הפך ל"מה קרה").</p>
+                            </div>
+                            <ul>
+                                <li>
+                                    <strong>עוצמה קונספטואלית (Conceptual Power):</strong> הסוג העמוק והחזק ביותר. היכולת של גורם A לעצב את תפיסות העולם, הרצונות וההעדפות של גורם B, כך ש-B פועל לטובת A מתוך מחשבה שזהו האינטרס האמיתי שלו. זוהי מניפולציה תפיסתית.
+                                </li>
+                            </ul>
+                             <div class="highlight-lecturer">
+                                <strong>דוגמת המרצה:</strong>
+                                <p style="margin: 8px 0 0 0;">פרסומת ישנה למשקה קולה, שבה הוטמעה דמות אישה באופן סמוי בין קוביות הקרח. הצופה לא מודע לכך, אך התת-מודע שלו קולט את המסר ונוצרת משיכה רגשית (מניפולטיבית) למוצר.</p>
+                            </div>
+                            <div class="highlight-external">
+                                <strong>הרחבה (מקור חיצוני): שלושת הפנים של העוצמה (סטיבן לוקס)</strong>
+                                <p style="font-size: 0.9rem; margin-top: 8px;">המודל שהציג פרופ' מאור מבוסס על ספרו הקלאסי של סטיבן לוקס, "עוצמה: מבט רדיקלי" (1974). לוקס טען שהבנות קודמות של עוצמה (שהתמקדו רק בהתנהגות גלויה, הפן ה-1) הן שטחיות. הוא הוסיף את הפן ה-2 (הסמוי, מניעת דיון) ואת הפן ה-3 (הקונספטואלי, עיצוב תודעה) כדי לחשוף את הדרכים העמוקות שבהן מבני כוח משמרים את עצמם בחברה.<sup>[1]</sup></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            2. השימוש בעוצמה וקביעת סדר יום
+                            <span class="accordion-arrow">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>מי שמחזיק בעוצמה (במיוחד סמויה וקונספטואלית) בזירה הציבורית, יכול להשפיע על:
+                            </p>
+                            <ul>
+                                <li><strong>קביעת האינטרס הציבורי:</strong> להגדיר מה נחשב "טוב לכולם" ומה לא.</li>
+                            </ul>
+                            <div class="highlight-lecturer">
+                                <strong>דוגמת המרצה:</strong>
+                                <p style="margin: 8px 0 0 0;">המצב האבסורדי שבו מוסד מרכזי כמו הביטוח הלאומי, המנהל מעל 100 מיליארד שקל מכספי ציבור, מתנהל במשך שנים ללא מנכ"ל קבוע. העובדה שנושא זה כמעט ולא נמצא בסדר היום הציבורי מראה על הפעלת עוצמה סמויה (Non-decision) - מישהו מרוויח מ"אי-ההחלטה" הזו.</p>
+                            </div>
+                            <ul>
+                                <li><strong>קביעת זכות השימוש בעוצמה:</strong> מי רשאי להפעיל סמכות ובאילו תנאים.</li>
+                            </ul>
+                            <div class="highlight-lecturer">
+                                <strong>דוגמת המרצה:</strong>
+                                <p style="margin: 8px 0 0 0;">תופעת "ממלאי המקום" הנפוצה בממשלה. כאשר שר ממנה מנכ"ל כ"ממלא מקום" ולא במינוי קבע, הוא למעשה מסרס את עוצמתו. ממלא המקום לא יכול לבצע רפורמות, לא יכול למנות בכירים, ותלוי בשר להפיכת המינוי לקבוע. זה הופך אותו ל"יס-מן" ומאפשר לשר התערבות פוליטית עמוקה יותר בדרג המקצועי, מה שפוגע באינטרס הציבורי.</p>
+                            </div>
+                            <ul>
+                                <li><strong>קביעת העובדות (Evidence-based Policy):</strong> היכולת להחליט אילו נתונים יוצגו לציבור ואילו יוסתרו.</li>
+                            </ul>
+                            <div class="highlight-lecturer">
+                                <strong>דוגמת המרצה:</strong>
+                                <p style="margin: 8px 0 0 0;">בבריטניה, משרד התחבורה מפרסם נתונים מלאים על איחורי רכבות, והאזרחים מקבלים החזר כספי אוטומטי. בישראל, המרצה טוען שמשרד התחבורה נמנע מביצוע מחקרי הערכה דומים על התחבורה הציבורית, כי התוצאות כנראה לא יהיו נוחות פוליטית. זו דוגמה להסתרת "עובדות" מהציבור.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            3. הצדקות להתערבות ממשלתית
+                            <span class="accordion-arrow">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>מדוע שהממשלה תתערב בכלל? ההצדקות נחלקות לשני סוגים עיקריים: ערכיות וכלכליות.</p>
+                            
+                            <h5>הצדקות כלכליות (כשלי שוק)</h5>
+                            <p>התערבות המבוססת על ההנחה שהשוק החופשי לא תמיד מגיע לתוצאה היעילה ביותר. המדינה מתערבת כדי לתקן "כשלי שוק".</p>
+                            <ul>
+                                <li><strong>מוצרים ציבוריים (Public Goods):</strong> מוצרים שהשוק הפרטי לא יספק כי אי אפשר למנוע מאנשים לצרוך אותם (כמו ביטחון או אוויר נקי).</li>
+                            </ul>
+                            <div class="highlight-lecturer">
+                                <strong>דוגמת המרצה:</strong>
+                                <p style="margin: 8px 0 0 0;">שוטר שמסתובב ברחוב ומספק ביטחון לכולם, גם למי שלא שילם עליו מס ישיר.</p>
+                            </div>
+                            <ul>
+                                <li><strong>השפעות חיצוניות (Externalities):</strong> מצב שבו פעולה של גורם אחד משפיעה על גורם אחר (לטובה או לרעה) בלי שהדבר יתומחר. (לדוגמה: זיהום אוויר הוא השפעה חיצונית שלילית).</li>
+                                <li><strong>מידע א-סימטרי:</strong> כשאחד הצדדים בעסקה יודע יותר מהשני (לדוגמה: יצרן מזון יודע מה יש במוצר, הצרכן לא). המדינה מתערבת וקובעת חובת גילוי (תווית מזון).</li>
+                                <li><strong>מונופולים:</strong> כשגורם אחד שולט בשוק וקובע מחירים גבוהים.</li>
+                            </ul>
+                            <div class="highlight-external">
+                                <strong>הרחבה (מקור חיצוני): מהם "כשלי שוק"?</strong>
+                                <p style="font-size: 0.9rem; margin-top: 8px;">"כשל שוק" הוא מונח בכלכלה המתאר מצב שבו המנגנון של שוק חופשי (היצע וביקוש) אינו מצליח להקצות משאבים בצורה יעילה. ההצדקות שהוצגו (מוצרים ציבוריים, השפעות חיצוניות, מידע א-סימטרי ומונופולים) הן הדוגמאות הקלאסיות למצבים שבהם התערבות ממשלתית (דרך רגולציה, מיסוי או אספקה ישירה) עשויה לשפר את התוצאה החברתית הכוללת.<sup>[2]</sup></p>
+                            </div>
+                            
+                            <h5 style="margin-top: 24px;">הצדקות ערכיות ותרבותיות</h5>
+                            <p>התערבות המבוססת על ערכים שהחברה רוצה לקדם, גם אם זה לא "יעיל" כלכלית.</p>
+                            <ul>
+                                <li><strong>גישת הצדק וההגינות:</strong> המדינה מתערבת כדי להבטיח חלוקה הוגנת יותר של משאבים ודאגה לחלשים (למשל, הבטחת הכנסה).</li>
+                                <li><strong>הגישה התועלתנית:</strong> המדינה פועלת כדי למקסם את "האושר" או ה"טוב" הכולל של מרבית האזרחים.</li>
+                                <li><strong>הצדקות תרבותיות:</strong> המדינה מתערבת כדי לשמר ערכים ייחודיים (לדוגמה: שמירה על השפה העברית, מדיניות הגירה).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            4. המעבר מ"ממשל" (Government) ל"משילות" (Governance)
+                            <span class="accordion-arrow">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>המרצה הציג שינוי תפיסתי באופן שבו מדיניות ציבורית מנוהלת.</p>
+                            <ul>
+                                <li>
+                                    <strong>ממשל (Government):</strong> התפיסה הישנה (עד שנות ה-80 בערך). המדינה היא השחקן המרכזי והיחיד. היא פועלת "מלמעלה למטה" (Top-Down) במבנה היררכי ברור.
+                                </li>
+                                <li>
+                                    <strong>משילות (Governance):</strong><sup>[3]</sup> התפיסה החדשה. המדינה היא כבר לא השחקן היחיד, אלא חלק מ"רשת" (Network) של שחקנים. ברשת זו פועלים יחד:
+                                    <ul>
+                                        <li>המדינה (משרדי ממשלה)</li>
+                                        <li>המגזר הפרטי (פירמות עסקיות)</li>
+                                        <li>המגזר השלישי (עמותות, ארגונים ללא מטרות רווח - NGOs)<sup>[4]</sup></li>
+                                        <li>גופים בינלאומיים (כמו האו"ם או האיחוד האירופי)</li>
+                                    </ul>
+                                    <p>ניהול המדיניות נעשה באמצעות שיתופי פעולה, משא ומתן וביזור סמכויות, ולא רק באמצעות פקודות.</p>
+                                </li>
+                            </ul>
+                            <div class="highlight-lecturer">
+                                <strong>דוגמת המרצה:</strong>
+                                <p style="margin: 8px 0 0 0;">במודל השוודי, המדינה מעבירה תקציבים לוועדי שכונות ("ביזור סמכויות"), והוועדים הם אלו שמחליטים כיצד לפתח את הפארק המקומי בהתאם לצרכים שהם מזהים, במקום שהמדינה תחליט עבורם "מלמעלה".</p>
+                            </div>
+                            <ul>
+                                <li>
+                                    <strong>משילות חדשה (NPM)<sup>[5]</sup> / מעבדות מדיניות (Policy Labs):<sup>[6]</sup></strong> (58:30) גישה עוד יותר מתקדמת, שבה יוצרים צוותים רב-תחומיים (מהאקדמיה, הממשל, המגזר השלישי) שמשתמשים בכלים כמו "חשיבה עיצובית" (Design Thinking)<sup>[7]</sup> כדי להתמקד באזרח, לפתח פתרונות מהירים ("אב-טיפוס") ולבחון אותם בשטח, במקום לתכנן תוכניות ארוכות טווח שלא תמיד עובדות.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- כרטיסייה 4: שאלות ודיון -->
+            <section class="tab-pane" id="qa-pane" role="tabpanel" aria-labelledby="qa-tab">
+                <article class="page-card">
+                    <h3>שאלות מהשיעור</h3>
+                    
+                    <h4>שאלות משתתפים</h4>
+                    
+                    <div class="qa-item">
+                        <h4>שאלה 1 (סטודנטית - ספיר)</h4>
+                        <p class="question"><strong>השאלה:</strong> האם יש הגבלה חוקית למשך הזמן שבו ניתן להחזיק אדם בתפקיד של "ממלא מקום"?</p>
+                        <p class="answer"><strong>תשובת המרצה:</strong> זו שאלה מצוינת. בפועל, זו טקטיקה ידועה למרוח זמן, ולעיתים גם לחסום מועמדים לא רצויים (למשל נשים). ממנים מישהו "בפועל" (שזה כמו ממלא מקום) לתקופה (למשל שנה), ואז כשהמכרז נפתח הוא מגיע עם יתרון מובנה כי הוא כבר בתפקיד. הממשלה תמיד יכולה לטעון שהיא "לא מוצאת מועמד מתאים" ולמשוך את הזמן. קשה מאוד לאכוף את זה משפטית.</p>
+                    </div>
+
+                    <div class="qa-item">
+                        <h4>שאלה 2 (סטודנט - יובל)</h4>
+                        <p class="question"><strong>השאלה:</strong> כשממנים "ממלא מקום" במקום מנכ"ל קבוע, למי עוברות הסמכויות של המנכ"ל?</p>
+                        <p class="answer"><strong>תשובת המרצה:</strong> הסמכויות לא עוברות לאף אחד. זה העניין. ממלא מקום הוא "משותק" - הוא לא יכול לבצע רפורמות, לא יכול למנות בכירים ולא לקבל החלטות אסטרטגיות ארוכות טווח. הוא יכול לנהל רק את השוטף (Day-to-day). הבעיה היא שזה יוצר תלות מוחלטת בשר הממנה; ממלא המקום רוצה את מינוי הקבע, ולכן יפעל כדי לרצות את השר (יהיה "יס-מן") ויהיה חשוף ללחצים פוליטיים, מה שפוגע באינטרס הציבורי ובמקצועיות של המשרד.</p>
+                    </div>
+
+                    <div class="qa-item">
+                        <h4>שאלה 3 (סטודנט - חגי)</h4>
+                        <p class="question"><strong>השאלה:</strong> מה רע בכך ששר ימנה אנשים שהוא סומך עליהם ("משרות אמון") כדי שיוציאו לפועל את המדיניות שלשמה הוא נבחר?</p>
+                        <p class="answer"><strong>תשובת המרצה:</strong> החוק מגדיר במפורש משרות אמון (כמו מנכ"ל או משנה למנכ"ל) וזה לגיטימי. הבעיה מתחילה כשהפוליטיקאים מנסים להרחיב את משרות האמון גם לדרגים שמתחת למנכ"ל (דרג מקצועי בכיר). זו כבר "פוליטיזציה" של המנהל הציבורי. המרצה נתן כדוגמה משרדי ממשלה בעבר שהפכו למקומות למינוי "אנשי שלומנו" (אנ"ש) במקום אנשי מקצוע.</p>
+                    </div>
+                    
+                    <div class="qa-item">
+                        <h4>שאלה 4 (סטודנטית - יובל)</h4>
+                        <p class="question"><strong>השאלה:</strong> אז מה הציבור יכול לעשות? איך אפשר לבקר את הממשלה על הדברים האלה?</p>
+                        <p class="answer"><strong>תשובת המרצה:</strong> הביקורת הציבורית מגיעה בעיקר דרך התקשורת. הבעיה היא שסדר היום הציבורי בישראל כל כך עמוס וצפוף (בעיקר בנושאי ביטחון, המרצה ציין "פה פצ"ר, פה חטופים, פה עזה..."), שנושאים "אפורים" כמו מינוי ממלאי מקום פשוט לא מקבלים תשומת לב. זה דורש "פשלה גרנדיוזית" (טעות ענקית) כדי שנושא כזה יצוף ויגיע לתודעת הציבור. מי שנפגע בסוף מכל התהליך הזה הוא הציבור, שהאינטרס הציבורי שלו נזנח.</p>
+                    </div>
+                    
+                    <div class="qa-item">
+                        <h4>שאלה 5 (סטודנט)</h4>
+                        <p class="question"><strong>השאלה:</strong> האם בג"ץ יכול להתערב במינויים של ממלאי מקום?</p>
+                        <p class="answer"><strong>תשובת המרצה:</strong> בג"ץ לא פועל ביוזמתו (הוא גוף "ריאקטיבי", לא "פרואקטיבי"). מישהו צריך להגיש עתירה. גם כשמוגשת עתירה, בג"ץ יתערב רק במקרים קיצוניים של "אי-סבירות קיצונית" או פגם חמור בהליך המינוי. בדרך כלל, בג"ץ לא יתערב בסמכות הממשלה למנות, והממשלה תמיד יכולה לטעון שהיא "עדיין בתהליך חיפוש מועמד".</p>
+                    </div>
+
+                </article>
+            </section>
+            
+            <!-- כרטיסייה 3: מקורות והערות -->
+            <section class="tab-pane" id="notes-pane" role="tabpanel" aria-labelledby="notes-tab">
+                <article class="page-card">
+                    <h3>מקורות חיצוניים שהוזכרו או שימשו להרחבה</h3>
+                    <p>הרשימה הבאה כוללת מקורות אקדמיים רלוונטיים להרחבת הנושאים שעלו בשיעור.</p>
+                    <ol>
+                        <li>Lukes, S. (1974). *Power: A Radical View*. Macmillan. (זהו המקור התיאורטי המרכזי לשלושת סוגי העוצמה שהציג המרצה).</li>
+                        <li>Weimer, D. L., & Vining, A. R. (2017). *Policy Analysis: Concepts and Practice*. Routledge. (פרקים העוסקים ב"כשלי שוק" כהצדקות להתערבות).</li>
+                    </ol>
+                    
+                    <h3 style="margin-top: var(--s4);">הערות ומונחים</h3>
+                    <ul classC="term-list" style="list-style: none; padding: 0;">
+                        <li>
+                            <strong>Evidence-based policy (EBP) - מדיניות מבוססת עובדות/ראיות:</strong>
+                            גישה לקביעת מדיניות המדגישה שימוש בראיות מחקריות מוצקות כבסיס המרכזי לקבלת החלטות.
+                        </li>
+                        <li>
+                            <strong>Externalities (השפעות חיצוניות):</strong>
+                            במיקרו-כלכלה, זוהי עלות או תועלת הנגרמת מצד שלישי שאינו מעורב ישירות בעסקה או בפעולה. זיהום אוויר הוא דוגמה קלאסית להשפעה חיצונית שלילית.
+                        </li>
+                        <li>
+                            <strong>Command and Control (שליטה ופיקוח):</strong>
+                            גישת רגולציה היררכית שבה הרגולטור (המדינה) קובע סטנדרטים ברורים ואוכף אותם באמצעות סנקציות (קנסות, מאסר וכו').
+                        </li>
+                        <li>
+                            <strong>NGOs (Non-Governmental Organizations) - ארגונים לא-ממשלתיים:</strong>
+                            גופים הפועלים ללא כוונת רווח (מלכ"ר) ואינם חלק מהמנגנון הממשלתי, המוכרים כ"מגזר השלישי".
+                        </li>
+                        <li>
+                            <strong>NPM (New Public Management) - ניהול ציבורי חדש:</strong>
+                            גישה ניהולית שצמחה בשנות ה-80 וה-90, ששאפה להכניס עקרונות מהמגזר הפרטי (כמו תחרות, מדידת ביצועים ותפיסת האזרח כלקוח) לתוך המגזר הציבורי.
+                        </li>
+                        <li>
+                            <strong>Policy Labs (מעבדות מדיניות):</strong>
+                            מסגרות ארגוניות (לרוב ממשלתיות או ציבוריות) המשתמשות בגישות חדשניות (כמו חשיבה עיצובית) כדי לפתח, לבחון ולנסות פתרונות לבעיות ציבוריות מורכבות, לרוב בשיתוף אזרחים.
+                        </li>
+                        <li>
+                            <strong>Design Thinking (חשיבה עיצובית):</strong>
+                            מתודולוגיה איטרטיבית (חוזרנית) לפתרון בעיות, ששמה במרכז את המשתמש האנושי. היא כוללת שלבים של הבנת הצורך (אמפתיה), הגדרת הבעיה, יצירת רעיונות, בניית אב-טיפוס ובחינה.
+                        </li>
+                    </ul>
+                    
+                    <div class="footnotes">
+                        <ol>
+                            <li>מבוסס על ספרו של סטיבן לוקס (1974), "עוצמה: מבט רדיקלי".</li>
+                            <li>מבוסס על עקרונות יסוד בכלכלה ציבורית, למשל בספרם של ויימר ויינינג (2017).</li>
+                            <li>ההבחנה בין Government ל-Governance היא מושג יסוד בלימודי ממשל ומדיניות ציבורית מאז שנות ה-90.</li>
+                            <li>קיצור נפוץ לארגונים לא-ממשלתיים (Non-Governmental Organizations).</li>
+                            <li>ראשי תיבות נפוצים ל-New Public Management.</li>
+                            <li>מושג המתאר גופי חדשנות במגזר הציבורי.</li>
+                            <li>מתודולוגיה פופולרית המשמשת רבות ב"מעבדות מדיניות".</li>
+                        </ol>
+                    </div>
+                </article>
+            </section>
+            
+            <!-- כרטיסייה 5: רשמים נוספים -->
+            <section class="tab-pane" id="impressions-pane" role="tabpanel" aria-labelledby="impressions-tab">
+                <article class="page-card">
+                    <h3>רשמים נוספים</h3>
+                    <p>כרטיסייה זו מיועדת להוספת רשמים אישיים, חומרי קריאה נוספים או הערות אישיות שלך. (כרגע ריק)</p>
+                </article>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- לוגיקת טאבים ---
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // עדכון כפתורים
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-selected', 'false');
+                    });
+                    button.classList.add('active');
+                    button.setAttribute('aria-selected', 'true');
+
+                    // עדכון תוכן
+                    const targetTab = button.getAttribute('data-tab');
+                    tabPanes.forEach(pane => {
+                        if (pane.id === `${targetTab}-pane`) {
+                            pane.classList.add('active');
+                        } else {
+                            pane.classList.remove('active');
+                        }
+                    });
+                });
+            });
+
+            // --- לוגיקת אקורדיון ---
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const isActive = header.classList.toggle('active');
+                    const arrow = header.querySelector('.accordion-arrow');
+                    
+                    header.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+                    if (arrow) {
+                        arrow.textContent = isActive ? '−' : '+';
+                    }
+
+                    if (isActive) {
+                        // פתיחה: הגדר max-height לגובה התוכן
+                        content.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    } else {
+                        // סגירה: אפס max-height
+                        content.style.maxHeight = '0';
+                        // הסר את הקלאס רק לאחר סיום האנימציה
+                        content.addEventListener('transitionend', () => {
+                            if (!header.classList.contains('active')) {
+                                content.classList.remove('active');
+                            }
+                        }, { once: true });
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
