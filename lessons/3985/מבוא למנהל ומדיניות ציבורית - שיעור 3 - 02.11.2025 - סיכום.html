@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <!-- 
+    ================================================================
+    מטא-תגיות חובה לזיהוי אוטומטי
+    ================================================================
+    -->
+    <meta name='lesson-title' content='שיעור 3 – הצדקות להתערבות ומ"ממשל" ל"משילות"'>
+    <meta name='lesson-date' content='02.11.2025'>
+    <meta name='lesson-teacher' content='פרופ' משה מאור'>
+    <meta name='lesson-summary' content='השיעור סקר את סוגי העוצמה, פירט את ההצדקות להתערבות ממשלתית (ערכיות, כלכליות, תרבותיות), והסביר את המעבר מדפוסי "ממשל" (Government) לדפוסי "משילות" (Governance).'>
+    <!-- 
+    ================================================================
+    סוף מטא-תגיות חובה
+    ================================================================
+    -->
+
+    <meta charset="UTF-8">
+    <title>מבוא למנהל ומדיניות ציבורית - שיעור 3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 
+    קישורים לגופנים ואייקונים כפי שהופיעו בקבצי התבנית.
+    נדרש עבור אייקוני האקורדיון וכפתורי ההדפסה/מצב לילה.
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* --- מערכת עיצוב (מבוסס על sample2.html) --- */
+        :root {
+            /* ערכי ברירת מחדל (מצב בהיר) */
+            --bg: #f6f8fa; /* רקע דף בהיר */
+            --surface: #ffffff; /* רקע כרטיסייה לבן */
+            --text: #202124;
+            --muted: #5f6368;
+            --primary: #3b82f6; 
+            --primary-ink: #174ea6;
+            --border: #e5e7eb;
+            --highlight: #e8f0fe;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .06);
+            --header-bg: rgba(255, 255, 255, .8);
+            
+            /* צבעים מיוחדים לסימון תוכן */
+            --lecturer-example-bg: #fffacd; /* צהוב בהיר לדוגמאות מרצה */
+            --external-source-bg: #e0f7fa; /* תכלת בהיר להרחבות */
+            --external-source-border: #b2ebf2;
+            --status-verified-bg: #dcfce7; /* ירוק בהיר לאימות */
+            --status-verified-text: #166534;
+            --status-falsified-bg: #fee2e2; /* אדום בהיר להפרכה */
+            --status-falsified-text: #991b1b;
+            --highlight-orange-bg: #fff3e0;
+            --highlight-orange-border: #ff9800;
+            --highlight-blue-bg: #e0f7fa;
+            --highlight-blue-border: #b2ebf2;
+            --highlight-green-bg: #dcfce7;
+            --highlight-green-border: #166534;
+
+            --s1: 8px;
+            --s2: 12px;
+            --s3: 16px;
+            --s4: 24px;
+            --s5: 36px;
+            --content-width: 980px;
+        }
+
+        /* --- מצב לילה (מותאם לסקריפט של lesson_header_template.html) --- */
+        html.sa-dark {
+            filter: invert(1) hue-rotate(180deg);
+            background: #000000;
+            
+            --bg: #333333; 
+            --surface: #444444; 
+            --text: #eeeeee;
+            --muted: #bbbbbb;
+            --primary: #4b9bff;
+            --border: #555555; 
+            --highlight: #2a3a52;
+            --shadow: 0 0 0 1px var(--border);
+            --header-bg: rgba(51, 51, 51, .8); 
+            
+            --lecturer-example-bg: #5a5a4d;
+            --external-source-bg: #1c3d44;
+            --external-source-border: #3d5b60;
+            --status-verified-bg: #143620;
+            --status-verified-text: #a7f3d0;
+            --status-falsified-bg: #450a0a;
+            --status-falsified-text: #fecaca;
+            --highlight-orange-bg: #593815;
+            --highlight-orange-border: #ff9800;
+            --highlight-blue-bg: var(--external-source-bg);
+            --highlight-blue-border: var(--external-source-border);
+            --highlight-green-bg: var(--status-verified-bg);
+            --highlight-green-border: var(--status-verified-text);
+        }
+        
+        /* היפוך פילטר לתמונות ווידאו במצב כהה */
+        html.sa-dark img,
+        html.sa-dark video,
+        html.sa-dark canvas,
+        html.sa-dark svg image {
+          filter: invert(1) hue-rotate(180deg);
+        }
+
+        /* --- איפוס בסיסי ועיצוב גלובלי --- */
+        * {
+            box-sizing: border-box;
+        }
+        
+        html {
+             scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Noto Sans Hebrew", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            font-weight: 400; 
+            line-height: 1.7;
+            text-align: right;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* --- טיפוגרפיה --- */
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 0;
+            margin-bottom: var(--s3);
+            font-weight: 600; 
+        }
+        
+        /* התאמה לכותרת ב-header template */
+        .site-header .brand h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+        
+        h2 { 
+            font-size: 1.75rem; 
+            text-align: center; 
+            margin-bottom: var(--s5); 
+        }
+        h3 { 
+            font-size: 1.25rem; 
+            margin: 0 0 var(--s2) 0;
+            padding-bottom: var(--s2);
+        }
+        
+        .page-card h3 {
+             border-bottom: 1px solid var(--border);
+             transition: border-color 0.3s;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: var(--s4);
+            margin-bottom: var(--s2);
+        }
+        
+        h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: var(--s3);
+            margin-bottom: var(--s1);
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: var(--s3);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s, background-color 0.2s;
+        }
+        
+        h1 a {
+            color: var(--text);
+            transition: color 0.3s;
+        }
+        
+        h1 a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        ul, ol {
+            padding-right: var(--s4); 
+        }
+        
+        ul li, ol li {
+            margin-bottom: var(--s2);
+            padding-right: var(--s2);
+        }
+
+        sup {
+            font-size: 0.75em;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline;
+            top: -0.5em;
+            padding: 0 2px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        sup a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        sup a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- מבנה וקומפוננטות (מ-index.html) --- */
+        
+        /* כותרת עליונה (מ-lesson_header_template.html) */
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--header-bg); 
+            border-bottom: 1px solid var(--border); 
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        /* קונטיינר ראשי */
+        .container {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: var(--s5) var(--s4);
+        }
+        
+        /* --- עיצוב כרטיסיות (Tabs) (מ-sample2.html) --- */
+        .tab-navigation {
+            display: flex;
+            gap: var(--s1);
+            border-bottom: 2px solid var(--border);
+            margin-bottom: var(--s4);
+            transition: border-color 0.3s;
+            flex-wrap: wrap; 
+        }
+
+        .tab-btn {
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--muted);
+            background: none;
+            border: none;
+            padding: var(--s2) var(--s3);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: color 0.3s, border-color 0.3s;
+            margin-bottom: -2px; 
+            white-space: nowrap;
+        }
+        
+        /* סגנון לטאב מטלה */
+        .tab-btn.assignment-tab {
+            color: #b91c1c; /* אדום כהה לטקסט */
+            font-weight: 700;
+        }
+        
+        html.sa-dark .tab-btn.assignment-tab {
+            color: #fca5a5; /* אדום בהיר לטקסט במצב כהה */
+        }
+        
+        .tab-btn.assignment-tab.active {
+            color: #dc2626; /* אדום פעיל */
+            border-bottom-color: #dc2626;
+        }
+        
+        html.sa-dark .tab-btn.assignment-tab.active {
+            color: #ef4444;
+            border-bottom-color: #ef4444;
+        }
+        
+        .pulse {
+            display: inline-block;
+            animation: pulse 1.2s infinite;
+        }
+        
+        @keyframes pulse { 
+            0%, 100% { opacity: 1; }
+            50% { opacity: .25; }
+        }
+
+        .tab-btn:hover {
+            color: var(--text);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-pane {
+            display: none; /* מוסתר כברירת מחדל */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-pane.active {
+            display: block; /* מוצג כשהוא פעיל */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* --- כרטיס תוכן פנימי (מ-sample2.html) --- */
+        .page-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: var(--s4);
+            margin-bottom: var(--s4);
+            transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        /* סגנון לכרטיס מטלה */
+        .assignment-card {
+            background-color: var(--status-falsified-bg); /* רקע אדום בהיר */
+            border-color: var(--status-falsified-text);
+        }
+        
+        .assignment-card h3 {
+            color: var(--status-falsified-text);
+            border-bottom-color: var(--status-falsified-text);
+        }
+        
+        html.sa-dark .assignment-card {
+            background-color: var(--status-falsified-bg);
+            border-color: var(--status-falsified-text);
+        }
+        
+        html.sa-dark .assignment-card h3 {
+            color: var(--status-falsified-text);
+            border-bottom-color: var(--status-falsified-text);
+        }
+
+        
+        .page-card h3:first-child {
+            margin-top: 0;
+        }
+
+        /* --- רשימת פרטי שיעור (מ-sample1.html) --- */
+        .lesson-details-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .lesson-details-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--s2) 0;
+            border-bottom: 1px dashed var(--border);
+            flex-wrap: wrap;
+        }
+        .lesson-details-list li:last-child {
+            border-bottom: none;
+        }
+        .lesson-details-list strong {
+            color: var(--muted);
+            margin-left: var(--s4);
+            flex-shrink: 0;
+        }
+        .lesson-details-list span {
+            font-weight: 500;
+        }
+
+        /* --- רכיב אקורדיון (מבוסס details) (מ-sample2.html) --- */
+        .accordion-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            margin-bottom: var(--s3);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        
+        .accordion-item:last-child {
+             margin-bottom: 0;
+        }
+
+        .accordion-header {
+            font-size: 1.15rem;
+            font-weight: 600;
+            padding: var(--s3) var(--s4);
+            cursor: pointer;
+            list-style: none; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .accordion-header::-webkit-details-marker {
+            display: none; 
+        }
+
+        /* שימוש ב-Font Awesome במקום +/-, כפי שמופיע ב-sample1.html */
+        .accordion-header::after {
+            content: '\f078'; /* fa-chevron-down */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: var(--muted);
+            transition: transform 0.2s ease-out;
+            margin-right: auto; 
+            padding-right: var(--s2);
+        }
+        
+        .accordion-item[open] .accordion-header::after {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-item[open] .accordion-header {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .accordion-content {
+            padding: var(--s4);
+        }
+        .accordion-content > *:first-child {
+            margin-top: 0;
+        }
+        .accordion-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* --- סגנונות הדגשה מיוחדים (מ-sample2.html) --- */
+        mark.lecturer-example {
+            background-color: var(--lecturer-example-bg);
+            padding: var(--s1) var(--s2);
+            border-radius: 6px;
+            display: block;
+            margin: var(--s3) 0;
+            border-right: 4px solid var(--primary);
+            padding-right: var(--s2);
+            font-style: italic;
+        }
+        
+        mark.lecturer-example p:last-child {
+            margin-bottom: 0;
+        }
+
+        .external-source {
+            background-color: var(--external-source-bg);
+            padding: var(--s3);
+            border-radius: 8px;
+            border: 1px solid var(--external-source-border);
+            margin: var(--s3) 0;
+        }
+        
+        /* --- כרטיס שאלה ותשובה (מ-sample2.html) --- */
+        .qa-card {
+            padding: var(--s3);
+            border-bottom: 1px dashed var(--border);
+        }
+        .qa-card:last-child {
+            border-bottom: none;
+        }
+        .qa-card strong { /* השאלה */
+            display: block;
+            margin-bottom: var(--s1);
+            font-weight: 600;
+        }
+        .qa-card p { /* התשובה */
+            margin-bottom: 0;
+            padding-right: var(--s3);
+            border-right: 3px solid var(--primary);
+        }
+        
+        .qa-status {
+            font-weight: 500;
+            padding: var(--s1) var(--s2);
+            border-radius: 6px;
+            margin-top: var(--s2);
+            display: inline-block;
+        }
+        .qa-status.verified {
+            background-color: var(--status-verified-bg);
+            color: var(--status-verified-text);
+        }
+        .qa-status.falsified {
+            background-color: var(--status-falsified-bg);
+            color: var(--status-falsified-text);
+        }
+
+        /* --- רשימת הערות ומונחים (טאב 4) --- */
+        #tab-sources ol {
+            padding-right: 20px;
+        }
+        #tab-sources li {
+            margin-bottom: 8px;
+        }
+        #tab-sources li::marker {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        /* --- רשמים נוספים (טאב 5 - מ-sample1.html) --- */
+        .personal-impression,
+        .reading-material,
+        .external-addition {
+            padding: var(--s3);
+            border-radius: 8px;
+            margin-top: var(--s3);
+            margin-bottom: var(--s3);
+            border-right-width: 4px;
+            border-right-style: solid;
+        }
+        .personal-impression p:last-child,
+        .reading-material p:last-child,
+        .external-addition p:last-child {
+            margin-bottom: 0;
+        }
+        .personal-impression {
+            background-color: var(--highlight-blue-bg); 
+            border-right-color: var(--highlight-blue-border); 
+        }
+        .reading-material {
+            background-color: var(--highlight-orange-bg); 
+            border-right-color: var(--highlight-orange-border); 
+        }
+        .external-addition {
+            background-color: var(--highlight-green-bg); 
+            border-right-color: var(--highlight-green-border); 
+        }
+
+
+        /* --- כפתורי מצב יום/לילה והדפסה בהדר (מ-lesson_header_template.html) --- */
+        .sa-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            direction: ltr;
+            flex-wrap: wrap;
+        }
+        .sa-actions .sa-divider {
+            width: 1px;
+            height: 24px;
+            background: #d0d5dd;
+        }
+        /* התאמת צבעי הכפתורים למשתני העיצוב */
+        html.sa-dark .sa-actions .sa-divider {
+            background: var(--border);
+        }
+        
+        .sa-btn {
+            font: inherit;
+            line-height: 1;
+            border: 1px solid #d0d5dd;
+            background: var(--surface); /* שימוש במשתנה */
+            color: var(--text); /* שימוש במשתנה */
+            padding: 10px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+            font-size: 15px;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        
+        html.sa-dark .sa-btn {
+            border-color: var(--border);
+        }
+        
+        .sa-btn:hover {
+            background-color: var(--highlight);
+        }
+
+        .sa-btn.primary {
+            background: #0ea5e9;
+            color: #00131d;
+            border-color: transparent;
+        }
+        
+        html.sa-dark .sa-btn.primary {
+             filter: invert(1) hue-rotate(180deg); /* הופך את הכפתור הבהיר חזרה */
+        }
+        
+        .sa-btn svg {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+        .sa-btn .lbl {
+            display: none; 
+        }
+        @media (max-width: 640px) {
+            .sa-actions {
+                gap: 8px;
+            }
+            .sa-actions .sa-divider {
+                height: 20px;
+            }
+            .sa-btn {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+            .sa-btn svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+        
+        /* סימון פלייסהולדר */
+        .placeholder-warn {
+            color: var(--highlight-orange-border);
+            font-weight: 700;
+        }
+        html.sa-dark .placeholder-warn {
+            color: var(--highlight-orange-border);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header מ-lesson_header_template.html -->
+    <header class="site-header" role="banner">
+        <div class="brand">
+            <h1>מבוא למנהל ומדיניות ציבורית | שיעור 3: הצדקות להתערבות</h1>
+        </div>
+        <div class="nav"><!-- הכפתורים יוזרקו לכאן על ידי הסקריפט --></div>
+    </header>
+
+    <!-- Main ו-Tabs מ-sample2.html -->
+    <main class="container" role="main">
+        
+        <nav class="tab-navigation" aria-label="ניווט בסיכום השיעור">
+            <button class="tab-btn active" data-tab="tab-overview" role="tab" aria-selected="true" aria-controls="tab-overview">סקירה כללית</button>
+            <button class="tab-btn" data-tab="tab-content" role="tab" aria-selected="false" aria-controls="tab-content">תוכן השיעור</button>
+            <button class="tab-btn" data-tab="tab-qa" role="tab" aria-selected="false" aria-controls="tab-qa">שאלות ודיון</button>
+            <button class="tab-btn" data-tab="tab-sources" role="tab" aria-selected="false" aria-controls="tab-sources">מקורות והערות</button>
+            <button class="tab-btn" data-tab="tab-impressions" role="tab" aria-selected="false" aria-controls="tab-impressions">רשמים נוספים</button>
+            <!-- לא זוהתה מטלה בשיעור זה, לכן הטאב לא נוצר -->
+        </nav>
+
+        <div class="tab-content">
+
+            <!-- ======================= -->
+            <!-- ====== טאב 1: סקירה ====== -->
+            <!-- ======================= -->
+            <section id="tab-overview" class="tab-pane active" role="tabpanel" aria-labelledby="tab-overview">
+                <!-- תוכן הועתק מהקובץ הקודם שלך -->
+                <article class="page-card" aria-labelledby="details-heading">
+                    <h3 id="details-heading">פרטי השיעור</h3>
+                    <ul class="lesson-details-list">
+                        <li>
+                            <strong>נושא:</strong>
+                            <span>הצדקות להתערבות ומ"ממשל" ל"משילות"</span>
+                        </li>
+                        <li>
+                            <strong>מרצה:</strong>
+                            <span>פרופ' משה מאור</span>
+                        </li>
+                        <li>
+                            <strong>תאריך:</strong>
+                            <span>02.11.2025</span>
+                        </li>
+                        <li>
+                            <strong>שעה (מוערכת):</strong>
+                            <span class="placeholder-warn">לא זוהה בווידאו ⚠️</span>
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="page-card" aria-labelledby="summary-heading">
+                    <h3 id="summary-heading">תקציר ונושאי מפתח</h3>
+                    
+                    <h4>תקציר</h4>
+                    <p>שיעור זה התמקד בחזרה על סוגי עוצמה (ישירה, שומרי סף וקונספטואלית) ועבר לדון בהצדקות להתערבות ממשלתית. נבחנו הצדקות ערכיות, כלכליות ותרבותיות, וההבדלים בין גישת ה"ממשל" (Government) הריכוזית לגישת ה"משילות" (Governance) הפלורליסטית. השיעור הסתיים בהצגת מושגי "המשילות החדשה" ו"מעבדות מדיניות".</p>
+                    
+                    <h4>הנושאים המרכזיים שעלו (לפי סדר כרונולוגי):</h4>
+                    <ul>
+                        <li>חזרה על 3 סוגי העוצמה בזירה הציבורית (ישירה, שומרי סף, קונספטואלית).</li>
+                        <li>השימוש בעוצמה להגדרת "אינטרס ציבורי", תפקיד המדינה, וקביעת מדיניות מבוססת עובדות.</li>
+                        <li>דיון בשימוש הסמוי בעוצמה (דוגמת מינוי "ממלא מקום").</li>
+                        <li>ניתוח הצדקות להתערבות ממשלתית (ערכיות, כלכליות/כשלי שוק, ותרבותיות).</li>
+                        <li>המעבר ההיסטורי מ"ממשל" (Government) היררכי ל"משילות" (Governance) רשתית.</li>
+                        <li>עקרונות הניהול הציבורי החדש (NPM).</li>
+                        <li>הצגת גישת "המשילות החדשה" (New Governance) ו"מעבדות מדיניות" (Policy Labs).</li>
+                    </ul>
+                </article>
+            </section>
+
+            <!-- ========================== -->
+            <!-- ====== טאב 2: תוכן מרכזי ====== -->
+            <!-- ========================== -->
+            <section id="tab-content" class="tab-pane" role="tabpanel" aria-labelledby="tab-content">
+                
+                <!-- תוכן הועתק והותאם לתגיות של sample2.html -->
+                <details class="accordion-item" open>
+                    <summary class="accordion-header">
+                        חזרה על 3 סוגי עוצמה
+                    </summary>
+                    <div class="accordion-content">
+                        <p>המרצה פתח בחזרה על שלושת סוגי העוצמה המרכזיים בזירה הציבורית:</p>
+                        <ul>
+                            <li><strong>עוצמה ישירה (Direct Power / Power of Decision):</strong> היכולת הגלויה של גורם A לגרום לגורם B לבצע פעולה בניגוד לרצונו, תוך קונפליקט גלוי.</li>
+                            <li><strong>עוצמה של שומרי סף (Gatekeeping / Power of Non-Decision):</strong> היכולת הסמויה לקבוע אילו נושאים כלל לא יגיעו לסדר היום הציבורי.</li>
+                            <li><strong>עוצמה קונספטואלית (Conceptual Power):</strong> היכולת הסמויה להשפיע על תפיסות, העדפות וערכים של הציבור, כך שיפעל באופן הרצוי למפעיל העוצמה, לעיתים מבלי לדעת שכופים עליו דבר.</li>
+                        </ul>
+                         <mark class="lecturer-example">
+                            <p><strong>דוגמת המרצה (עוצמה ישירה):</strong> "כששוטר אומר לך 'תזוז הצידה, תביא לי מסמכים', זוהי הפעלת עוצמה ישירה (Power of Decision). אתה רואה אותו מקבל את ההחלטה, והיא מגובה בסמכות חוקית (למשל 'סעיף 7')."</p>
+                         </mark>
+                         <mark class="lecturer-example">
+                            <p><strong>דוגמת המרצה (עוצמת שומרי סף):</strong> "עבודת הגמר שלי עסקה בביטוח סיעודי. הנושא הזה כלל לא עלה לסדר היום הציבורי במשך שנים, למרות חשיבותו. זו דוגמה קלאסית לעוצמה של שומרי סף (במקרה הזה, פקידי האוצר) שפעלו כדי שהנושא לא יעלה לדיון."</p>
+                         </mark>
+                    </div>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        השימוש בעוצמה בזירת המדיניות
+                    </summary>
+                    <div class="accordion-content">
+                        <p>השימוש בסוגי העוצמה השונים משפיע ישירות על עיצוב המדיניות הציבורית. המרצה הציג מספר שאלות מפתח הנגזרות מכך:</p>
+                        <ul>
+                            <li><strong>מהו אינטרס ציבורי ומי קובע אותו?</strong></li>
+                            <li><strong>מהו תפקיד המדינה ומי קובע אותו?</strong></li>
+                            <li><strong>מי זכאי להפעיל עוצמה וכיצד?</strong></li>
+                            <li><strong>מה תפקידם של רגולטורים?</strong></li>
+                            <li><strong>מהי מדיניות מבוססת עובדות (Evidence-based policy)<sup><a href="#term-1">1</a></sup>?</strong> גם ההחלטה על אילו עובדות להסתמך ועל אילו לא, היא הפעלת עוצמה.</li>
+                        </ul>
+                        <mark class="lecturer-example">
+                            <p><strong>דוגמת המרצה (הצד הסמוי של העוצמה):</strong> "פרשת הפצ"ר... הדיונים שהיו בקבוצת הווטסאפ... זה בדיוק הסמוי. זה היה דיל [Deal] שכן לא לעלות את הנושא. [...] תסתכלו על המנגנון, המנגנון היה סמוי."</p>
+                        </mark>
+                        <mark class="lecturer-example">
+                            <p><strong>דוגמת המרצה (עוצמה ומינויים):</strong> "מינוי של ממלא מקום... מה שהממשלה קיבלה זה היענות (Responsiveness)<sup><a href="#term-2">2</a></sup>. כיוון שמי שממונה... רוצה מינוי של קבע. איך הוא יקבל מינוי של קבע? הוא צריך לרצות את מי שמינה אותו... יש פה פגיעה משמעותית באינטרס הציבורי."</p>
+                        </mark>
+                    </div>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        הצדקות להתערבות ממשלתית
+                    </summary>
+                    <div class="accordion-content">
+                        <p>כדי שמדיניות תזכה לציות מרצון (ולא רק מאכיפה), היא זקוקה ללגיטימציה. לגיטימציה זו מושגת באמצעות הצדקות. השיעור סקר שלוש קבוצות עיקריות של הצדקות להתערבות המדינה:</p>
+                        
+                        <h4>1. הצדקות ערכיות (מבוססות על ערכים אוניברסליים)</h4>
+                        <ul>
+                            <li><strong>הגישה התועלתנית:</strong> פעולה שמביאה למקסימום תועלת למספר האנשים הגדול ביותר.</li>
+                            <li><strong>הגישה הרולסיאנית (על שם ג'ון רולס):</strong> התמקדות בשיפור מצבם של החלשים ביותר בחברה.</li>
+                            <li><strong>גישת המטרות הטובות:</strong> התערבות לטובת ערכים שנחשבים "טובים" מטבעם (למשל, בריאות, חינוך).</li>
+                            <li><strong>הגישה הליברטריאנית:</strong> התערבות מינימלית, רק כדי להגן על חירויות הפרט וקניין.</li>
+                        </ul>
+
+                        <h4>2. הצדקות תרבותיות</h4>
+                        <ul>
+                            <li><strong>הגישה הרב-תרבותית:</strong> התערבות כדי להגן על זכויות וקיום של קבוצות מיעוט תרבותיות.</li>
+                            <li><strong>הגישה הליברלית:</strong> הדגשת הפרט על פני הקבוצה, תוך שמירה על זכויות הפרט גם בתוך קהילות תרבותיות.</li>
+                        </ul>
+
+                        <h4>3. הצדקות כלכליות (טיפול ב"כשלי שוק")</h4>
+                        <p>התערבות נדרשת כאשר השוק החופשי אינו יעיל. כשלי שוק מרכזיים כוללים:</p>
+                        <ul>
+                            <li><strong>מונופולים:</strong> שחקן יחיד ששולט בשוק ופוגע בתחרות.</li>
+                            <li><strong>כשלי מידע (פערי מידע):</strong> מצב בו לצד אחד בעסקה (למשל, המוכר) יש מידע שלצד השני (הקונה) אין.</li>
+                            <li><strong>השפעות חיצוניות (Externalities)<sup><a href="#term-4">4</a></sup>:</strong> מצב שבו פעולה של גורם אחד משפיעה על צד שלישי שאינו חלק מהעסקה (למשל, זיהום אוויר ממפעל שפוגע בתושבים).</li>
+                            <li><strong>מוצרים ציבוריים:</strong> מוצרים שהשוק הפרטי יתקשה לספק, כיוון שלא ניתן למנוע מאנשים לצרוך אותם (למשל, ביטחון, תאורת רחוב).</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        מ"ממשל" (Government) ל"משילות" (Governance)
+                    </summary>
+                    <div class="accordion-content">
+                        <p>המרצה הציג את המעבר ההיסטורי מתפיסה ריכוזית של "ממשל" לתפיסה רשתית של "משילות".</p>
+
+                        <h4>תקופת הממשל (Government)</h4>
+                        <ul>
+                            <li><strong>תקופה:</strong> עד אמצע/שלהי המאה ה-20.</li>
+                            <li><strong>מאפיינים:</strong> ממשל מרכזי, מדיניות היררכית (מלמעלה-למטה), בירוקרטיה דומיננטית.</li>
+                            <li><strong>אופן פעולה:</strong> המדינה היא השחקן המרכזי שקובע, מיישם ומפקח.</li>
+                            <li><strong>כינוי נפוץ:</strong> "שליטה ופיקוח" (Command and Control)<sup><a href="#term-5">5</a></sup>.</li>
+                        </ul>
+
+                        <h4>תקופת המשילות (Governance)</h4>
+                        <ul>
+                            <li><strong>תקופה:</strong> החל משנות ה-80 וה-90 של המאה ה-20.</li>
+                            <li><strong>מאפיינים:</strong> זירה פלורליסטית, רשת של שותפים (Networking), הכרה במגבלות כוחה של המדינה לבדה.</li>
+                            <li><strong>שחקנים:</strong> המדינה פועלת לצד המגזר הפרטי, ארגונים לא-ממשלתיים (NGOs)<sup><a href="#term-6">6</a></sup>, ארגונים וולונטריים ודעת הקהל.</li>
+                            <li><strong>אופן פעולה:</strong> תהליכי מיקוח, בניית קונצנזוס ושיתופי פעולה.</li>
+                            <li><strong>ניהול ציבורי חדש (New Public Management - NPM)<sup><a href="#term-7">7</a></sup>:</strong> גישה ניהולית שצמחה בתקופה זו, הדוגלת בביזור סמכויות, מדידת ביצועים, הפרטה ותפיסת האזרח כלקוח ("האזרח כלקוח").</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        המשילות החדשה ומעבדות מדיניות
+                    </summary>
+                    <div class="accordion-content">
+                        <p>בעשור האחרון מתפתחת גישה חדשה המכונה "המשילות החדשה" (New Governance)<sup><a href="#term-8">8</a></sup>, המדגישה גמישות, אדפטיביות ולמידה מהירה מניסויים.</p>
+
+                        <h4>מעבדות מדיניות (Policy Labs)<sup><a href="#term-9">9</a></sup></h4>
+                        <ul>
+                            <li><strong>מה זה?</strong> מסגרות ארגוניות חדשניות לניסוי ופיילוט של פתרונות, תוך שיתוף הציבור.</li>
+                            <li><strong>מאפיינים:</strong> שימוש בחשיבה עיצובית (Design Thinking)<sup><a href="#term-10">10</a></sup>, עבודה מול האקדמיה, המגזר השלישי וגורמים נוספים, במטרה למצוא פתרונות מהירים לבעיות מורכבות.</li>
+                            <li><strong>למה זה חשוב?</strong> המעבדות מאפשרות למצוא פתרונות אפקטיביים בקנה מידה קטן ("בחינת מים") בטרם מיישמים אותם ברמה הלאומית, ובכך חוסכים כסף ומונעים כישלונות גדולים.</li>
+                            <li><strong>אתגר מרכזי:</strong> הקושי להטמיע את הפתרונות החדשניים שפותחו במעבדה חזרה לתוך המערכות הבירוקרטיות המסורתיות והנוקשות.</li>
+                        </ul>
+                    </div>
+                </details>
+
+            </section>
+
+            <!-- ======================= -->
+            <!-- ====== טאב 3: שאלות ודיון ====== -->
+            <!-- ======================= -->
+            <section id="tab-qa" class="tab-pane" role="tabpanel" aria-labelledby="tab-qa">
+                <article class="page-card" aria-labelledby="qa-student-heading">
+                    <h3 id="qa-student-heading">שאלות משתתפים</h3>
+                    
+                    <div class="qa-card">
+                        <strong>שאלה (סטודנט): האם פרסום שמות השופטים בבג"ץ בהקשר של הפעלת עוצמה הוא לא לגיטימי מבחינת שקיפות?</strong>
+                        <p>
+                            <strong>תשובת המרצה (בתמצית):</strong> זו שאלה מצוינת שמדגימה את המתח. שקיפות היא ערך חשוב, אבל יש הבדל בין שקיפות לבין הפעלת לחץ שמטרתו להשפיע על החלטה ספציפית. יש גבול דק בין הרצון הלגיטימי לדעת לבין ניסיון להפחיד או להשפיע על שיקול הדעת המקצועי של השופט.
+                        </p>
+                    </div>
+
+                    <div class="qa-card">
+                        <strong>שאלה (סטודנט, ישראל): האם יש הגבלה חוקית על משך הזמן של מינוי "ממלא מקום"?</strong>
+                        <p>
+                            <strong>תשובת המרצה (בתמצית):</strong> זו שאלה טובה. הממשלה תמיד יכולה לטעון ש"לא מצאנו את המועמד המתאים". בג"ץ (בית המשפט העליון) לא יתערב בזה בקלות, אלא אם מדובר במקרה קיצון של אי-סבירות קיצונית, וגם זה רק אם מישהו יגיש עתירה. בג"ץ לא יוזם בעצמו. המצב הקיים של מינוי ממלאי מקום רבים הוא בעייתי מאוד, פוגע באינטרס הציבורי ויוצר ניגוד עניינים מובנה, אבל קשה מאוד לאכוף את זה משפטית.
+                        </p>
+                    </div>
+
+                    <div class="qa-card">
+                        <strong>שאלה (סטודנט): האם אפשר לנתח את משבר 2008 והמקרה של AIG כדוגמה להתערבות ממשלתית?</strong>
+                        <p>
+                            <strong>תשובת המרצה (בתמצית):</strong> בהחלט. זה מקרה קלאסי של הצדקה להתערבות המדינה. AIG הייתה "גדולה מכדי ליפול" (Too big to fail)<sup><a href="#term-3">3</a></sup>. קריסתה הייתה יוצרת "השפעה חיצונית" שלילית אדירה על כלכלת ארה"ב והעולם (כשל שוק מערכתי). הממשל האמריקאי הפעיל עוצמה ישירה והתערב (הלאים את החברה למעשה) לא מתוך רצון, אלא מתוך הצדקה של מניעת קטסטרופה כלכלית.
+                        </p>
+                         <div class="qa-status verified">
+                            <p><strong>סטטוס:</strong> אימות.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-card">
+                        <strong>שאלה (סטודנטית, יובל): אפשר רגע למקד? קצת התחלתי לאבד את זה בהבדל בין "ממשל" ל"משילות".</strong>
+                        <p>
+                            <strong>תשובת המרצה (בתמצית):</strong> (המרצה מחדד) התחלנו ב"ממשל" (Government) – שהוא היררכי, ריכוזי, והמדינה עושה הכל מלמעלה למטה. עברנו ל"משילות" (Governance) – שבה המדינה מבינה שהיא לא יכולה לבד, והיא עובדת ברשת עם המגזר הפרטי והמגזר השלישי (עמותות, NGOs וכו'). ועכשיו אנחנו ב"משילות חדשה" (New Governance) – שזה אומר למידה מהירה, ניסויים קטנים (Policy Labs), וגמישות, כי גם המשילות הקלאסית הפכה לאיטית מדי.
+                        </p>
+                    </div>
+                    
+                </article>
+            </section>
+
+            <!-- ============================= -->
+            <!-- ====== טאב 4: מקורות והערות ====== -->
+            <!-- ============================= -->
+            <section id="tab-sources" class="tab-pane" role="tabpanel" aria-labelledby="tab-sources">
+                
+                <article class="page-card" aria-labelledby="external-sources-heading">
+                    <h3 id="external-sources-heading">מקורות חיצוניים</h3>
+                    <p>לא נעשה שימוש במקורות חיצוניים להכנת סיכום זה.</p>
+                </article>
+                
+                <article class="page-card" aria-labelledby="terms-heading">
+                    <h3 id="terms-heading">הערות ומונחים (לפי סדר הופעתם)</h3>
+                    <ol>
+                        <li id="term-1"><strong>Evidence-based policy (EBP):</strong> מדיניות מבוססת עובדות/ראיות. גישה לקביעת מדיניות המדגישה שימוש בראיות מחקריות מוצקות כבסיס המרכזי לקבלת החלטות.</li>
+                        <li id="term-2"><strong>Responsiveness (היענות):</strong> בהקשר הכללי, היכולת של הממשל להגיב לצורכי הציבור. בשיעור זה, המרצה השתמש במונח בהקשר ספציפי של 'ממלא מקום' הנדרש להגיב (להיענות) לרצונות השר הממנה כדי לזכות במינוי קבע.</li>
+                        <li id="term-3"><strong>Too big to fail (גדול מכדי ליפול):</strong> מונח כלכלי המתאר תאגיד (לרוב בנק או חברת ביטוח) שקריסתו תוביל לנזק מערכתי כה גדול לכלכלה, עד שהממשלה תיאלץ לחלץ אותו.</li>
+                        <li id="term-4"><strong>Externalities (השפעות חיצוניות):</strong> במיקרו-כלכלה, זוהי עלות או תועלת הנגרמת לצד שלישי שאינו מעורב ישירות בעסקה או בפעולה. זיהום אוויר הוא דוגמה קלאסית להשפעה חיצונית שלילית.</li>
+                        <li id="term-5"><strong>Command and Control (שליטה ופיקוח):</strong> גישת רגולציה היררכית שבה הרגולטור (המדינה) קובע סטנדרטים ברורים ואוכף אותם באמצעות סנקציות (קנסות, מאסר וכו').</li>
+                        <li id="term-6"><strong>NGOs (Non-Governmental Organizations):</strong> ארגונים לא-ממשלתיים. גופים הפועלים ללא כוונת רווח (מלכ"ר) ואינם חלק מהמנגנון הממשלתי, המוכרים כ"מגזר השלישי".</li>
+                        <li id="term-7"><strong>NPM (New Public Management):</strong> ניהול ציבורי חדש. גישה ניהולית שצמחה בשנות ה-80 וה-90, ששאפה להכניס עקרונות מהמגזר הפרטי (כמו תחרות, מדידת ביצועים ותפיסת האזרח כלקוח) לתוך המגזר הציבורי.</li>
+                        <li id="term-8"><strong>New Governance (המשילות החדשה):</strong> גישה המדגישה יצירת מדיניות ברשתות גמישות, אדפטיביות, תוך למידה מתמדת מניסויים ומשיתוף פעולה בין מגזרי.</li>
+                        <li id="term-9"><strong>Policy Labs (מעבדות מדיניות):</strong> מסגרות ארגוניות (לרוב ממשלתיות או ציבוריות) המשתמשות בגישות חדשניות (כמו חשיבה עיצובית) כדי לפתח, לבחון ולנסות פתרונות לבעיות ציבוריות מורכבות, לרוב בשיתוף אזרחים.</li>
+                        <li id="term-10"><strong>Design Thinking (חשיבה עיצובית):</strong> מתודולוגיה איטרטיבית (חוזרנית) לפתרון בעיות, ששמה במרכז את המשתמש האנושי. היא כוללת שלבים של הבנת הצורך (אמפתיה), הגדרת הבעיה, יצירת רעיונות, בניית אב-טיפוס ובחינה.</li>
+                    </ol>
+                </article>
+
+            </section>
+            
+            <!-- ========================== -->
+            <!-- ====== טאב 5: רשמים נוספים ====== -->
+            <!-- ========================== -->
+            <section id="tab-impressions" class="tab-pane" role="tabpanel" aria-labelledby="tab-impressions">
+                
+                <article class="page-card" aria-labelledby="impressions-heading">
+                    <h3 id="impressions-heading">רשמים אישיים</h3>
+                    <p><i>(טאב זה נותר ריק בכוונה. כאן תוכל/י להוסיף את הרשמים האישיים שלך מהשיעור, ניתוחים נוספים, או קישורים שברצונך לשמור.)</i></p>
+                </article>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!--
+    סקריפט אחיד (מ-lesson_header_template.html)
+    לניהול כפתורי הדר (יום/לילה, הדפסה)
+    -->
+    <script>
+    (function(){
+      // בורר מאוחד שמכסה את כל מבני ההדר שראינו בדוגמאות
+      const HEADER_SELECTOR = '.site-header .nav, header .nav, .site-header nav, header nav';
+
+      // יוצר את סרגל הכפתורים
+      function makeBar(){
+        const ICON_PRINT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 8H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3zm-4 11H9v-3h6zm1-15H8v3h8z" fill="currentColor"/></svg>';
+        const ICON_SUN   = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V1h0v3zm0 19v-3h0v3zM4 12H1v0h3zm22 0h-3v0h3zM5.64 5.64L3.51 3.51l0 0 2.13 2.13zM20.49 20.49l-2.13-2.13 0 0 2.13 2.13zM18.36 5.64l2.13-2.13 0 0-2.13 2.13zM3.51 20.49l2.13-2.13 0 0-2.13 2.13zM12 7a5 5 0 100 10 5 5 0 000-10z" fill="currentColor"/></svg>';
+        const ICON_MOON  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1021 12.79z" fill="currentColor"/></svg>';
+
+        const bar = document.createElement('div');
+        bar.className = 'sa-actions';
+
+        const theme = document.createElement('button');
+        theme.className = 'sa-btn';
+        theme.type = 'button';
+        theme.title = 'מצב יום/לילה';
+        theme.dataset.sun = ICON_SUN;
+        theme.dataset.moon = ICON_MOON;
+
+        const divider = document.createElement('div');
+        divider.className = 'sa-divider';
+
+        const printBtn = document.createElement('button');
+        printBtn.className = 'sa-btn primary';
+        printBtn.type = 'button';
+        printBtn.title = 'הדפס';
+        printBtn.innerHTML = ICON_PRINT;
+
+        bar.appendChild(theme);
+        bar.appendChild(divider);
+        bar.appendChild(printBtn);
+
+        return {bar, theme, printBtn};
+      }
+
+      // מאתחל את כפתור מצב הלילה
+      function initThemeButton(btn){
+        const root = document.documentElement;
+        function isDark(){ return root.classList.contains('sa-dark'); }
+        function icon(){ return isDark() ? btn.dataset.moon : btn.dataset.sun; }
+
+        btn.addEventListener('click', ()=>{
+          root.classList.toggle('sa-dark');
+          btn.innerHTML = icon();
+          try{ localStorage.setItem('sa-theme', isDark() ? 'dark' : 'light'); }catch(e){}
+        });
+
+        let t = 'light';
+        // קודם נבדוק הגדרה שמורה
+        try{ t = localStorage.getItem('sa-theme') || 'auto'; }catch(e){}
+        
+        if (t === 'auto') {
+            // אם אין הגדרה שמורה, נבדוק העדפת מערכת
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                t = 'dark';
+            } else {
+                t = 'light';
+            }
+        }
+        
+        root.classList.toggle('sa-dark', t === 'dark');
+        btn.innerHTML = icon();
+      }
+
+      // מחדיר את הכפתורים ל-DOM
+      function injectButtons(){
+        let navs = document.querySelectorAll(HEADER_SELECTOR);
+        if(!navs.length){
+          const header = document.querySelector('.site-header') || document.querySelector('header');
+          if(header){
+            let aux = header.querySelector('.nav');
+            if(!aux){
+              aux = document.createElement('div');
+              aux.className = 'nav';
+              header.appendChild(aux);
+            }
+            navs = [aux];
+          }
+        }
+        
+        if (navs.length === 0) {
+            console.error("לא נמצא אלמנט .nav בהדר.");
+            return;
+        }
+
+        navs.forEach(nav=>{
+          if(nav.querySelector('.sa-actions')) return; // מונע שכפול
+          const {bar, theme, printBtn} = makeBar();
+          nav.appendChild(bar);
+          initThemeButton(theme);
+          printBtn.addEventListener('click', ()=> window.print());
+        });
+      }
+
+      // מריץ את הסקריפט כשה-DOM מוכן
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', injectButtons);
+      }else{
+        injectButtons();
+      }
+    })();
+    </script>
+    
+    <!-- סקריפט לטאבים (מ-sample2.html) -->
+    <script>
+        (function() {
+            // --- בקר טאבים ---
+            const tabNavigation = document.querySelector('.tab-navigation');
+            if (!tabNavigation) return;
+
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+
+            tabNavigation.addEventListener('click', function(event) {
+                const clickedButton = event.target.closest('.tab-btn');
+                
+                if (!clickedButton || clickedButton.classList.contains('active')) return;
+                event.preventDefault();
+
+                // הסתר הכל
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-selected', 'false');
+                });
+                tabPanes.forEach(pane => {
+                    pane.classList.remove('active');
+                });
+
+                // הצג את הנבחר
+                clickedButton.classList.add('active');
+                clickedButton.setAttribute('aria-selected', 'true');
+                
+                const tabId = clickedButton.getAttribute('data-tab');
+                
+                // ודא שה-ID תואם
+                const activePane = document.getElementById(tabId); 
+
+                if (activePane) {
+                    activePane.classList.add('active');
+                } else {
+                    console.error('לא נמצא tab-pane עם ID: ' + tabId);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
