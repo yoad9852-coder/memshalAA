@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <!-- 
+    ================================================================
+    מטא-תגיות חובה לזיהוי אוטומטי
+    ================================================================
+    -->
+    <meta name='lesson-title' content='שיעור 1 – מבוא: מדע, מדינה, ממשל, פוליטיקה וריבונות'>
+    <meta name='lesson-date' content='02.11.2025'>
+    <meta name='lesson-teacher' content='ד"ר חיים וייצמן'>
+    <meta name='lesson-summary' content='מבוא להגדרת מדע, התפתחות המדינה המודרנית, והבחנה בין מושגי היסוד: ממשל, פוליטיקה, ריבונות, סמכות ולגיטימיות.'>
+    <!-- 
+    ================================================================
+    סוף מטא-תגיות חובה
+    ================================================================
+    -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מושגי יסוד בממשל ופוליטיקה - שיעור 1 - 02.11.2025 - סיכום</title>
+
+    <!-- קוד הגנה של Firebase (מתוך sec.html) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        // 1. אותו Config בדיוק כמו בדף הכניסה
+        const firebaseConfig = {
+          apiKey: "AIzaSyDqxxf434N0wnn6C6AglEEIaqj5TVtoYLQ",
+          authDomain: "memshalaa.firebaseapp.com",
+          projectId: "memshalaa",
+          storageBucket: "memshalaa.firebasestorage.app",
+          messagingSenderId: "324187090365",
+          appId: "1:324187090365:web:8e4956d0d1370b5aab36d4",
+          measurementId: "G-2QHJF3SSJQ"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // 2. ה"שומר" - בודק אם יש משתמש מחובר
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // משתמש מחובר - הכל בסדר, מציגים את הדף
+                console.log("משתמש מורשה:", user.email);
+                
+                // --- אופציונלי: עדכון UI ---
+                const userInfo = document.getElementById('userInfo');
+                const loginLink = document.getElementById('loginLink');
+                const logoutButton = document.getElementById('logoutButton');
+
+                if (userInfo) userInfo.innerText = `מחובר כ: ${user.email}`;
+                if (loginLink) loginLink.style.display = 'none';
+                if (logoutButton) logoutButton.style.display = 'block';
+                // -------------------------
+
+                document.body.style.display = 'block'; // מציג את הגוף רק אחרי אימות
+            } else {
+                // אין משתמש מחובר - זרוק אותו לדף הכניסה
+                window.location.href = 'login.html'; 
+            }
+        });
+        
+        // פונקציית התנתקות גלובלית
+        window.logout = function() {
+            signOut(auth).then(() => {
+                window.location.href = 'login.html'; 
+            });
+        }
+    </script>
+    
+    <!-- הסתרת הדף עד שהבדיקה מסתיימת כדי למנוע הבהוב -->
+    <style> 
+        body { display: none; } 
+        /* הסתרת כפתור התנתקות כברירת מחדל */
+        #logoutButton { display: none; } 
+    </style>
+    <!-- סוף קוד הגנה -->
+
+    <!-- פונטים ואייקונים (מתוך sample1.html) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* --- מערכת עיצוב (מבוסס על 'sample1.html') --- */
+        :root {
+            /* ערכי ברירת מחדל (מצב בהיר) */
+            --bg: #f6f8fa; /* רקע דף בהיר */
+            --surface: #ffffff; /* רקע כרטיסייה לבן */
+            --text: #202124;
+            --muted: #5f6368;
+            --primary: #3b82f6; 
+            --primary-ink: #174ea6;
+            --border: #e5e7eb;
+            --highlight: #e8f0fe;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .06);
+            --header-bg: rgba(255, 255, 255, .8);
+            
+            /* מידות רווח */
+            --s1: 8px;
+            --s2: 12px;
+            --s3: 16px;
+            --s4: 24px;
+            --s5: 36px;
+            --content-width: 980px;
+
+            /* צבעים סמנטיים (עבור הדגשות תוכן) */
+            --highlight-yellow-bg: #fff9c4;
+            --highlight-yellow-border: #fdd835;
+            --highlight-blue-bg: #e0f7fa;
+            --highlight-blue-border: #00bcd4;
+            --highlight-green-bg: #e8f5e9;
+            --highlight-green-border: #4caf50;
+            --highlight-red-bg: #ffebee;
+            --highlight-red-border: #f44336;
+            --highlight-orange-bg: #fff3e0;
+            --highlight-orange-border: #ff9800;
+        }
+
+        /* --- מצב לילה (מופעל על ידי JS או הגדרות מערכת) --- */
+        
+        @media (prefers-color-scheme: dark) {
+            :root:not(.light-mode) {
+                --bg: #333333; 
+                --surface: #444444; 
+                --text: #eeeeee;
+                --muted: #bbbbbb;
+                --primary: #4b9bff;
+                --border: #555555; 
+                --highlight: #2a3a52;
+                --shadow: 0 0 0 1px var(--border);
+                --header-bg: rgba(51, 51, 51, .8); 
+
+                /* צבעים סמנטיים (מצב כהה) */
+                --highlight-yellow-bg: #4f4b23;
+                --highlight-yellow-border: #fdd835;
+                --highlight-blue-bg: #1a4a52;
+                --highlight-blue-border: #00bcd4;
+                --highlight-green-bg: #1e4620;
+                --highlight-green-border: #4caf50;
+                --highlight-red-bg: #5d1c18;
+                --highlight-red-border: #f44336;
+                --highlight-orange-bg: #593815;
+                --highlight-orange-border: #ff9800;
+            }
+        }
+        
+        /* דריסה ידנית - מצב בהיר */
+        :root.light-mode {
+            --bg: #f6f8fa;
+            --surface: #ffffff;
+            --text: #202124;
+            --muted: #5f6368;
+            --primary: #3b82f6; 
+            --border: #e5e7eb;
+            --highlight: #e8f0fe;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .06);
+            --header-bg: rgba(255, 255, 255, .8);
+
+            --highlight-yellow-bg: #fff9c4;
+            --highlight-yellow-border: #fdd835;
+            --highlight-blue-bg: #e0f7fa;
+            --highlight-blue-border: #00bcd4;
+            --highlight-green-bg: #e8f5e9;
+            --highlight-green-border: #4caf50;
+            --highlight-red-bg: #ffebee;
+            --highlight-red-border: #f44336;
+            --highlight-orange-bg: #fff3e0;
+            --highlight-orange-border: #ff9800;
+        }
+        
+        /* דריסה ידנית - מצב כהה (מ-template) */
+        :root.dark-mode {
+            --bg: #333333; 
+            --surface: #444444; 
+            --text: #eeeeee;
+            --muted: #bbbbbb;
+            --primary: #4b9bff;
+            --border: #555555; 
+            --highlight: #2a3a52;
+            --shadow: 0 0 0 1px var(--border);
+            --header-bg: rgba(51, 51, 51, .8); 
+
+            --highlight-yellow-bg: #4f4b23;
+            --highlight-yellow-border: #fdd835;
+            --highlight-blue-bg: #1a4a52;
+            --highlight-blue-border: #00bcd4;
+            --highlight-green-bg: #1e4620;
+            --highlight-green-border: #4caf50;
+            --highlight-red-bg: #5d1c18;
+            --highlight-red-border: #f44336;
+            --highlight-orange-bg: #593815;
+            --highlight-orange-border: #ff9800;
+        }
+
+
+        /* --- איפוס בסיסי ועיצוב גלובלי (מ-sample1) --- */
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Noto Sans Hebrew", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            font-weight: 400; 
+            line-height: 1.7;
+            text-align: right; 
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* --- טיפוגרפיה (מ-sample1) --- */
+        
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 0;
+            margin-bottom: var(--s3);
+            font-weight: 600; 
+        }
+        
+        h1 { 
+            font-size: 1.0rem; 
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.4; 
+        }
+        h2 { 
+            font-size: 1.75rem; 
+            text-align: center; 
+            margin-bottom: var(--s5); 
+        }
+        h3 { 
+            font-size: 1.25rem; 
+            margin: 0 0 var(--s2) 0;
+            padding-bottom: var(--s2);
+            border-bottom: 1px solid var(--border);
+            transition: border-color 0.3s;
+        }
+        
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: var(--s4);
+            margin-bottom: var(--s2);
+        }
+        
+        h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: var(--s3);
+            margin-bottom: var(--s1);
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: var(--s3); 
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s, background-color 0.2s;
+        }
+        
+        h1 a {
+            color: var(--text);
+            transition: color 0.3s;
+        }
+        
+        h1 a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        ul, ol {
+            padding-right: var(--s4); 
+        }
+        
+        ul li, ol li {
+            margin-bottom: var(--s2);
+            padding-right: var(--s2);
+        }
+        
+        /* סגנון להערות שוליים */
+        sup {
+            font-size: 0.75em;
+            vertical-align: super;
+            margin-right: 2px;
+            color: var(--primary);
+            font-weight: 600;
+            line-height: 0; 
+        }
+
+        sup a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        sup a:hover {
+            text-decoration: underline;
+        }
+        
+        blockquote {
+            border-right: 4px solid var(--primary);
+            padding-right: var(--s3);
+            margin-right: 0;
+            margin-left: 0;
+            font-style: italic;
+            color: var(--muted);
+        }
+
+        /* --- מבנה וקומפוננטות (מ-lesson_header_template) --- */
+        
+        /* כותרת עליונה דביקה */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border);
+            transition: background-color 0.3s, border-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+        }
+        
+        .site-header .brand {
+             display: flex;
+            gap: 10px;
+            align-items: center;
+            text-align: right; 
+        }
+        
+        .site-header .brand h1 {
+            margin: 0;
+            font-size: 1.1rem; /* התאמה לגודל מ-sample1 */
+        }
+        
+        @media (max-width: 640px) {
+            .site-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .site-header .nav {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .site-header .brand h1 {
+                 font-size: 1rem;
+            }
+        }
+        
+        .site-header .nav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+
+        /* כפתורי מצב יום/לילה והדפסה (מ-lesson_header_template) */
+        .sa-actions {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+          direction: ltr; /* כפתורים מיושרים לשמאל */
+        }
+        .sa-actions .sa-divider {
+          width: 1px;
+          height: 24px;
+          background: var(--border); /* שימוש במשתנה צבע */
+          transition: background-color 0.3s;
+        }
+        .sa-btn {
+          font: inherit;
+          line-height: 1;
+          border: 1px solid var(--border); /* שימוש במשתנה צבע */
+          background: var(--surface); /* שימוש במשתנה צבע */
+          color: var(--text); /* שימוש במשתנה צבע */
+          padding: 10px 12px;
+          border-radius: 12px;
+          cursor: pointer;
+          display: inline-flex;
+          gap: 10px;
+          align-items: center;
+          font-size: 15px;
+          transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+        .sa-btn.primary {
+          background: var(--primary);
+          color: var(--surface);
+          border-color: transparent;
+        }
+        .sa-btn:hover {
+            background-color: var(--highlight);
+        }
+        .sa-btn.primary:hover {
+             background: var(--primary-ink);
+             color: var(--surface);
+        }
+        
+        .sa-btn svg {
+          width: 20px;
+          height: 20px;
+          display: block;
+        }
+        .sa-btn .lbl {
+          display: none; /* אייקונים בלבד, ללא טקסט */
+        }
+        
+        /* סגנון מצב כהה (מ-lesson_header_template) - משולב עם המשתנים של sample1 */
+        html.sa-dark {
+          /* אנו משתמשים במשתני CSS (var) במקום ב-filter, 
+             כדי לשמור על העיצוב המדויק מ-sample1 */
+        }
+        
+        /* סינון תמונות במצב כהה נשאר רלוונטי */
+        html.sa-dark img,
+        html.sa-dark video,
+        html.sa-dark canvas,
+        html.sa-dark svg image {
+          filter: invert(1) hue-rotate(180deg);
+        }
+        
+        :root.dark-mode .sa-btn {
+            background: var(--surface);
+            color: var(--text);
+            border-color: var(--border);
+        }
+        :root.dark-mode .sa-btn.primary {
+            background: var(--primary);
+            color: #00131d; /* טקסט בהיר על כפתור כחול */
+            border-color: transparent;
+        }
+        :root.dark-mode .sa-btn:hover {
+            background-color: var(--highlight);
+        }
+        :root.dark-mode .sa-btn.primary:hover {
+             background: #6ab0ff; /* גוון בהיר יותר של כחול בהובר */
+        }
+
+
+        /* קונטיינר ראשי (מ-sample1) */
+        .container {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: var(--s5) var(--s4);
+        }
+        
+
+        /* --- עיצוב כרטיסיות (Tabs) (מ-sample1) --- */
+        .tab-navigation {
+            display: flex;
+            gap: var(--s1);
+            border-bottom: 2px solid var(--border);
+            margin-bottom: var(--s4);
+            transition: border-color 0.3s;
+            flex-wrap: wrap; /* מאפשר גלישה במכשירים צרים */
+        }
+
+        .tab-btn {
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--muted);
+            background: none;
+            border: none;
+            padding: var(--s2) var(--s3);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: color 0.3s, border-color 0.3s;
+            margin-bottom: -2px; /* כדי שהגבול התחתון יחפוף */
+            white-space: nowrap; /* מונע שבירת שורה בכפתור */
+        }
+
+        .tab-btn:hover {
+            color: var(--text);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-pane {
+            display: none; /* מוסתר כברירת מחדל */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-pane.active {
+            display: block; /* מוצג כשהוא פעיל */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* --- כרטיס תוכן פנימי (מ-sample1) --- */
+        .page-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: var(--s4);
+            margin-bottom: var(--s4);
+            transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .page-card h3:first-child {
+            margin-top: 0;
+        }
+
+        /* --- סגנון לכרטיס פרטי השיעור (מ-sample1) --- */
+        .lesson-details-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .lesson-details-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--s2) 0;
+            border-bottom: 1px dashed var(--border);
+            flex-wrap: wrap;
+            gap: var(--s2);
+        }
+        .lesson-details-list li:last-child {
+            border-bottom: none;
+        }
+        .lesson-details-list strong {
+            color: var(--muted);
+            margin-left: var(--s4);
+            flex-shrink: 0;
+        }
+        .lesson-details-list span {
+            font-weight: 500;
+        }
+
+        /* --- Accordion Styles (מ-sample1) --- */
+        .accordion details {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px; 
+            margin-bottom: var(--s2);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        
+        .accordion details[open] {
+            box-shadow: var(--shadow);
+        }
+
+        .accordion summary {
+            padding: var(--s3) var(--s4);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none; /* Remove default marker */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .accordion summary::-webkit-details-marker {
+            display: none; /* Hide for Chrome */
+        }
+        
+        .accordion summary::marker {
+             display: none; /* Hide for Firefox */
+        }
+
+        .accordion summary:after {
+            content: '\f078'; /* Font Awesome chevron-down */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: var(--muted);
+            transition: transform 0.2s ease-out;
+            margin-right: auto; /* דוחף את החץ שמאלה (RTL) */
+            padding-right: var(--s2);
+        }
+
+        .accordion details[open] summary:after {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            padding: 0 var(--s4) var(--s4) var(--s4);
+            border-top: 1px solid var(--border);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .accordion-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .accordion-content > *:first-child {
+            margin-top: var(--s3);
+        }
+        
+        /* --- Highlight Styles (מ-sample1) --- */
+        .example-highlight,
+        .external-highlight,
+        .verification-success,
+        .verification-fail,
+        .personal-impression,
+        .reading-material,
+        .external-addition,
+        .example-bad,
+        .example-good {
+            padding: var(--s3);
+            border-radius: 8px;
+            margin-top: var(--s3);
+            margin-bottom: var(--s3);
+        }
+        
+        .example-highlight p:last-child,
+        .external-highlight p:last-child,
+        .verification-success p:last-child,
+        .verification-fail p:last-child,
+        .personal-impression p:last-child,
+        .reading-material p:last-child,
+        .external-addition p:last-child,
+        .example-bad p:last-child,
+        .example-good p:last-child {
+            margin-bottom: 0;
+        }
+
+        .example-highlight {
+            background-color: var(--highlight-yellow-bg); 
+            border-right: 4px solid var(--highlight-yellow-border); 
+        }
+        
+        .external-highlight {
+            background-color: var(--highlight-blue-bg); 
+            border-right: 4px solid var(--highlight-blue-border); 
+        }
+        
+        .verification-success, .example-good {
+            background-color: var(--highlight-green-bg); 
+            border-right: 4px solid var(--highlight-green-border); 
+        }
+        
+        .verification-fail, .example-bad {
+            background-color: var(--highlight-red-bg); 
+            border-right: 4px solid var(--highlight-red-border); 
+        }
+
+        /* סגנונות לטאב 5 - רשמים */
+        .personal-impression {
+            background-color: var(--highlight-blue-bg); 
+            border-right: 4px solid var(--highlight-blue-border); 
+        }
+        .reading-material {
+            background-color: var(--highlight-orange-bg); 
+            border-right: 4px solid var(--highlight-orange-border); 
+        }
+        .external-addition {
+            background-color: var(--highlight-green-bg); 
+            border-right: 4px solid var(--highlight-green-border); 
+        }
+        
+        
+        /* --- רשימת הערות ומונחים (מ-sample1) --- */
+        #tab-sources ol {
+            padding-right: 20px;
+        }
+        #tab-sources li {
+            margin-bottom: 8px;
+        }
+        #tab-sources li::marker {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        /* --- טבלת השוואה (מההרחבה) --- */
+        .comparison-table { width: 100%; border-collapse: collapse; margin-top: var(--s3); }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid var(--border);
+            padding: var(--s2);
+            text-align: right;
+            vertical-align: top;
+        }
+        .comparison-table th { 
+            background-color: var(--highlight); 
+            font-weight: 600;
+        }
+        :root.dark-mode .comparison-table th {
+            background-color: #2a3a52; /* גוון כהה יותר מהדגשה רגילה */
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- הדר מ-lesson_header_template.html -->
+    <header class="site-header" role="banner">
+        <div class="brand">
+            <h1>מושגי יסוד בממשל ופוליטיקה | שיעור 1: מבוא</h1>
+        </div>
+        <div class="nav"><!-- הכפתורים יוכנסו לכאן על ידי הסקריפט --></div>
+    </header>
+
+    <main class="container" role="main">
+        <nav class="tab-navigation" aria-label="ניווט בסיכום השיעור">
+            <button class="tab-btn active" data-tab="overview" role="tab" aria-selected="true" aria-controls="tab-overview">סקירה כללית</button>
+            <button class="tab-btn" data-tab="content" role="tab" aria-selected="false" aria-controls="tab-content">תוכן השיעור</button>
+            <button class="tab-btn" data-tab="qa" role="tab" aria-selected="false" aria-controls="tab-qa">שאלות ודיון</button>
+            <button class="tab-btn" data-tab="sources" role="tab" aria-selected="false" aria-controls="tab-sources">מקורות והערות</button>
+            <button class="tab-btn" data-tab="impressions" role="tab" aria-selected="false" aria-controls="tab-impressions">רשמים נוספים</button>
+        </nav>
+
+        <div class="tab-content">
+
+            <!-- ======================= -->
+            <!-- טאב 1: סקירה כללית -->
+            <!-- ======================= -->
+            <section id="tab-overview" class="tab-pane active" role="tabpanel" aria-labelledby="tab-overview-heading">
+                
+                <article class="page-card" aria-labelledby="details-heading">
+                    <h3 id="details-heading">פרטי השיעור</h3>
+                    <ul class="lesson-details-list">
+                        <li>
+                            <strong>נושא:</strong>
+                            <span>מבוא: מדע, מדינה, ממשל, פוליטיקה וריבונות</span>
+                        </li>
+                        <li>
+                            <strong>מרצה:</strong>
+                            <span>ד"ר חיים וייצמן</span>
+                        </li>
+                        <li>
+                            <strong>תאריך:</strong>
+                            <span>02.11.2025</span>
+                        </li>
+                        <li>
+                            <strong>שעה (מוערכת):</strong>
+                            <span>⚠️ לא צוינה שעת התחלה/סיום</span>
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="page-card" aria-labelledby="summary-heading">
+                    <h3 id="summary-heading">תקציר ונושאים מרכזיים</h3>
+                    
+                    <h4>תקציר</h4>
+                    <p>שיעור מבוא זה הניח את היסודות לדיון במדע המדינה. השיעור החל בהגדרת המושג "מדע" (דרך פוזיטיביזם והעיקרון ההפרכה של קרל פופר), המשיך לסקירה היסטורית מקיפה של התפתחות "המדינה המודרנית" מימי הביניים (שלום וסטפליה) דרך המאה ה-19 (המהפכה התעשייתית) ועד לאתגרי המאה ה-20 וה-21 (מדינת הרווחה, ניאו-ליברליזם, דה-קולוניזציה וגלובליזציה). לבסוף, השיעור הגדיר והבחין בין מושגי מפתח נגזרים: "ממשל", "משילה", "משילות", "פוליטיקה" ו"ריבונות".</p>
+                    
+                    <h4>נושאים מרכזיים שעלו</h4>
+                    <ul>
+                        <li>הגדרת "מדע" והבחנה בינו לבין מה שאינו מדע (פוזיטיביזם, הפרכה).</li>
+                        <li>התפתחות מדע המדינה כדיסציפלינה (גישה פילוסופית מול ביהביורליסטית).</li>
+                        <li>הגדרת "המדינה המודרנית" (מקס ובר) והתפתחותה ההיסטורית.</li>
+                        <li>אירועים מכוננים: המצאת הדפוס, הרפורמציה, שלום וסטפליה (1648), המהפכה התעשייתית.</li>
+                        <li>המדינה במאה ה-20: מדינת הרווחה, ניאו-ליברליזם, דה-קולוניזציה ו"מדינות ממוטטות".</li>
+                        <li>הבחנה בין "ממשל" (Government), "משילה" (Governance) ו"משילות" (Governability).</li>
+                        <li>הגדרת "פוליטיקה" (גישה מוסדית - איסטון; גישת עוצמה/תהליך - דאהל).</li>
+                        <li>הגדרת "ריבונות" (Sovereignty) (פנימית וחיצונית) ודיון במגבלותיה (לוק, ג'פרסון, האיחוד האירופי).</li>
+                        <li>הבחנה בין "סמכות" (Authority) ל"לגיטימיות" (Legitimacy).</li>
+                        <li>שלושת הטיפוסים האידיאליים של סמכות לגיטימית לפי מקס ובר (רציונלית, מסורתית, כריזמטית).</li>
+                        <li>ההבדל בין "חוקיות" (Legality) ל"לגיטימיות" (Legitimacy).</li>
+                    </ul>
+                </article>
+
+            </section>
+
+            <!-- ======================= -->
+            <!-- טאב 2: תוכן השיעור -->
+            <!-- ======================= -->
+            <section id="tab-content" class="tab-pane" role="tabpanel" aria-labelledby="tab-content-heading">
+                
+                <div class="accordion">
+                    
+                    <details open>
+                        <summary>פרק 1: מדע ומדע המדינה</summary>
+                        <div class="accordion-content">
+                            <p>השיעור נפתח בהגדרת המושג "מדע". בתחילה שלטה "הגישה הפוזיטיביסטית", שגרסה כי ניתן להסיק כלל מתצפית על מקרים רבים (אינדוקציה).</p>
+                            <p>גישה זו אותגרה על ידי הפילוסוף קרל פופר, שטבע את עיקרון ה<strong>הפרכה (Falsifiability)</strong><sup><a href="#term-1">1</a></sup>. לפי פופר, תיאוריה היא מדעית רק אם ניתן להגדיר ניסוי או תצפית שיכולים להפריך אותה. לא ניתן להוכיח שהשערה נכונה באופן מוחלט, אלא רק להפריך אותה.</p>
+                            
+                            <div class="example-highlight">
+                                <p><strong>דוגמת הברבורים של פופר:</strong> גם אם ראינו מיליון ברבורים לבנים, זו אינה הוכחה ש"כל הברבורים לבנים". לעומת זאת, מספיק למצוא ברבור שחור אחד כדי להפריך את הטענה.</p>
+                            </div>
+                            
+                            <p>מה שאינו ניתן להפרכה (כמו אידיאולוגיות, אמונות דתיות, טעם אישי) אינו "מדע".</p>
+                            <p>מדע המדינה החל כענף של פילוסופיה של המוסר (אפלטון, אריסטו), שעסק בשאלות ערכיות (כמו צדק). מאוחר יותר התפתחה "הגישה הביהביורליסטית", שניסתה להפוך את התחום למדעי יותר על ידי התמקדות בהתנהגות נצפית.</p>
+                            
+                            <blockquote><strong>רוברט דאהל (Robert Dahl):</strong> "מדע המדינה, עניינו בדפוסים של יחסי אנוש שכרוכים בהם מידה ניכרת של כוח, שלטון או סמכות."</blockquote>
+                            
+                            <p>המרצה סייג הגדרה זו וטען שהיא "חלקית וחסרה", כיוון שהיא מתעלמת מהמטרה (הערכית) של הפוליטיקה. הוגים קלאסיים כמו אפלטון ואריסטו ראו במדינה כלי להשגת מטרה נעלה יותר:</p>
+                            
+                            <blockquote><strong>אפלטון (Plato):</strong> "המדינה נולדת בשעה שאין היחיד שבינינו מספיק עוד לעצמו, אלא זקוק הוא לעוזרים רבים."</blockquote>
+                            <blockquote><strong>אריסטו (Aristotle):</strong> "המדינה התהוותה לשם החיים וקיומה לשם החיים הטובים."</blockquote>
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary>פרק 2: המדינה המודרנית (עד המאה ה-19)</summary>
+                        <div class="accordion-content">
+                            <p>ה"מדינה המודרנית" היא יצירה פוליטית חדשה יחסית (התפתחה באירופה בין המאות ה-16 ל-18). הגדרתו הקלאסית של הסוציולוג מקס ובר למדינה היא:</p>
+                            
+                            <blockquote><strong>מקס ובר (Max Weber):</strong> "מדינה היא קהילה אנושית הטוענת בהצלחה למונופול על השימוש הלגיטימי בכוח פיזי בטריטוריה נתונה."</blockquote>
+                            
+                            <p>בימי הביניים, המונרך היה חלש, כלוא בין שני כוחות חזקים ממנו: הכנסייה הקתולית (כוח "על-לאומי") והמבנה הפיאודלי (כוח "תת-לאומי").</p>
+                            
+                            <h5>אירועים מכוננים ששינו את המאזן:</h5>
+                            <ol>
+                                <li><strong>המצאת הדפוס (1454-1452):</strong> אפשרה הפצת ידע המונית ושברה את המונופול של הכנסייה על הידע.</li>
+                                <li><strong>הרפורמציה (1517):</strong> מרטין לותר, שנעזר בדפוס להפצת "95 התזות" שלו, יצר את הנצרות הפרוטסטנטית והחליש משמעותית את כוחה העל-לאומי של הכנסייה הקתולית.</li>
+                                <li><strong>שלום וסטפליה (1648):</strong> הסכם שסיים את "מלחמת שלושים השנים" וקבע את עליונות השליט הטריטוריאלי החילוני על פני הסמכות הדתית של הוותיקן. זהו ציון דרך מרכזי בצמיחת המדינה הריבונית.</li>
+                                <li><strong>התפתחויות טכנולוגיות ובירוקרטיות:</strong> שימוש באבק שריפה דרש צבאות מאורגנים וגדולים יותר, ואלו דרשו "בירוקרטיה" (מערך פקידים) לניהול, מימון וגיוס. תהליך זה הוביל לצמצום מאות יחידות פוליטיות קטנות באירופה לכ-25 מדינות ריכוזיות.</li>
+                            </ol>
+                            
+                            <p>במאה ה-19, "המהפכה התעשייתית" ו"המצאת הרכבת" האיצו את התהליכים. הן גרמו להגירה המונית לערים, יצרו מעמדות חדשים (בורגנות ופרולטריון), ואפשרו למדינה להרחיב את מעורבותה: קביעת גבולות מדויקת (באמצעות מפות), מדיניות סחר (מכסים), חינוך ציבורי חובה ואיסוף נתונים סטטיסטיים על האוכלוסייה.</p>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>פרק 3: המדינה במאה ה-20 וה-21</summary>
+                        <div class="accordion-content">
+                            <p>המאה ה-20 התאפיינה בשני מהלכים מרכזיים: התרחבות המדינה עד שנות ה-70, והתכווצותה לאחר מכן.</p>
+                            <ul>
+                                <li><strong>התרחבות (עד שנות ה-70):</strong> בעקבות שתי מלחמות העולם (שדרשו גיוס משאבים כולל) והצורך לטפל בחיילים משוחררים, צמחה "מדינת הרווחה" (Welfare State). המדינה לקחה אחריות על חינוך, בריאות, פנסיה ודאגה למוחלשים. במקביל, "המלחמה הקרה" והמירוץ הטכנולוגי הובילו לצמיחת "המדינה המנהלית" (Managerial State) בעלת בירוקרטיה גדולה.</li>
+                                <li><strong>התכווצות (שנות ה-80 ואילך):</strong> תפיסת ה"ניאו-ליברליזם" טענה שהמדינה המנהלית הסתאבה והפכה לא יעילה. תפיסה זו קראה לנסיגת המדינה מהתערבות בכלכלה וביצעה הפרטות (Privatization).</li>
+                            </ul>
+                            
+                            <div class="example-highlight">
+                                <p><strong>דמויות מפתח (ניאו-ליברליזם):</strong> מרגרט תאצ'ר בבריטניה, רונלד רייגן בארה"ב, ובנימין נתניהו בישראל (באיחור של עשור).</p>
+                            </div>
+                            
+                            <p>במקביל, תהליך ה"דה-קולוניזציה" לאחר מלחמת העולם השנייה הוביל להקמת מדינות חדשות רבות, שלעיתים התקשו ליישם את מודל המדינה האירופי. חלקן הפכו ל"מדינות ממוטטות" (Failed States).</p>
+                            
+                            <div class="example-highlight">
+                                <p><strong>דוגמאות למדינות ממוטטות:</strong> זאיר (שבה תקציבי החינוך והבריאות הגיעו לאפס ב-1992), סומליה, וסוריה (שב-2017 היו בה כ-5.5 מיליון פליטים רשומים מחוץ למדינה, בנוסף למיליוני פליטים פנימיים).</p>
+                            </div>
+                            
+                            <p>בתחילת המאה ה-21, מספר משברים גרמו דווקא להתערבות מחודשת של המדינה:</p>
+                            <ol>
+                                <li><strong>פרשת אנרון (2001):</strong> הובילה לחקיקת "חוק סרבנס-אוקסלי" להגברת הפיקוח הפיננסי.</li>
+                                <li><strong>פיגועי ה-11 בספטמבר (2001):</strong> הרחיבו דרמטית את מעורבות המדינה בביטחון פנים והגירה.</li>
+                                <li><strong>המשבר הכלכלי (2008):</strong> חייב התערבות ממשלתית מסיבית להצלת הכלכלה.</li>
+                            </ol>
+
+                            <h5>סיכום הגדרות "מדינה" (הוגים שונים):</h5>
+                            <ul>
+                                <li><strong>רוסקין (Roskin et al.):</strong> "צורת ממשל, בדרך-כלל סוברנית וחזקה דיה כדי לאכוף את חוקיה."</li>
+                                <li><strong>דאהל וסטינבריקר (Dahl & Stinebrickner):</strong> "השילוב של התושבים, השטח והממשל."</li>
+                                <li><strong>זגורסקי (Zagorski):</strong> "מערכת פוליטית מודרנית... מבוססת על תחושת הלאומיות ועל בירוקרטיה אפקטיבית."</li>
+                            </ul>
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary>פרק 4: ממשל, משילה ומשילות</summary>
+                        <div class="accordion-content">
+                            <p>המרצה מבחין בין שלושה מושגים קרובים: "ממשל", "משטר", ו"מערכת פוליטית". בעוד הובס השתמש בהם כמילים נרדפות, אנו נבחין ביניהם:</p>
+                            
+                            <ol>
+                                <li><strong>ממשל (Government):</strong> "מערך של אנשים ומוסדות המפעילים כוח פוליטי על בסיס יום-יומי." זהו "אוסף משרדים" (Collection of offices) המאוישים על ידי אנשים (כמו נשיאה, יו"ר כנסת, ראש עיר). יש להבחין בין ה"תפקיד" (Role) ל"ממלא התפקיד" (Role-filler).</li>
+                                <li><strong>משטר (Regime):</strong> "צורת הממשל ואת אופיו" (למשל, דמוקרטי או אוטוריטרי).</li>
+                                <li><strong>משילה (Governance)</strong><sup><a href="#term-4">4</a></sup><strong>:</strong> (תרגום המרצה) "מה שהממשל עושה, אבל היא גם מה שהממשל מחליט לא לעשות." זוהי הגדרה רחבה המתארת את *תהליך* קבלת ההחלטות. בעבר התהליך נתפס כ-"Top-Down" (מהממשל לאזרח), אך כיום הגישה המודרנית רואה בו שילוב של "Top-Down" ו-"Bottom-Up", הכולל מעורבות של המגזר העסקי והמגזר השלישי.</li>
+                                <li><strong>משילות (Governability)</strong><sup><a href="#term-5">5</a></sup><strong>:</strong> (תרגום המרצה) "יכולתו של הממשל לקיים את המשילה." זהו הכושר הניהולי והיכולת לייצר הסכמות כדי ליישם מדיניות.</li>
+                            </ol>
+                            
+                            <div class="example-highlight">
+                                <p><strong>דוגמה להבחנה (ממשל/משטר):</strong> כאשר מתחלף נשיא בארה"b או ראש ממשלה בבריטניה, זהו "חילופי ממשל" אך ה"משטר" (הדמוקרטי) נשאר. לעומת זאת, בטורקיה או ברוסיה, המרצה טוען כי נראה שמתחולל "שינוי משטר".</p>
+                            </div>
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary>פרק 5: פוליטיקה</summary>
+                        <div class="accordion-content">
+                            <p>המרצה הציג שתי גישות מרכזיות להגדרת "פוליטיקה":</p>
+                            
+                            <h5>גישה 1: הזירה המוסדית (פוליטיקה = ממשל)</h5>
+                            <p>גישה זו רואה בפוליטיקה פעילות המתרחשת ב"זירת הממשל" (The arena of government). היא ממשיכה את תפיסתו של אריסטו שפוליטיקה היא "ארגון של המדינה (פוליס)".</p>
+                            <blockquote><strong>דיוויד איסטון (David Easton):</strong> "פוליטיקה... היא ההקצאה הסמכותית של ערכים בחברה."</blockquote>
+                            <p>"ערכים" יכולים להיות חומריים (תקציב, קרקע) או סמליים.</p>
+                            
+                            <div class="example-highlight">
+                                <p><strong>דוגמאות ל"ערך סמלי":</strong> מעמד השפה הערבית בישראל, או הוויכוח סביב מי ידליק משואה ביום העצמאות.</p>
+                            </div>
+
+                            <h5>גישה 2: תהליך חברתי (פוליטיקה = עוצמה)</h5>
+                            <p>גישה זו רואה בפוליטיקה תהליך חברתי של מאבק על עוצמה, הקיים "בכל מקום בו נמצאים בני אדם" (דברי רוברט דאהל).</p>
+                            <blockquote><strong>רוברט דאהל (Robert Dahl):</strong> "פוליטיקה [היא] הפעלת השפעה... יחסים המבוססים על עוצמה, השפעה והרתעה."</blockquote>
+                            
+                            <div class="example-highlight">
+                                <p><strong>דוגמה (פוליטיקה בכל מקום):</strong> פקיד בבנק או אחות בבית חולים המנסים להתקדם לתפקיד ניהולי "עושים פוליטיקה" – הם יוצרים בריתות, מבטיחים הבטחות וכו'. גם התמרונים בתוך המשפחה (למשל סביב מי יארח את ליל הסדר) הם סוג של פוליטיקה לפי גישה זו.</p>
+                            </div>
+                            
+                            <p>הגדרתו הקלאסית של <strong>הרולד לאסוול</strong> (שהמרצה ייחס לג'יימס דנציגר) מסכמת גישה זו:</p>
+                            <blockquote><strong>הרולד לאסוול (Harold Lasswell):</strong> "פוליטיקה היא הקביעה מי מקבל מה, מתי ואיך."</blockquote>
+                            <p>המרצה, ד"ר וייצמן, הוסיף להגדרה זו: "...ועל חשבון מי!"</p>
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary>פרק 6: ריבונות</summary>
+                        <div class="accordion-content">
+                            <p><strong>ריבונות (Sovereignty)</strong><sup><a href="#term-6">6</a></sup> היא "הסמכות העליונה" (העליון). במקור, המונח התייחס לאל ("ריבון העולמים"). בימי הביניים, סמכות המלכים נבעה מהכנסייה.</p>
+                            
+                            <h5>ריבונות מוחלטת לעומת מוגבלת</h5>
+                            <p>המעבר לריבונות חילונית החל במהפכה של הנרי השמיני באנגליה (שייסד את הכנסייה האנגליקנית כדי להתנתק מהאפיפיור) והתבסס ב"שלום וסטפליה" (1648), שקבע את עליונות המונרך החילוני.</p>
+                            <ul>
+                                <li><strong>הגישה המוחלטת (ז'אן בודן, וויליאם בלקסטון):</strong> "ריבונות היא הסמכות הבלתי מוגבלת והבלתי מחולקת".</li>
+                                <li><strong>הגישה המוגבלת (ג'ון לוק, תומס ג'פרסון):</strong> בתפיסה הדמוקרטית, הריבונות נובעת מהעם ("Consent of the governed") והיא מוגבלת על ידי החוק.</li>
+                            </ul>
+                            
+                            <h5>ריבונות אינה מוחלטת</h5>
+                            <p>המרצה טוען כי ריבונות אינה מצב מוחלט (בניגוד לטענת סורנסן). תמיד קיימות מגבלות על הריבונות:</p>
+                            <ol>
+                                <li><strong>מגבלות צבאיות:</strong> דוגמת מדינות הלוויין של ברית המועצות במלחמה הקרה.
+                                    <div class="example-highlight">
+                                        <p><strong>דוגמה:</strong> הפלישה הסובייטית להונגריה (1956) וצ'כוסלובקיה (1968, "האביב של פראג") הדגימה שהריבונות שלהן מוגבלת.</p>
+                                    </div>
+                                </li>
+                                <li><strong>מגבלות כלכליות:</strong> תלות במדינה אחרת.
+                                    <div class="example-highlight">
+                                        <p><strong>דוגמה:</strong> הסכם כלכלי בין ישראל לאיחוד האירופי, שבו ישראל הסכימה להחרגת ההתנחלויות מההסכם.</p>
+                                    </div>
+                                </li>
+                                <li><strong>מגבלות פוליטיות בינלאומיות:</strong>
+                                    <div class="example-highlight">
+                                        <p><strong>דוגמה:</strong> החרם הישראלי על אולימפיאדת מוסקבה (1980) בעקבות ארה"ב, למרות האינטרס לחזק קשר עם יהדות ברית המועצות.</p>
+                                    </div>
+                                </li>
+                                <li><strong>מבנים על-לאומיים:</strong> מדינות מוותרות מרצון על חלקים מהריבונות שלהן.
+                                     <div class="example-highlight">
+                                        <p><strong>דוגמה:</strong> האיחוד האירופי. "אמנת שנגן" מבטלת את ריבונות המדינה על גבולותיה הפנימיים, ו"מטבע האירו" מבטל את הריבונות על קביעת מדיניות מוניטרית.</p>
+                                    </div>
+                                </li>
+                            </ol>
+
+                            <p><strong>ריבונות פנימית</strong><sup><a href="#term-7">7</a></sup> היא הסמכות העליונה לחוקק חוקים בתוך המדינה, בעוד <strong>ריבונות חיצונית</strong><sup><a href="#term-8">8</a></sup> היא הכרה בינלאומית בעצמאותה של המדינה.</p>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>פרק 7: סמכות ולגיטימיות</summary>
+                        <div class="accordion-content">
+                            <p>פרק זה עוסק בהבחנה החשובה בין <strong>סמכות (Authority)</strong><sup><a href="#term-9">9</a></sup> לבין <strong>לגיטימיות (Legitimacy)</strong><sup><a href="#term-10">10</a></sup>. לגיטימיות היא האמונה של האזרחים בכך שהשלטון ראוי למשול. סמכות היא הכוח הנובע מאותה אמונה.</p>
+                            <p>הסוציולוג <strong>מקס ובר</strong> הוא ההוגה המרכזי בתחום. הוא טען כי הלגיטימיות אינה עומדת בפני עצמה, אלא היא "מה שנתפס כלגיטימי" בעיני הנשלטים. ובר הגדיר שלושה "טיפוסים אידיאליים" (Ideal Types)<sup><a href="#term-11">11</a></sup> של סמכות לגיטימית:</p>
+                            
+                            <ol>
+                                <li><strong>סמכות חוקית-רציונלית (Legal-Rational Authority)</strong><sup><a href="#term-12">12</a></sup><strong>:</strong> הציות נובע מאמונה בחוקים ובתהליכים הפורמליים שקבעו את השליט, ולא באדם עצמו.
+                                    <ul>
+                                        <li><strong>דוגמה:</strong> חייל מציית למפקד בגלל הדרגה והתפקיד שהוגדרו בחוק, לא בגלל תכונותיו האישיות.</li>
+                                        <li>זוהי הסמכות האופיינית ל<strong>בירוקרטיה</strong> המודרנית, הפועלת על פי כללים ברורים, היררכיה וסמכויות מוגדרות.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>סמכות מסורתית (Traditional Authority)</strong><sup><a href="#term-13">13</a></sup><strong>:</strong> הציות נובע מתוך אמונה ב"קדושת המסורת" – מצייתים כי "כך היה תמיד".
+                                    <ul>
+                                        <li>זוהי הרחבה של "סמכות האב" (פטריארכיה).</li>
+                                        <li><strong>דוגמה:</strong> שלטון מלוכני או משטרים פטרימוניאליים (כמו בנסיכויות המפרץ) שבהם הסמכות עוברת בירושה.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>סמכות כריזמטית (Charismatic Authority)</strong><sup><a href="#term-14">14</a></sup><strong>:</strong> הציות נובע מתכונותיו האישיות יוצאות הדופן של המנהיג (או לפחות, מתפיסת החסידים את תכונותיו).
+                                    <ul>
+                                        <li>זוהי סמכות מהפכנית (כוח מהפכני) ולרוב קצרת ימים, מכיוון שהיא תלויה באדם אחד.</li>
+                                        <li><strong>דוגמה:</strong> מנהיגי מהפכות כמו פידל קסטרו או צ'ה גווארה.</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                            
+                            <h5>חוקיות (Legality) מול לגיטימיות (Legitimacy)</h5>
+                            <p>המרצה מדגיש כי <strong>חוקיות</strong><sup><a href="#term-15">15</a></sup> היא מושג טכני-פרוצדורלי (האם החוק עבר בתהליך הנדרש?), בעוד <strong>לגיטימיות</strong> היא מושג פוליטי רחב (האם הציבור מקבל את סמכות החוק?). תקנות וחוקים יכולים להיות חוקיים לחלוטין, ועדיין להיתפס כלא-לגיטימיים בעיני חלקים בציבור.</p>
+                            
+                            <div class="example-highlight">
+                                <p><strong>דוגמה 1 (המהפכה האמריקאית):</strong> המיסים שהטיל מלך אנגליה על המושבות היו "חוקיים" (מבחינת הכתר), אך המושבות ראו בהם "לא לגיטימיים" מכיוון שלא היה להן ייצוג בפרלמנט (הסיסמה: "אין מיסוי ללא ייצוג").</p>
+                            </div>
+                            <div class="example-highlight">
+                                <p><strong>דוגמה 2 (תוכנית ההתנתקות, 2004):</strong> כדי להשיג רוב בממשלה להצבעה, ראש הממשלה אריאל שרון פיטר שרים מהאיחוד הלאומי. המהלך היה "חוקי" לחלוטין, אך נתפס בעיני רבים כ"לא לגיטימי" וכמחטף שנוגד את רוח הדמוקרטיה.</p>
+                            </div>
+
+                            <h5>מרכיבים לשמירת לגיטימיות (במדינה מודרנית):</h5>
+                            <ul>
+                                <li>תחושת ביטחון (אישי ולאומי).</li>
+                                <li>שלטון החוק (הנתפס כעשיית צדק).</li>
+                                <li>מצב כלכלי סביר ("It's the economy, stupid!").</li>
+                                <li>ייצוגיות הממשל (התחושה שהממשל אינו "מועדון סגור").</li>
+                            </ul>
+                        </div>
+                    </details>
+                    
+                </div>
+            </section>
+
+            <!-- ======================= -->
+            <!-- טאב 3: שאלות ודיון -->
+            <!-- ======================= -->
+            <section id="tab-qa" class="tab-pane" role="tabpanel" aria-labelledby="tab-qa-heading">
+                
+                <article class="page-card" aria-labelledby="qa-lecturer-heading">
+                    <h3 id="qa-lecturer-heading">שאלות המרצה (מתוך בחני השיעור)</h3>
+                    
+                    <h5>1. מה גרסה הגישה הפוזיטיביסטית?</h5>
+                    <p><strong>התשובה שסומנה בשיעור:</strong> "מצפיה במספר מספיק של ניסויים ניתן להסיק לגבי שאר המקרים אותם לא בדקנו בפועל."</p>
+                    <div class="verification-success">
+                        <strong>אימות:</strong> המרצה הציג זאת כגישה ההיסטורית (אינדוקציה) שקדמה לעיקרון ההפרכה של פופר.</div>
+
+                    <hr style="border: 0; border-top: 1px dashed var(--border); margin: var(--s4) 0;">
+                    
+                    <h5>2. בימי הביניים, כוחם של המלכים היה ___ מזה של הכנסייה.</h5>
+                    <p><strong>התשובה שנבחרה בשיעור:</strong> נמוך.</p>
+                    <div class="verification-success">
+                        <strong>אימות:</strong> המרצה הדגיש כי המונרך היה "חלש לעין ערוך" בין הכנסייה (כוח על-לאומי) והמבנה הפיאודלי (כוח תת-לאומי).</div>
+                    
+                    <hr style="border: 0; border-top: 1px dashed var(--border); margin: var(--s4) 0;">
+
+                    <h5>3. מה מהבאים לא היווה גורם לצמיחת "המדינה המנהלית"?</h5>
+                    <p><strong>התשובה שנבחרה בשיעור:</strong> המצאת הדרכון.</p>
+                    <div class="verification-success">
+                        <strong>אימות:</strong> המרצה קישר את צמיחת המדינה המנהלית (הבירוקרטיה הנרחבת) למדינת הרווחה, המלחמה הקרה והמירוץ הטכנולוגי. המצאת הדרכון (סביב מלחמת העולם הראשונה) קדמה לכך והיא סממן של ריבונות טריטוריאלית, לאו דווקא של ניהול רווחה מורחב.</div>
+
+                    <hr style="border: 0; border-top: 1px dashed var(--border); margin: var(--s4) 0;">
+                    
+                    <h5>4. לפי ג'ון לוק, הריבונות ___, בעוד לפי בודן, הריבונות ___.</h5>
+                    <p><strong>התשובה שנבחרה בשיעור:</strong> מוגבלת; מוחלטת.</p>
+                    <div class="verification-success">
+                        <strong>אימות:</strong> המרצה הציג את בודן (ובלקסטון) כמייצגי הריבונות המוחלטת, ואת לוק כמי שקדם לתפיסה הדמוקרטית של ריבונות מוגבלת ("באמנה ובהסכמה").</div>
+
+                    <hr style="border: 0; border-top: 1px dashed var(--border); margin: var(--s4) 0;">
+                    
+                    <h5>5. לפי דאהל, הפוליטיקה קיימת:</h5>
+                    <p><strong>התשובה שנבחרה בשיעור:</strong> בכל התשובות נכונות (בין בני משפחה / בממשלה / בארגונים היררכיים).</p>
+                    <div class="verification-success">
+                        <strong>אימות:</strong> המרצה הדגיש שגישתו של דאהל (פוליטיקה כהפעלת עוצמה) רואה אותה כקיימת "בכל מקום בו נמצאים בני אדם", כולל במשפחה ובמקום העבודה.</div>
+
+                    <hr style="border: 0; border-top: 1px dashed var(--border); margin: var(--s4) 0;">
+
+                    <h5>6. (מפרק 7) בלגיטימיות מסורתית, הציות הוא ל...</h5>
+                    <p><strong>התשובה שנבחרה בשיעור:</strong> אדם ומסורת.</p>
+                    <div class="verification-success">
+                        <strong>אימות:</strong> המרצה הסביר שסמכות זו נובעת מהאמונה בקדושת המסורת ("כך היה תמיד") ובסמכותו האישית של מי שמונה מכוחה (למשל, מלך).</div>
+
+                    <hr style="border: 0; border-top: 1px dashed var(--border); margin: var(--s4) 0;">
+
+                    <h5>7. (מפרק 7) מה מהבאים אינו מרכיב חיוני ליצירת לגיטימיות (במדינה מודרנית)?</h5>
+                    <p><strong>התשובה הנכונה (לפי ההרצאה):</strong> כריזמטיות המנהיג.</p>
+                    <div class="verification-success">
+                        <strong>הבהרה:</strong> המרצה מנה ארבעה מרכיבים מרכזיים לשמירת לגיטימיות: 1. תחושת ביטחון, 2. שלטון החוק (עשיית צדק), 3. מצב כלכלי סביר, 4. ייצוגיות הממשל. כריזמה היא *סוג* של לגיטימיות בפני עצמה (לפי ובר), אך אינה מרכיב *הכרחי* לקיום לגיטימיות במשטר דמוקרטי-רציונלי.</div>
+                </article>
+
+                <article class="page-card" aria-labelledby="qa-student-heading">
+                    <h3 id="qa-student-heading">שאלות למחשבה (שהציג המרצה)</h3>
+                    
+                    <h5>1. (פרק 3) האם ניתן לכפות מבנה פוליטי (כמו המדינה המודרנית) שנוצר במקום מסוים ובתרבות מסוימת, על עמים אחרים במקומות אחרים עם תרבות שונה?</h5>
+                    <p><strong>תשובת המרצה (סיכום):</strong> זוהי "שאלה למחשבה". המרצה רמז שהדבר מורכב, במיוחד בהקשר של דה-קולוניזציה, שם מדינות חדשות "ייבאו" את מודל המדינה האירופית. לעיתים קרובות, התוצאה הייתה בעייתית והובילה לצמיחת "מדינות ממוטטות" (כמו בסומליה או זאיר), שלא הצליחו למלא את הפונקציות הבסיסיות של מדינה.</p>
+
+                    <h5>2. (פרק 4) האם "הרשאה ציבורית" (לגיטימציה) היא תנאי הכרחי להגדרת ממשל (כפי שטען ברוך קימרלינג)?</h5>
+                    <p><strong>תשובת המרצה (סיכום):</strong> זוהי שאלה פתוחה שהמרצה ציין כי תידון בפרקים הבאים של הקורס, שיעסקו במושגי הסמכות והלגיטימיות.</p>
+                    
+                </article>
+                
+            </section>
+
+            <!-- ======================= -->
+            <!-- טאב 4: מקורות והערות -->
+            <!-- ======================= -->
+            <section id="tab-sources" class="tab-pane" role="tabpanel" aria-labelledby="tab-sources-heading">
+                
+                <article class="page-card" aria-labelledby="external-sources-heading">
+                    <h3 id="external-sources-heading">מקורות חיצוניים</h3>
+                    <p>לא נעשה שימוש במקורות חיצוניים (מעבר לתכני השיעור שהמרצה הציג) להכנת סיכום זה.</p>
+                </article>
+                
+                <article class="page-card" aria-labelledby="terms-heading">
+                    <h3 id="terms-heading">הערות ומונחים</h3>
+                    <ol>
+                        <li id="term-1"><strong>הפרכה (Falsifiability):</strong> עיקרון מדעי (שהגדיר קרל פופר) שלפיו תיאוריה היא מדעית רק אם ניתן להגדיר ניסוי או תצפית שתוצאותיהם יכולות להפריך אותה.</li>
+                        <li id="term-2"><strong>ממשל (Government):</strong> המערך המוסדי והאנושי ("אוסף משרדים") המפעיל את השלטון היומיומי.</li>
+                        <li id="term-3"><strong>משטר (Regime):</strong> צורת הממשל ואופיו (למשל, דמוקרטי, אוטוריטרי).</li>
+                        <li id="term-4"><strong>משילה (Governance):</strong> (בתרגום המרצה) תהליך קבלת ההחלטות ויישומן, המתאר את מה שהממשל עושה (ומה שאינו עושה), ואת האינטראקציה שלו עם המגזר העסקי והשלישי.</li>
+                        <li id="term-5"><strong>משילות (Governability):</strong> (בתרגום המרצה) היכולת או הכושר של הממשל לקיים את תהליך המשילה (למשל, ליישם מדיניות וליצור הסכמות).</li>
+                        <li id="term-6"><strong>ריבונות (Sovereignty):</strong> סמכות עליונה, בלעדית (גם אם מוגבלת) על טריטוריה ואוכלוסייה.</li>
+                        <li id="term-7"><strong>ריבונות פנימית (Internal Sovereignty):</strong> סמכות עליונה לחוקק חוקים ולאכוף אותם בתוך גבולות המדינה.</li>
+                        <li id="term-8"><strong>ריבונות חיצונית (External Sovereignty):</strong> הכרה בינלאומית בעצמאותה של המדינה ובסמכותה הפנימית.</li>
+                        <li id="term-9"><strong>סמכות (Authority):</strong> הזכות (הנתפסת) להפעיל כוח ולזכות לציות.</li>
+                        <li id="term-10"><strong>לגיטימיות (Legitimacy):</strong> האמונה הרווחת בקרב הציבור כי לסמכות השלטונית יש זכות למשול וכי יש לציית לה. זהו הבסיס לסמכות.</li>
+                        <li id="term-11"><strong>טיפוס אידיאלי (Ideal Type):</strong> מודל תיאורטי (שטבע מקס ובר) המקבץ מאפיינים מרכזיים של תופעה חברתית לצורך ניתוח. הטיפוס הטהור אינו בהכרח קיים במציאות.</li>
+                        <li id="term-12"><strong>סמכות חוקית-רציונלית (Legal-Rational):</strong> לגיטימיות המבוססת על אמונה בחוקים ובתהליכים פורמליים. מצייתים לתפקיד (למשרה) ולא לאדם.</li>
+                        <li id="term-13"><strong>סמכות מסורתית (Traditional):</strong> לגיטימיות המבוססת על אמונה בקדושת המסורת ובסדר הקיים ("כך היה תמיד").</li>
+                        <li id="term-14"><strong>סמכות כריזמטית (Charismatic):</strong> לגיטימיות המבוססת על תכונות אישיות יוצאות דופן (כריזמה) המיוחסות למנהיג על ידי חסידיו.</li>
+                        <li id="term-15"><strong>חוקיות (Legality):</strong> ההיבט הטכני-פרוצדורלי של החוק (האם נחקק כהלכה?). להבדיל מלגיטימיות, שהיא ההכרה הציבורית הרחבה בתוקפו המהותי של החוק או השלטון.</li>
+                    </ol>
+                </article>
+
+            </section>
+
+            <!-- ======================= -->
+            <!-- טאב 5: רשמים נוספים -->
+            <!-- ======================= -->
+            <section id="tab-impressions" class="tab-pane" role="tabpanel" aria-labelledby="tab-impressions-heading">
+                
+                <article class="page-card" aria-labelledby="impressions-heading-inner">
+                    <h3 id="impressions-heading-inner">הרחבות נוספות</h3>
+                    
+                    <div class="external-addition">
+                        <h5>הרחבה 1: קרל פופר והבעיה של מדע המדינה</h5>
+                        <p>הדיון של המרצה על קרל פופר ועיקרון ההפרכה (פרק 1) הוא קריטי להבנת מדע המדינה. במשך שנים, התחום ספג ביקורת על היותו "לא מדעי" מספיק, מכיוון שקשה מאוד (עד בלתי אפשרי) לבצע ניסויים מבוקרים כמו במדעי הטבע. אי אפשר "להפעיל מחדש" את מלחמת העולם הראשונה ללא גורם X כדי לבדוק את השפעתו.</p>
+                        <p>הגישה הביהביורליסטית (שרוברט דאהל הוא נציג בולט שלה) הייתה ניסיון להתמודד עם אתגר זה על ידי התמקדות רק במה שניתן למדוד באופן אמפירי (כמו דפוסי הצבעה, חקיקה, או התנהגות מנהיגים), במקום לעסוק בשאלות פילוסופיות "גדולות" (כמו "מהו צדק?") שאינן ניתנות להפרכה.</p>
+                        <p>מקור: מבוסס על עקרונות הפילוסופיה של המדע (קרל פופר, "הלוגיקה של הגילוי המדעי") וביקורות על מדע המדינה.</p>
+                    </div>
+
+                    <div class="external-addition">
+                        <h5>הרחבה 2: מקס ובר והבירוקרטיה כ"כלוב של ברזל"</h5>
+                        <p>המרצה הציג (בפרק 7) את הטיפולוגיה של מקס ובר לסמכות, והדגיש את "הסמכות החוקית-רציונלית" כבסיס לבירוקרטיה. ובר אכן ראה בבירוקרטיה את צורת הארגון היעילה, ההוגנת והרציונלית ביותר, שהיא עדיפה על פני הכאוס של הכריזמה או השרירותיות של המסורת.</p>
+                        <p>עם זאת, ובר גם הזהיר מפני סכנותיה. הוא טבע את המונח <strong>"כלוב הברזל" (Iron Cage)</strong>. הוא חשש שהדגש הקיצוני על חוקים, כללים ונהלים (הרציונליות) עלול לרוקן את החיים האנושיים ממשמעות, יצירתיות וערכים. האדם הופך ל"בורג קטן במכונה גדולה". לכן, בעוד הבירוקרטיה חיונית לתפקוד המדינה המודרנית, היא גם נושאת בחובה סכנה של ניכור ואובדן אנושיות.</p>
+                        <p>מקור: מבוסס על מקס ובר, "האתיקה הפרוטסטנטית ורוח הקפיטליזם" ו"כלכלה וחברה".</p>
+                    </div>
+
+                    <div class="external-addition">
+                        <h5>הרחבה 3: פוליטיקה כ"מי מקבל מה" (לאסוול) מול פוליטיקה כ"סדר" (אריסטו)</h5>
+                        <p>ההגדרות השונות ל"פוליטיקה" (פרק 5) מייצגות שתי תפיסות עולם:</p>
+                        <ul>
+                            <li><strong>הגישה הריאליסטית/מודרנית (לאסוול, דאהל):</strong> רואה בפוליטיקה מאבק כוח על משאבים מוגבלים ("מי מקבל מה, מתי ואיך"). זוהי גישה המתמקדת בתהליך ובאינטרסים.</li>
+                            <li><strong>הגישה הנורמטיבית/קלאסית (אריסטו, אפלטון):</strong> רואה בפוליטיקה פעילות שמטרתה להשיג מטרה נעלה יותר – "החיים הטובים", צדק, או סדר חברתי ראוי.</li>
+                        </ul>
+                        <p>בעוד הגישה המודרנית שואלת "איך המערכת עובדת?", הגישה הקלאסית שואלת "איך המערכת *צריכה* לעבוד?". מדע המדינה המודרני מנסה לשלב בין השתיים: להבין את מאבקי הכוח (ביהביורליזם) וגם לבחון את המוסדות והערכים שמעצבים אותם (ניאו-מוסדיות ופילוסופיה פוליטית).</p>
+                        <p>מקור: מבוסס על אריסטו ("פוליטיקה") והרולד לאסוול ("פוליטיקה: מי מקבל מה, מתי ואיך").</p>
+                    </div>
+                    
+                    <div class="external-addition">
+                        <h5>הרחבה 4: גישות פילוסופיות למדינה וריבונות</h5>
+                        <p>הדיון של המרצה בהוגים שונים נוגע בשאלת יסוד בפילוסופיה הפוליטית: מדוע אנו זקוקים למדינה ומהיכן נובעת סמכותה (ריבונותה)?</p>
+                        
+                        <h5>ז'אן בודן והריבונות המוחלטת</h5>
+                        <p>ז'אן בודן (Jean Bodin), שהוזכר בשיעור, כתב במאה ה-16 בצרפת, בתקופה של מלחמות דת קשות. עבורו, הפתרון היחיד לאנרכיה היה ריבון אחד, מוחלט, שעומד מעל החוק ("בלתי מחולקת ובלתי מוגבלת"). הריבון מחוקק חוקים אך אינו כפוף להם, והוא מקור הסמכות היחיד. זוהי התשתית התיאורטית למשטר האבסולוטי.</p>
+
+                        <h5>טבלת השוואה: תיאורטיקנים של "האמנה החברתית"</h5>
+                        <p>ההוגים תומאס הובס, ג'ון לוק (שהוזכרו בשיעור) וז'אן-ז'אק רוסו (שלא הוזכר אך משלים את התמונה) פיתחו את רעיון "האמנה החברתית". כולם יצאו מנקודת הנחה של "מצב טבע" (מצב היפותטי ללא שלטון), אך הגיעו למסקנות שונות לגבי אופי המדינה הנדרשת.</p>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">הוגה</th>
+                                    <th scope="col">תומאס הובס (Thomas Hobbes)</th>
+                                    <th scope="col">ג'ון לוק (John Locke)</th>
+                                    <th scope="col">ז'אן-ז'אק רוסו (Jean-Jacques Rousseau)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">"מצב הטבע"</th>
+                                    <td>"מלחמת כל בכל" (Bellum omnium contra omnes). חיים "אומללים, דלים, מאוסים, בהמיים וקצרים".</td>
+                                    <td>מצב של חירות, אך לא הפקרות. רוב האנשים רציונליים, אך קיים חשש לפגיעה בזכויות הטבעיות (חיים, חירות, קניין).</td>
+                                    <td>מצב אידיאלי של "הפרא האציל". האדם טוב מטבעו, אך המצאת הקניין הפרטי והחברה משחיתים אותו.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">מטרת האמנה החברתית</th>
+                                    <td>ביטחון. אנשים מוותרים על *כל* זכויותיהם (למעט הזכות להגנה עצמית) למען ביטחון פיזי.</td>
+                                    <td>שמירה על הזכויות הטבעיות (בעיקר קניין). אנשים מוותרים רק על הזכות לשפוט ולהעניש בעצמם.</td>
+                                    <td>יצירת חברה שתשמור על החירות אך תספק ביטחון. האדם מוותר על זכויותיו לטובת "הרצון הכללי" (General Will) שהוא חלק ממנו.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">אופי הריבונות</th>
+                                    <td><strong>מוחלטת (אבסולוטית).</strong> הריבון (ה"לוויתן") אינו צד לאמנה ועומד מעליה. אין זכות למרוד בו.</td>
+                                    <td><strong>מוגבלת ועל תנאי.</strong> הריבונות נשארת בידי העם. הממשל הוא רק נאמן. אם הממשל פוגע בזכויות, לעם יש זכות (ואף חובה) למרוד.</td>
+                                    <td><strong>מוחלטת, אך עממית.</strong> "הרצון הכללי" הוא הריבון המוחלט. אין הפרדת רשויות, והעם כגוף אחד מחוקק.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="font-size: 0.9em; margin-top: var(--s2);"><i>מקור להרחבה: מבוסס על ערכים רלוונטיים באנציקלופדיה לפילוסופיה של סטנפורד (SEP).</i></p>
+                    </div>
+
+                </article>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- סקריפט לניווט טאבים (מ-sample1) -->
+    <script>
+        (function() {
+            'use strict';
+            
+            // --- בקר ניווט כרטיסיות (Tabs) ---
+            const tabContainer = document.querySelector('.tab-navigation');
+            
+            if (tabContainer) {
+                const tabButtons = tabContainer.querySelectorAll('.tab-btn');
+                const tabPanes = document.querySelectorAll('.tab-pane');
+
+                tabContainer.addEventListener('click', function(event) {
+                    const clickedButton = event.target.closest('.tab-btn');
+                    
+                    if (!clickedButton || clickedButton.classList.contains('active')) return;
+                    event.preventDefault();
+
+                    // הסר 'active' מכל הכפתורים והחלוניות
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-selected', 'false');
+                    });
+                    tabPanes.forEach(pane => {
+                        pane.classList.remove('active');
+                    });
+
+                    // הוסף 'active' לכפתור ולחלונית שנבחרו
+                    clickedButton.classList.add('active');
+                    clickedButton.setAttribute('aria-selected', 'true');
+                    
+                    const tabId = clickedButton.getAttribute('data-tab');
+                    const activePane = document.getElementById(`tab-${tabId}`);
+                    if (activePane) {
+                        activePane.classList.add('active');
+                    }
+                });
+            }
+
+        })();
+    </script>
+    
+    <!-- סקריפט כפתורי הדר (מ-lesson_header_template.html) -->
+    <script>
+      (function(){
+        const HEADER_SELECTOR = '.site-header .nav, header .nav, .site-header nav, header nav';
+    
+        function makeBar(){
+          const ICON_PRINT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 8H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3zm-4 11H9v-3h6zm1-15H8v3h8z" fill="currentColor"/></svg>';
+          const ICON_SUN   = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V1h0v3zm0 19v-3h0v3zM4 12H1v0h3zm22 0h-3v0h3zM5.64 5.64L3.51 3.51l0 0 2.13 2.13zM20.49 20.49l-2.13-2.13 0 0 2.13 2.13zM18.36 5.64l2.13-2.13 0 0-2.13 2.13zM3.51 20.49l2.13-2.13 0 0-2.13 2.13zM12 7a5 5 0 100 10 5 5 0 000-10z" fill="currentColor"/></svg>';
+          const ICON_MOON  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1021 12.79z" fill="currentColor"/></svg>';
+    
+          const bar = document.createElement('div');
+          bar.className = 'sa-actions';
+    
+          const theme = document.createElement('button');
+          theme.className = 'sa-btn';
+          theme.type = 'button';
+          theme.title = 'מצב יום/לילה';
+          theme.dataset.sun = ICON_SUN;
+          theme.dataset.moon = ICON_MOON;
+          // ID ספציפי להתאמה עם הסקריפט של sample1
+          theme.id = 'theme-toggle-btn'; 
+    
+          const divider = document.createElement('div');
+          divider.className = 'sa-divider';
+    
+          const printBtn = document.createElement('button');
+          printBtn.className = 'sa-btn primary';
+          printBtn.type = 'button';
+          printBtn.title = 'הדפס';
+          printBtn.innerHTML = ICON_PRINT;
+    
+          bar.appendChild(theme);
+          bar.appendChild(divider);
+          bar.appendChild(printBtn);
+    
+          return {bar, theme, printBtn};
+        }
+    
+        function initThemeButton(btn){
+            const rootEl = document.documentElement;
+            
+            function isDark(){ 
+                // בודק גם הגדרה ידנית (dark-mode) וגם הגדרת מערכת (sa-dark)
+                return rootEl.classList.contains('dark-mode') || rootEl.classList.contains('sa-dark');
+            }
+            function icon(){ return isDark() ? btn.dataset.moon : btn.dataset.sun; }
+    
+            btn.addEventListener('click', ()=>{
+                // משתמש במחלקות של sample1 כדי להתאים ל-CSS
+                const currentTheme = isDark() ? 'light' : 'dark'; 
+                applyTheme(currentTheme);
+            });
+            
+            function applyTheme(theme) {
+                try { localStorage.setItem('theme', theme); } catch(e) {}
+                
+                if (theme === 'dark') {
+                    rootEl.classList.remove('light-mode');
+                    rootEl.classList.add('dark-mode');
+                    rootEl.classList.add('sa-dark'); // תאימות גם לסקריפט השני
+                } else {
+                    rootEl.classList.remove('dark-mode');
+                    rootEl.classList.add('light-mode');
+                    rootEl.classList.remove('sa-dark');
+                }
+                btn.innerHTML = icon();
+            }
+
+            let t = 'light';
+            try{ t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }catch(e){}
+            applyTheme(t);
+        }
+    
+        function injectButtons(){
+          let navs = document.querySelectorAll(HEADER_SELECTOR);
+          if(!navs.length){
+            const header = document.querySelector('.site-header') || document.querySelector('header');
+            if(header){
+              let aux = header.querySelector('.nav');
+              if(!aux){
+                aux = document.createElement('div');
+                aux.className = 'nav';
+                header.appendChild(aux);
+              }
+              navs = [aux];
+            }
+          }
+    
+          navs.forEach(nav=>{
+            if(nav.querySelector('.sa-actions')) return;
+            const {bar, theme, printBtn} = makeBar();
+            nav.appendChild(bar);
+            initThemeButton(theme);
+            printBtn.addEventListener('click', ()=> window.print());
+          });
+        }
+    
+        if(document.readyState === 'loading'){
+          document.addEventListener('DOMContentLoaded', injectButtons);
+        }else{
+          injectButtons();
+        }
+      })();
+    </script>
+
+</body>
+</html>
