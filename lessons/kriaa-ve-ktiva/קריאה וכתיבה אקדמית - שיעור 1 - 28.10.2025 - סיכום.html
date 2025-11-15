@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <!-- 
+    ================================================================
+    מטא-תגיות חובה לזיהוי אוטומטי
+    ================================================================
+    -->
+    <meta name="lesson-title" content="שיעור 1 – מבוא לכתיבה אקדמית ועידן ה-AI">
+    <meta name="lesson-date" content="28.10.2025">
+    <meta name="lesson-teacher" content="פרופ' סיון הירש-הפלר">
+    <meta name="lesson-summary" content="השיעור עסק בהגדרת הקורס, מאפייני הכתיבה האקדמית, והכללים לשימוש ב-AI במטלות.">
+    <!-- 
+    ================================================================
+    סוף מטא-תגיות חובה
+    ================================================================
+    -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קריאה וכתיבה אקדמית - שיעור 1 - 28.10.2025 - סיכום</title>
+
+    <!-- קוד הגנה של Firebase (מתוך sec.html) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        // 1. אותו Config בדיוק כמו בדף הכניסה
+        const firebaseConfig = {
+          apiKey: "AIzaSyDqxxf434N0wnn6C6AglEEIaqj5TVtoYLQ",
+          authDomain: "memshalaa.firebaseapp.com",
+          projectId: "memshalaa",
+          storageBucket: "memshalaa.firebasestorage.app",
+          messagingSenderId: "324187090365",
+          appId: "1:324187090365:web:8e4956d0d1370b5aab36d4",
+          measurementId: "G-2QHJF3SSJQ"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // 2. ה"שומר" - בודק אם יש משתמש מחובר
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // משתמש מחובר - הכל בסדר, מציגים את הדף
+                console.log("משתמש מורשה:", user.email);
+                
+                // --- אופציונלי: עדכון UI ---
+                // הקוד הזה יחפש אלמנטים עם ה-ID שכתוב ויעדכן אותם.
+                // אם אין לך אלמנטים כאלה, הוא פשוט ידלג.
+                const userInfo = document.getElementById('userInfo');
+                const loginLink = document.getElementById('loginLink');
+                const logoutButton = document.getElementById('logoutButton');
+
+                if (userInfo) userInfo.innerText = `מחובר כ: ${user.email}`;
+                if (loginLink) loginLink.style.display = 'none';
+                if (logoutButton) logoutButton.style.display = 'block';
+                // -------------------------
+
+                document.body.style.display = 'block'; // מציג את הגוף רק אחרי אימות
+            } else {
+                // אין משתמש מחובר - זרוק אותו לדף הכניסה
+                window.location.href = 'login.html'; 
+            }
+        });
+        
+        // פונקציית התנתקות גלובלית
+        window.logout = function() {
+            signOut(auth).then(() => {
+                window.location.href = 'login.html'; 
+            });
+        }
+    </script>
+    
+    <!-- הסתרת הדף עד שהבדיקה מסתיימת כדי למנוע הבהוב -->
+    <style> 
+        body { display: none; } 
+        /* הסתרת כפתור התנתקות כברירת מחדל */
+        #logoutButton { display: none; } 
+    </style>
+    
+    <!-- שימוש בגופנים וסמלים - מבוסס על sample1.html -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* --- מערכת עיצוב (מבוסס על 'sample1.html') --- */
+        :root {
+            /* ערכי ברירת מחדל (מצב בהיר) */
+            --bg: #f6f8fa; /* רקע דף בהיר */
+            --surface: #ffffff; /* רקע כרטיסייה לבן */
+            --text: #202124;
+            --muted: #5f6368;
+            --primary: #3b82f6; 
+            --primary-ink: #174ea6;
+            --border: #e5e7eb;
+            --highlight: #e8f0fe;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .06);
+            
+            /* מידות רווח */
+            --s1: 8px;
+            --s2: 12px;
+            --s3: 16px;
+            --s4: 24px;
+            --s5: 36px;
+            --content-width: 980px;
+
+            /* צבעים סמנטיים (עבור הדגשות תוכן) */
+            --highlight-yellow-bg: #fff9c4;
+            --highlight-yellow-border: #fdd835;
+            --highlight-blue-bg: #e0f7fa;
+            --highlight-blue-border: #00bcd4;
+            --highlight-green-bg: #e8f5e9;
+            --highlight-green-border: #4caf50;
+            --highlight-red-bg: #ffebee;
+            --highlight-red-border: #f44336;
+            --highlight-orange-bg: #fff3e0;
+            --highlight-orange-border: #ff9800;
+        }
+
+        /* --- מצב לילה (מופעל על ידי JS או הגדרות מערכת) --- */
+        html.sa-dark {
+            filter: invert(1) hue-rotate(180deg);
+            background: #000000;
+        }
+        html.sa-dark img,
+        html.sa-dark video,
+        html.sa-dark canvas,
+        html.sa-dark svg image {
+            filter: invert(1) hue-rotate(180deg);
+        }
+        
+        /* דריסת CSS גלובלית עבור צבעים דינמיים מ-sample1 */
+        /* (מצב כהה יטופל על ידי הסקריפט של lesson_header_template) */
+        body {
+            font-family: "Noto Sans Hebrew", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            font-weight: 400; 
+            line-height: 1.7;
+            text-align: right; 
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* --- טיפוגרפיה --- */
+        
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 0;
+            margin-bottom: var(--s3);
+            font-weight: 600; 
+        }
+        
+        h1 { 
+            font-size: 1.0rem; 
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.4; 
+        }
+        h2 { 
+            font-size: 1.75rem; 
+            text-align: center; 
+            margin-bottom: var(--s5); 
+        }
+        h3 { 
+            font-size: 1.25rem; 
+            margin: 0 0 var(--s2) 0;
+            padding-bottom: var(--s2);
+            border-bottom: 1px solid var(--border);
+            transition: border-color 0.3s;
+        }
+        
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: var(--s4);
+            margin-bottom: var(--s2);
+        }
+        
+        h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: var(--s3);
+            margin-bottom: var(--s1);
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: var(--s3); 
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s, background-color 0.2s;
+        }
+        
+        h1 a {
+            color: var(--text);
+            transition: color 0.3s;
+        }
+        
+        h1 a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        ul, ol {
+            padding-right: var(--s4); 
+        }
+        
+        ul li, ol li {
+            margin-bottom: var(--s2);
+            padding-right: var(--s2);
+        }
+        
+        /* סגנון להערות שוליים */
+        sup {
+            font-size: 0.75em;
+            vertical-align: super;
+            margin-right: 2px;
+            color: var(--primary);
+            font-weight: 600;
+            line-height: 0; 
+        }
+
+        sup a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        sup a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- מבנה וקומפוננטות --- */
+        
+        /* כותרת עליונה (מ-lesson_header_template) */
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+        
+        .site-header .brand h1 {
+            margin: 0;
+            font-size: 1.25rem; /* הגדלה קלה של הפונט מהתבנית */
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* קונטיינר ראשי */
+        .container {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: var(--s5) var(--s4);
+        }
+        
+        /* כפתורי מצב יום/לילה והדפסה (מ-lesson_header_template) */
+        .sa-actions {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+          direction: ltr;
+          flex-wrap: wrap;
+        }
+        .sa-actions .sa-divider {
+          width: 1px;
+          height: 24px;
+          background: #d0d5dd;
+        }
+        .sa-btn {
+          font: inherit;
+          line-height: 1;
+          border: 1px solid #d0d5dd;
+          background: var(--surface);
+          color: var(--text);
+          padding: 10px 12px;
+          border-radius: 12px;
+          cursor: pointer;
+          display: inline-flex;
+          gap: 10px;
+          align-items: center;
+          font-size: 15px;
+        }
+        .sa-btn.primary {
+          background: var(--primary);
+          color: #ffffff;
+          border-color: transparent;
+        }
+        .sa-btn svg {
+          width: 20px;
+          height: 20px;
+          display: block;
+        }
+        .sa-btn .lbl {
+          display: none;
+        }
+        @media (max-width: 640px) {
+          .sa-actions { gap: 8px; }
+          .sa-actions .sa-divider { height: 20px; }
+          .sa-btn { padding: 8px 10px; font-size: 14px; }
+          .sa-btn svg { width: 18px; height: 18px; }
+        }
+
+        /* --- עיצוב כרטיסיות (Tabs) --- */
+        .tab-navigation {
+            display: flex;
+            gap: var(--s1);
+            border-bottom: 2px solid var(--border);
+            margin-bottom: var(--s4);
+            transition: border-color 0.3s;
+            flex-wrap: wrap; 
+        }
+
+        .tab-btn {
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--muted);
+            background: none;
+            border: none;
+            padding: var(--s2) var(--s3);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: color 0.3s, border-color 0.3s;
+            margin-bottom: -2px; 
+            white-space: nowrap; 
+        }
+
+        .tab-btn:hover {
+            color: var(--text);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-pane {
+            display: none; /* מוסתר כברירת מחדל */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-pane.active {
+            display: block; /* מוצג כשהוא פעיל */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* --- כרטיס תוכן פנימי (לרקע, ציון וכו') --- */
+        .page-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: var(--s4);
+            margin-bottom: var(--s4);
+            transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .page-card h3:first-child {
+            margin-top: 0;
+        }
+
+        /* --- סגנון לכרטיס פרטי השיעור (טאב 1) --- */
+        .lesson-details-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .lesson-details-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--s2) 0;
+            border-bottom: 1px dashed var(--border);
+            flex-wrap: wrap;
+        }
+        .lesson-details-list li:last-child {
+            border-bottom: none;
+        }
+        .lesson-details-list strong {
+            color: var(--muted);
+            margin-left: var(--s4);
+            flex-shrink: 0;
+        }
+        .lesson-details-list span {
+            font-weight: 500;
+        }
+
+        /* --- Accordion Styles --- */
+        .accordion details {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px; 
+            margin-bottom: var(--s2);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        
+        .accordion details[open] {
+            box-shadow: var(--shadow);
+        }
+
+        .accordion summary {
+            padding: var(--s3) var(--s4);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none; /* Remove default marker */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .accordion summary::-webkit-details-marker {
+            display: none; /* Hide for Chrome */
+        }
+        
+        .accordion summary::marker {
+             display: none; /* Hide for Firefox */
+        }
+
+        .accordion summary:after {
+            content: '\f078'; /* Font Awesome chevron-down */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: var(--muted);
+            transition: transform 0.2s ease-out;
+            margin-right: auto; /* דוחף את החץ שמאלה (RTL) */
+            padding-right: var(--s2);
+        }
+
+        .accordion details[open] summary:after {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            padding: 0 var(--s4) var(--s4) var(--s4);
+            border-top: 1px solid var(--border);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .accordion-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .accordion-content > *:first-child {
+            margin-top: var(--s3);
+        }
+        
+        /* --- Highlight Styles (New) --- */
+        .example-highlight,
+        .external-highlight,
+        .verification-success,
+        .verification-fail,
+        .personal-impression,
+        .reading-material,
+        .external-addition {
+            padding: var(--s3);
+            border-radius: 8px;
+            margin-top: var(--s3);
+            margin-bottom: var(--s3);
+        }
+        
+        .example-highlight p:last-child,
+        .external-highlight p:last-child,
+        .verification-success p:last-child,
+        .verification-fail p:last-child,
+        .personal-impression p:last-child,
+        .reading-material p:last-child,
+        .external-addition p:last-child {
+            margin-bottom: 0;
+        }
+
+        .example-highlight {
+            background-color: var(--highlight-yellow-bg); 
+            border-right: 4px solid var(--highlight-yellow-border); 
+        }
+        
+        .external-highlight {
+            background-color: var(--highlight-blue-bg); 
+            border-right: 4px solid var(--highlight-blue-border); 
+        }
+        
+        .verification-success {
+            background-color: var(--highlight-green-bg); 
+            border-right: 4px solid var(--highlight-green-border); 
+            color: #1b5e20; /* צבע טקסט ירוק כהה יותר */
+        }
+        
+        .verification-fail {
+            background-color: var(--highlight-red-bg); 
+            border-right: 4px solid var(--highlight-red-border); 
+            color: #b71c1c; /* צבע טקסט אדום כהה יותר */
+        }
+
+        /* סגנונות לטאב 5 - רשמים */
+        .personal-impression {
+            background-color: var(--highlight-blue-bg); 
+            border-right: 4px solid var(--highlight-blue-border); 
+        }
+        .reading-material {
+            background-color: var(--highlight-orange-bg); 
+            border-right: 4px solid var(--highlight-orange-border); 
+        }
+        .external-addition {
+            background-color: var(--highlight-green-bg); 
+            border-right: 4px solid var(--highlight-green-border); 
+        }
+        
+        
+        /* --- רשימת הערות ומונחים (טאב 3) --- */
+        #tab-sources ol {
+            padding-right: 20px;
+        }
+        #tab-sources li {
+            margin-bottom: 8px;
+        }
+        #tab-sources li::marker {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* --- סגנונות להמחשה ויזואלית (דיאגרמות) --- */
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--s2);
+            padding: var(--s3);
+            background-color: var(--bg);
+            border-radius: 8px;
+        }
+        .diagram-item {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            padding: var(--s2) var(--s3);
+            border-radius: 6px;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <header class="site-header" role="banner">
+        <div class="brand">
+            <h1>קריאה וכתיבה אקדמית | שיעור 1: מבוא ועידן ה-AI</h1>
+        </div>
+        <div class="nav">
+            <!-- כפתורי תצוגה והדפסה יוכנסו כאן על ידי סקריפט -->
+        </div>
+    </header>
+
+    <main class="container" role="main">
+        <nav class="tab-navigation" aria-label="ניווט בסיכום השיעור">
+            <button class="tab-btn active" data-tab="overview" role="tab" aria-selected="true" aria-controls="tab-overview">סקירה כללית</button>
+            <button class="tab-btn" data-tab="content" role="tab" aria-selected="false" aria-controls="tab-content">תוכן השיעור</button>
+            <button class="tab-btn" data-tab="qa" role="tab" aria-selected="false" aria-controls="tab-qa">שאלות ודיון</button>
+            <button class="tab-btn" data-tab="sources" role="tab" aria-selected="false" aria-controls="tab-sources">מקורות והערות</button>
+            <button class="tab-btn" data-tab="impressions" role="tab" aria-selected="false" aria-controls="tab-impressions">רשמים נוספים</button>
+        </nav>
+
+        <div class="tab-content">
+
+            <!-- ======================= -->
+            <!-- טאב 1: סקירה כללית -->
+            <!-- ======================= -->
+            <section id="tab-overview" class="tab-pane active" role="tabpanel" aria-labelledby="tab-overview">
+                
+                <article class="page-card" aria-labelledby="details-heading">
+                    <h3 id="details-heading">פרטי השיעור</h3>
+                    <ul class="lesson-details-list">
+                        <li>
+                            <strong>נושא:</strong>
+                            <span>מבוא לכתיבה אקדמית, כללי הקורס ושימוש ב-AI</span>
+                        </li>
+                        <li>
+                            <strong>מרצה:</strong>
+                            <span>פרופ' סיון הירש-הפלר</span>
+                        </li>
+                        <li>
+                            <strong>תאריך:</strong>
+                            <span>28.10.2025</span>
+                        </li>
+                        <li>
+                            <strong>שעה (מוערכת):</strong>
+                            <span>13:49 - 15:15 ⚠️</span>
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="page-card" aria-labelledby="summary-heading">
+                    <h3 id="summary-heading">תקציר ונושאים מרכזיים</h3>
+                    
+                    <h4>תקציר</h4>
+                    <p>שיעור פתיחה זה הציג את מטרות הקורס "קריאה וכתיבה אקדמית", תוך דגש על הבנת הכתיבה האקדמית כ"קוד" או "שפה" ייחודית שיש לפענח. השיעור התמקד בהבדלים בין דעה אישית לטיעון מבוסס מחקר ("אני חושב" מול "המחקר מראה"), הציג את המבנה הבסיסי של טקסט אקדמי, ודן בהרחבה ב"פיל שבחדר" – הכללים, הגבולות והאחריות בשימוש בכלי AI (בינה מלאכותית) במטלות אקדמיות.</p>
+                    
+                    <h4>נושאים מרכזיים שעלו</h4>
+                    <ul>
+                        <li>היכרות עם מטרות הקורס, המרצה (פרופ' סיון הירש-הפלר) והמתרגל (טל פרינץ).</li>
+                        <li>דיון על תפיסות הסטודנטים לגבי הקורס (מבוסס סקר).</li>
+                        <li>הגדרת הכתיבה האקדמית כ"שפה" עם כללים ומבנה שצריך ללמוד.</li>
+                        <li>הכללים לשימוש ב-AI: שקיפות, אחריות ומקוריות.</li>
+                        <li>איסור על הגשת עבודות זהות (גניבה עצמית / פלגיאט).</li>
+                        <li>ההבדל בין דעה (כמו ב"מאמר דעה") לבין טיעון אקדמי מבוסס נתונים.</li>
+                        <li>הצגת שני מודלים למבנה טקסט/עבודת מחקר (מודל 5 השלבים של המרצה ומודל IMRAD).</li>
+                    </ul>
+                </article>
+
+            </section>
+
+            <!-- ======================= -->
+            <!-- טאב 2: תוכן השיעור -->
+            <!-- ======================= -->
+            <section id="tab-content" class="tab-pane" role="tabpanel" aria-labelledby="tab-content">
+                
+                <div class="accordion">
+                    
+                    <details open>
+                        <summary>מבוא: הכתיבה האקדמית כ"שפה זרה"</summary>
+                        <div class="accordion-content">
+                            <p>בתחילת השיעור, המרצה הציגה את הקורס כבסיס חיוני להצלחה בכל הקורסים האחרים בתואר. בסקר שנערך בכיתה (באמצעות Poll Everywhere), המילים הבולטות שעלו היו "מעניין", "חשוב", "קשה", "מאתגר" ו"בסיס", מה שמצביע על כך שהסטודנטים מבינים את חשיבות הקורס אך גם חוששים ממנו.</p>
+                            <p>המרצה הדגישה כי כתיבה אקדמית מרגישה לעיתים כמו "שפה זרה" או "קוד" (מפתח הפענוח). זו אינה כתיבה אינטואיטיבית, אלא כתיבה עם כללים, מוסכמות ומבנה ברור שצריך ללמוד ולתרגל. המטרה המרכזית של הקורס היא "לפענח את הקוד" הזה.</p>
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary>כתיבה בעידן ה-AI: הפיל שבחדר</summary>
+                        <div class="accordion-content">
+                            <p>המרצה התייחסה בהרחבה לסוגיית השימוש בכלי בינה מלאכותית (AI) בכתיבת מטלות. המדיניות בקורס (ובאקדמיה בכלל) אינה לאסור שימוש, אלא להגדיר כללי שימוש ברורים.</p>
+                            <h5>דגשים לשימוש ב-AI במטלות:</h5>
+                            <ul>
+                                <li><strong>שקיפות מלאה:</strong> חובה לציין ולהצהיר מתי וכיצד נעשה שימוש ב-AI.</li>
+                                <li><strong>אחריות הסטודנט:</strong> הסטודנט אחראי באופן מלא לכל התוכן המוגש. אם ה-AI ייצר טעות, מידע שגוי או אפילו המציא מקורות (דבר שקורה), האחריות היא כולה של הסטודנט.</li>
+                                <li><strong>מקוריות:</strong> AI הוא כלי עזר לשיפור, ניסוח, או קבלת רעיונות. הוא לא יכול להחליף את החשיבה המקורית, הניתוח והטיעון של הסטודנט.</li>
+                            </ul>
+                            
+                            <h5>סוגיות אתיות נוספות שעלו:</h5>
+                            <ul>
+                                <li><strong>גניבה עצמית (Self-Plagiarism):</strong> נשאלה שאלה (במצגת) האם מותר להגיש עבודות זהות או דומות מאוד בשני קורסים שונים. התשובה היא <strong>לא</strong>. כל קורס דורש עבודה מקורית עבורו.</li>
+                                <li><strong>שימוש במקורות:</strong> ויקיפדיה אינה נחשבת מקור אקדמי תקף לציטוט, אך היא יכולה לשמש כנקודת פתיחה טובה לאיתור המקורות האקדמיים האמיתיים (שמופיעים בהערות השוליים שלה).</li>
+                            </ul>
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary>המעבר מ"אני חושב ש..." ל"המחקר מראה ש..."</summary>
+                        <div class="accordion-content">
+                            <p>אחד המאפיינים המרכזיים של כתיבה אקדמית הוא המעבר מסובייקטיביות לאובייקטיביות (או לפחות שאיפה לאובייקטיביות). בעוד שבמאמר דעה בעיתון המטרה היא להביע עמדה אישית, במחקר אקדמי המטרה היא להציג טיעון המבוסס על נתונים, עובדות ומחקרים קודמים.</p>
+                            
+                            <div class="example-highlight">
+                                <p><strong>דוגמה 1 (כתיבת דעה):</strong> "המהפכה המשפטית מסכנת קציני צה"ל..."</p>
+                                <p><strong>דוגמה 2 (כתיבה המייחסת דעה):</strong> "לטענת העיתונאי אמנון אברמוביץ', המהפכה המשפטית עלולה לסכן..."</p>
+                                <p><strong>הסבר המרצה:</strong> שתי הדוגמאות מציגות דעה (סובייקטיבית) ואינן כתיבה אקדמית. כתיבה אקדמית הייתה בודקת את הטיעון הזה באמצעות כלים מחקריים, נתונים או ניתוח משפטי של מקרים קודמים.</p>
+                            </div>
+
+                            <div class="example-highlight">
+                                <p><strong>דוגמה לניסוח מעורפל (לא טוב):</strong> "לפי הטיפול קיבלו המטופלים הסבר מקיף, אשר היה משמעותי מאוד להבטחת שיתוף הפעולה מצדם."</p>
+                                <p><strong>הסבר המרצה:</strong> המילים "משמעותי מאוד" הן סובייקטיביות ולא מדידות. הניסוח מסורבל.</p>
+                            </div>
+                            
+                            <div class="verification-success" style="background: var(--highlight-green-bg); border-right: 4px solid var(--highlight-green-border); color: var(--text);">
+                                <p><strong>דוגמה לניסוח בהיר (טוב):</strong> "למטופלים ניתן הסבר מקיף כדי להבטיח את שיתוף הפעולה מצדם."</p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>מאפייני ומבנה הטקסט האקדמי</summary>
+                        <div class="accordion-content">
+                            <p>המרצה הציגה שני מודלים המשמשים כמבנה של טקסט אקדמי (כמו מאמר או עבודת מחקר):</p>
+                            
+                            <figure>
+                                <figcaption style="font-weight: 600; margin-bottom: var(--s2);">מודל 1: חמשת שלבי הטקסט (לפי המרצה)</figcaption>
+                                <div class="diagram-container">
+                                    <div class="diagram-item"><strong>שלב 1:</strong> המבוא והמתודולוגיה</div>
+                                    <div class="diagram-item"><strong>שלב 2:</strong> רקע וסקירת ספרות</div>
+                                    <div class="diagram-item"><strong>שלב 3:</strong> המקורות (ניתוח)</div>
+                                    <div class="diagram-item"><strong>שלב 4:</strong> הטיעון המרכזי</div>
+                                    <div class="diagram-item"><strong>שלב 5:</strong> המבנה והמסקנות</div>
+                                </div>
+                            </figure>
+                            
+                            <figure style="margin-top: var(--s4);">
+                                <figcaption style="font-weight: 600; margin-bottom: var(--s2);">מודל 2: מודל מחקרי סטנדרטי (IMRAD)</figcaption>
+                                <div class="diagram-container">
+                                    <div class="diagram-item"><strong>שלב 1:</strong> מבוא (Introduction)</div>
+                                    <div class="diagram-item"><strong>שלב 2:</strong> סקירת ספרות (Literature Review)</div>
+                                    <div class="diagram-item"><strong>שלב 3:</strong> מתודולוגיה (Methodology)</div>
+                                    <div class="diagram-item"><strong>שלב 4:</strong> ממצאים (Findings)</div>
+                                    <div class="diagram-item"><strong>שלב 5:</strong> דיון ומסקנות (Discussion & Conclusion)</div>
+                                </div>
+                            </figure>
+                        </div>
+                    </details>
+                    
+                </div>
+            </section>
+
+            <!-- ======================= -->
+            <!-- טאב 3: שאלות ודיון -->
+            <!-- ======================= -->
+            <section id="tab-qa" class="tab-pane" role="tabpanel" aria-labelledby="tab-qa">
+                
+                <article class="page-card" aria-labelledby="qa-lecturer-heading">
+                    <h3 id="qa-lecturer-heading">שאלות המרצה (מתוך סקר Poll Everywhere)</h3>
+                    
+                    <h5 style="margin-top: var(--s3);">שאלה 1: "מה אתם חושבים על הקורס?" (סקר פתוח)</h5>
+                    <p><strong>תשובות הסטודנטים (ענן מילים):</strong> התשובות הבולטות ביותר היו "מעניין", "חשוב", "קשה", "מאתגר", "שימושי" ו"בסיס".</p>
+                    <p><strong>מסקנת המרצה:</strong> התשובות משקפות את ההבנה שמדובר בקורס יסוד חיוני, אך גם את החשש מהקושי או ה"שעמום" שעלולים להיות כרוכים בו. המרצה הדגישה שהקורס יספק כלים פרקטיים לכל התואר.</p>
+                </article>
+
+                <article class="page-card" aria-labelledby="qa-student-heading">
+                    <h3 id="qa-student-heading">שאלות משתתפים (מתוך שקף המטלות)</h3>
+                    
+                    <h5>שאלה 1: האם מותר להעזר ב-AI בכתיבת מטלות?</h5>
+                    <div class="verification-success">
+                        <p><strong>תשובת המרצה (אימות):</strong> כן, מותר להשתמש ב-AI ככלי עזר. עם זאת, השימוש מחייב <strong>שקיפות</strong> (חובה להצהיר על השימוש), <strong>אחריות</strong> (הסטודנט אחראי ל-100% מהתוכן, כולל טעויות של ה-AI) ו<strong>מקוריות</strong> (ה-AI לא יכול להחליף את החשיבה המקורית של הסטודנט).</p>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px dashed var(--border); margin: var(--s4) 0;">
+
+                    <h5>שאלה 2: האם מותר להגיש עבודות זהות או דומות מאוד בשני קורסים שונים?</h5>
+                    <div class="verification-fail">
+                         <p><strong>תשובת המרצה (הפרכה):</strong> לא. הגשת עבודה זהה או דומה מאוד, אפילו אם היא שלך, בשני קורסים שונים נחשבת "גניבה עצמית" (Self-Plagiarism) ומהווה עבירה אקדמית. כל מטלה בכל קורס דורשת עבודה מקורית.</p>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px dashed var(--border); margin: var(--s4) 0;">
+
+                    <h5>שאלה 3: האם מותר להשתמש בויקיפדיה כמקור?</h5>
+                    <p><strong>תשובת המרצה (סיכום):</strong> ויקיפדיה אינה נחשבת מקור אקדמי בר-ציטוט. עם זאת, היא כלי מצוין כנקודת פתיחה. מומלץ לקרוא את הערך בויקיפדיה כדי לקבל הבנה כללית, ולאחר מכן להשתמש ברשימת המקורות (הפניות ומקורות) שבתחתית הערך כדי להגיע למאמרים האקדמיים המקוריים והאמיתיים, אותם כן ניתן לצטט.</p>
+                    
+                </article>
+                
+            </section>
+
+            <!-- ======================= -->
+            <!-- טאב 4: מקורות והערות -->
+            <!-- ======================= -->
+            <section id="tab-sources" class="tab-pane" role="tabpanel" aria-labelledby="tab-sources">
+                
+                <article class="page-card" aria-labelledby="external-sources-heading">
+                    <h3 id="external-sources-heading">מקורות חיצוניים</h3>
+                    <p>לא נעשה שימוש במקורות חיצוניים להכנת סיכום זה.</p>
+                </article>
+                
+                <article class="page-card" aria-labelledby="terms-heading">
+                    <h3 id="terms-heading">הערות ומונחים</h3>
+                    <p><i>(לא זוהו מונחים ספציפיים באנגלית שנדרשו להערת שוליים בשיעור זה.)</i></p>
+                </article>
+
+            </section>
+
+            <!-- ======================= -->
+            <!-- טאב 5: רשמים נוספים -->
+            <!-- ======================= -->
+            <section id="tab-impressions" class="tab-pane" role="tabpanel" aria-labelledby="tab-impressions">
+                
+                <article class="page-card" aria-labelledby="impressions-heading">
+                    <h3 id="impressions-heading">רשמים אישיים</h3>
+                    <p><i>(טאב זה נותר ריק בכוונה. כאן תוכל/י להוסיף את הרשמים האישיים שלך מהשיעור, ניתוחים נוספים, או קישורים שברצונך לשמור.)</i></p>
+                    
+                    <!-- 
+                    דוגמאות לשימוש עתידי (ניתן לבטל את ההערה ולהוסיף תוכן):
+                    
+                    <div class="personal-impression">
+                        <h5>רשם אישי / מחשבה</h5>
+                        <p>הדיון על AI היה חשוב. צריך לזכור לבדוק תמיד את המקורות שהוא ממציא.</p>
+                    </div>
+                    
+                    <div class="reading-material">
+                        <h5>חומר קריאה קשור</h5>
+                        <p>לבדוק את המאמר של המרצה על קיצוניות פוליטית שהיא הזכירה בהתחלה.</p>
+                    </div>
+                    -->
+                </article>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- סקריפט אחיד: מ-lesson_header_template.html -->
+    <script>
+    (function(){
+      const HEADER_SELECTOR = '.site-header .nav, header .nav, .site-header nav, header nav';
+  
+      function makeBar(){
+        const ICON_PRINT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 8H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3zm-4 11H9v-3h6zm1-15H8v3h8z" fill="currentColor"/></svg>';
+        const ICON_SUN   = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V1h0v3zm0 19v-3h0v3zM4 12H1v0h3zm22 0h-3v0h3zM5.64 5.64L3.51 3.51l0 0 2.13 2.13zM20.49 20.49l-2.13-2.13 0 0 2.13 2.13zM18.36 5.64l2.13-2.13 0 0-2.13 2.13zM3.51 20.49l2.13-2.13 0 0-2.13 2.13zM12 7a5 5 0 100 10 5 5 0 000-10z" fill="currentColor"/></svg>';
+        const ICON_MOON  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1021 12.79z" fill="currentColor"/></svg>';
+  
+        const bar = document.createElement('div');
+        bar.className = 'sa-actions';
+  
+        const theme = document.createElement('button');
+        theme.className = 'sa-btn';
+        theme.type = 'button';
+        theme.title = 'מצב יום/לילה';
+        theme.dataset.sun = ICON_SUN;
+        theme.dataset.moon = ICON_MOON;
+  
+        const divider = document.createElement('div');
+        divider.className = 'sa-divider';
+  
+        const printBtn = document.createElement('button');
+        printBtn.className = 'sa-btn primary';
+        printBtn.type = 'button';
+        printBtn.title = 'הדפס';
+        printBtn.innerHTML = ICON_PRINT;
+  
+        bar.appendChild(theme);
+        bar.appendChild(divider);
+        bar.appendChild(printBtn);
+  
+        return {bar, theme, printBtn};
+      }
+  
+      function initThemeButton(btn){
+        function isDark(){ return document.documentElement.classList.contains('sa-dark'); }
+        function icon(){ return isDark() ? btn.dataset.moon : btn.dataset.sun; }
+  
+        btn.addEventListener('click', ()=>{
+          document.documentElement.classList.toggle('sa-dark');
+          btn.innerHTML = icon();
+          try{ localStorage.setItem('sa-theme', isDark() ? 'dark' : 'light'); }catch(e){}
+        });
+  
+        let t = 'light';
+        try{ t = localStorage.getItem('sa-theme') || t; }catch(e){}
+        document.documentElement.classList.toggle('sa-dark', t === 'dark');
+        btn.innerHTML = icon();
+      }
+  
+      function injectButtons(){
+        let navs = document.querySelectorAll(HEADER_SELECTOR);
+        if(!navs.length){
+          const header = document.querySelector('.site-header') || document.querySelector('header');
+          if(header){
+            let aux = header.querySelector('.nav');
+            if(!aux){
+              aux = document.createElement('div');
+              aux.className = 'nav';
+              header.appendChild(aux);
+            }
+            navs = [aux];
+          }
+        }
+  
+        navs.forEach(nav=>{
+          if(nav.querySelector('.sa-actions')) return;
+          const {bar, theme, printBtn} = makeBar();
+          nav.appendChild(bar);
+          initThemeButton(theme);
+          printBtn.addEventListener('click', ()=> window.print());
+        });
+      }
+  
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', injectButtons);
+      }else{
+        injectButtons();
+      }
+    })();
+    </script>
+
+    <!-- סקריפט ניווט טאבים (מ-sample1.html) -->
+    <script>
+        (function() {
+            'use strict';
+            
+            // --- בקר ניווט כרטיסיות (Tabs) ---
+            const tabContainer = document.querySelector('.tab-navigation');
+            
+            if (tabContainer) {
+                const tabButtons = tabContainer.querySelectorAll('.tab-btn');
+                const tabPanes = document.querySelectorAll('.tab-pane');
+
+                tabContainer.addEventListener('click', function(event) {
+                    const clickedButton = event.target.closest('.tab-btn');
+                    
+                    if (!clickedButton || clickedButton.classList.contains('active')) return;
+                    event.preventDefault();
+
+                    // הסר 'active' מכל הכפתורים והחלוניות
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-selected', 'false');
+                    });
+                    tabPanes.forEach(pane => {
+                        pane.classList.remove('active');
+                    });
+
+                    // הוסף 'active' לכפתור ולחלונית שנבחרו
+                    clickedButton.classList.add('active');
+                    clickedButton.setAttribute('aria-selected', 'true');
+                    
+                    const tabId = clickedButton.getAttribute('data-tab');
+                    const activePane = document.getElementById(`tab-${tabId}`);
+                    if (activePane) {
+                        activePane.classList.add('active');
+                    }
+                });
+            }
+
+        })();
+    </script>
+
+</body>
+</html>
