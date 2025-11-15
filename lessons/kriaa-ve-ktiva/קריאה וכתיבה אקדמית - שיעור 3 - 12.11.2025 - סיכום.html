@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Meta Tags ייעודיים לשיעור -->
+    <meta name="lesson-title" content="שיעור 3 – מבנה הפסקה">
+    <meta name="lesson-date" content="12.11.2025">
+    <meta name="lesson-teacher" content="פרופ' סיון הירש-הפלר">
+    <meta name="lesson-summary" content="השיעור עסק בהגדרה, במבנה ובעקרונות הכתיבה של פסקה אקדמית.">
+
+    <title>קריאה וכתיבה אקדמית - שיעור 3 - 12.11.2025 - סיכום</title>
+    
+    <!-- תלויות חיצוניות (גופנים ואייקונים) כפי שמופיע בקובץ התבנית -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* --- מערכת עיצוב (מתוך קובץ התבנית) --- */
+        :root {
+            /* ערכי ברירת מחדל (מצב בהיר) */
+            --bg: #f6f8fa; /* רקע דף בהיר */
+            --surface: #ffffff; /* רקע כרטיסייה לבן */
+            --text: #202124;
+            --muted: #5f6368;
+            --primary: #3b82f6; 
+            --primary-ink: #174ea6;
+            --border: #e5e7eb;
+            --highlight: #e8f0fe;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .06);
+            --header-bg: rgba(255, 255, 255, .8);
+            
+            --s1: 8px;
+            --s2: 12px;
+            --s3: 16px;
+            --s4: 24px;
+            --s5: 36px;
+            --content-width: 980px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #333333;
+                --surface: #444444;
+                --text: #eeeeee;
+                --muted: #bbbbbb;
+                --primary: #4b9bff;
+                --border: #555555;
+                --highlight: #2a3a52;
+                --shadow: 0 0 0 1px var(--border);
+                --header-bg: rgba(51, 51, 51, .8);
+            }
+        }
+        
+        :root.light-mode {
+            --bg: #f6f8fa;
+            --surface: #ffffff;
+            --text: #202124;
+            --muted: #5f6368;
+            --primary: #3b82f6; 
+            --border: #e5e7eb;
+            --highlight: #e8f0fe;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .06);
+            --header-bg: rgba(255, 255, 255, .8);
+        }
+        
+        :root.dark-mode {
+             --bg: #333333;
+            --surface: #444444;
+            --text: #eeeeee;
+            --muted: #bbbbbb;
+            --primary: #4b9bff;
+            --border: #555555;
+            --highlight: #2a3a52;
+            --shadow: 0 0 0 1px var(--border);
+            --header-bg: rgba(51, 51, 51, .8);
+        }
+
+        /* --- איפוס בסיסי ועיצוב גלובלי --- */
+        * {
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Noto Sans Hebrew", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            font-weight: 400; 
+            line-height: 1.7;
+            text-align: right;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* --- טיפוגרפיה --- */
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 0;
+            margin-bottom: var(--s3);
+            font-weight: 600; 
+        }
+        
+        h1 { 
+            font-size: 1.0rem; 
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.4; 
+        }
+        h2 { 
+            font-size: 1.75rem; 
+            text-align: right; /* שונה ממורכז בתבנית */
+            margin-bottom: var(--s4); 
+        }
+        h3 { 
+            font-size: 1.25rem; 
+            margin: 0 0 var(--s2) 0;
+            padding-bottom: var(--s2);
+            border-bottom: 1px solid var(--border);
+            transition: border-color 0.3s;
+        }
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: var(--s4);
+            margin-bottom: var(--s2);
+        }
+        h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: var(--s3);
+            margin-bottom: var(--s1);
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: var(--s3);
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s, background-color 0.2s;
+        }
+        
+        h1 a {
+            color: var(--text);
+            transition: color 0.3s;
+        }
+        
+        h1 a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            padding-right: var(--s4);
+        }
+        
+        ul li, ol li {
+            margin-bottom: var(--s2);
+            padding-right: var(--s2);
+        }
+
+        /* --- מבנה וקומפוננטות --- */
+        
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: var(--s3) var(--s4);
+        }
+
+        .brand {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            text-align: right; 
+        }
+
+        .brand .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            transition: background-color 0.3s;
+            flex-shrink: 0;
+        }
+
+        .container {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: var(--s5) var(--s4);
+        }
+        
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px; 
+            height: 28px; 
+        }
+
+        #theme-toggle {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px; 
+            width: 20px; 
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        #theme-toggle:checked + .slider {
+            background-color: var(--primary);
+        }
+
+        #theme-toggle:checked + .slider:before {
+            transform: translateX(22px); 
+        }
+        
+        :root.dark-mode .slider,
+        @media (prefers-color-scheme: dark) {
+            .slider {
+                background-color: #555;
+            }
+        }
+
+        /* --- עיצוב כרטיסיות (Tabs) --- */
+        .tab-navigation {
+            display: flex;
+            gap: var(--s1);
+            border-bottom: 2px solid var(--border);
+            margin-bottom: var(--s4);
+            transition: border-color 0.3s;
+            flex-wrap: wrap; /* נוסף גלישה למסכים קטנים */
+        }
+
+        .tab-btn {
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--muted);
+            background: none;
+            border: none;
+            padding: var(--s2) var(--s3);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: color 0.3s, border-color 0.3s;
+            margin-bottom: -2px;
+        }
+
+        .tab-btn:hover {
+            color: var(--text);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-pane {
+            display: none; /* מוסתר כברירת מחדל */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-pane.active {
+            display: block; /* מוצג כשהוא פעיל */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* --- כרטיס תוכן פנימי (לרקע, ציון וכו') --- */
+        .page-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: var(--s4);
+            margin-bottom: var(--s4);
+            transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        figure {
+            margin: var(--s3) 0;
+            padding: 0;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--s2);
+        }
+        
+        figcaption {
+            font-size: 0.9rem;
+            color: var(--muted);
+            text-align: center;
+            margin-top: var(--s1);
+        }
+        
+        figure svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- סגנונות שנוספו עבור דרישות הפרומפט --- */
+
+        /* 1. אקורדיון */
+        .accordion details {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: var(--s2);
+            background: var(--surface);
+            transition: background-color 0.3s;
+        }
+        .accordion summary {
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: var(--s3);
+            cursor: pointer;
+            list-style: none; /* הסרת סמן ברירת מחדל */
+            position: relative;
+            padding-left: var(--s5); /* מקום לסמל + */
+        }
+        .accordion summary::-webkit-details-marker {
+            display: none; /* הסרת סמן בכרום */
+        }
+        .accordion summary::before { /* סמן מותאם אישית */
+            content: '+';
+            font-family: monospace;
+            font-weight: bold;
+            position: absolute;
+            left: var(--s3);
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+        .accordion details[open] summary {
+            border-bottom: 1px solid var(--border);
+        }
+        .accordion details[open] summary::before {
+            content: '−';
+        }
+        .accordion-content {
+            padding: var(--s4);
+            padding-top: var(--s3);
+        }
+        .accordion-content p, .accordion-content ul, .accordion-content ol {
+            margin-bottom: var(--s3);
+        }
+        .accordion-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* 2. הדגשות תוכן */
+        .example-highlight {
+            background-color: #fffde7; /* צהוב בהיר */
+            padding: var(--s3);
+            border-radius: 8px;
+            border: 1px solid #fff59d;
+            margin: var(--s3) 0;
+        }
+        :root.dark-mode .example-highlight {
+            background-color: #4a4632;
+            border-color: #796f4e;
+        }
+        
+        .external-highlight {
+            background-color: #e0f7fa; /* תכלת בהיר */
+            padding: var(--s3);
+            border-radius: 8px;
+            border: 1px solid #b2ebf2;
+            margin: var(--s3) 0;
+        }
+        :root.dark-mode .external-highlight {
+            background-color: #324a4f;
+            border-color: #4e7679;
+        }
+
+        /* 3. כרטיסיית מטלה */
+        #assignment-tab {
+            color: #c53030; /* טקסט אדום כהה */
+            font-weight: 700;
+        }
+        :root.dark-mode #assignment-tab {
+            color: #f5c4c4; /* טקסט אדום בהיר */
+        }
+        @keyframes pulse { 
+            0%, 100% { opacity: 1; transform: scale(1); } 
+            50% { opacity: .25; transform: scale(1.1); } 
+        }
+        #assignment-tab .pulse {
+            display: inline-block;
+            animation: pulse 1.2s infinite;
+            color: #e53e3e; /* אדום בוהק לסימן קריאה */
+        }
+        :root.dark-mode #assignment-tab .pulse {
+            color: #fc8181;
+        }
+        #assignment-card {
+            background-color: #fde6e6; /* רקע אדום בהיר */
+            border-color: #f0b6b6;
+        }
+        :root.dark-mode #assignment-card {
+            background-color: #5a3030; /* רקע אדום כהה */
+            border-color: #8c4e4e;
+        }
+        #assignment-card h2 {
+            color: #c53030;
+        }
+         :root.dark-mode #assignment-card h2 {
+            color: #f5c4c4;
+         }
+        .placeholder-warning {
+            color: #dd6b20; /* כתום-חום */
+            font-weight: 500;
+        }
+        :root.dark-mode .placeholder-warning {
+            color: #f6ad55;
+        }
+        
+        /* 4. שאלות ותשובות */
+        .qa-section { 
+            margin-bottom: var(--s4); 
+        }
+        .qa-item {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: var(--s3);
+            background: var(--surface);
+            overflow: hidden; /* כדי שהרקע יתפוס את הפינות */
+        }
+        .qa-question {
+            font-weight: 600;
+            padding: var(--s3);
+            background-color: var(--highlight);
+            border-bottom: 1px solid var(--border);
+        }
+        .qa-answer {
+            padding: var(--s3);
+        }
+        .qa-answer .status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: var(--s2);
+            border: 1px solid var(--border);
+        }
+        /* סטטוס הבהרה (נוסף) */
+        .status-clarification {
+            background-color: var(--highlight); 
+            color: var(--primary-ink);
+            border-color: var(--primary);
+        }
+        :root.dark-mode .status-clarification {
+            background-color: #2a3a52; 
+            color: #a3c7ff; 
+            border-color: #4b9bff;
+        }
+
+        /* 5. SVG Styles */
+        .svg-illustration {
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+        }
+        .svg-illustration .svg-text {
+            font-family: "Noto Sans Hebrew", sans-serif;
+            font-weight: 500;
+            fill: var(--text);
+        }
+        .svg-illustration .svg-label {
+             font-size: 14px;
+             fill: var(--muted);
+        }
+        .svg-illustration .svg-arrow {
+            fill: var(--primary);
+        }
+        .svg-illustration .svg-chaos-line {
+            stroke: var(--text);
+            stroke-width: 1.5;
+            fill: none;
+        }
+        .svg-illustration .svg-block-fill {
+            fill: var(--surface);
+            stroke: var(--text);
+            stroke-width: 2;
+        }
+        .svg-illustration .svg-block-highlight {
+            fill: var(--highlight);
+            stroke: var(--primary);
+            stroke-width: 2;
+        }
+        
+        .svg-hamburger svg {
+            max-width: 50%; /* הקטנה ב-50% */
+            margin: 0 auto; /* מרכוז */
+        }
+        
+        .svg-hamburger .svg-bun {
+            fill: #D2A679;
+        }
+        .svg-hamburger .svg-patty {
+            fill: #8B4513;
+        }
+        .svg-hamburger .svg-garnish {
+            fill: #228B22;
+        }
+        :root.dark-mode .svg-hamburger .svg-bun {
+            fill: #9c7b5a;
+        }
+        :root.dark-mode .svg-hamburger .svg-patty {
+            fill: #61310d;
+        }
+        :root.dark-mode .svg-hamburger .svg-garnish {
+            fill: #3aa03a;
+        }
+        .svg-hamburger .svg-text {
+            font-size: 16px;
+            font-weight: 600;
+            fill: var(--text);
+        }
+        .svg-hamburger .svg-line {
+            stroke: var(--muted);
+            stroke-width: 1.5;
+            stroke-dasharray: 4 2;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="nav">
+            <div class="brand">
+                <span class="dot" aria-hidden="true"></span>
+                <h1>קריאה וכתיבה אקדמית | שיעור 3 – מבנה הפסקה</h1>
+            </div>
+            
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" class="theme-toggle-input" />
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <!-- ניווט כרטיסיות -->
+        <nav class="tab-navigation">
+            <button class="tab-btn active" data-tab="overview">סקירה</button>
+            <button class="tab-btn" data-tab="content">תוכן מרכזי</button>
+            <button class="tab-btn" data-tab="qa">שאלות ודיון</button>
+            <button class="tab-btn" data-tab="sources">מקורות והערות</button>
+            <button class="tab-btn" data-tab="impressions">רשמים נוספים</button>
+            <!-- כרטיסיית מטלה מופיעה כי זוהתה מטלה -->
+            <button class="tab-btn" data-tab="assignment" id="assignment-tab">מטלה <span aria-hidden="true" class="pulse">!</span></button>
+        </nav>
+
+        <!-- תוכן הכרטיסיות -->
+        <div class="tab-content">
+
+            <!-- כרטיסיה 1: סקירה -->
+            <section id="overview" class="tab-pane active">
+                
+                <article class="page-card">
+                    <h3>פרטי השיעור</h3>
+                    <ul class="grade-list" style="font-size: 1rem; list-style-type: none; padding-right: 0;">
+                         <li>
+                            <span>נושא השיעור:</span>
+                            <span class="percentage" style="color: var(--text); font-weight: 400;">מבנה הפסקה</span>
+                        </li>
+                        <li>
+                            <span>קורס:</span>
+                            <span class="percentage" style="color: var(--text); font-weight: 400;">מיומנויות כתיבה וקריאה אקדמית</span>
+                        </li>
+                        <li>
+                            <span>תאריך:</span>
+                            <span class="percentage" style="color: var(--text); font-weight: 400;">12.11.2025</span>
+                        </li>
+                        <li>
+                            <span>מרצה:</span>
+                            <span class="percentage" style="color: var(--text); font-weight: 400;">פרופ' סיון הירש-הפלר</span>
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="page-card">
+                    <h3>תקציר ונושאים מרכזיים</h3>
+                    <p>השיעור התמקד באחד מאבני הבניין החשובות ביותר בכתיבה אקדמית: הפסקה. התחלנו בהגדרת הפסקה כרצף משפטים המפתח רעיון מרכזי אחד, וסקרנו את החשיבות של חלוקה נכונה לפסקאות הן עבור הקורא (יצירת סדר ונקודות מנוחה) והן עבור הכותב (ארגון המחשבה).</p>
+                    <p>בהמשך, פירקנו את המבנה האופטימלי של פסקה באמצעות "מודל ההמבורגר", הכולל משפט מפתח (נושא), משפטים תומכים (גוף הפסקה) ומשפט מסכם, וניתנו דוגמאות לכל רכיב. כמו כן, דנו בסוגים שונים של פסקאות (פתיחה, גוף וסיום) ובטכניקות לקישוריות נכונה בין הפסקאות ליצירת טקסט רציף והגיוני.</p>
+                    
+                    <h4>נושאים מרכזיים שעלו:</h4>
+                    <ul>
+                        <li>הגדרת הפסקה וכללי היסוד (רעיון מרכזי אחד, ללא כותרת).</li>
+                        <li>חשיבות החלוקה לפסקאות (עבור הקורא והכותב).</li>
+                        <li>מבנה הפסקה היעיל ("מודל ההמבורגר"): משפט מפתח, גוף וסיום.</li>
+                        <li>ניתוח דוגמאות לפסקאות פתיחה, גוף וסיום.</li>
+                        <li>סוגי פסקאות גוף (מדגימה, מפרטת, הסבר, הנמקה, סיכום).</li>
+                        <li>אורך מומלץ לפסקה (בין 3 ל-15 משפטים בממוצע).</li>
+                        <li>עקרונות הקישוריות (בין משפטים בתוך הפסקה ובין פסקאות).</li>
+                    </ul>
+                </article>
+
+            </section>
+
+            <!-- כרטיסיה 2: תוכן מרכזי -->
+            <section id="content" class="tab-pane">
+                <article class="page-card">
+                    <h3>נושאי השיעור (לפי סדר כרונולוגי)</h3>
+                    <div class="accordion">
+                        
+                        <details>
+                            <summary>הקדמה: ממבוך ליחידות הגיון</summary>
+                            <div class="accordion-content">
+                                <p>השיעור נפתח במטאפורה ויזואלית של הפיכת כאוס (קשקוש סבוך) לסדר (מבנה של קוביות). הרעיון המרכזי הוא שהסוד לכתיבה בהירה טמון ביכולת שלנו לארגן את המחשבות המורכבות שלנו ליחידות קטנות, הגיוניות ומסודרות – והיחידה הבסיסית הזו היא הפסקה.</p>
+                                <figure>
+                                    <svg viewBox="0 0 400 200" class="svg-illustration" aria-label="תרשים המציג כאוס של קווים הופך למבנה מסודר של קוביות">
+                                        <desc>איור המדגים הפיכת מחשבות מבולגנות (קשקוש) למבנה לוגי ומסודר (פירמידת קוביות).</desc>
+                                        <!-- Chaos -->
+                                        <g transform="translate(80, 100)">
+                                            <path class="svg-chaos-line" d="M-50,0 Q-40,-30 -30,0 Q-20,30 -10,0 Q0,-30 10,0 Q20,30 30,0 Q40,-30 50,0" />
+                                            <path class="svg-chaos-line" d="M0,-50 Q30,-40 0,-30 Q-30,-20 0,-10 Q30,0 0,10 Q-30,20 0,30 Q30,40 0,50" />
+                                            <path class="svg-chaos-line" d="M-40,-40 Q0,0 40,40 M-40,40 Q0,0 40,-40" />
+                                            <path class="svg-chaos-line" d="M-30,-20 Q-10,30 10,-20 Q30,30 50,-20" />
+                                            <circle cx="0" cy="0" r="55" stroke="var(--text)" stroke-width="1" fill="none" opacity="0.5" />
+                                        </g>
+                                        <text x="80" y="175" text-anchor="middle" class="svg-text svg-label">מבוך של מילים</text>
+                                        
+                                        <!-- Arrow -->
+                                        <line x1="150" y1="100" x2="220" y2="100" stroke="var(--primary)" stroke-width="3" class="svg-arrow" />
+                                        <polygon points="215,95 230,100 215,105" class="svg-arrow" />
+                                        
+                                        <!-- Order -->
+                                        <g transform="translate(300, 140)">
+                                            <rect x="-45" y="0" width="30" height="20" class="svg-block-fill" />
+                                            <rect x="-15" y="0" width="30" height="20" class="svg-block-fill" />
+                                            <rect x="15" y="0" width="30" height="20" class="svg-block-fill" />
+                                            <rect x="-30" y="-20" width="30" height="20" class="svg-block-fill" />
+                                            <rect x="0" y="-20" width="30" height="20" class="svg-block-highlight" />
+                                            <rect x="-15" y="-40" width="30" height="20" class="svg-block-fill" />
+                                        </g>
+                                        <text x="300" y="175" text-anchor="middle" class="svg-text svg-label">מבנה הגיוני</text>
+                                    </svg>
+                                    <figcaption>איור מהמצגת (המחשה): הפיכת "מבוך של מילים" למבנה מאורגן.</figcaption>
+                                </figure>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>מהי פסקה? הגדרה ועקרונות</summary>
+                            <div class="accordion-content">
+                                <p>פסקה אקדמית הוגדרה כאוסף של מספר משפטים (לא משפט בודד) העוסקים בפיתוח של <strong>רעיון מרכזי אחד ומצומצם</strong>.</p>
+                                <h4>עקרונות יסוד:</h4>
+                                <ul>
+                                    <li><strong>רעיון מרכזי אחד:</strong> כל משפט בפסקה חייב לתרום לפיתוח הנושא המרכזי שלה. משפט שאינו תורם נחשב ל"רעש" ומפריע לרצף הקריאה.</li>
+                                    <li><strong>ללא כותרת:</strong> לפסקה אין כותרת משלה; היא מהווה "חרוז בשרשרת" של הטקסט כולו.</li>
+                                    <li><strong>הפרדה ויזואלית:</strong> המעבר לפסקה חדשה (בין אם על ידי שורת רווח או הזחה<sup>1</sup>) מסמן לקורא על התחלה של עניין חדש או תת-נושא חדש.</li>
+                                    <li><strong>סיוע לכותב:</strong> החלוקה לפסקאות מסייעת גם לכותב לארגן את הטיעונים שלו בצורה לוגית ולוודא שכל רעיון מקבל פיתוח הולם.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        
+                        <details open>
+                            <summary>מבנה הפסקה היעיל: "מודל ההמבורגר"</summary>
+                            <div class="accordion-content">
+                                <p>הוצג מודל ויזואלי (בצורת המבורגר) המדגים את המבנה האידיאלי של פסקת גוף:</p>
+                                <figure class="svg-hamburger">
+                                    <svg viewBox="0 0 300 220" aria-label="תרשים מבנה פסקה בצורת המבורגר">
+                                        <desc>איור המבורגר המחולק לשלושה חלקים: לחמניה עליונה (משפט מפתח), מילוי (משפטים תומכים), ולחמניה תחתונה (משפט מסכם).</desc>
+                                        
+                                        <!-- Top Bun -->
+                                        <g>
+                                            <path class="svg-bun" d="M50,100 C50,60 100,50 150,50 C200,50 250,60 250,100 Z" />
+                                            <text x="150" y="80" text-anchor="middle" class="svg-text">משפט מפתח (נושא)</text>
+                                        </g>
+                                        
+                                        <!-- Garnish -->
+                                        <g>
+                                            <rect class="svg-garnish" x="50" y="100" width="200" height="10" rx="5" />
+                                            <rect class="svg-patty" x="45" y="110" width="210" height="30" rx="8" />
+                                            <text x="150" y="130" text-anchor="middle" class="svg-text" fill="#FFF">גוף הפסקה (משפטים תומכים)</text>
+                                        </g>
+                                        
+                                        <!-- Bottom Bun -->
+                                        <g>
+                                            <path class="svg-bun" d="M50,140 H250 C250,165 200,170 150,170 C100,170 50,165 50,140 Z" />
+                                            <text x="150" y="160" text-anchor="middle" class="svg-text">משפט מסכם</text>
+                                        </g>
+                                        
+                                        <!-- Labels -->
+                                        <text x="150" y="20" text-anchor="middle" class="svg-text" style="font-size: 18px; font-weight: 700;">מבנה הפסקה</text>
+                                        <line class="svg-line" x1="150" y1="25" x2="150" y2="45" />
+                                        <line class="svg-line" x1="150" y1="175" x2="150" y2="200" />
+                                        <text x="150" y="215" text-anchor="middle" class="svg-text svg-label">("מודל ההמבורגר")</text>
+
+                                    </svg>
+                                    <figcaption>איור "מודל ההמבורגר" מתוך מצגת השיעור.</figcaption>
+                                </figure>
+                                <ul>
+                                    <li><strong>הלחמנייה העליונה (משפט מפתח / נושא):</strong> זהו המשפט הראשון בפסקה (לרוב). תפקידו להציג את הרעיון המרכזי של הפסקה. הוא "מבטיח" לקורא על מה הפסקה הולכת לדבר.</li>
+                                    <li><strong>המילוי (גוף הפסקה / משפטים תומכים):</strong> אלו המשפטים הבאים אחרי משפט המפתח. תפקידם לפתח, לפרט, להבהיר, להדגים, לנמק או להוכיח את הרעיון שהוצג במשפט המפתח.</li>
+                                    <li><strong>הלחמנייה התחתונה (משפט מסכם):</strong> זהו המשפט האחרון בפסקה. תפקידו לסכם את הרעיון המרכזי, או לקשר את הפסקה הנוכחית לפסקה הבאה אחריה.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        
+                        <details>
+                            <summary>סוגי פסקאות: פתיחה, גוף וסיום</summary>
+                            <div class="accordion-content">
+                                <h4>1. פסקת פתיחה (מבוא)</h4>
+                                <p>תפקידה להציג באופן כללי את נושא העבודה ולעורר עניין אצל הקורא. רצוי לפתוח במשפט "לוכד קשב" (כגון ציטוט, נתון מפתיע או שאלה רטורית) ולהציג את הטיעון המרכזי או את מטרת הטקסט.</p>
+                                
+                                <div class="example-highlight">
+                                    <p><strong>דוגמת המרצה לפסקת פתיחה:</strong></p>
+                                    <p>"אזרחים ותיקים בישראל סובלים פעמים רבות מדימוי ציבורי שלילי, המלווה בתחושות של בדידות וניכור. תופעה זו, המוכרת בספרות המקצועית כ'גילנות' (Ageism), אינה רק פוגעת באיכות חייהם של הקשישים, אלא גם מונעת מהחברה כולה ליהנות מהידע ומהניסיון העצום שהם צברו. בעבודה זו אטען כי... וכו'"</p>
+                                </div>
+
+                                <h4>2. פסקאות גוף</h4>
+                                <p>אלו הן הפסקאות המרכיבות את רוב הטקסט. כל אחת מהן מפתחת רעיון-משנה אחד התומך בטיעון הכללי של העבודה. ישנם סוגים לוגיים שונים של פסקאות גוף, כגון:</p>
+                                <ul>
+                                    <li><strong>פסקה מדגימה:</strong> מציגה מקרה בוחן או דוגמה ספציפית.</li>
+                                    <li><strong>פסקה מפרטת:</strong> מפרטת רכיבים, גורמים או מאפיינים.</li>
+                                    <li><strong>פסקת הסבר:</strong> מבהירה מושג או תהליך.</li>
+                                    <li><strong>פסקת הנמקה:</strong> מספקת סיבות וראיות לתמיכה בטיעון.</li>
+                                    <li><strong>פסקת סיכום (ביניים):</strong> מסכמת תת-נושא מורכב לפני המעבר לנושא הבא.</li>
+                                </ul>
+
+                                <div class="example-highlight">
+                                    <p><strong>דוגמה (מתוך המצגת): פסקת גוף (מדגימה)</strong></p>
+                                    <p>"מחקרים רבים מצביעים על כך שפעילות גופנית סדירה היא מרכיב חיוני בשמירה על בריאות הלב. לדוגמה, מחקר נרחב שפורסם בכתב העת 'Lancet' מצא כי אנשים המקיימים פעילות גופנית מתונה... נהנו מסיכון נמוך ב-30% להתקפי לב..."</p>
+                                </div>
+                                
+                                <div class="example-highlight">
+                                    <p><strong>דוגמת המרצה לפסקת גוף (פיתוח רעיון):</strong></p>
+                                    <p>"התפיסה הרווחת נוטה לראות בטרור פעולה אי-רציונלית, אקראית ובלתי צפויה. ואולם, חוקרים רבים בתחום מצביעים על כך שמאחורי פעולות טרור רבות עומד היגיון אסטרטגי מחושב. ארגוני טרור משתמשים באלימות ככלי להשגת מטרות פוליטיות מוגדרות, כגון סילוק כוח כובש, השגת אוטונומיה או שינוי משטר. לכן, ניתוח מעמיק של פעולותיהם מגלה דפוסים... וכו'"</p>
+                                </div>
+
+                                <div class="example-highlight">
+                                    <p><strong>דוגמה נוספת (ניתוח משפט מפתח ופיתוח):</strong></p>
+                                    <p>"אולם, הרעיון שקריאה מרובה משפרת בהכרח את יכולות הכתיבה אינו מוסכם על כל החוקרים. יש הטוענים כי בעוד שקריאה מרחיבה את אוצר המילים ואת ההיכרות עם מבנים תחביריים, היא אינה מכשירה את הסטודנט בהכרח במיומנות האקטיבית של ארגון רעיונות והצגת טיעון קוהרנטי בכתב. לשם כך, נדרש תרגול מעשי..."</p>
+                                </div>
+                                
+                                <h4>3. פסקת סיום (סיכום)</h4>
+                                <p>תפקידה "לסגור" את הטקסט. היא חוזרת על הרעיון המרכזי (בניסוח שונה), מסכמת את עיקרי הטיעונים שהוצגו בפסקאות הגוף, ומציגה מסקנות או שאלות למחקר המשך. <strong>חשוב:</strong> אין להוסיף רעיונות חדשים או מידע חדש בפסקת הסיום.</p>
+                                
+                                <div class="example-highlight">
+                                    <p><strong>דוגמה לפסקת טיעון (מתוך תרגול כיתה):</strong></p>
+                                    <p>"כדאי אפוא להפסיק לעשן לאלתר. העישון הוכח במחקרים רבים מספור כגורם מרכזי למחלות לב וכלי דם, סרטן ריאות ומחלות כרוניות נוספות. מעבר לנזק הבריאותי הישיר למעשן, העישון הפסיבי פוגע גם בסביבתו, ובמיוחד בילדים. לבסוף, העלות הכלכלית של העישון, הן ברמת הפרט והן ברמת הכלל, היא עצומה. לאור נזקים כבדים אלו, ברור כי הפסקת עישון היא הצעד הנבון ביותר..."</p>
+                                </div>
+                            </div>
+                        </details>
+                        
+                        <details>
+                            <summary>קישוריות (Coherence) בין פסקאות</summary>
+                            <div class="accordion-content">
+                                <p>כדי ליצור טקסט רציף (ולא אוסף מקוטע של פסקאות), יש ליצור קישור לוגי בין סוף פסקה אחת לתחילת הפסקה הבאה.</p>
+                                <div class="example-highlight">
+                                    <p><strong>דוגמת המרצה לקישוריות:</strong></p>
+                                    <p><strong>בסוף פסקה א':</strong> "...נמצא קשר חזק בין סיכון מוגבר לנפילות לבין גורמים פיזיולוגיים, כגון חולשת שרירים בגפה התחתונה, המכונה בספרות סרקופניה (Sarcopenia)<sup>2</sup>."</p>
+                                    <p><strong>בתחילת פסקה ב':</strong> "הסרקופניה, אותה חולשת שרירים שהוזכרה, מאפיינת..."</p>
+                                </div>
+                                <p>החזרה על המונח המרכזי ("סרקופניה") בתחילת הפסקה השנייה יוצרת גשר ברור שמסייע לקורא להבין את ההתפתחות הלוגית של הטיעון.</p>
+                            </div>
+                        </details>
+
+                    </div>
+                </article>
+            </section>
+
+            <!-- כרטיסיה 3: שאלות ודיון -->
+            <section id="qa" class="tab-pane">
+                <article class="page-card">
+                    
+                    <div class="qa-section">
+                        <h3>שאלות המרצה (רטוריות/דידקטיות)</h3>
+                        
+                        <div class="qa-item">
+                            <div class="qa-question">
+                                <p>שאלה: האם הרעיונות שלכם הולכים לאיבוד במבוך של מילים?</p>
+                            </div>
+                            <div class="qa-answer">
+                                <p><strong>תשובת המרצה (מטרה):</strong> השאלה נשאלה כדי להדגים את האתגר בכתיבה לא מאורגנת. הפתרון שהוצג הוא ארגון המחשבות ליחידות קטנות והגיוניות (פסקאות) במקום "קיר טקסט" כאוטי.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="qa-item">
+                            <div class="qa-question">
+                                <p>שאלה: חלוקה לפסקאות - למה בעצם?</p>
+                            </div>
+                            <div class="qa-answer">
+                                <p><strong>תשובת המרצה (סיכום):</strong> החלוקה מסייעת לשני הצדדים:
+                                <br>1. <strong>לקורא:</strong> היא יוצרת נקודות מנוחה ויזואליות ומסייעת לארגן את הרעיונות בראש.
+                                <br>2. <strong>לכותב:</strong> היא מסייעת לארגן את המחשבות, לוודא שכל רעיון מפותח כראוי, וליצור מבנה לוגי לטקסט.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="qa-section">
+                        <h3>שאלות משתתפים</h3>
+                        
+                        <div class="qa-item">
+                            <div class="qa-question">
+                                <p>שאלה (סטודנטית): חייבת לשאול לגבי הגעה להרצאות והתארגנות טכנית. כמה זמן לוקח להתארגן עם המערכות (זום, דרופבוקס, AI וכו')? זה נהיה מסובך.</p>
+                            </div>
+                            <div class="qa-answer">
+                                <p><strong>תשובת המרצה (סיכום):</strong> המרצה הסכימה שהמערכות הטכנולוגיות (זום, מאגרי מידע, כלי AI) משתנות כל הזמן והופכות מורכבות יותר. היא השתמשה בזה כאנלוגיה לכתיבה – שני התחומים דורשים הכנה מראש. ההמלצה שלה הייתה לא להגיע 5-10 דקות לפני הרצאה, אלא להקדיש זמן רב יותר להתארגנות טכנית, כי תמיד יש תקלות בלתי צפויות. </p>
+                                <span class="status status-clarification">סטטוס: הבהרה (אנלוגיה)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="qa-item">
+                            <div class="qa-question">
+                                <p>שאלה (סטודנט/ית, בצ'אט): מה עושים אם אין באמת מסקנות חדשות לפסקת הסיום?</p>
+                            </div>
+                            <div class="qa-answer">
+                                <p><strong>תשובת המרצה (סיכום):</strong> זה בסדר גמור. פסקת סיום לא חייבת להציג מסקנות חדשניות. תפקידה המרכזי הוא לסכם את הטיעונים המרכזיים שהוצגו בעבודה (לחזור על משפט הנושא המרכזי ועיקרי פסקאות הגוף בניסוח אחר). אין "לדחוף בכוח" מסקנות אם הן לא נובעות ישירות מהטקסט.</p>
+                                <span class="status status-clarification">סטטוס: הבהרה</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </article>
+            </section>
+            
+            <!-- כרטיסיה 4: מקורות והערות -->
+            <section id="sources" class="tab-pane">
+                
+                <article class="page-card">
+                    <h3>מקורות חיצוניים (הרחבות)</h3>
+                    <p>לא נוספו הרחבות ממקורות חיצוניים על ידי מחולל הסיכום בשיעור זה. כל המידע מבוסס על הרצאת המרצה.</p>
+                </article>
+                
+                <article class="page-card">
+                    <h3>הערות ומונחים (שהופיעו בטקסט)</h3>
+                    <ol>
+                        <li><strong>הזחה (Indented):</strong> הזזת השורה הראשונה של פסקה פנימה (ימינה בעברית, שמאלה באנגלית). זוהי טכניקה חזותית חלופית לשימוש בשורת רווח להפרדה בין פסקאות.</li>
+                        <li><strong>סרקופניה (Sarcopenia):</strong> מונח רפואי המתאר אובדן מסת שריר ותפקוד שרירים הקשור לגיל. הוזכר כדוגמה לגורם פיזיולוגי לנפילות קשישים.</li>
+                    </ol>
+                </article>
+
+            </section>
+            
+            <!-- כרטיסיה 5: רשמים נוספים -->
+            <section id="impressions" class="tab-pane">
+                <article class="page-card">
+                    <h3>רשמים נוספים</h3>
+                    <p>טאב זה מיועד לרשמים אישיים, הערות נוספות או חומרי הרחבה שברצונך להוסיף באופן ידני.</p>
+                    <p>לא זוהה תוכן כזה בשיעור.</p>
+                </article>
+            </section>
+            
+            <!-- כרטיסיה 6: מטלה! -->
+            <section id="assignment" class="tab-pane">
+                <article class="page-card" id="assignment-card">
+                    <h2>מטלה <span aria-hidden="true" class="pulse">!</span></h2>
+                    <p>המרצה הציגה בכיתה את המטלה הראשונה בקורס, שתעסוק בכתיבת פסקאות בנושא "שקט יורים".</p>
+                    
+                    <ul class="grade-list" style="font-size: 1rem; list-style-type: none; padding-right: 0;">
+                         <li>
+                            <span>נושא המטלה:</span>
+                            <span class="percentage" style="color: var(--text); font-weight: 400;">"שקט יורים" (ביקורת והפגנות בזמן מלחמה)</span>
+                        </li>
+                        <li>
+                            <span>הנחיות לביצוע:</span>
+                            <span class="percentage" style="color: var(--text); font-weight: 400;">יש לכתוב <strong>שתי (2) פסקאות</strong>:
+                                <ol style="padding-right: var(--s3); margin-top: var(--s2); font-weight: 400;">
+                                    <li>פסקת מבוא (פתיחה) לנושא.</li>
+                                    <li>פסקת גוף מסוג "פסקת טיעון".</li>
+                                </ol>
+                            </span>
+                        </li>
+                         <li>
+                            <span>היקף נדרש:</span>
+                            <span class="percentage" style="color: var(--text); font-weight: 400;">2 פסקאות. (המלצת אורך: 3-15 משפטים לפסקה)</span>
+                        </li>
+                        <li>
+                            <span>תאריך הגשה:</span>
+                            <span class="placeholder-warning">⚠️ לא צוין (המרצה תעדכן בהמשך, ציינה שזה לא לשבוע הבא)</span>
+                        </li>
+                        <li>
+                            <span>אופן ההגשה:</span>
+                            <span class="percentage" style="color: var(--text); font-weight: 400;">קובץ Word</span>
+                        </li>
+                    </ul>
+                </article>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- סקריפטים (מבוסס תבנית + התאמות) -->
+    <script>
+        // --- בקר מצב בהיר/כהה (מתוך התבנית) ---
+        (function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const rootEl = document.documentElement; 
+            
+            function applyTheme(theme) {
+                localStorage.setItem('theme', theme);
+                
+                if (theme === 'dark') {
+                    rootEl.classList.remove('light-mode');
+                    rootEl.classList.add('dark-mode');
+                } else if (theme === 'light') {
+                    rootEl.classList.remove('dark-mode');
+                    rootEl.classList.add('light-mode');
+                } else {
+                    rootEl.classList.remove('dark-mode', 'light-mode');
+                }
+                
+                if (themeToggle) {
+                    const finalThemeIsDark = rootEl.classList.contains('dark-mode') || 
+                                             (!rootEl.classList.contains('light-mode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                    themeToggle.checked = finalThemeIsDark;
+                }
+            }
+
+            if (themeToggle) {
+                themeToggle.addEventListener('change', function() {
+                    applyTheme(this.checked ? 'dark' : 'light');
+                });
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else {
+                applyTheme(null);
+            }
+        })();
+        
+        // --- בקר כרטיסיות (מותאם לדף יחיד) ---
+        function initializeLessonTabs() {
+            const tabContainer = document.querySelector('.tab-navigation');
+            if (!tabContainer) return;
+            
+            const tabButtons = tabContainer.querySelectorAll('.tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane'); // מאתר את כל ה-panes בדף
+
+            tabContainer.addEventListener('click', function(event) {
+                const clickedButton = event.target.closest('.tab-btn');
+                if (!clickedButton) return;
+                event.preventDefault();
+
+                // 1. בטל אקטיביות מכולם
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabPanes.forEach(pane => pane.classList.remove('active'));
+
+                // 2. הפעל את הכפתור וה-pane שנלחצו
+                clickedButton.classList.add('active');
+                const tabId = clickedButton.getAttribute('data-tab');
+                const activePane = document.getElementById(tabId);
+                if (activePane) {
+                    activePane.classList.add('active');
+                }
+            });
+        }
+        
+        // הפעלה בטעינת ה-DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeLessonTabs();
+        });
+    </script>
+
+</body>
+</html>
