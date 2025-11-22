@@ -1,0 +1,238 @@
+<!-- lesson_body_template.html -->
+<main class="container" role="main">
+    <!-- ניווט טאבים -->
+    <nav class="tab-navigation" aria-label="ניווט בסיכום השיעור">
+        <button class="tab-btn active" data-tab="overview" role="tab" aria-selected="true" aria-controls="tab-overview">
+            סקירה כללית
+        </button>
+        <button class="tab-btn" data-tab="content" role="tab" aria-selected="false" aria-controls="tab-content">
+            תוכן השיעור
+        </button>
+        <button class="tab-btn" data-tab="qa" role="tab" aria-selected="false" aria-controls="tab-qa">
+            שאלות ודיון
+        </button>
+        <button class="tab-btn" data-tab="sources" role="tab" aria-selected="false" aria-controls="tab-sources">
+            מקורות והערות
+        </button>
+        <button class="tab-btn" data-tab="impressions" role="tab" aria-selected="false" aria-controls="tab-impressions">
+            רשמים נוספים
+        </button>
+        <button class="tab-btn" data-tab="tasks" role="tab" aria-selected="false" aria-controls="tab-tasks">
+            מטלה !
+        </button>
+    </nav>
+
+    <div class="tab-content">
+
+        <!-- ====================================== -->
+        <!-- טאב 1: סקירה כללית                    -->
+        <!-- ====================================== -->
+        <section id="tab-overview" class="tab-pane active" role="tabpanel" aria-labelledby="tab-overview">
+            <!-- כרטיס פרטי שיעור -->
+            <article class="page-card" aria-labelledby="details-heading">
+                <h3 id="details-heading">פרטי השיעור</h3>
+                <ul class="lesson-details-list">
+                    <li>
+                        <strong>קורס:</strong>
+                        <span>שם הקורס ⚠️</span>
+                    </li>
+                    <li>
+                        <strong>נושא השיעור:</strong>
+                        <span>כותרת השיעור ⚠️</span>
+                    </li>
+                    <li>
+                        <strong>מרצה:</strong>
+                        <span>שם המרצה ⚠️</span>
+                    </li>
+                    <li>
+                        <strong>תאריך:</strong>
+                        <span>DD.MM.YYYY ⚠️</span>
+                    </li>
+                    <li>
+                        <strong>שעות (אם ידוע):</strong>
+                        <span>⚠️</span>
+                    </li>
+                </ul>
+            </article>
+
+            <!-- כרטיס תקציר + נושאים מרכזיים -->
+            <article class="page-card" aria-labelledby="summary-heading">
+                <h3 id="summary-heading">תקציר ונושאים מרכזיים</h3>
+
+                <h4>תקציר</h4>
+                <p>
+                    כאן יופיע תקציר קצר של השיעור (2–5 משפטים), בניסוח אקדמי, ברור ולא מנופח. 
+                    התקציר מתבסס רק על החומרים שהועלו עבור השיעור.
+                </p>
+
+                <h4>נושאים מרכזיים שעלו</h4>
+                <ul>
+                    <li>נושא מרכזי 1 ⚠️</li>
+                    <li>נושא מרכזי 2 ⚠️</li>
+                    <li>נושא מרכזי 3 ⚠️</li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- ====================================== -->
+        <!-- טאב 2: תוכן השיעור (אקורדיון כרונולוגי) -->
+        <!-- ====================================== -->
+        <section id="tab-content" class="tab-pane" role="tabpanel" aria-labelledby="tab-content">
+            <div class="accordion">
+                <!-- דוגמה למקטע נושא באקורדיון -->
+                <details open>
+                    <summary>כותרת נושא 1 ⚠️</summary>
+                    <div class="accordion-content">
+                        <p>
+                            כאן מגיע תקציר ענייני ברמה אקדמית של הנושא, ולאחריו פירוט כל המושגים,
+                            ההסברים והסוגיות שנדונו תחת נושא זה.
+                        </p>
+
+                        <p>
+                            ניתן להשתמש בפסקאות, רשימות תבליטים, וטבלאות לפי הצורך. חשוב שלא לפספס מושגים שעלו
+                            בתמליל / סיכום.
+                        </p>
+
+                        <!-- דוגמאות מהשיעור – בצהוב -->
+                        <div class="example-highlight">
+                            <p><strong>דוגמה מתוך השיעור:</strong> כאן נכנסת דוגמה שהמרצה נתן/ה, מנוסחת מחדש (לא ציטוט ישיר).</p>
+                        </div>
+
+                        <!-- הרחבה ממקור חיצוני – בתכלת -->
+                        <div class="external-highlight">
+                            <p><strong>הרחבה ממקור חיצוני (שם מקור ⚠️):</strong> אם צריך הבהרה קצרה ממקור אקדמי – זו המסגרת.</p>
+                        </div>
+
+                    </div>
+                </details>
+
+                <!-- אפשר לשכפל בלוק <details> לנושאים נוספים -->
+                <details>
+                    <summary>כותרת נושא 2 ⚠️</summary>
+                    <div class="accordion-content">
+                        <p>תוכן נוסף לנושא אחר בשיעור.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- ====================================== -->
+        <!-- טאב 3: שאלות ודיון                    -->
+        <!-- ====================================== -->
+        <section id="tab-qa" class="tab-pane" role="tabpanel" aria-labelledby="tab-qa">
+            <!-- שאלות המרצה -->
+            <article class="page-card" aria-labelledby="qa-lecturer-heading">
+                <h3 id="qa-lecturer-heading">שאלות המרצה</h3>
+
+                <!-- דוגמה לשאלה של המרצה -->
+                <h5>שאלה 1 ⚠️</h5>
+                <p><strong>סיכום השאלה:</strong> כאן ניסוח קצר שלך של השאלה כפי שנשאלה בשיעור.</p>
+                <p><strong>תשובת המרצה (סיכום):</strong> ניסוח ברור של עמדת המרצה (לא ציטוט).</p>
+
+                <div class="verification-success">
+                    <p><strong>סטטוס:</strong> המרצה אימת את הטענה / הדגיש שהטיעון נכון (טקסט בירוק בהיר).</p>
+                </div>
+
+                <!-- שאלה נוספת של המרצה – לשכפל לפי הצורך -->
+            </article>
+
+            <!-- שאלות משתתפים -->
+            <article class="page-card" aria-labelledby="qa-students-heading">
+                <h3 id="qa-students-heading">שאלות משתתפים</h3>
+
+                <h5>שאלה משתתף/ת 1 ⚠️</h5>
+                <p><strong>סיכום השאלה:</strong> כאן ניסוח השאלה.</p>
+                <p><strong>תשובת המרצה (סיכום):</strong> תשובה מנוסחת ברור.</p>
+
+                <div class="verification-fail">
+                    <p><strong>סטטוס:</strong> המרצה חלק על הטענה / הפריך (טקסט באדום בהיר).</p>
+                </div>
+            </article>
+        </section>
+
+        <!-- ====================================== -->
+        <!-- טאב 4: מקורות והערות                 -->
+        <!-- ====================================== -->
+        <section id="tab-sources" class="tab-pane" role="tabpanel" aria-labelledby="tab-sources">
+            <article class="page-card" aria-labelledby="external-sources-heading">
+                <h3 id="external-sources-heading">מקורות חיצוניים</h3>
+                <p>
+                    כאן תופיע רשימת המקורות שהוספת במהלך הסיכום (כל מקור שהופיע בהרחבות 
+                    עם רקע תכלת).
+                </p>
+                <ol>
+                    <li>מחבר, שנה – שם מאמר / ספר ⚠️</li>
+                    <li>מחבר נוסף… ⚠️</li>
+                </ol>
+            </article>
+
+            <article class="page-card" aria-labelledby="terms-heading">
+                <h3 id="terms-heading">הערות ומונחים</h3>
+                <ol>
+                    <li id="term-1"><strong>מונח 1 ⚠️:</strong> הסבר קצר (מקושר ב-sup).</li>
+                    <li id="term-2"><strong>מונח 2 ⚠️:</strong> הסבר קצר.</li>
+                </ol>
+            </article>
+        </section>
+
+        <!-- ====================================== -->
+        <!-- טאב 5: רשמים נוספים                  -->
+        <!-- ====================================== -->
+        <section id="tab-impressions" class="tab-pane" role="tabpanel" aria-labelledby="tab-impressions">
+            <article class="page-card" aria-labelledby="impressions-heading">
+                <h3 id="impressions-heading">רשמים נוספים</h3>
+                <p><i>
+                    טאב זה מיועד לתוכן שתוסיף ידנית אחרי השיעור: רשמים אישיים, 
+                    חומרי קריאה, תוספות ממקורות חיצוניים. אם לא הוזן תוכן – אפשר להשאיר את הטקסט הזה כמות שהוא.
+                </i></p>
+
+                <!-- דוגמאות לשימוש:
+                <div class="personal-impression">
+                    <h5>רשם אישי</h5>
+                    <p>כאן מחשבה אישית שלי על השיעור.</p>
+                </div>
+
+                <div class="reading-material">
+                    <h5>חומר קריאה</h5>
+                    <p>כאן קישור/שם מאמר שכדאי לקרוא.</p>
+                </div>
+
+                <div class="external-addition">
+                    <h5>תוספת ממקור חיצוני</h5>
+                    <p>תקציר קצר של משהו שמצאתי לבד.</p>
+                </div>
+                -->
+            </article>
+        </section>
+
+        <!-- ====================================== -->
+        <!-- טאב 6: מטלה !                        -->
+        <!-- ====================================== -->
+        <section id="tab-tasks" class="tab-pane" role="tabpanel" aria-labelledby="tab-tasks">
+            <article class="page-card" aria-labelledby="tasks-heading">
+                <h3 id="tasks-heading">
+                    מטלה 
+                    <span aria-hidden="true" class="pulse">!</span>
+                </h3>
+
+                <!-- אם יש מטלה אחת – ממלאים כאן.
+                     אם אין מטלה בשיעור, אפשר להשאיר כרטיס עם טקסט:
+                     "לא זוהתה מטלה בשיעור זה." -->
+                <div class="task-card">
+                    <h4>שם המטלה / נושא המטלה ⚠️</h4>
+                    <p><strong>הנחיות לביצוע:</strong></p>
+                    <ul>
+                        <li>שלב 1 ⚠️</li>
+                        <li>שלב 2 ⚠️</li>
+                    </ul>
+
+                    <p><strong>תאריך הגשה:</strong> DD.MM.YYYY ⚠️</p>
+                    <p><strong>היקף נדרש:</strong> ⚠️</p>
+                    <p><strong>אופן ההגשה:</strong> ⚠️</p>
+                    <p><strong>קריטריונים להערכה:</strong> ⚠️</p>
+                </div>
+            </article>
+        </section>
+
+    </div>
+</main>
