@@ -46,7 +46,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <style>
@@ -68,8 +68,12 @@
             --hl-yellow-bg: #423e22; --hl-blue-bg: #1e3a3e; --hl-green-bg: #1e3322; --hl-red-bg: #3e2121;
         }
 
-        * { box-sizing: border-box; font-family: 'Rubik', sans-serif !important; }
-        .fas, .far, .fab { font-family: "Font Awesome 6 Free" !important; } /* Fix Icons */
+        * { box-sizing: border-box; }
+        /* Strict Font */
+        body, button, input, textarea, select, .tab-link, h1, h2, h3, h4, li, p, span, div, summary, dt, dd {
+            font-family: 'Noto Sans Hebrew', sans-serif !important;
+        }
+        .fas, .far, .fab, .fa { font-family: "Font Awesome 6 Free" !important; }
         
         body { background-color: var(--bg); color: var(--text-main); margin: 0; line-height: 1.6; font-size: 14px; display: none; }
 
@@ -80,6 +84,7 @@
         
         .btn-action { background: var(--accent); border: none; border-radius: 50%; width: 34px; height: 34px; color: var(--primary); cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; justify-content: center; margin-left: 5px; font-size: 14px; }
         .btn-action.active { background: var(--primary); color: white; }
+        .btn-action:hover { filter: brightness(0.95); }
         .btn-save-file { background: #4caf50; color: white; } 
 
         /* Tabs */
@@ -92,77 +97,85 @@
 
         /* Cards */
         .card { background: var(--surface); border-radius: 12px; box-shadow: var(--shadow); padding: 20px; margin-bottom: 20px; position: relative; min-height: 80px; }
-        .highlight { padding: 15px; margin: 15px 0; border-radius: 8px; border-right: 4px solid transparent; position: relative; }
+        h3 { border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 15px; font-size: 1.2rem; color: var(--text-main); }
+        p, li { margin-bottom: 10px; line-height: 1.7; }
+
+        /* Compact Highlights */
+        .highlight { 
+            padding: 6px 12px 10px; margin: 10px 0; border-radius: 6px; 
+            border-right: 4px solid transparent; position: relative;
+            font-size: 0.92em !important;
+        }
+        .highlight > *:first-child { margin-top: 0; }
+        .highlight h4 { margin-top: 0; margin-bottom: 4px; font-weight: 700; font-size: 1.1em; }
+        .highlight p, .highlight div, .highlight li { margin-bottom: 5px; line-height: 1.45; }
         
         .hl-example { background-color: var(--hl-yellow-bg); border-color: var(--hl-yellow-br); }
         .hl-external { background-color: var(--hl-blue-bg); border-color: var(--hl-blue-br); }
         .hl-success { background-color: var(--hl-green-bg); border-color: var(--hl-green-br); } 
         .hl-fail { background-color: var(--hl-red-bg); border-color: var(--hl-red-br); }
 
-        h3 { border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 15px; font-size: 1.2rem; color: var(--text-main); }
-        p, li { margin-bottom: 10px; line-height: 1.7; }
-
-        /* Metadata Rows */
+        /* Metadata */
         .meta-row { display: flex; justify-content: flex-start; align-items: center; border-bottom: 1px dashed var(--border); padding: 10px 0; width: 100%; }
         .meta-label { font-weight: 700; color: var(--text-sec); margin-left: 15px; min-width: 60px; }
         .meta-value { font-weight: 400; color: var(--text-main); flex-grow: 1; text-align: right; outline: none; border-bottom: 1px solid transparent; min-height: 24px; }
         .meta-value:focus { border-bottom: 1px solid var(--primary); background: rgba(24,119,242,0.05); }
         input[type="date"] { border: none; background: transparent; color: var(--text-main); width: auto; flex-grow: 1; text-align: right; outline: none; }
 
-        /* Tooltip / Term */
-        .term { 
-            color: var(--primary) !important; /* Force blue */
-            font-weight: 700; cursor: help; 
-            border-bottom: 1px dotted var(--primary); position: relative;
-            display: inline-block;
-        }
-        .term:hover { background-color: rgba(24, 119, 242, 0.1); border-radius: 3px;}
-        .term:hover::after {
-            content: attr(data-def);
-            position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
-            background: #333; color: #fff; padding: 10px 15px; border-radius: 8px;
-            width: max-content; max-width: 300px; font-size: 13px; font-weight: 400;
-            z-index: 99999; white-space: normal; line-height: 1.5; text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3); pointer-events: none;
-        }
-        /* Arrow */
-        .term:hover::before {
-            content:''; position:absolute; bottom:115%; left:50%; margin-left:-6px;
-            border-width:6px; border-style:solid; border-color:#333 transparent transparent transparent;
-            z-index: 99999;
-        }
+        /* Glossary */
+        ol.glossary-list { padding-right: 25px; margin: 0; list-style: none; counter-reset: gloss-counter; }
+        ol.glossary-list li { position: relative; margin-bottom: 12px; padding-right: 5px; }
+        ol.glossary-list li::before { content: counter(gloss-counter) "."; counter-increment: gloss-counter; position: absolute; right: -20px; color: var(--primary); font-weight: 800; }
+        
+        .term { color: var(--primary) !important; font-weight: 700; cursor: help; border-bottom: 1px dotted var(--primary); position: relative; display: inline-block; }
+        .term:hover { background-color: var(--accent); }
+        .term:hover::after { content: attr(data-def); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 10px; border-radius: 8px; width: max-content; max-width: 260px; font-size: 13px; z-index: 99999; white-space: normal; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.3); pointer-events: none; }
+        .term:hover::before { content:''; position:absolute; bottom:115%; left:50%; margin-left:-6px; border-width:6px; border-style:solid; border-color:#333 transparent transparent transparent; z-index:99999; }
 
         /* Accordion */
         details { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; overflow: visible; background: var(--surface); }
         summary { padding: 15px; cursor: pointer; font-weight: 700; font-size: 1.1rem; display: flex; justify-content: space-between; background: rgba(0,0,0,0.02); }
-        .acc-body { padding: 15px; border-top: 1px solid var(--border); }
+        .acc-body { padding: 15px; border-top: 1px solid var(--border); min-height: 50px; }
 
-        /* --- Edit Mode Wrapper --- */
+        /* Edit Wrapper */
         .edit-wrapper { position: relative; margin-bottom: 8px; }
-        body.editing-mode .edit-wrapper { border: 1px dashed rgba(0,0,0,0.15); padding-top: 40px; border-radius: 6px; background: rgba(255,255,255,0.3); }
-        
+        body.editing-mode .edit-wrapper { border: 1px dashed rgba(0,0,0,0.15); padding-top: 40px; border-radius: 6px; background: rgba(255,255,255,0.3); width: 100%; }
         .wrapper-toolbar { display: none; position: absolute; top: 5px; right: 5px; gap: 5px; z-index: 100; direction: ltr; }
         body.editing-mode .wrapper-toolbar { display: flex; }
-
         .w-btn { width: 30px; height: 30px; background: #fff; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #555; font-size: 13px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: 0.2s; }
         .w-btn:hover { transform: scale(1.1); background: var(--primary); color: white; border-color: var(--primary); }
         .w-btn.del:hover { background: #ef5350; border-color: #ef5350; }
-        .w-btn.term { color: var(--primary); font-weight:bold; }
-        
+        .w-btn.term { color: var(--primary); font-weight:bold; border-color: var(--accent); }
         .editable-content[contenteditable="true"] { outline: none; cursor: text; min-height: 1.2em; }
 
-        /* --- Editor Modal --- */
-        .fab-btn { position: fixed; bottom: 25px; left: 25px; width: 60px; height: 60px; background: var(--primary); color: white; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: none; cursor: pointer; font-size: 26px; z-index: 2000; transition: transform 0.2s; display: flex; align-items: center; justify-content: center; }
+        /* FAB & Chat */
+        .fab-container { position: fixed; bottom: 25px; left: 25px; display: flex; flex-direction: row-reverse; gap: 15px; z-index: 2000; }
+        .fab-btn { width: 60px; height: 60px; background: var(--primary); color: white; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: none; cursor: pointer; font-size: 26px; transition: transform 0.2s; display: flex; align-items: center; justify-content: center; }
         .fab-btn:hover { transform: scale(1.1); }
+        .ai-fab { background: linear-gradient(135deg, #1a73e8, #8e24aa); }
+        /* Gemini Icon SVG */
+        .gemini-icon { width: 30px; height: 30px; fill: white; }
 
+        /* Chat Overlay */
+        .chat-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 4000; justify-content: flex-end; align-items: flex-end; pointer-events: none; }
+        .chat-window { background: var(--surface); width: 400px; height: 600px; max-width: 100%; max-height: 80vh; margin: 20px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); display: flex; flex-direction: column; pointer-events: auto; overflow: hidden; border: 1px solid var(--border); }
+        .chat-header { padding: 15px; background: #f5f7fa; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        .chat-body { flex: 1; overflow-y: auto; padding: 15px; background: var(--bg); display: flex; flex-direction: column; gap: 10px; }
+        .chat-message { padding: 10px 15px; border-radius: 8px; max-width: 85%; line-height: 1.5; font-size: 14px; }
+        .chat-message.user { align-self: flex-start; background: var(--primary); color: white; border-bottom-right-radius: 0; }
+        .chat-message.bot { align-self: flex-end; background: var(--surface); border: 1px solid var(--border); border-bottom-left-radius: 0; }
+        .chat-input-area { padding: 10px; border-top: 1px solid var(--border); display: flex; gap: 10px; background: var(--surface); }
+        .chat-input { flex: 1; padding: 10px; border: 1px solid var(--border); border-radius: 20px; outline: none; }
+        .settings-panel { display: none; padding: 15px; background: #fff3cd; border-bottom: 1px solid #ffeeba; font-size: 13px; }
+        .settings-panel input { width: 100%; padding: 5px; margin-top: 5px; border: 1px solid #ccc; }
+
+        /* Editor Modal */
         .editor-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 3000; justify-content: center; align-items: center; }
-        .editor-box { background: var(--surface); padding: 25px; border-radius: 12px; width: 90%; height: 85%; max-width: 900px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column; cursor: default; }
-        
-        .type-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 10px; flex-wrap: wrap; justify-content: center; }
-        .type-btn { padding: 8px 16px; border: 1px solid var(--border); border-radius: 20px; cursor: pointer; font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; gap: 6px; background: var(--surface); color: var(--text-main); transition: 0.2s; }
+        .editor-box { background: var(--surface); padding: 25px; border-radius: 12px; width: 90%; height: 85%; max-width: 900px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column; cursor: default; pointer-events: auto; }
+        .type-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 10px; margin-bottom: 5px; flex-wrap: wrap; justify-content: center; }
+        .type-btn { padding: 8px 16px; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; gap: 6px; background: var(--surface); color: var(--text-main); transition: 0.2s; }
         .type-btn.selected { box-shadow: 0 0 0 2px var(--primary); font-weight: 700; transform: translateY(-2px); }
         
-        /* Colors */
         .btn-text.selected { background: #eee; border-color: #999; }
         .btn-acc.selected { background: #333; color: #fff; border-color: #000; }
         .btn-ext { background: var(--hl-blue-bg); border-color: var(--hl-blue-br); color: #005c69; }
@@ -171,12 +184,15 @@
         .btn-task { background: var(--hl-red-bg); border-color: var(--hl-red-br); color: #b71c1c; }
 
         #editorTitleInput { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid var(--border); border-radius: 6px; font-weight: bold; background: var(--bg); color: var(--text-main); }
-        .editor-toolbar { display: flex; gap: 8px; margin-bottom: 5px; background: #f9f9f9; padding: 8px; border-radius: 6px; flex-wrap: wrap; }
+        .editor-toolbar { display: flex; gap: 8px; margin-bottom: 5px; background: #f9f9f9; padding: 8px; border-radius: 6px; flex-wrap: wrap; align-items: center; }
         .tb-btn { padding: 5px 10px; background: #fff; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; }
         
+        /* Palette */
+        .palette-row { display: flex; gap: 4px; flex-wrap: wrap; }
+        .color-swatch { width: 20px; height: 20px; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; }
+        .color-swatch:hover { transform: scale(1.2); box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+
         .rich-editor { flex: 1; border: 1px solid var(--border); border-radius: 6px; padding: 15px; overflow-y: auto; background: var(--bg); font-size: 16px; color: var(--text-main); user-select: text !important; -webkit-user-select: text !important; outline: none; cursor: text; }
-        .rich-editor:empty:before { content: 'הקלד כאן...'; color: #999; }
-        
         .modal-actions { margin-top: 15px; display: flex; justify-content: space-between; }
         .btn-save { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-size: 1rem;}
         .btn-cancel { background: transparent; color: var(--text-sec); border: 1px solid var(--border); padding: 10px 24px; border-radius: 6px; cursor: pointer; font-size: 1rem;}
@@ -185,8 +201,7 @@
         body.placing-mode .card, body.placing-mode .acc-body, body.placing-mode .content-zone { outline: 2px dashed var(--primary); min-height: 80px; }
         body.placing-mode *:hover { box-shadow: inset 0 0 0 1000px rgba(24,119,242,0.1); z-index: 3000; }
 
-        @media print { header, .tabs, .fab-btn, .editor-overlay, .wrapper-toolbar { display: none !important; } body { display: block !important; font-size: 12px; } body.editing-mode { border: none !important; padding: 0 !important; } .edit-wrapper { border: none !important; padding: 0 !important; margin: 0 !important; } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media print { header, .tabs, .fab-container, .editor-overlay, .wrapper-toolbar { display: none !important; } body { display: block !important; font-size: 12px; } body.editing-mode { border: none !important; padding: 0 !important; } }
     </style>
 </head>
 <body>
@@ -197,10 +212,11 @@
                 <h1><i class="fas fa-graduation-cap"></i> <span id="header-title-text">טוען כותרת...</span></h1>
             </div>
             <div class="actions">
-                <button class="btn-action btn-save-file" onclick="downloadSource()" title="שמור קובץ HTML"><i class="fas fa-save"></i></button>
-                <button class="btn-action" id="editToggleBtn" onclick="toggleEditMode()" title="מצב עריכה"><i class="fas fa-pen"></i></button>
-                <button class="btn-action" id="theme-toggle" title="יום/לילה"><i class="fas fa-moon"></i></button>
-                <button class="btn-action" onclick="window.print()" title="הדפס/PDF"><i class="fas fa-print"></i></button>
+                <button class="btn-action" onclick="window.close()" title="סגור"><i class="fas fa-arrow-right"></i></button>
+                <button class="btn-action btn-save-file" onclick="downloadSource()" title="שמור HTML"><i class="fas fa-save"></i></button>
+                <button class="btn-action" id="editToggleBtn" onclick="toggleEditMode()" title="עריכה"><i class="fas fa-pen"></i></button>
+                <button class="btn-action" id="theme-toggle" title="תצוגה"><i class="fas fa-moon"></i></button>
+                <button class="btn-action" onclick="window.print()" title="הדפס"><i class="fas fa-print"></i></button>
                 <button class="btn-action" id="logoutButton" onclick="logout()" style="display:none;" title="יציאה"><i class="fas fa-power-off"></i></button>
             </div>
         </div>
@@ -215,22 +231,12 @@
             <button class="tab-link" onclick="switchTab('tasks', this)">מטלות</button>
         </nav>
 
-        <!-- 1. OVERVIEW -->
         <div id="overview" class="tab-content active">
             <div class="card" id="meta-card">
                 <h3>פרטי השיעור</h3>
-                <div class="meta-row">
-                    <div class="meta-label">נושא:</div>
-                    <div id="meta-subject" class="meta-value" contenteditable="false"></div>
-                </div>
-                <div class="meta-row">
-                    <div class="meta-label">מרצה:</div>
-                    <div id="meta-value-teacher" class="meta-value" contenteditable="false"></div>
-                </div>
-                <div class="meta-row">
-                    <div class="meta-label">תאריך:</div>
-                    <input type="date" id="meta-value-date" class="meta-value" disabled>
-                </div>
+                <div class="meta-row"><span class="meta-label">נושא:</span><span id="meta-subject" class="meta-value" contenteditable="false"></span></div>
+                <div class="meta-row"><span class="meta-label">מרצה:</span><span id="meta-value-teacher" class="meta-value" contenteditable="false"></span></div>
+                <div class="meta-row"><span class="meta-label">תאריך:</span><input type="date" id="meta-value-date" class="meta-value" disabled></div>
             </div>
             <div class="card">
                 <h3>תקציר</h3>
@@ -238,54 +244,65 @@
             </div>
         </div>
 
-        <!-- 2. CONTENT -->
         <div id="content" class="tab-content content-zone"></div>
 
-        <!-- 3. QA -->
         <div id="qa" class="tab-content">
-            <div class="card">
-                <h3>שאלות ודיון</h3>
-                <div id="qa-body" class="content-zone"></div>
-            </div>
+            <div class="card"><h3>שאלות ודיון</h3><div id="qa-body" class="content-zone"></div></div>
         </div>
 
-        <!-- 4. GLOSSARY & SOURCES -->
         <div id="glossary" class="tab-content">
-            <div class="card">
-                <h3>מונחים והגדרות</h3>
-                <ol class="glossary-list content-zone" id="glossary-list"></ol>
-            </div>
-            <div class="card">
-                <h3>מקורות חיצוניים</h3>
-                <ul id="sources-list" class="content-zone"></ul>
-            </div>
+            <div class="card"><h3>מונחים והגדרות</h3><ol class="glossary-list content-zone" id="glossary-list"></ol></div>
+            <div class="card"><h3>מקורות חיצוניים</h3><ul id="sources-list" class="content-zone"></ul></div>
         </div>
 
-        <!-- 5. TASKS -->
         <div id="tasks" class="tab-content">
-            <div class="card hl-fail">
-                <h3>מטלות</h3>
-                <div id="tasks-body" class="content-zone"></div>
+            <div class="card hl-fail"><h3>מטלות</h3><div id="tasks-body" class="content-zone"></div></div>
+        </div>
+    </div>
+
+    <!-- FABs -->
+    <div class="fab-container">
+        <button class="fab-btn" onclick="openEditor()" title="הוסף תוכן"><i class="fas fa-plus"></i></button>
+        <button class="fab-btn ai-fab" onclick="toggleChat()" title="AI Chat">
+            <!-- Official Gemini SVG Icon -->
+            <svg class="gemini-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.9,22.1c-0.6,0-1-0.4-1-1v-5.8c0-2-1.6-3.6-3.6-3.6H1.6c-0.6,0-1-0.4-1-1s0.4-1,1-1h5.8c2,0,3.6-1.6,3.6-3.6V1.6c0-0.6,0.4-1,1-1s1,0.4,1,1v5.8c0,2,1.6,3.6,3.6,3.6h5.8c0.6,0,1,0.4,1,1s-0.4,1-1,1h-5.8c-2,0-3.6,1.6-3.6,3.6v5.8C12.9,21.7,12.5,22.1,11.9,22.1z M19.6,4.4c-0.4,0-0.7-0.3-0.7-0.7V2c0-0.4-0.3-0.7-0.7-0.7s-0.7,0.3-0.7,0.7v1.7c0,0.4-0.3,0.7-0.7,0.7S16.2,4,16.2,4.4s0.3,0.7,0.7,0.7H18.6c0.4,0,0.7,0.3,0.7,0.7s0.3,0.7,0.7,0.7s0.7-0.3,0.7-0.7V5.1c0-0.4,0.3-0.7,0.7-0.7S22,4,22,4.4z"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Chat Modal -->
+    <div class="chat-overlay" id="chatOverlay">
+        <div class="chat-window">
+            <div class="chat-header">
+                <span><i class="fas fa-robot"></i> עוזר מחקר (Gemini)</span>
+                <div><i class="fas fa-cog" style="cursor:pointer;margin-left:10px" onclick="toggleSettings()"></i><i class="fas fa-times" style="cursor:pointer" onclick="toggleChat()"></i></div>
+            </div>
+            <div class="settings-panel" id="settingsPanel">
+                <label>Gemini API Key:</label>
+                <input type="password" id="apiKeyInput" placeholder="הדבק כאן..." onchange="saveKey(this.value)">
+                <a href="https://aistudio.google.com/app/apikey" target="_blank">קבל מפתח בחינם</a>
+            </div>
+            <div class="chat-body" id="chatBody"><div class="chat-message bot">היי! קראתי את הסיכום. שאל אותי כל דבר.</div></div>
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" id="userMsg" placeholder="שאל שאלה..." onkeypress="handleEnter(event)">
+                <button class="btn-action active" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
 
-    <!-- FAB -->
-    <button class="fab-btn" onclick="openEditor()"><i class="fas fa-plus"></i></button>
-
     <!-- Editor -->
-    <div class="editor-overlay" id="editorModal">
-        <!-- Fix: Independent click handling to allow input focus -->
-        <div class="editor-box" id="editorBox">
+    <div class="editor-overlay" id="editorModal" onclick="closeEditor()">
+        <div class="editor-box" onclick="event.stopPropagation()">
             <h3 style="text-align:center;border:none;margin-bottom:10px;">הוספת תוכן</h3>
             
             <div class="type-scroll">
-                <button class="type-btn btn-text selected" onclick="setType(this, 'text')">טקסט רגיל</button>
-                <button class="type-btn btn-acc" onclick="setType(this, 'accordion')"><i class="fas fa-list"></i> נושא חדש</button>
-                <button class="type-btn btn-ext" onclick="setType(this, 'external')">הרחבה</button>
-                <button class="type-btn btn-ex" onclick="setType(this, 'example')">דוגמה</button>
-                <button class="type-btn btn-per" onclick="setType(this, 'personal')">הערה אישית</button>
-                <button class="type-btn btn-task" onclick="setType(this, 'task')">מטלה</button>
+                <button class="type-btn btn-text selected" onclick="setType(this, 'text')">טקסט</button>
+                <button class="type-btn btn-acc" onclick="setType(this, 'accordion')"><i class="fas fa-list"></i> נושא</button>
+                <button class="type-btn btn-ext" onclick="setType(this, 'external')"><i class="fas fa-book-open"></i> הרחבה</button>
+                <button class="type-btn btn-ex" onclick="setType(this, 'example')"><i class="fas fa-lightbulb"></i> דוגמה</button>
+                <button class="type-btn btn-per" onclick="setType(this, 'personal')"><i class="fas fa-pen-fancy"></i> הערה</button>
+                <button class="type-btn btn-task" onclick="setType(this, 'task')"><i class="fas fa-tasks"></i> מטלה</button>
             </div>
 
             <input type="text" id="editorTitleInput" placeholder="כותרת..." style="display:none;">
@@ -299,13 +316,31 @@
                 
                 <div style="width:1px;background:#ccc;margin:0 5px;"></div>
                 
-                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('fontSize', '5')">T+</button>
-                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('fontSize', '3')">T-</button>
-                <input type="color" onchange="execCmd('foreColor', this.value)" title="צבע טקסט" style="width:25px;height:25px;border:none;background:none;cursor:pointer;">
-                
+                <!-- Extended Palette -->
+                <div class="palette-row">
+                    <div class="color-swatch" style="background:#000000" onmousedown="event.preventDefault(); execCmd('foreColor','#000000')"></div>
+                    <div class="color-swatch" style="background:#546e7a" onmousedown="event.preventDefault(); execCmd('foreColor','#546e7a')"></div>
+                    <div class="color-swatch" style="background:#b71c1c" onmousedown="event.preventDefault(); execCmd('foreColor','#b71c1c')"></div>
+                    <div class="color-swatch" style="background:#e64a19" onmousedown="event.preventDefault(); execCmd('foreColor','#e64a19')"></div>
+                    <div class="color-swatch" style="background:#f57f17" onmousedown="event.preventDefault(); execCmd('foreColor','#f57f17')"></div>
+                    <div class="color-swatch" style="background:#1b5e20" onmousedown="event.preventDefault(); execCmd('foreColor','#1b5e20')"></div>
+                    <div class="color-swatch" style="background:#006064" onmousedown="event.preventDefault(); execCmd('foreColor','#006064')"></div>
+                    <div class="color-swatch" style="background:#01579b" onmousedown="event.preventDefault(); execCmd('foreColor','#01579b')"></div>
+                    <div class="color-swatch" style="background:#4a148c" onmousedown="event.preventDefault(); execCmd('foreColor','#4a148c')"></div>
+                    <div class="color-swatch" style="background:#880e4f" onmousedown="event.preventDefault(); execCmd('foreColor','#880e4f')"></div>
+                    <div class="color-swatch" style="background:#3e2723" onmousedown="event.preventDefault(); execCmd('foreColor','#3e2723')"></div>
+                    <div class="color-swatch" style="background:linear-gradient(to right, #f00, #00f)" onclick="document.getElementById('colorPick').click()"></div>
+                    <input type="color" id="colorPick" onchange="execCmd('foreColor', this.value)" style="visibility:hidden;width:0;position:absolute;">
+                </div>
+
                 <div style="width:1px;background:#ccc;margin:0 5px;"></div>
-                <!-- Fix: Prevent focus loss on createTerm -->
-                <button class="tb-btn" onmousedown="event.preventDefault(); createTermFromEditor()" title="צור מונח" style="color:var(--primary);"><i class="fas fa-book"></i> מונח</button>
+                <!-- Font Sizes -->
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('fontSize', '2')" style="font-size:11px">T</button>
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('fontSize', '3')" style="font-size:14px">T</button>
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('fontSize', '5')" style="font-size:18px">T</button>
+
+                <div style="width:1px;background:#ccc;margin:0 5px;"></div>
+                <button class="tb-btn" onmousedown="event.preventDefault(); createTermFromEditor()" title="צור מונח" style="color:var(--primary);"><i class="fas fa-book"></i></button>
             </div>
 
             <div id="richEditor" class="rich-editor" contenteditable="true"></div>
@@ -318,290 +353,173 @@
     </div>
 
     <script>
-        let isEditMode = false;
-        let contentType = 'text';
-        let pendingHTML = '';
-        let isDirty = false;
+        let isEditMode=false, contentType='text', pendingHTML='', isDirty=false, apiKey = localStorage.getItem('geminiKey');
+        window.onbeforeunload=function(){if(isDirty)return "שינויים לא נשמרו";};
+        function markDirty(){isDirty=true;}
 
-        window.onbeforeunload = function() { if (isDirty) return "שינויים לא נשמרו"; };
-        function markDirty() { isDirty = true; }
-
-        // Init Meta
-        window.initMetaData = function() {
-            const mTitle = document.querySelector("meta[name='lesson-title']").content;
-            const mTeacher = document.querySelector("meta[name='lesson-teacher']").content;
-            const mDate = document.querySelector("meta[name='lesson-date']").content;
-
-            const subEl = document.getElementById('meta-subject');
-            const teachEl = document.getElementById('meta-value-teacher');
-            const dateEl = document.getElementById('meta-value-date');
-
-            if(subEl && !subEl.innerText) subEl.innerText = mTitle;
-            if(teachEl && !teachEl.innerText) teachEl.innerText = mTeacher;
-            if(dateEl && !dateEl.value) dateEl.value = mDate;
-
+        window.initMetaData=function(){
+            const t=document.querySelector("meta[name='lesson-title']").content;
+            const c=document.querySelector("meta[name='lesson-teacher']").content;
+            const d=document.querySelector("meta[name='lesson-date']").content;
+            const s1=document.getElementById('meta-subject'), s2=document.getElementById('meta-value-teacher'), s3=document.getElementById('meta-value-date');
+            if(s1&&!s1.innerText)s1.innerText=t; if(s2&&!s2.innerText)s2.innerText=c; if(s3&&!s3.value)s3.value=d;
             updateHeader();
-
-            subEl.addEventListener('input', () => { 
-                markDirty(); 
-                updateHeader(); 
-                document.querySelector("meta[name='lesson-title']").setAttribute("content", subEl.innerText);
+            document.getElementById('glossary-list').addEventListener('input',function(e){
+                markDirty(); const li=e.target.closest('li');
+                if(li&&li.hasAttribute('data-term-id')){
+                    const tid=li.getAttribute('data-term-id'), pts=li.innerText.split(':');
+                    if(pts.length>1) document.querySelectorAll(`.term[data-term-id="${tid}"]`).forEach(x=>x.setAttribute('data-def', pts.slice(1).join(':').trim()));
+                }
             });
-            teachEl.addEventListener('input', () => { 
-                markDirty(); 
-                document.querySelector("meta[name='lesson-teacher']").setAttribute("content", teachEl.innerText);
-            });
-            dateEl.addEventListener('change', () => { 
-                markDirty();
-                document.querySelector("meta[name='lesson-date']").setAttribute("content", dateEl.value);
-            });
+            s1.addEventListener('input',()=>{markDirty();updateHeader();document.querySelector("meta[name='lesson-title']").setAttribute("content",s1.innerText);});
+            s2.addEventListener('input',()=>{markDirty();document.querySelector("meta[name='lesson-teacher']").setAttribute("content",s2.innerText);});
+            s3.addEventListener('change',()=>{markDirty();document.querySelector("meta[name='lesson-date']").setAttribute("content",s3.value);});
+            if(apiKey) document.getElementById('apiKeyInput').value = apiKey;
         };
 
-        function updateHeader() {
-            const val = document.getElementById('meta-subject').innerText;
-            document.getElementById('header-title-text').innerText = val || 'סיכום שיעור';
-            document.title = val || 'סיכום שיעור';
+        function updateHeader(){
+            const v=document.getElementById('meta-subject').innerText;
+            document.getElementById('header-title-text').innerText=v||'סיכום שיעור'; document.title=v||'סיכום שיעור';
         }
 
-        // --- GLOSSARY TOOL ---
-        function addTermToTab(text, def) {
-            const list = document.getElementById('glossary-list');
-            const li = document.createElement('li');
-            const content = `<strong>${text}:</strong> ${def}`;
+        /* CHAT */
+        function toggleChat(){ document.getElementById('chatOverlay').style.display = document.getElementById('chatOverlay').style.display==='flex'?'none':'flex'; }
+        function toggleSettings(){ document.getElementById('settingsPanel').style.display = document.getElementById('settingsPanel').style.display==='block'?'none':'block'; }
+        function saveKey(val){ localStorage.setItem('geminiKey', val); apiKey = val; }
+        async function sendMessage(){
+            const input=document.getElementById('userMsg'), q=input.value.trim();
+            if(!q)return; if(!apiKey){alert('חסר מפתח API');toggleSettings();return;}
+            addChatMsg(q,'user'); input.value='';
+            const loadId = 'load'+Date.now();
+            addChatMsg('מקליד...', 'bot', loadId);
             
-            // If editing, wrap immediately
-            if (isEditMode) {
-                 const wrapper = createWrapper(content);
-                 li.appendChild(wrapper);
-            } else {
-                 li.innerHTML = content;
-            }
-            list.appendChild(li);
-            markDirty();
-        }
-
-        window.createTerm = function() {
-            const sel = window.getSelection();
-            if (!sel.rangeCount || !sel.toString().trim()) return alert('סמן מילה בטקסט');
-            const text = sel.toString();
-            const def = prompt("הגדרה עבור: " + text);
-            if (def) {
-                document.execCommand('insertHTML', false, `<span class="term" data-def="${def}">${text}</span>`);
-                addTermToTab(text, def);
-            }
-        }
-        window.createTermFromEditor = function() { window.createTerm(); }
-
-        // --- WRAPPER ENGINE ---
-        function toggleEditMode() {
-            isEditMode = !isEditMode;
-            const btn = document.getElementById('editToggleBtn');
+            const context = document.body.innerText.replace(/\n+/g,' ').substring(0,30000);
+            const prompt = `You are a helpful academic teaching assistant. Context from the lesson:\n${context}\n\nStudent Question: ${q}\n\nAnswer in Hebrew concisely and accurately.`;
             
-            if(isEditMode) {
-                document.body.classList.add('editing-mode');
-                btn.classList.add('active');
-                
-                // Meta
-                document.getElementById('meta-subject').setAttribute('contenteditable', 'true');
-                document.getElementById('meta-value-teacher').setAttribute('contenteditable', 'true');
+            try {
+                const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})});
+                document.getElementById(loadId).remove();
+                if(!res.ok) return addChatMsg('שגיאה בתקשורת', 'bot');
+                const data=await res.json();
+                const ans = data.candidates?.[0]?.content?.parts?.[0]?.text || "אין תשובה";
+                addChatMsg(ans.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>'), 'bot');
+            } catch(e){ if(document.getElementById(loadId))document.getElementById(loadId).remove(); addChatMsg("שגיאה", 'bot'); }
+        }
+        function addChatMsg(t,type,id){
+            const d=document.createElement('div'); if(id)d.id=id; d.className=`chat-message ${type}`; d.innerHTML=t;
+            const b=document.getElementById('chatBody'); b.appendChild(d); b.scrollTop=b.scrollHeight;
+        }
+        function handleEnter(e){ if(e.key==='Enter') sendMessage(); }
+
+        /* Glossary */
+        function addTermToTab(t,d,id){
+            const l=document.getElementById('glossary-list'), li=document.createElement('li'); li.setAttribute('data-term-id',id);
+            const c=`<strong>${t}:</strong> ${d}`;
+            if(isEditMode) li.appendChild(createWrapper(c)); else li.innerHTML=c;
+            l.appendChild(li); markDirty();
+        }
+        window.createTerm=function(){
+            const s=window.getSelection(); if(!s.rangeCount||!s.toString().trim())return alert('סמן מילה');
+            const t=s.toString(), d=prompt("הגדרה:");
+            if(d){
+                const id='tid_'+Math.floor(Math.random()*10000);
+                document.execCommand('insertHTML',false,`<span class="term" data-def="${d}" data-term-id="${id}">${t}</span>`);
+                addTermToTab(t,d,id);
+            }
+        }
+        window.createTermFromEditor=function(){window.createTerm();}
+
+        /* Edit */
+        function toggleEditMode(){
+            isEditMode=!isEditMode; const btn=document.getElementById('editToggleBtn');
+            if(isEditMode){
+                document.body.classList.add('editing-mode'); btn.classList.add('active');
+                document.getElementById('meta-subject').setAttribute('contenteditable','true');
+                document.getElementById('meta-value-teacher').setAttribute('contenteditable','true');
                 document.getElementById('meta-value-date').removeAttribute('disabled');
-                
-                // Wrap all content zones
-                document.querySelectorAll('.content-zone, .acc-body').forEach(zone => wrapChildren(zone));
-
+                document.querySelectorAll('.content-zone, .acc-body').forEach(z=>wrapDeep(z));
+                document.querySelectorAll('.editable-content').forEach(el=>{el.setAttribute('contenteditable','true');el.addEventListener('input',markDirty)});
             } else {
-                document.body.classList.remove('editing-mode');
-                btn.classList.remove('active');
-                
-                document.querySelectorAll('[contenteditable]').forEach(el => el.setAttribute('contenteditable', 'false'));
-                document.getElementById('meta-value-date').setAttribute('disabled', 'true');
-                updateHeader();
+                document.body.classList.remove('editing-mode'); btn.classList.remove('active');
+                document.querySelectorAll('[contenteditable]').forEach(e=>e.setAttribute('contenteditable','false'));
+                document.getElementById('meta-value-date').setAttribute('disabled','true');
             }
         }
-
-        function wrapChildren(container) {
-            Array.from(container.children).forEach(child => {
-                if(child.classList.contains('edit-wrapper') || child.tagName === 'BR') return;
-                
-                // Lists special handling
-                if(container.tagName === 'OL' || container.tagName === 'UL') {
-                     const wrapper = createWrapper(child.innerHTML);
-                     child.innerHTML = '';
-                     child.appendChild(wrapper);
-                } else {
-                    const wrapper = createWrapper(child.cloneNode(true));
-                    container.replaceChild(wrapper, child);
-                }
+        function wrapDeep(c){
+            Array.from(c.children).forEach(k=>{
+                if(k.classList.contains('highlight')){ const inr=k.querySelector('div:not(.wrapper-toolbar)'); if(inr) wrapDeep(inr); }
+                if(k.classList.contains('edit-wrapper')||k.tagName==='BR'||k.tagName==='SUMMARY')return;
+                if(c.tagName==='OL'||c.tagName==='UL'){ const w=createWrapper(k.innerHTML); k.innerHTML=''; k.appendChild(w); }
+                else { c.replaceChild(createWrapper(k.cloneNode(true)),k); }
             });
         }
-
-        function createWrapper(innerContent) {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'edit-wrapper';
-            
-            const controls = document.createElement('div');
-            controls.className = 'wrapper-toolbar';
-            controls.contentEditable = "false";
-            controls.innerHTML = `
-                <div class="w-btn" onclick="moveBlock(this,-1)">▲</div>
-                <div class="w-btn" onclick="moveBlock(this,1)">▼</div>
-                <div class="w-btn term" onmousedown="event.preventDefault(); termFromRow(this)">📖</div>
-                <div class="w-btn del" onclick="deleteBlock(this)">✖</div>
-            `;
-            
-            const contentDiv = document.createElement('div');
-            contentDiv.className = 'editable-content';
-            contentDiv.setAttribute('contenteditable', 'true');
-            contentDiv.addEventListener('input', markDirty);
-            
-            if(typeof innerContent === 'string') contentDiv.innerHTML = innerContent;
-            else contentDiv.appendChild(innerContent);
-
-            wrapper.appendChild(controls);
-            wrapper.appendChild(contentDiv);
-            return wrapper;
+        function createWrapper(inner){
+            const w=document.createElement('div'); w.className='edit-wrapper';
+            w.innerHTML=`<div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="true">${typeof inner==='string'?inner:''}`;
+            if(typeof inner!=='string') w.querySelector('.editable-content').appendChild(inner);
+            w.querySelector('.editable-content').addEventListener('input',markDirty);
+            return w;
         }
+        window.moveBlock=function(b,d){const el=b.closest('.edit-wrapper'), p=(el.parentElement.tagName==='LI'?el.parentElement:el); markDirty(); if(d===-1&&p.previousElementSibling)p.parentNode.insertBefore(p,p.previousElementSibling); if(d===1&&p.nextElementSibling)p.parentNode.insertBefore(p.nextElementSibling,p)};
+        window.deleteBlock=function(b){if(confirm('למחוק?')){markDirty();const el=b.closest('.edit-wrapper'); if(el.parentElement.tagName==='LI')el.parentElement.remove(); else el.remove();}};
+        window.termFromRow=function(b){b.closest('.edit-wrapper').querySelector('.editable-content').focus();window.createTerm();};
 
-        window.moveBlock = function(btn, dir) {
-            let block = btn.closest('.edit-wrapper');
-            if(block.parentElement.tagName === 'LI') block = block.parentElement;
-            
-            markDirty();
-            if(dir===-1 && block.previousElementSibling) block.parentNode.insertBefore(block, block.previousElementSibling);
-            if(dir===1 && block.nextElementSibling) block.parentNode.insertBefore(block.nextElementSibling, block);
+        function openEditor(){const e=document.getElementById('richEditor');e.innerHTML='';document.getElementById('editorTitleInput').value='';document.getElementById('editorModal').style.display='flex';e.setAttribute('contenteditable','true');setTimeout(()=>e.focus(),100);}
+        function closeEditor(){document.getElementById('editorModal').style.display='none';}
+        function execCmd(c,v=null){document.execCommand(c,false,v);}
+        function setType(b,t){
+            document.querySelectorAll('.type-btn').forEach(x=>x.classList.remove('selected')); b.classList.add('selected'); contentType=t;
+            const inp=document.getElementById('editorTitleInput'); inp.style.display=(t!=='text')?'block':'none'; inp.placeholder=(t==='accordion')?'נושא...':'כותרת...';
         }
-        window.deleteBlock = function(btn) {
-            if(confirm('למחוק?')) { 
-                markDirty(); 
-                let block = btn.closest('.edit-wrapper');
-                if(block.parentElement.tagName === 'LI') block.parentElement.remove();
-                else block.remove(); 
+        
+        function startPlacement(){
+            const h=document.getElementById('richEditor').innerHTML, t=document.getElementById('editorTitleInput').value;
+            if(!h&&contentType!=='accordion')return alert('חסר תוכן');
+            let inner='';
+            if(contentType==='accordion') inner=`<details open><summary>${t||'נושא'}</summary><div class="acc-body content-zone">${h}</div></details>`;
+            else if(contentType==='text') inner=`<p>${h}</p>`;
+            else {
+                let cls='',ico='';
+                if(contentType==='external'){cls='hl-external';ico='fa-book-open';}
+                else if(contentType==='example'){cls='hl-example';ico='fa-lightbulb';}
+                else if(contentType==='personal'){cls='hl-success';ico='fa-pen-fancy';}
+                else if(contentType==='task'){cls='hl-fail';ico='fa-tasks';}
+                inner=`<div class="highlight ${cls}"><h4><i class="fas ${ico}"></i> ${t||(contentType==='personal'?'הערה':contentType==='task'?'מטלה':'הרחבה')}</h4><div class="editable-content">${h}</div></div>`;
             }
-        }
-        window.termFromRow = function(btn) {
-            const parent = btn.closest('.edit-wrapper').querySelector('.editable-content');
-            parent.focus(); 
-            window.createTerm();
-        }
-
-        // --- EDITOR MODAL LOGIC (FIXED) ---
-        
-        // Prevent closing when clicking inside
-        document.getElementById('editorBox').addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-        
-        // Close when clicking outside
-        document.getElementById('editorModal').addEventListener('click', function(e) {
-            if(e.target.id === 'editorModal') closeEditor();
-        });
-
-        function openEditor() { 
-            document.getElementById('editorModal').style.display = 'flex'; 
-            // Explicitly clear and focus
-            document.getElementById('richEditor').innerHTML = '';
-            document.getElementById('editorTitleInput').value = '';
-            
-            setTimeout(()=> {
-                document.getElementById('richEditor').focus();
-            }, 50); 
-        }
-        
-        function closeEditor() { document.getElementById('editorModal').style.display = 'none'; }
-        function execCmd(cmd, val=null) { document.execCommand(cmd, false, val); }
-
-        function setType(btn, type) {
-            document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            contentType = type;
-            const tInp = document.getElementById('editorTitleInput');
-            tInp.style.display = (type !== 'text') ? 'block' : 'none';
-            if(type==='accordion') tInp.placeholder = 'כותרת נושא...';
-            else tInp.placeholder = 'כותרת...';
-        }
-
-        function startPlacement() {
-            const html = document.getElementById('richEditor').innerHTML;
-            const title = document.getElementById('editorTitleInput').value;
-
-            if(!html && contentType !== 'accordion') return alert('הכנס תוכן');
-
-            let inner = '';
-            if(contentType === 'accordion') {
-                inner = `<details open><summary>${title || 'נושא'}</summary><div class="acc-body content-zone">${html}</div></details>`;
-            } else {
-                let blockContent = '';
-                if(contentType==='text') blockContent = `<p>${html}</p>`;
-                else if(contentType==='external') blockContent = `<div class="highlight hl-external"><h4><i class="fas fa-book"></i> ${title||'הרחבה'}</h4><div>${html}</div></div>`;
-                else if(contentType==='example') blockContent = `<div class="highlight hl-example"><p><strong>${title||'דוגמה'}:</strong></p><div>${html}</div></div>`;
-                else if(contentType==='personal') blockContent = `<div class="highlight hl-success"><h4><i class="fas fa-sticky-note"></i> ${title||'הערה אישית'}</h4><div>${html}</div></div>`;
-                else if(contentType==='task') blockContent = `<div class="highlight hl-fail"><h4>${title||'מטלה'}</h4><div>${html}</div></div>`;
-                inner = blockContent;
-            }
-            
-            pendingHTML = inner;
-
-            document.getElementById('editorModal').style.display = 'none';
+            pendingHTML=inner; document.getElementById('editorModal').style.display='none';
             document.body.classList.add('placing-mode');
-            
-            const t = document.createElement('div');
-            t.innerText = "לחץ כדי למקם";
-            t.style.cssText = "position:fixed;top:80px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px;border-radius:20px;z-index:4000;";
-            document.body.appendChild(t);
-            setTimeout(()=>t.remove(), 3000);
-            
-            document.addEventListener('click', placeHandler, true);
+            const msg=document.createElement('div'); msg.innerText="בחר מיקום"; msg.style.cssText="position:fixed;top:80px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:10px;border-radius:20px;z-index:4000;"; document.body.appendChild(msg); setTimeout(()=>msg.remove(),3000);
+            document.addEventListener('click',placeHandler,true);
         }
 
-        function placeHandler(e) {
-            e.preventDefault(); e.stopPropagation();
-            markDirty();
-
+        function placeHandler(e){
+            e.preventDefault(); e.stopPropagation(); markDirty();
             let target = e.target.closest('.edit-wrapper, details, li, p, .highlight'); 
             let container = e.target.closest('.content-zone, .acc-body');
-
-            let node = document.createElement('div');
-            node.innerHTML = pendingHTML;
+            let node = document.createElement('div'); node.innerHTML = pendingHTML;
             let newEl = node.firstElementChild;
-
-            if(isEditMode) {
-                if(contentType === 'accordion') {
-                   // Just insert
-                } else {
-                   newEl = createWrapper(newEl);
-                }
-            }
-
-            if(target && target.parentElement.closest('.content-zone')) {
-                target.insertAdjacentElement('afterend', newEl);
-            } else if(container) {
-                container.appendChild(newEl);
-            } else {
-                document.getElementById('content').appendChild(newEl);
-            }
-
+            if(isEditMode && contentType!=='accordion') newEl = createWrapper(newEl);
+            if(target && target.parentElement.closest('.content-zone, .acc-body')) target.insertAdjacentElement('afterend', newEl);
+            else if(container) container.appendChild(newEl);
+            else document.getElementById('content').appendChild(newEl);
             document.body.classList.remove('placing-mode');
             document.removeEventListener('click', placeHandler, true);
-            
-            if(isEditMode) { toggleEditMode(); toggleEditMode(); } 
+            if(isEditMode) { toggleEditMode(); toggleEditMode(); }
         }
 
-        // General
         function switchTab(id, btn) {
             document.querySelectorAll('.tab-content, .tab-link').forEach(e=>e.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             btn.classList.add('active');
         }
         document.getElementById('theme-toggle').addEventListener('click', ()=>document.body.classList.toggle('dark-mode'));
-
+        
         function downloadSource() {
             if(isEditMode) toggleEditMode();
             isDirty=false;
             const blob = new Blob([document.documentElement.outerHTML], {type:'text/html'});
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = (document.title||'lesson')+'.html';
-            a.click();
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+            a.download = (document.title||'lesson')+'.html'; a.click();
         }
 
         if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', window.initMetaData); else window.initMetaData();
