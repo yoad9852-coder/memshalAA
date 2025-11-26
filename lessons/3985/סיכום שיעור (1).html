@@ -1,0 +1,501 @@
+<html lang="he" dir="rtl"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>סיכום שיעור</title>
+    
+    <meta name="lesson-title" content="">
+    <meta name="lesson-date" content="">
+    <meta name="lesson-teacher" content="">
+
+    <!-- Firebase Protection -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        const firebaseConfig = {apiKey: "AIzaSyDqxxf434N0wnn6C6AglEEIaqj5TVtoYLQ",authDomain: "memshalaa.firebaseapp.com",projectId: "memshalaa",storageBucket: "memshalaa.firebasestorage.app",messagingSenderId: "324187090365",appId: "1:324187090365:web:8e4956d0d1370b5aab36d4",measurementId: "G-2QHJF3SSJQ"};
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        onAuthStateChanged(auth, (user) => {
+            if (user) { document.body.style.display = 'block'; if(document.getElementById('logoutButton')) document.getElementById('logoutButton').style.display = 'inline-flex'; window.initMetaData(); } 
+            else { document.body.style.display = 'block'; window.initMetaData(); } // Debug allowed
+        });
+        window.logout = function() { signOut(auth).then(() => { window.location.href = 'login.html'; }); }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #f0f2f5; --surface: #ffffff; --text-main: #1c1e21; --text-sec: #606770;
+            --primary: #1877f2; --accent: #e7f3ff; --border: #dadde1; --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --w: 800px;
+            /* Colors */
+            --hl-yellow-bg: #fff9c4; --hl-yellow-br: #fdd835;
+            --hl-blue-bg: #e3f2fd; --hl-blue-br: #2196f3;
+            --hl-green-bg: #e8f5e9; --hl-green-br: #4caf50; 
+            --hl-red-bg: #ffebee; --hl-red-br: #ef5350;
+            /* Nav Height */
+            --nav-height: 60px;
+        }
+
+        /* 3. OLED Dark Mode */
+        body.dark-mode {
+            --bg: #000000; /* True Black */
+            --surface: #121212; /* Very Dark Gray for Contrast */
+            --text-main: #e0e0e0; --text-sec: #b0b3b8;
+            --primary: #4a90e2; --accent: #1f2a36; --border: #333333;
+            --shadow: 0 1px 2px rgba(255,255,255,0.1);
+            
+            --hl-yellow-bg: #3e3b20; --hl-blue-bg: #1a2836; 
+            --hl-green-bg: #1a2e1b; --hl-red-bg: #381e1e;
+        }
+
+        * { box-sizing: border-box; }
+        body, button, input, textarea, select, .tab-link, h1, h2, h3, h4, li, p, span, div, summary, dt, dd { font-family: 'Noto Sans Hebrew', sans-serif !important; }
+        .fas, .far, .fab, .fa { font-family: "Font Awesome 6 Free" !important; }
+        
+        body { background-color: var(--bg); color: var(--text-main); margin: 0; line-height: 1.6; font-size: 14px; padding-bottom: var(--nav-height); display: none; }
+
+        /* Header */
+        header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; padding: 0.6rem 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .header-content { max-width: var(--w); margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: relative;}
+        .header-content h1 { font-size: 1.1rem; margin: 0; display:flex; align-items:center; gap:10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 50vw; }
+        
+        /* Search Bar */
+        .search-container { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--surface); align-items: center; padding: 0 10px; z-index: 10; }
+        .search-container.active { display: flex; }
+        .search-input { flex-grow: 1; border: none; background: var(--bg); padding: 8px 12px; border-radius: 20px; color: var(--text-main); outline: none; font-size: 16px; margin-right: 10px; }
+        .search-close { background: none; border: none; cursor: pointer; color: var(--text-sec); font-size: 1.2rem; }
+        /* Highlight effect for search results */
+        .found-focus { animation: highlight-pulse 2s ease-out; border: 2px solid var(--primary); }
+        @keyframes highlight-pulse { 0% { background-color: rgba(255, 255, 0, 0.5); } 100% { background-color: transparent; } }
+
+        .btn-action { background: var(--accent); border: none; border-radius: 50%; width: 34px; height: 34px; color: var(--primary); cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; justify-content: center; margin-left: 5px; font-size: 14px; flex-shrink: 0; }
+        .btn-action:hover { filter: brightness(0.95); }
+        .btn-action.active { background: var(--primary); color: white; }
+        .btn-save-file { background: #4caf50; color: white; } 
+
+        /* Main Layout */
+        .main-wrap { max-width: var(--w); margin: 20px auto; padding: 0 20px 80px; }
+
+        /* Top Tabs (Desktop) */
+        .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; border-bottom: 2px solid var(--border); margin-bottom: 20px; padding-bottom: 5px;}
+        .tab-link { background: none; border: none; padding: 8px 12px; font-size: 0.95rem; font-weight: 500; color: var(--text-sec); cursor: pointer; border-bottom: 3px solid transparent; transition: 0.3s; margin-bottom: -7px; }
+        .tab-link.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+        /* 1. Mobile Bottom Navigation */
+        .bottom-nav {
+            display: none; position: fixed; bottom: 0; left: 0; width: 100%; height: var(--nav-height);
+            background: var(--surface); border-top: 1px solid var(--border); z-index: 9000;
+            justify-content: space-around; align-items: center; box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-sec); font-size: 10px; background: none; border: none; width: 20%; padding: 5px 0; cursor: pointer;}
+        .nav-item i { font-size: 18px; margin-bottom: 3px; }
+        .nav-item.active { color: var(--primary); }
+
+        .tab-content { display: none; animation: fadeIn 0.3s; }
+        .tab-content.active { display: block; }
+
+        /* Content Styling */
+        .card { background: var(--surface); border-radius: 12px; box-shadow: var(--shadow); padding: 20px; margin-bottom: 20px; position: relative; min-height: 80px; }
+        h3 { border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 15px; font-size: 1.2rem; color: var(--text-main); }
+        p, li { margin-bottom: 10px; line-height: 1.7; }
+
+        .highlight { padding: 6px 12px 10px; margin: 10px 0; border-radius: 6px; border-right: 4px solid transparent; position: relative; font-size: 0.92em !important; }
+        .highlight > *:first-child { margin-top: 0; }
+        .highlight h4 { margin: 0 0 4px 0; font-weight: 700; font-size: 1.1em; }
+        .hl-example { background-color: var(--hl-yellow-bg); border-color: var(--hl-yellow-br); }
+        .hl-external { background-color: var(--hl-blue-bg); border-color: var(--hl-blue-br); }
+        .hl-success { background-color: var(--hl-green-bg); border-color: var(--hl-green-br); } 
+        .hl-fail { background-color: var(--hl-red-bg); border-color: var(--hl-red-br); }
+
+        /* Metadata */
+        .meta-row { display: flex; justify-content: flex-start; align-items: center; border-bottom: 1px dashed var(--border); padding: 10px 0; width: 100%; }
+        .meta-label { font-weight: 700; color: var(--text-sec); margin-left: 15px; min-width: 60px; }
+        .meta-value { font-weight: 400; color: var(--text-main); flex-grow: 1; text-align: right; outline: none; border-bottom: 1px solid transparent; min-height: 24px; }
+        .meta-value:focus { border-bottom: 1px solid var(--primary); background: rgba(24,119,242,0.05); }
+        input[type="date"] { border: none; background: transparent; color: var(--text-main); width: auto; flex-grow: 1; text-align: right; outline: none; }
+
+        /* Glossary */
+        ol.glossary-list { padding-right: 25px; margin: 0; list-style: none; counter-reset: gloss-counter; }
+        ol.glossary-list li { position: relative; margin-bottom: 12px; padding-right: 5px; }
+        ol.glossary-list li::before { content: counter(gloss-counter) "."; counter-increment: gloss-counter; position: absolute; right: -20px; color: var(--primary); font-weight: 800; }
+        .term { color: var(--primary) !important; font-weight: 700; cursor: help; border-bottom: 1px dotted var(--primary); position: relative; display: inline-block; }
+        .term:hover { background-color: var(--accent); }
+        .term:hover::after { content: attr(data-def); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 10px; border-radius: 8px; width: max-content; max-width: 260px; font-size: 13px; z-index: 99999; white-space: normal; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.3); pointer-events: none; }
+        .term:hover::before { content:''; position:absolute; bottom:115%; left:50%; margin-left:-6px; border-width:6px; border-style:solid; border-color:#333 transparent transparent transparent; z-index:99999; }
+
+        /* Accordion */
+        details { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; overflow: visible; background: var(--surface); }
+        summary { padding: 15px; cursor: pointer; font-weight: 700; font-size: 1.1rem; display: flex; justify-content: space-between; background: rgba(0,0,0,0.02); }
+        .acc-body { padding: 15px; border-top: 1px solid var(--border); min-height: 50px; }
+
+        /* Edit Engine */
+        .edit-wrapper { position: relative; margin-bottom: 8px; width: 100%; }
+        body.editing-mode .edit-wrapper { border: 1px dashed rgba(0,0,0,0.15); padding-top: 40px; border-radius: 6px; background: rgba(255,255,255,0.1); }
+        .wrapper-toolbar { display: none; position: absolute; top: 5px; right: 5px; gap: 5px; z-index: 100; direction: ltr; }
+        body.editing-mode .wrapper-toolbar { display: flex; }
+        .w-btn { width: 30px; height: 30px; background: #fff; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #555; font-size: 13px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: 0.2s; }
+        .w-btn:hover { transform: scale(1.1); background: var(--primary); color: white; border-color: var(--primary); }
+        .w-btn.del:hover { background: #ef5350; border-color: #ef5350; }
+        .w-btn.term { color: var(--primary); font-weight:bold; border-color: var(--accent); }
+        .editable-content[contenteditable="true"] { outline: none; cursor: text; min-height: 1.2em; }
+
+        /* Editor Modal */
+        .fab-btn { position: fixed; bottom: 25px; left: 25px; width: 60px; height: 60px; background: var(--primary); color: white; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: none; cursor: pointer; font-size: 26px; z-index: 2000; transition: transform 0.2s; display: flex; align-items: center; justify-content: center; }
+        .fab-btn:hover { transform: scale(1.1); }
+        .editor-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 3000; justify-content: center; align-items: center; }
+        .editor-box { background: var(--surface); padding: 25px; border-radius: 12px; width: 90%; height: 85%; max-width: 900px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column; cursor: default; pointer-events: auto; }
+        .type-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 10px; margin-bottom: 5px; flex-wrap: wrap; justify-content: center; }
+        .type-btn { padding: 8px 16px; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; gap: 6px; background: var(--surface); color: var(--text-main); transition: 0.2s; }
+        .type-btn.selected { box-shadow: 0 0 0 2px var(--primary); font-weight: 700; transform: translateY(-2px); }
+        .btn-text.selected { background: #eee; border-color: #999; }
+        .btn-acc.selected { background: #333; color: #fff; border-color: #000; }
+        .btn-ext { background: var(--hl-blue-bg); border-color: var(--hl-blue-br); color: #005c69; }
+        .btn-ex { background: var(--hl-yellow-bg); border-color: var(--hl-yellow-br); color: #5f4c00; }
+        .btn-per { background: var(--hl-green-bg); border-color: var(--hl-green-br); color: #1b5e20; }
+        .btn-task { background: var(--hl-red-bg); border-color: var(--hl-red-br); color: #b71c1c; }
+        #editorTitleInput { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid var(--border); border-radius: 6px; font-weight: bold; background: var(--bg); color: var(--text-main); }
+        .editor-toolbar { display: flex; gap: 8px; margin-bottom: 5px; background: #f9f9f9; padding: 8px; border-radius: 6px; flex-wrap: wrap; align-items: center; }
+        .tb-btn { padding: 5px 10px; background: #fff; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; }
+        .palette-row { display: flex; gap: 4px; flex-wrap: wrap; }
+        .color-swatch { width: 20px; height: 20px; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; }
+        .rich-editor { flex: 1; border: 1px solid var(--border); border-radius: 6px; padding: 15px; overflow-y: auto; background: var(--bg); font-size: 16px; color: var(--text-main); user-select: text !important; -webkit-user-select: text !important; outline: none; cursor: text; }
+        .modal-actions { margin-top: 15px; display: flex; justify-content: space-between; }
+        .btn-save { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-size: 1rem;}
+        .btn-cancel { background: transparent; color: var(--text-sec); border: 1px solid var(--border); padding: 10px 24px; border-radius: 6px; cursor: pointer; font-size: 1rem;}
+        body.placing-mode { cursor: crosshair; }
+        body.placing-mode .card, body.placing-mode .acc-body, body.placing-mode .content-zone { outline: 2px dashed var(--primary); min-height: 80px; }
+        body.placing-mode *:hover { box-shadow: inset 0 0 0 1000px rgba(24,119,242,0.1); z-index: 3000; }
+
+        /* MEDIA QUERY: MOBILE */
+        @media (max-width: 768px) {
+            .tabs { display: none; } /* Hide Top Tabs */
+            .bottom-nav { display: flex !important; } /* Show Bottom Nav */
+            .fab-btn { bottom: 75px; } /* Move FAB up */
+            .header-content h1 { font-size: 0.9rem; }
+        }
+        
+        @media print { header, .tabs, .bottom-nav, .fab-btn, .editor-overlay, .wrapper-toolbar { display: none !important; } body { display: block !important; font-size: 12px; } body.editing-mode { border: none !important; padding: 0 !important; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body class="" style="display: block;">
+
+    <header>
+        <div class="header-content">
+            <!-- 2. Smart Search UI -->
+            <div class="search-container" id="searchContainer">
+                <input type="text" class="search-input" id="pageSearch" placeholder="חיפוש בשיעור..." onkeypress="handleSearch(event)">
+                <button class="search-close" onclick="toggleSearch()">✖</button>
+            </div>
+            
+            <div class="brand">
+                <h1><i class="fas fa-graduation-cap"></i> <span id="header-title-text">סיכום שיעור</span></h1>
+            </div>
+            <div class="actions">
+                <button class="btn-action" onclick="toggleSearch()" title="חיפוש"><i class="fas fa-search"></i></button>
+                <button class="btn-action" onclick="window.close()" title="סגור"><i class="fas fa-arrow-right"></i></button>
+                <button class="btn-action btn-save-file" onclick="downloadSource()" title="שמור קובץ"><i class="fas fa-save"></i></button>
+                <button class="btn-action" id="editToggleBtn" onclick="toggleEditMode()" title="עריכה"><i class="fas fa-pen"></i></button>
+                <button class="btn-action" id="theme-toggle" title="תצוגה"><i class="fas fa-moon"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-wrap">
+        <!-- Desktop Tabs -->
+        <nav class="tabs">
+            <button class="tab-link" onclick="switchTab('overview', this)">סקירה</button>
+            <button class="tab-link active" onclick="switchTab('content', this)">תוכן</button>
+            <button class="tab-link" onclick="switchTab('qa', this)">שאלות</button>
+            <button class="tab-link" onclick="switchTab('glossary', this)">מונחים</button>
+            <button class="tab-link" onclick="switchTab('tasks', this)">מטלות</button>
+        </nav>
+
+        <!-- Content Panes -->
+        <div id="overview" class="tab-content">
+            <div class="card" id="meta-card">
+                <h3>פרטי השיעור</h3>
+                <div class="meta-row"><span class="meta-label">נושא:</span><span id="meta-subject" class="meta-value" contenteditable="false"></span></div>
+                <div class="meta-row"><span class="meta-label">מרצה:</span><span id="meta-value-teacher" class="meta-value" contenteditable="false"></span></div>
+                <div class="meta-row"><span class="meta-label">תאריך:</span><input type="date" id="meta-value-date" class="meta-value" disabled="true"></div>
+            </div>
+            <div class="card"><h3>תקציר</h3><div id="summary-text" class="content-zone"></div></div>
+        </div>
+
+        <div id="content" class="tab-content content-zone active"><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><details><summary>העמקה בנושא ספציפי </summary><div class="acc-body content-zone"><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><p style="margin-top: 16px; margin-bottom: 16px; color: rgb(32, 33, 36); font-family: &quot;Noto Sans Hebrew&quot;, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; font-size: medium; background-color: rgb(255, 255, 255);">המרצה, אפי מלכין, פתח בהסבר על תפקידו כממונה על השכר והסכמי עבודה במשרד האוצר. הוא הדגיש את החשיבות הקריטית של מגזר ציבורי חזק ומתפקד, במיוחד בהקשר של אירועי חירום (כמו ה-7 באוקטובר, שהוזכר כאירוע המדגיש את חשיבות המשילות).</p></div></div><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><div class="highlight hl-example"><h4><i class="fas fa-lightbulb"></i> בחירה אחת</h4><div class="editable-content" contenteditable="false"><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><p style="margin-top: 16px; margin-bottom: 16px; color: rgb(32, 33, 36); font-family: &quot;Noto Sans Hebrew&quot;, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; font-size: medium; background-color: rgb(255, 255, 255);">המרצה הגדיר את השירות הציבורי בחמישה תחומים עיקריים (לפי שקף 4):</p></div></div><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><ol style="padding-right: 24px; color: rgb(32, 33, 36); font-family: &quot;Noto Sans Hebrew&quot;, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; font-size: medium; background-color: rgb(255, 255, 255);"><li style="margin-bottom: 12px; padding-right: 12px;"><strong>מוצרים ציבוריים:</strong>&nbsp;שירותים שהמדינה מספקת לכולם, כמו תשתיות (כבישים), ביטחון לאומי ותחבורה ציבורית.</li><li style="margin-bottom: 12px; padding-right: 12px;"><strong>בריאות ורווחה:</strong>&nbsp;שירותי רפואה וסעד.</li><li style="margin-bottom: 12px; padding-right: 12px;"><strong>חינוך:</strong>&nbsp;מערכת החינוך הפורמלית, מהגנים ועד ההשכלה הגבוהה.</li><li style="margin-bottom: 12px; padding-right: 12px;"><strong>ביטחון (פנים):</strong>&nbsp;משטרה, שירות בתי הסוהר (שב"ס), כבאות ושירותי מודיעין.</li><li style="margin-bottom: 12px; padding-right: 12px;"><strong>מטה:</strong>&nbsp;תפקידי הליבה של הממשל - רגולציה, קביעת מדיניות, תכנון, אכיפה ופיקוח.</li></ol></div></div><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><p style="margin-top: 0px; margin-bottom: 0px; color: rgb(32, 33, 36); font-family: &quot;Noto Sans Hebrew&quot;, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; font-size: medium; background-color: rgb(255, 255, 255);">המגזר הציבורי בישראל מהווה כ-20% מכלל כוח העבודה במשק.</p></div></div></div></div></div></div><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><p style="margin-top: 0px; margin-bottom: 0px; color: rgb(32, 33, 36); font-family: &quot;Noto Sans Hebrew&quot;, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; font-size: medium; background-color: rgb(255, 255, 255);">האגף מפקח על שכרם של כ-800,000 עובדים בלמעלה מ-800 גופים (מעסיקים), הכוללים משרדי ממשלה, אוניברסיטאות, קופות חולים, רשויות מקומיות, חברות ממשלתיות ועוד.</p></div></div></div></details></div></div></div>
+
+        <div id="qa" class="tab-content">
+            <div class="card"><h3>שאלות ודיון</h3><div id="qa-body" class="content-zone"></div></div>
+        </div>
+
+        <div id="glossary" class="tab-content">
+            <div class="card"><h3>מונחים והגדרות</h3><ol class="glossary-list content-zone" id="glossary-list"></ol></div>
+            <div class="card"><h3>מקורות חיצוניים</h3><ul id="sources-list" class="content-zone"></ul></div>
+        </div>
+
+        <div id="tasks" class="tab-content">
+            <div class="card hl-fail"><h3>מטלות</h3><div id="tasks-body" class="content-zone"></div></div>
+        </div>
+    </div>
+
+    <!-- 1. Mobile Bottom Navigation -->
+    <div class="bottom-nav">
+        <button class="nav-item" onclick="navTo('overview', this)"><i class="fas fa-home"></i>סקירה</button>
+        <button class="nav-item active" onclick="navTo('content', this)"><i class="fas fa-layer-group"></i>תוכן</button>
+        <button class="nav-item" onclick="navTo('qa', this)"><i class="fas fa-comments"></i>שאלות</button>
+        <button class="nav-item" onclick="navTo('glossary', this)"><i class="fas fa-book"></i>מונחים</button>
+        <button class="nav-item" onclick="navTo('tasks', this)"><i class="fas fa-tasks"></i>מטלות</button>
+    </div>
+
+    <button class="fab-btn" onclick="openEditor()"><i class="fas fa-plus"></i></button>
+
+    <!-- Editor Modal -->
+    <div class="editor-overlay" id="editorModal" onclick="closeEditor()" style="display: none;">
+        <div class="editor-box" onclick="event.stopPropagation()">
+            <h3 style="text-align:center;border:none;margin-bottom:10px;">הוספת תוכן</h3>
+            <div class="type-scroll">
+                <button class="type-btn btn-text" onclick="setType(this, 'text')">טקסט</button>
+                <button class="type-btn btn-acc" onclick="setType(this, 'accordion')"><i class="fas fa-list"></i> נושא</button>
+                <button class="type-btn btn-ext" onclick="setType(this, 'external')"><i class="fas fa-book-open"></i> הרחבה</button>
+                <button class="type-btn btn-ex selected" onclick="setType(this, 'example')"><i class="fas fa-lightbulb"></i> דוגמה</button>
+                <button class="type-btn btn-per" onclick="setType(this, 'personal')"><i class="fas fa-pen-fancy"></i> הערה</button>
+                <button class="type-btn btn-task" onclick="setType(this, 'task')"><i class="fas fa-tasks"></i> מטלה</button>
+            </div>
+            <input type="text" id="editorTitleInput" placeholder="כותרת..." style="display: block;">
+
+            <div class="editor-toolbar">
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('bold')"><b>B</b></button>
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('italic')"><i>I</i></button>
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('underline')"><u>U</u></button>
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('insertOrderedList')"><i class="fas fa-list-ol"></i></button>
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('insertUnorderedList')"><i class="fas fa-list-ul"></i></button>
+                <div style="width:1px;background:#ccc;margin:0 5px;"></div>
+                <div class="palette-row">
+                    <div class="color-swatch" style="background:#000000" onmousedown="event.preventDefault(); execCmd('foreColor','#000000')"></div>
+                    <div class="color-swatch" style="background:#d32f2f" onmousedown="event.preventDefault(); execCmd('foreColor','#d32f2f')"></div>
+                    <div class="color-swatch" style="background:#1976d2" onmousedown="event.preventDefault(); execCmd('foreColor','#1976d2')"></div>
+                    <div class="color-swatch" style="background:#388e3c" onmousedown="event.preventDefault(); execCmd('foreColor','#388e3c')"></div>
+                    <div class="color-swatch" style="background:#f57c00" onmousedown="event.preventDefault(); execCmd('foreColor','#f57c00')"></div>
+                    <div class="color-swatch" style="background:linear-gradient(45deg,red,blue)" onclick="document.getElementById('cp').click()"></div>
+                    <input type="color" id="cp" onchange="execCmd('foreColor', this.value)" style="visibility:hidden;width:0;">
+                </div>
+                <div style="width:1px;background:#ccc;margin:0 5px;"></div>
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('fontSize', '2')">T</button>
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('fontSize', '3')">T</button>
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('fontSize', '5')">T</button>
+                <div style="width:1px;background:#ccc;margin:0 5px;"></div>
+                <button class="tb-btn" onmousedown="event.preventDefault(); createTermFromEditor()" title="צור מונח" style="color:var(--primary);"><i class="fas fa-book"></i></button>
+            </div>
+            <div id="richEditor" class="rich-editor" contenteditable="false"><p style="margin-top: 16px; margin-bottom: 16px; color: rgb(32, 33, 36); font-family: &quot;Noto Sans Hebrew&quot;, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; font-size: medium; background-color: rgb(255, 255, 255);">המרצה הגדיר את השירות הציבורי בחמישה תחומים עיקריים (לפי שקף 4):</p><ol style="padding-right: 24px; color: rgb(32, 33, 36); font-family: &quot;Noto Sans Hebrew&quot;, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; font-size: medium; background-color: rgb(255, 255, 255);"><li style="margin-bottom: 12px; padding-right: 12px;"><strong>מוצרים ציבוריים:</strong>&nbsp;שירותים שהמדינה מספקת לכולם, כמו תשתיות (כבישים), ביטחון לאומי ותחבורה ציבורית.</li><li style="margin-bottom: 12px; padding-right: 12px;"><strong>בריאות ורווחה:</strong>&nbsp;שירותי רפואה וסעד.</li><li style="margin-bottom: 12px; padding-right: 12px;"><strong>חינוך:</strong>&nbsp;מערכת החינוך הפורמלית, מהגנים ועד ההשכלה הגבוהה.</li><li style="margin-bottom: 12px; padding-right: 12px;"><strong>ביטחון (פנים):</strong>&nbsp;משטרה, שירות בתי הסוהר (שב"ס), כבאות ושירותי מודיעין.</li><li style="margin-bottom: 12px; padding-right: 12px;"><strong>מטה:</strong>&nbsp;תפקידי הליבה של הממשל - רגולציה, קביעת מדיניות, תכנון, אכיפה ופיקוח.</li></ol><p style="margin-top: 0px; margin-bottom: 0px; color: rgb(32, 33, 36); font-family: &quot;Noto Sans Hebrew&quot;, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; font-size: medium; background-color: rgb(255, 255, 255);">המגזר הציבורי בישראל מהווה כ-20% מכלל כוח העבודה במשק.</p></div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeEditor()">ביטול</button>
+                <button class="btn-save" onclick="startPlacement()">בחר מיקום</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isEditMode = false, contentType = 'text', pendingHTML = '', isDirty = false;
+        window.onbeforeunload = function() { if (isDirty) return "שינויים לא נשמרו"; };
+        function markDirty() { isDirty = true; }
+
+        // Init & Meta
+        window.initMetaData = function() {
+            const title = document.querySelector("meta[name='lesson-title']").content;
+            const teacher = document.querySelector("meta[name='lesson-teacher']").content;
+            const date = document.querySelector("meta[name='lesson-date']").content;
+            const subEl = document.getElementById('meta-subject');
+            const teachEl = document.getElementById('meta-value-teacher');
+            const dateEl = document.getElementById('meta-value-date');
+            if(!subEl.innerText) subEl.innerText = title;
+            if(!teachEl.innerText) teachEl.innerText = teacher;
+            if(!dateEl.value) dateEl.value = date;
+            updateHeader();
+            // Listeners
+            subEl.addEventListener('input', () => { markDirty(); updateHeader(); document.querySelector("meta[name='lesson-title']").setAttribute("content", subEl.innerText); });
+            teachEl.addEventListener('input', () => { markDirty(); document.querySelector("meta[name='lesson-teacher']").setAttribute("content", teachEl.innerText); });
+            dateEl.addEventListener('change', () => { markDirty(); document.querySelector("meta[name='lesson-date']").setAttribute("content", dateEl.value); });
+            // Live Glossary
+            document.getElementById('glossary-list').addEventListener('input', function(e) {
+                markDirty();
+                const li = e.target.closest('li');
+                if(li && li.hasAttribute('data-term-id')) {
+                    const tid = li.getAttribute('data-term-id');
+                    const parts = li.innerText.split(':');
+                    if(parts.length>1) {
+                         const newDef = parts.slice(1).join(':').trim();
+                         document.querySelectorAll(`.term[data-term-id="${tid}"]`).forEach(t => t.setAttribute('data-def', newDef));
+                    }
+                }
+            });
+        };
+
+        function updateHeader() {
+            const val = document.getElementById('meta-subject').innerText;
+            document.getElementById('header-title-text').innerText = val || 'סיכום שיעור';
+            document.title = val || 'סיכום שיעור';
+        }
+
+        // 3. SMART SEARCH Logic
+        function toggleSearch() {
+            const el = document.getElementById('searchContainer');
+            el.classList.toggle('active');
+            if(el.classList.contains('active')) document.getElementById('pageSearch').focus();
+        }
+
+        function handleSearch(e) {
+            if(e.key === 'Enter') {
+                const term = document.getElementById('pageSearch').value;
+                if(!term) return;
+                // Naive find: look for text
+                const found = window.find(term, false, false, true, false, false, false);
+                if(found) {
+                    // Highlight parent block
+                    const sel = window.getSelection();
+                    if(sel.anchorNode) {
+                         const block = sel.anchorNode.parentElement.closest('.card, .edit-wrapper');
+                         if(block) {
+                             block.classList.add('found-focus');
+                             setTimeout(()=>block.classList.remove('found-focus'), 2000);
+                             // Ensure inside open tab
+                             const tabPane = block.closest('.tab-content');
+                             if(tabPane) {
+                                 document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+                                 tabPane.classList.add('active');
+                                 // update active buttons
+                                 const id = tabPane.id;
+                                 document.querySelectorAll('.tab-link, .nav-item').forEach(b=>b.classList.remove('active'));
+                                 // find button matching this id? lazy: clear all
+                             }
+                         }
+                    }
+                    toggleSearch(); // close search bar
+                } else {
+                    alert('לא נמצא');
+                }
+            }
+        }
+
+        // Tabs Logic (Unified)
+        function switchTab(id, btn) {
+            document.querySelectorAll('.tab-content, .tab-link, .nav-item').forEach(e=>e.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            // desktop btn
+            if(btn && btn.classList.contains('tab-link')) btn.classList.add('active');
+            // sync mobile btn
+            const navBtns = document.querySelectorAll(`.nav-item[onclick*="${id}"]`);
+            navBtns.forEach(n => n.classList.add('active'));
+        }
+        
+        function navTo(id, btn) { switchTab(id, btn); } // Helper for mobile
+
+        document.getElementById('theme-toggle').addEventListener('click', ()=>document.body.classList.toggle('dark-mode'));
+
+        // Editing Logic
+        function addTermToTab(text, def, id) {
+            const list = document.getElementById('glossary-list');
+            const li = document.createElement('li');
+            li.setAttribute('data-term-id', id);
+            const content = `<strong>${text}:</strong> ${def}`;
+            if(isEditMode) li.appendChild(createWrapper(content)); else li.innerHTML=content;
+            list.appendChild(li); markDirty();
+        }
+        window.createTerm=function() {
+            const sel=window.getSelection(); if(!sel.rangeCount||!sel.toString().trim()) return alert('סמן מילה');
+            const text=sel.toString(); const def=prompt("הגדרה:"); 
+            if(def) { 
+                const id='tid_'+Math.floor(Math.random()*10000);
+                document.execCommand('insertHTML',false,`<span class="term" data-def="${def}" data-term-id="${id}">${text}</span>`);
+                addTermToTab(text,def,id);
+            }
+        }
+        window.createTermFromEditor = function() { window.createTerm(); }
+
+        function openEditor(){ const ed=document.getElementById('richEditor'); ed.innerHTML=''; document.getElementById('editorTitleInput').value=''; document.getElementById('editorModal').style.display='flex'; ed.setAttribute('contenteditable','true'); setTimeout(()=>ed.focus(),100); }
+        function closeEditor(){document.getElementById('editorModal').style.display='none';}
+        function execCmd(c,v=null){document.execCommand(c,false,v);}
+
+        function setType(btn,type){
+            document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); contentType=type;
+            const tInp=document.getElementById('editorTitleInput'); tInp.style.display=(type!=='text')?'block':'none';
+            tInp.placeholder=(type==='accordion')?'כותרת נושא...':'כותרת...';
+        }
+
+        function startPlacement(){
+            const html=document.getElementById('richEditor').innerHTML; const title=document.getElementById('editorTitleInput').value;
+            if(!html&&contentType!=='accordion')return alert('הכנס תוכן');
+            let inner='';
+            if(contentType==='accordion') inner=`<details open><summary>${title||'נושא'}</summary><div class="acc-body content-zone">${html}</div></details>`;
+            else if(contentType==='text') inner=`<p>${html}</p>`;
+            else {
+                let cls,icon;
+                if(contentType==='external'){cls='hl-external';icon='fa-book-open';}
+                else if(contentType==='example'){cls='hl-example';icon='fa-lightbulb';}
+                else if(contentType==='personal'){cls='hl-success';icon='fa-pen-fancy';}
+                else if(contentType==='task'){cls='hl-fail';icon='fa-tasks';}
+                inner=`<div class="highlight ${cls}"><h4><i class="fas ${icon}"></i> ${title||'כותרת'}</h4><div class="editable-content">${html}</div></div>`;
+            }
+            pendingHTML=inner;
+            document.getElementById('editorModal').style.display='none';
+            document.body.classList.add('placing-mode');
+            document.addEventListener('click',placeHandler,true);
+        }
+        function placeHandler(e){
+            e.preventDefault();e.stopPropagation(); markDirty();
+            let target=e.target.closest('.edit-wrapper,details,li,p,.highlight');
+            let container=e.target.closest('.content-zone,.acc-body');
+            let node=document.createElement('div'); node.innerHTML=pendingHTML; let newEl=node.firstElementChild;
+            if(isEditMode && contentType!=='accordion') newEl=createWrapper(newEl);
+            if(target&&target.parentElement.closest('.content-zone,.acc-body')) target.insertAdjacentElement('afterend',newEl);
+            else if(container) container.appendChild(newEl);
+            else document.getElementById('content').appendChild(newEl);
+            document.body.classList.remove('placing-mode');
+            document.removeEventListener('click',placeHandler,true);
+            if(isEditMode){toggleEditMode();toggleEditMode();}
+        }
+
+        function toggleEditMode(){
+            isEditMode=!isEditMode; const btn=document.getElementById('editToggleBtn');
+            if(isEditMode){
+                document.body.classList.add('editing-mode'); btn.classList.add('active');
+                document.getElementById('meta-subject').setAttribute('contenteditable','true');
+                document.getElementById('meta-value-teacher').setAttribute('contenteditable','true');
+                document.getElementById('meta-value-date').removeAttribute('disabled');
+                document.querySelectorAll('.content-zone, .acc-body').forEach(z=>wrapDeep(z));
+                document.querySelectorAll('.editable-content').forEach(e=>{e.setAttribute('contenteditable','true');e.addEventListener('input',markDirty);});
+            } else {
+                document.body.classList.remove('editing-mode'); btn.classList.remove('active');
+                document.querySelectorAll('[contenteditable]').forEach(e=>e.setAttribute('contenteditable','false'));
+                document.getElementById('meta-value-date').setAttribute('disabled','true');
+            }
+        }
+        function wrapDeep(con){
+            Array.from(con.children).forEach(c=>{
+                if(c.classList.contains('highlight')){const i=c.querySelector('div:not(.wrapper-toolbar)');if(i)wrapDeep(i);}
+                if(c.classList.contains('edit-wrapper')||c.tagName==='BR'||c.tagName==='SUMMARY')return;
+                if(con.tagName==='OL'||con.tagName==='UL'){const w=createWrapper(c.innerHTML);c.innerHTML='';c.appendChild(w);}
+                else{const w=createWrapper(c.cloneNode(true));con.replaceChild(w,c);}
+            });
+        }
+        function createWrapper(inner){
+            const w=document.createElement('div');w.className='edit-wrapper';
+            const ctr=document.createElement('div');ctr.className='wrapper-toolbar';ctr.contentEditable="false";
+            ctr.innerHTML=`<div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div>`;
+            const d=document.createElement('div');d.className='editable-content';d.setAttribute('contenteditable','true');d.addEventListener('input',markDirty);
+            if(typeof inner==='string')d.innerHTML=inner;else d.appendChild(inner);
+            w.appendChild(ctr);w.appendChild(d);return w;
+        }
+        window.moveBlock=function(b,d){let k=b.closest('.edit-wrapper');if(k.parentElement.tagName==='LI')k=k.parentElement;markDirty();if(d===-1&&k.previousElementSibling)k.parentNode.insertBefore(k,k.previousElementSibling);if(d===1&&k.nextElementSibling)k.parentNode.insertBefore(k.nextElementSibling,k);};
+        window.deleteBlock=function(b){if(confirm('למחוק?')){markDirty();let k=b.closest('.edit-wrapper');if(k.parentElement.tagName==='LI')k.parentElement.remove();else k.remove();}};
+        window.termFromRow=function(b){b.closest('.edit-wrapper').querySelector('.editable-content').focus();window.createTerm();};
+        function downloadSource(){if(isEditMode)toggleEditMode();isDirty=false;const blob=new Blob([document.documentElement.outerHTML],{type:'text/html'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(document.title||'lesson')+'.html';a.click();}
+
+        if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', window.initMetaData); else window.initMetaData();
+    </script>
+
+</body></html>
