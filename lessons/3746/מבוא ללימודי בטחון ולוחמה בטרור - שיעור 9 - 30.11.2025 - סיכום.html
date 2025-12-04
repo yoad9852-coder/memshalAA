@@ -1,0 +1,665 @@
+<html lang="he" dir="rtl"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>שיעור 10 - התקוממות והתמודדות איתה</title>
+    
+    <!-- Meta Tags -->
+    <meta name="lesson-title" content="שיעור 10 - התקוממות והתמודדות איתה">
+    <meta name="lesson-date" content="2025-12-02">
+    <meta name="lesson-teacher" content="גב' לורנה אטיאס-לבובסקי">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* CSS from Master Template - Unchanged */
+        :root {
+            --bg: #f0f2f5; --surface: #ffffff; --text-main: #1c1e21; --text-sec: #606770;
+            --primary: #1877f2; --accent: #e7f3ff; --border: #dadde1; --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --w: 800px; --nav-height: 60px;
+            --hl-yellow-bg: #fff9c4; --hl-yellow-br: #fdd835;
+            --hl-blue-bg: #e3f2fd; --hl-blue-br: #2196f3;
+            --hl-green-bg: #e8f5e9; --hl-green-br: #4caf50; 
+            --hl-red-bg: #ffebee; --hl-red-br: #ef5350;
+            --hl-orange-bg: #fff3e0; --hl-orange-br: #ff9800;
+        }
+        body.dark-mode {
+            --bg: #000000; --surface: #121212; --text-main: #e0e0e0; --text-sec: #b0b3b8;
+            --primary: #4a90e2; --accent: #1f2a36; --border: #333333;
+            --hl-yellow-bg: #3e3b20; --hl-blue-bg: #1a2836; --hl-green-bg: #1a2e1b; --hl-red-bg: #381e1e;
+            --hl-orange-bg: #3e2723;
+        }
+        * { box-sizing: border-box; font-family: 'Noto Sans Hebrew', sans-serif !important; }
+        .fas, .far, .fab, .fa { font-family: "Font Awesome 6 Free" !important; }
+        body { background-color: var(--bg); color: var(--text-main); margin: 0; line-height: 1.6; font-size: 14px; padding-bottom: var(--nav-height); display: block; }
+
+        /* Header */
+        header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; padding: 0.6rem 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .header-content { max-width: var(--w); margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: relative;}
+        .header-content h1 { font-size: 1.1rem; margin: 0; display:flex; align-items:center; gap:10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 50vw; }
+        
+        .search-container { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--surface); align-items: center; padding: 0 10px; z-index: 10; }
+        .search-container.active { display: flex; }
+        .search-input { flex-grow: 1; border: none; background: var(--bg); padding: 8px 12px; border-radius: 20px; color: var(--text-main); outline: none; font-size: 16px; margin-right: 10px; }
+        .search-close { background: none; border: none; cursor: pointer; color: var(--text-sec); font-size: 1.2rem; }
+        .found-mark { background-color: #ffeb3b; color: black; border-radius: 2px; box-shadow: 0 0 5px yellow; animation: pulseMark 1s infinite alternate; }
+        @keyframes pulseMark { from { background-color: #ffeb3b; } to { background-color: #ffcc00; } }
+
+        .btn-action { background: var(--accent); border: none; border-radius: 50%; width: 34px; height: 34px; color: var(--primary); cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; justify-content: center; margin-left: 5px; font-size: 14px; flex-shrink: 0; }
+        .btn-action.active { background: var(--primary); color: white; }
+        .btn-save-file { background: #4caf50; color: white; } 
+
+        /* Tabs */
+        .main-wrap { max-width: var(--w); margin: 20px auto; padding: 0 20px 80px; }
+        .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; border-bottom: 2px solid var(--border); margin-bottom: 20px; padding-bottom: 5px;}
+        .tab-link { background: none; border: none; padding: 8px 12px; font-size: 0.95rem; font-weight: 500; color: var(--text-sec); cursor: pointer; border-bottom: 3px solid transparent; transition: 0.3s; margin-bottom: -7px; }
+        .tab-link.active { color: var(--primary); border-bottom-color: var(--primary); }
+        .bottom-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; height: var(--nav-height); background: var(--surface); border-top: 1px solid var(--border); z-index: 9000; justify-content: space-around; align-items: center; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
+        .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-sec); font-size: 10px; background: none; border: none; width: 20%; padding: 5px 0; cursor: pointer;}
+        .nav-item.active { color: var(--primary); }
+        .tab-content { display: none; animation: fadeIn 0.3s; }
+        .tab-content.active { display: block; }
+
+        /* Content */
+        .card { background: var(--surface); border-radius: 12px; box-shadow: var(--shadow); padding: 20px; margin-bottom: 20px; position: relative; min-height: 80px; }
+        .highlight { padding: 6px 12px 10px; margin: 10px 0; border-radius: 6px; border-right: 4px solid transparent; position: relative; font-size: 0.92em !important; }
+        .highlight > *:first-child { margin-top: 0; }
+        .highlight h4 { margin: 0 0 4px 0; font-weight: 700; font-size: 1.1em; }
+        .hl-example { background-color: var(--hl-yellow-bg); border-color: var(--hl-yellow-br); }
+        .hl-external { background-color: var(--hl-blue-bg); border-color: var(--hl-blue-br); }
+        .hl-success { background-color: var(--hl-green-bg); border-color: var(--hl-green-br); } 
+        .hl-fail { background-color: var(--hl-red-bg); border-color: var(--hl-red-br); }
+        .hl-context { background-color: var(--hl-orange-bg); border-color: var(--hl-orange-br); }
+
+        h3 { border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 15px; font-size: 1.2rem; color: var(--text-main); }
+        p, li { margin-bottom: 10px; line-height: 1.7; }
+
+        .meta-row { display: flex; justify-content: flex-start; align-items: center; border-bottom: 1px dashed var(--border); padding: 10px 0; width: 100%; }
+        .meta-label { font-weight: 700; color: var(--text-sec); margin-left: 15px; min-width: 60px; }
+        .meta-value { font-weight: 400; color: var(--text-main); flex-grow: 1; text-align: right; outline: none; border-bottom: 1px solid transparent; min-height: 24px; }
+        .meta-value:focus { border-bottom: 1px solid var(--primary); background: rgba(24,119,242,0.05); }
+        input[type="date"] { border: none; background: transparent; color: var(--text-main); width: auto; flex-grow: 1; text-align: right; outline: none; }
+        ol.glossary-list { padding-right: 25px; margin: 0; list-style: none; counter-reset: gloss-counter; }
+        ol.glossary-list li { position: relative; margin-bottom: 12px; padding-right: 5px; }
+        ol.glossary-list li::before { content: counter(gloss-counter) "."; counter-increment: gloss-counter; position: absolute; right: -20px; color: var(--primary); font-weight: 800; }
+        .term { color: var(--primary) !important; font-weight: 700; cursor: help; border-bottom: 1px dotted var(--primary); position: relative; display: inline-block; }
+        .term:hover { background-color: var(--accent); }
+        .term:hover::after { content: attr(data-def); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 10px; border-radius: 8px; width: max-content; max-width: 260px; font-size: 13px; z-index: 99999; white-space: normal; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.3); pointer-events: none; }
+        .term:hover::before { content:''; position:absolute; bottom:115%; left:50%; margin-left:-6px; border-width:6px; border-style:solid; border-color:#333 transparent transparent transparent; z-index:99999; }
+        details { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; overflow: visible; background: var(--surface); position: relative; }
+        summary { padding: 15px; cursor: pointer; font-weight: 700; font-size: 1.1rem; display: flex; justify-content: space-between; background: var(--surface); position: sticky; top: 64px; z-index: 90; border-bottom: 1px solid transparent; transition: 0.2s; border-radius: 8px; }
+        details[open] summary { border-bottom: 1px solid var(--border); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+        .acc-body { padding: 15px; border-top: none; min-height: 50px; font-size: 14px; }
+
+        .edit-wrapper { position: relative; margin-bottom: 8px; width: 100%; }
+        body.editing-mode .edit-wrapper { border: 1px dashed rgba(0,0,0,0.15); padding-top: 40px; border-radius: 6px; background: rgba(255,255,255,0.3); }
+        .wrapper-toolbar { display: none; position: absolute; top: 5px; right: 5px; gap: 5px; z-index: 100; direction: ltr; }
+        body.editing-mode .wrapper-toolbar { display: flex; }
+        .w-btn { width: 30px; height: 30px; background: #fff; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #555; font-size: 13px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: 0.2s; }
+        .w-btn:hover { transform: scale(1.1); background: var(--primary); color: white; border-color: var(--primary); }
+        .w-btn.del:hover { background: #ef5350; border-color: #ef5350; }
+        .w-btn.term { color: var(--primary); font-weight:bold; border-color: var(--accent); }
+        .editable-content[contenteditable="true"] { outline: none; cursor: text; min-height: 1.2em; }
+        
+        .fab-btn { position: fixed; bottom: 25px; left: 25px; width: 60px; height: 60px; background: var(--primary); color: white; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: none; cursor: pointer; font-size: 26px; z-index: 2000; transition: transform 0.2s; display: flex; align-items: center; justify-content: center; }
+        .fab-btn:hover { transform: scale(1.1); }
+        
+        .editor-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 3000; justify-content: center; align-items: center; }
+        .editor-box { background: var(--surface); padding: 25px; border-radius: 12px; width: 90%; height: 85%; max-width: 900px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column; cursor: default; pointer-events: auto; }
+        .type-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 10px; margin-bottom: 5px; flex-wrap: wrap; justify-content: center; }
+        .type-btn { padding: 8px 16px; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; gap: 6px; background: var(--surface); color: var(--text-main); transition: 0.2s; }
+        .type-btn.selected { box-shadow: 0 0 0 2px var(--primary); font-weight: 700; transform: translateY(-2px); }
+        .btn-text.selected { background: #eee; border-color: #999; }
+        .btn-acc.selected { background: #333; color: #fff; border-color: #000; }
+        .btn-ext { background: var(--hl-blue-bg); border-color: var(--hl-blue-br); color: #005c69; }
+        .btn-ex { background: var(--hl-yellow-bg); border-color: var(--hl-yellow-br); color: #5f4c00; }
+        .btn-per { background: var(--hl-green-bg); border-color: var(--hl-green-br); color: #1b5e20; }
+        .btn-task { background: var(--hl-red-bg); border-color: var(--hl-red-br); color: #b71c1c; }
+        .btn-ctx { background: var(--hl-orange-bg); border-color: var(--hl-orange-br); color: #e65100; }
+        #editorTitleInput { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid var(--border); border-radius: 6px; font-weight: bold; background: var(--bg); color: var(--text-main); }
+        .editor-toolbar { display: flex; gap: 8px; margin-bottom: 5px; background: #f9f9f9; padding: 8px; border-radius: 6px; flex-wrap: wrap; align-items: center; }
+        .tb-btn { padding: 5px 10px; background: #fff; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; }
+        .palette-row { display: flex; gap: 4px; flex-wrap: wrap; }
+        .color-swatch { width: 20px; height: 20px; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; }
+        .rich-editor { flex: 1; border: 1px solid var(--border); border-radius: 6px; padding: 15px; overflow-y: auto; background: var(--bg); font-size: 16px; color: var(--text-main); outline: none; cursor: text; }
+        .modal-actions { margin-top: 15px; display: flex; justify-content: space-between; }
+        .btn-save { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-size: 1rem;}
+        .btn-cancel { background: transparent; color: var(--text-sec); border: 1px solid var(--border); padding: 10px 24px; border-radius: 6px; cursor: pointer; font-size: 1rem;}
+        
+        body.placing-mode { cursor: crosshair; }
+        body.placing-mode .card, body.placing-mode .acc-body, body.placing-mode .content-zone { outline: 2px dashed var(--primary); min-height: 80px; }
+        body.placing-mode *:hover { box-shadow: inset 0 0 0 1000px rgba(24,119,242,0.1); z-index: 3000; }
+        @media (max-width: 768px) { .tabs { display: none; } .bottom-nav { display: flex !important; } .fab-btn { bottom: 75px; } .header-content h1 { font-size: 0.9rem; } }
+        @media print { header, .tabs, .fab-btn, .editor-overlay, .wrapper-toolbar { display: none !important; } body { display: block !important; font-size: 12px; } body.editing-mode { border: none !important; padding: 0 !important; } }
+    </style>
+</head>
+<body class="">
+
+    <header>
+        <div class="header-content">
+            <div class="search-container" id="searchContainer">
+                <input type="text" class="search-input" id="pageSearch" placeholder="חיפוש חכם..." onkeypress="handleSmartSearch(event)">
+                <button class="search-close" onclick="toggleSearch()">✖</button>
+            </div>
+            <div class="brand">
+                <h1><i class="fas fa-graduation-cap"></i> <span id="header-title-text">שיעור 10 - התקוממות והתמודדות איתה</span></h1>
+            </div>
+            <div class="actions">
+                <button class="btn-action" onclick="toggleSearch()" title="חיפוש"><i class="fas fa-search"></i></button>
+                <button class="btn-action" onclick="window.close()" title="סגור"><i class="fas fa-arrow-right"></i></button>
+                <button class="btn-action btn-save-file" onclick="downloadSource()" title="שמור קובץ HTML"><i class="fas fa-save"></i></button>
+                <button class="btn-action" id="editToggleBtn" onclick="toggleEditMode()" title="מצב עריכה"><i class="fas fa-pen"></i></button>
+                <button class="btn-action" id="theme-toggle" title="יום/לילה"><i class="fas fa-moon"></i></button>
+                <button class="btn-action" onclick="window.print()" title="הדפס/PDF"><i class="fas fa-print"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-wrap">
+        <nav class="tabs">
+            <button class="tab-link active" onclick="switchTab('overview', this)">סקירה</button>
+            <button class="tab-link" onclick="switchTab('content', this)">תוכן</button>
+            <button class="tab-link" onclick="switchTab('qa', this)">שאלות</button>
+            <button class="tab-link" onclick="switchTab('glossary', this)">מונחים ומקורות</button>
+            <button class="tab-link" onclick="switchTab('tasks', this)">מטלות</button>
+        </nav>
+
+        <div id="overview" class="tab-content active">
+            <div class="card" id="meta-card">
+                <h3>פרטי השיעור</h3>
+                <div class="meta-row"><span class="meta-label">נושא:</span><span id="meta-subject" class="meta-value" contenteditable="false">שיעור 10 - התקוממות והתמודדות איתה</span></div>
+                <div class="meta-row"><span class="meta-label">מרצה:</span><span id="meta-value-teacher" class="meta-value" contenteditable="false">גב' לורנה אטיאס-לבובסקי</span></div>
+                <div class="meta-row"><span class="meta-label">תאריך:</span><input type="date" id="meta-value-date" class="meta-value" value="2025-12-02" disabled="true"></div>
+            </div>
+            <div class="card"><h3>תקציר</h3><div id="summary-text" class="content-zone">
+                <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><p>שיעור זה עוסק באופן מעמיק בתופעת ה<strong>התקוממות (Insurgency)</strong> ובנגזרותיה: טרור, גרילה ולוחמה בעצימות נמוכה (LIC). השיעור נפתח במיפוי השינוי ההיסטורי בשדה הקרב (מהגרעין לקונבנציונלי ומשם לחתרנות), ובוחן את המודל המרכזי של <strong>דוד גלולה</strong> ("שתי מלחמות במלחמה אחת"). בהמשך, אנו מבחינים בין סוגי סכסוכים שונים (הפיכה, מהפכה, מרי אזרחי), ומנתחים את הא-סימטריה הכלכלית והצבאית בין המדינה למורדים. דגש מיוחד ניתן ל"מכניזם" שבו התקוממות מצליחה: כיצד פעולה טקטית אלימה מתרגמת להישג פוליטי אסטרטגי באמצעות מניפולציה של האוכלוסייה ("הלבבות והמוחות"). לסיום, מוצגת דוקטרינת ה-COIN האמריקאית כאסטרטגיית המענה המדינתית.</p></div></div>
+            </div></div>
+        </div>
+
+        <div id="content" class="tab-content content-zone">
+            
+            <!-- נושא 1: רקע והגדרות -->
+            <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><details open="">
+                <summary>🌍 הרקע: מסוגי לוחמה ל"דוד גלולה"</summary>
+                <div class="acc-body">
+                    <h3>לוחמה קונבנציונלית מול לוחמה בחתרנות</h3>
+                    <p>כדי להבין מהי התקוממות, יש להבין תחילה מהי <strong>לא</strong>. נקודת הייחוס שלנו היא <span class="term" data-def="מלחמה בין שני צבאות סדירים או יותר, בשדה קרב מוגדר, ללא נשק להשמדה המונית.">לוחמה קונבנציונלית</span>.</p>
+                    <div class="highlight hl-context">
+                        <h4>השוואה: קונבנציונלי מול התקוממות</h4>
+                        <table border="1" cellpadding="10" cellspacing="0" style="width:100%; border-collapse:collapse;">
+                            <tbody><tr>
+                                <th>מאפיין</th>
+                                <th>לוחמה קונבנציונלית</th>
+                                <th>התקוממות (Insurgency)</th>
+                            </tr>
+                            <tr>
+                                <td><strong>הצדדים</strong></td>
+                                <td>מדינה מול מדינה (צבא מול צבא)</td>
+                                <td>מדינה מול שחקן לא-מדינתי</td>
+                            </tr>
+                            <tr>
+                                <td><strong>שדה הקרב</strong></td>
+                                <td>חזית מוגדרת וברורה</td>
+                                <td>בתוך האוכלוסייה האזרחית</td>
+                            </tr>
+                            <tr>
+                                <td><strong>היגיון הניצחון</strong></td>
+                                <td>השמדת כוח האויב / כיבוש שטח</td>
+                                <td>בידוד המורדים מהאוכלוסייה ("הדג מהמים")</td>
+                            </tr>
+                            <tr>
+                                <td><strong>דוגמה</strong></td>
+                                <td>מלחמת העולם השנייה, רוסיה-אוקראינה</td>
+                                <td>וייטנאם, אלג'יריה, עיראק (אחרי 2003)</td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+
+                    <h3>דוד גלולה וה-COIN</h3>
+                    <div class="highlight hl-external">
+                        <h4>דוד גלולה (1919–1967)</h4>
+                        <div class="editable-content" contenteditable="false">
+                            <p>קצין צרפתי-יהודי יליד תוניסיה. נחשב לאבי תורת ה-<strong>Counter-Insurgency (COIN)</strong>. לחם באלג'יריה ובסין, והבין שהכוח הצבאי לבדו לא יכול לנצח התקוממות. תורתו אומצה ב-2006 על ידי הגנרל דיוויד פטראוס בצבא ארה"ב (FM 3-24).</p>
+                        </div>
+                    </div>
+                    <p>גלולה טען שבכל התקוממות יש שתי מלחמות: המלחמה הצבאית והמלחמה הפוליטית. הניצחון הצבאי הוא חסר משמעות ללא ניצחון פוליטי (רכישת אמון האוכלוסייה).</p>
+                </div>
+            </details></div></div>
+
+            <!-- נושא 2: טיפולוגיה של סכסוכים פנימיים -->
+            <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><details open="">
+                <summary>🔄 הבחנה מושגית: התקוממות, הפיכה ומהפכה</summary>
+                <div class="acc-body">
+                    <p>כדי להבין את הזירה, עלינו לדייק במונחים:</p>
+                    <table border="1" cellpadding="10" cellspacing="0" style="width:100%; border-collapse:collapse; margin-bottom:15px;">
+                        <tbody><tr style="background-color: var(--accent);">
+                            <th>סוג הסכסוך</th>
+                            <th>מקור הכוח ("כיוון")</th>
+                            <th>משך הזמן</th>
+                            <th>מאפיינים</th>
+                        </tr>
+                        <tr>
+                            <td><strong>התקוממות (Insurgency)</strong></td>
+                            <td>מלמטה למעלה (Bottom-up)</td>
+                            <td>ממושך (Protracted)</td>
+                            <td>מאבק מאורגן, משלב פעילות צבאית ופוליטית. דורש גיוס משאבים איטי.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>הפיכה (Coup d'état)</strong></td>
+                            <td>מלמעלה למטה (Top-down)</td>
+                            <td>קצר ומהיר</td>
+                            <td>מבוצעת על ידי אליטות (לרוב צבא) מתוך המערכת (קונספירציה). מבוססת על סודיות והשתלטות על מוקדי כוח (תקשורת, פרלמנט).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>מהפכה (Revolution)</strong></td>
+                            <td>עממי (Grassroots)</td>
+                            <td>משתנה</td>
+                            <td>התפרצות רחבה של ההמונים. מטרתה שינוי מקיף של הסדר החברתי-פוליטי (לא בהכרח באלימות).</td>
+                        </tr>
+                    </tbody></table>
+
+                    <div class="highlight hl-example">
+                        <h4>דוגמה מהכיתה: המהפכה בתוניסיה (האביב הערבי)</h4>
+                        <div class="editable-content" contenteditable="false">
+                            <p>המחאה החלה ממעשה יחיד של מוכר הירקות מוחמד בועזיזי (שהצית את עצמו), והתפשטה במהירות ל<strong>מהפכה עממית</strong> רחבה. זה שונה מהותית מ<strong>הפיכה צבאית</strong> (כמו במצרים עם א-סיסי) או מ<strong>התקוממות</strong> מאורגנת וממושכת של ארגון גרילה.</p>
+                        </div>
+                    </div>
+
+                    <h3>מאפיינים מרכזיים של מרידה (Insurgency)</h3>
+                    <ul>
+                        <li><strong>מטרה פוליטית:</strong> החלפת המשטר או החלשת הלגיטימיות שלו.</li>
+                        <li><strong>לוחמה אסימטרית:</strong> הכוח המורד חלש יותר צבאית מהמדינה.</li>
+                        <li><strong>הסתמכות על האוכלוסייה:</strong> קבלת מחסה, מודיעין ולוגיסטיקה מהמקומיים.</li>
+                        <li><strong>מאבק ממושך:</strong> שחיקת הרצון הפוליטי של היריב לאורך זמן (לא הכרעה ב"זבנג וגמרנו").</li>
+                    </ul>
+                </div>
+            </details></div></div>
+
+            <!-- נושא 3: המכניזם והאסטרטגיה -->
+            <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><details open="">
+                <summary>🔄 המכניזם: כיצד התקוממות משיגה את מטרתה?</summary>
+                <div class="acc-body">
+                    <p>כיצד ארגון קטן וחלש מצליח לערער מדינה חזקה? התשובה טמונה במעגל קסמים המחבר בין פעולה אלימה (טקטית) להישג מדיני (אסטרטגי). המודל של נוימן וסמית' מסביר זאת:</p>
+
+                    <div class="highlight hl-context">
+                        <h4>מעגל ההתקוממות (The Insurgency Cycle)</h4>
+                        <div class="editable-content" contenteditable="false">
+                            <ol>
+                                <li><strong>פרובוקציה (Disorientation):</strong> הארגון מבצע פיגוע טרור מזעזע וסמלי (למשל: 11/9, הפיגוע במלון המלך דוד). המטרה: לזרוע כאוס, פחד וחוסר ביטחון.</li>
+                                <li><strong>תגובת המדינה (Target Response):</strong> המדינה, מתוך לחץ, מגיבה. כאן המלכודת:
+                                    <ul>
+                                        <li><strong>תגובת יתר (Overreaction):</strong> הפעלת כוח צבאי מסיבי שפוגע בחפים מפשע --&gt; הארגון מציג את המדינה כ"פושעת" וככוח זר/כובש.</li>
+                                        <li><strong>תת-תגובה (Underreaction):</strong> חוסר מעש --&gt; הארגון מציג את המדינה כחלשה ולא מסוגלת להגן על אזרחיה.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>דה-לגיטימציה למדינה:</strong> בעקבות התגובה (או היעדרה), הציבור מאבד אמון בממשלה.</li>
+                                <li><strong>לגיטימציה למורדים:</strong> הארגון נכנס לואקום ומציג את עצמו כמגן העם וכאלטרנטיבה שלטונית.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <h3>אסטרטגיות השגת יעדים</h3>
+                    <p>ההתקוממות פועלת בשני מישורים במקביל כדי להשיג את מטרותיה:</p>
+                    
+                    <h4>1. מישור הלוחמה (צבאי/קינטי)</h4>
+                    <ul>
+                        <li><strong>טרור:</strong> יצירת פחד, פגיעה באזרחים ("מטרות רכות").</li>
+                        <li><strong>גרילה:</strong> התשת הצבא, פגיעה בחיילים ("מטרות קשות"), פגע וברח.</li>
+                    </ul>
+
+                    <h4>2. מישור הפוליטיקה (אזרחי/חברתי)</h4>
+                    <ul>
+                        <li><strong>הפצת מידע (פרופגנדה):</strong> שליטה בנרטיב.</li>
+                        <li><strong>הפגנות וגיוס המונים:</strong> יצירת לחץ ציבורי.</li>
+                        <li><strong>מתן שירותים (Da'wa):</strong> מילוי הוואקום שהותירה המדינה (בריאות, חינוך, רווחה).</li>
+                        <li><strong>גיוס כספים ודיפלומטיה:</strong> יצירת קשרים בינלאומיים ולגיטימציה חיצונית.</li>
+                    </ul>
+
+                    <h3>עלויות א-סימטריות</h3>
+                    <p>המורדים נהנים מיתרון כלכלי מובהק: "קל וזול להבעיר אש".</p>
+                    <div class="highlight hl-example">
+                        <h4>דוגמה מהכיתה: פיגועי ה-11/9</h4>
+                        <div class="editable-content" contenteditable="false">
+                            <p>העלות הישירה לאל-קאעידה הייתה כ-500 אלף דולר. העלות לארה"ב (ביטחון, מלחמות באפגניסטן ועיראק) נאמדת בטריליונים. זהו ניצחון אסטרטגי של שחיקת משאבי היריב.</p>
+                        </div>
+                    </div>
+                </div>
+            </details></div></div>
+
+            <!-- נושא 4: המאבק על האוכלוסייה -->
+            <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><details open="">
+                <summary>🧠 "הלבבות והמוחות" וארגונים היברידיים</summary>
+                <div class="acc-body">
+                    <p>האוכלוסייה היא מרכז הכובד. מי ששולט בה – מנצח. ארגוני התקוממות מודרניים הם <strong>היברידיים</strong> (משולבים):</p>
+                    <ul>
+                        <li><strong>זרוע צבאית:</strong> מבצעת פיגועים ולחימת גרילה.</li>
+                        <li><strong>זרוע מדינית/חברתית (Da'wa):</strong> מספקת שירותים שהמדינה נכשלה בהם (חינוך, בריאות, רווחה).</li>
+                    </ul>
+
+                    <div class="highlight hl-example">
+                        <h4>מקרה בוחן: חמאס וחיזבאללה</h4>
+                        <div class="editable-content" contenteditable="false">
+                            <p>חיזבאללה מפעיל בתי חולים בחינם ורשת חינוך בדרום לבנון. חמאס מפעיל בתי תמחוי. זה יוצר תלות של האוכלוסייה בארגון. כשהאיחוד האירופי מגדיר רק את "הזרוע הצבאית" כארגון טרור, הוא מתעלם מכך שהזרוע האזרחית היא שמייצרת את הלגיטימיות לטרור.</p>
+                        </div>
+                    </div>
+                </div>
+            </details></div></div>
+
+            <!-- נושא 5: טקטיקות ומענה (גרילה ו-COIN) -->
+            <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><details open="">
+                <summary>⚔️ טרור vs. גרילה והמענה המדינתי (COIN)</summary>
+                <div class="acc-body">
+                    <h3>הבחנה טקטית</h3>
+                    <ul>
+                        <li><strong>טרור:</strong> פגיעה מכוונת באזרחים ("מטרות רכות") ליצירת פחד (אלימות חריגה וסמלית).</li>
+                        <li><strong>גרילה:</strong> פגיעה בכוחות צבא ומשטרה ("מטרות קשות") במטרה לשחוק את כוח הלחימה של האויב. גישה צבאית של הטרדה.</li>
+                    </ul>
+                    <p>בפועל, הגבולות מטושטשים. ב-7 באוקטובר חמאס הפעיל גם גרילה (פשיטה על בסיסים) וגם טרור (טבח באזרחים).</p>
+
+                    <h3>COIN: המענה האמריקאי</h3>
+                    <p>דוקטרינת ה-Counter-Insurgency (כפי שנוסחה ב-FM 3-24) גורסת כי אי אפשר לנצח רק בכוח אש ("Kill capture"). השיטה היא <strong>Clear, Hold, Build</strong>:</p>
+                    <ol>
+                        <li><strong>Clear:</strong> טיהור השטח ממורדים (צבאי).</li>
+                        <li><strong>Hold:</strong> הישארות בשטח כדי להגן על האוכלוסייה (שיטור וביטחון).</li>
+                        <li><strong>Build:</strong> שיקום תשתיות וחיזוק הכלכלה כדי לייתר את הצורך במורדים (אזרחי/כלכלי).</li>
+                    </ol>
+                </div>
+            </details></div></div>
+
+        </div>
+
+        <div id="qa" class="tab-content">
+            <div class="card">
+                <h3>שאלות ודיון</h3>
+                <div id="qa-body" class="content-zone">
+                    <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><h5>שאלה: האם תקיפת מטרות צבאיות נחשבת טרור?</h5></div></div>
+                    <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><p><strong>תשובה:</strong> לפי ההגדרה האקדמית היבשה (למשל של בועז גנור), תקיפת חיילים היא "גרילה" ותקיפת אזרחים היא "טרור". עם זאת, כשאירגון כמו חמאס מבצע את שניהם, הוא מוגדר כארגון טרור היברידי.</p></div></div>
+                    <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><hr></div></div>
+                    <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><h5>שאלה: איך מבדילים בין מלחמת אזרחים להתקוממות?</h5></div></div>
+                    <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><p><strong>תשובה:</strong> לעיתים קשה להבדיל. מלחמת אזרחים לרוב מרמזת על שני צדדים עם כוח יחסית שקול הנלחמים על השלטון. התקוממות מדגישה את ה<strong>א-סימטריה</strong>: צד אחד הוא המדינה המבוססת (החזקה), והצד השני הוא הארגון המורד (החלש בתחילה).</p></div></div>
+                    <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><hr></div></div>
+                    <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><h5>שאלה: למה ארה"ב נכשלה בווייטנאם/אפגניסטן אם הייתה לה דוקטרינת COIN?</h5></div></div>
+                    <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><p><strong>תשובה:</strong> כי היישום קשה בהרבה מהתיאוריה. קשה מאוד לבנות מדינה זרה ("Nation Building") כשאין לך לגיטימציה מקומית, וכשהאוכלוסייה רואה בך כוח כובש זר. בנוסף, הפוליטיקה הפנימית בארה"ב לא אפשרה את אורך הרוח (שנים רבות) שנדרש לניצחון ב-COIN.</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="glossary" class="tab-content">
+            <div class="card">
+                <h3>מונחים והגדרות</h3>
+                <ol class="glossary-list content-zone" id="glossary-list">
+                    <li data-term-id="t1"><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><strong>Insurgency (התקוממות):</strong> מאבק פוליטי-צבאי מאורגן וממושך של קבוצה לא-מדינתית נגד משטר קיים או כוח כובש.</div></div></li>
+                    <li data-term-id="t2"><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><strong>COIN (Counter-Insurgency):</strong> האסטרטגיה המדינתית להתמודדות עם התקוממות, המשלבת כוח צבאי עם מאמצים לשיפור חיי האוכלוסייה ("לבבות ומוחות").</div></div></li>
+                    <li data-term-id="t3"><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><strong>LIC (עימות בעצימות נמוכה):</strong> ספקטרום של סכסוכים אלימים שהם פחות ממלחמה כוללת (כמו טרור וגרילה).</div></div></li>
+                    <li data-term-id="t4"><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><strong>מלחמה קונבנציונלית:</strong> מלחמה בין צבאות סדירים של מדינות, עם קווי חזית ברורים (בניגוד ל-LIC).</div></div></li>
+                    <li data-term-id="t5"><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><strong>Coup d'état (הפיכה):</strong> החלפת שלטון מהירה וכפויה על ידי גורמים מתוך המערכת (למשל הצבא), ללא שינוי עומק חברתי.</div></div></li>
+                    <li data-term-id="t6"><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><strong>מרי אזרחי (Civil Disobedience):</strong> אסטרטגיה לא-אלימה להשגת מטרות פוליטיות באמצעות סירוב לציית לחוקים, שביתות ומחאות (דוגמת גנדי).</div></div></li>
+                </ol>
+            </div>
+            <div class="card">
+                <h3>מקורות חיצוניים</h3>
+                <ul id="sources-list" class="content-zone">
+                    <li><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><strong>Galula, David (1964).</strong> <em>Counterinsurgency Warfare: Theory and Practice</em>.</div></div></li>
+                    <li><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><strong>Neumann, P. R., &amp; Smith, M. L. R. (2005).</strong> <em>The Strategy of Terrorism</em>.</div></div></li>
+                    <li><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><strong>US Army (2006).</strong> <em>Counterinsurgency Field Manual (FM 3-24)</em>.</div></div></li>
+                    <li><div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><strong>Ganor, Boaz.</strong> <em>The Counter-Terrorism Puzzle</em>.</div></div></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="tasks" class="tab-content">
+            <div class="card hl-fail">
+                <h3>מטלות לשיעור הבא</h3>
+                <div id="tasks-body" class="content-zone">
+                    <div class="edit-wrapper"><div class="wrapper-toolbar" contenteditable="false"><div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div></div><div class="editable-content" contenteditable="false"><p>לקרוא את המאמר בנושא הדילמה הדמוקרטית ולנתח: אילו מגבלות יש לדמוקרטיה במאבק ב-Insurgency שאין למשטר אוטוריטרי?</p></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <button class="nav-item active" onclick="switchTab('overview')"><i class="fas fa-home"></i>סקירה</button>
+        <button class="nav-item" onclick="switchTab('content')"><i class="fas fa-layer-group"></i>תוכן</button>
+        <button class="nav-item" onclick="switchTab('qa')"><i class="fas fa-comments"></i>שאלות</button>
+        <button class="nav-item" onclick="switchTab('glossary')"><i class="fas fa-book"></i>מונחים</button>
+        <button class="nav-item" onclick="switchTab('tasks')"><i class="fas fa-tasks"></i>מטלות</button>
+    </div>
+
+    <button class="fab-btn" onclick="openEditor()"><i class="fas fa-plus"></i></button>
+
+    <div class="editor-overlay" id="editorModal" onclick="closeEditor()">
+        <div class="editor-box" onclick="event.stopPropagation()">
+            <h3 style="text-align:center;border:none;margin-bottom:10px;">הוספת תוכן</h3>
+            <div class="type-scroll">
+                <button class="type-btn btn-text selected" onclick="setType(this, 'text')">טקסט</button>
+                <button class="type-btn btn-acc" onclick="setType(this, 'accordion')"><i class="fas fa-list"></i> נושא</button>
+                <button class="type-btn btn-ext" onclick="setType(this, 'external')"><i class="fas fa-book-open"></i> הרחבה</button>
+                <button class="type-btn btn-ctx" onclick="setType(this, 'context')"><i class="fas fa-link"></i> הקשר</button>
+                <button class="type-btn btn-ex" onclick="setType(this, 'example')"><i class="fas fa-lightbulb"></i> דוגמה</button>
+                <button class="type-btn btn-per" onclick="setType(this, 'personal')"><i class="fas fa-pen-fancy"></i> הערה</button>
+                <button class="type-btn btn-task" onclick="setType(this, 'task')"><i class="fas fa-tasks"></i> מטלה</button>
+            </div>
+            <input type="text" id="editorTitleInput" placeholder="כותרת..." style="display:none;">
+
+            <div class="editor-toolbar">
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('bold')"><b>B</b></button>
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('italic')"><i>I</i></button>
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('underline')"><u>U</u></button>
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('insertOrderedList')"><i class="fas fa-list-ol"></i></button>
+                <button class="tb-btn" onmousedown="event.preventDefault(); execCmd('insertUnorderedList')"><i class="fas fa-list-ul"></i></button>
+                <div style="width:1px;background:#ccc;margin:0 5px;"></div>
+                <div class="palette-row">
+                    <div class="color-swatch" style="background:#000000" onmousedown="event.preventDefault(); execCmd('foreColor','#000000')"></div>
+                    <div class="color-swatch" style="background:#d32f2f" onmousedown="event.preventDefault(); execCmd('foreColor','#d32f2f')"></div>
+                    <div class="color-swatch" style="background:#303f9f" onmousedown="event.preventDefault(); execCmd('foreColor','#303f9f')"></div>
+                    <div class="color-swatch" style="background:#388e3c" onmousedown="event.preventDefault(); execCmd('foreColor','#388e3c')"></div>
+                    <input type="color" id="cp" onchange="execCmd('foreColor', this.value)" style="visibility:hidden;width:0;">
+                </div>
+                <div style="width:1px;background:#ccc;margin:0 5px;"></div>
+                <button class="tb-btn" onmousedown="event.preventDefault(); createTermFromEditor()" title="צור מונח" style="color:var(--primary);"><i class="fas fa-book-open"></i></button>
+            </div>
+            <div id="richEditor" class="rich-editor" contenteditable="false"></div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeEditor()">ביטול</button>
+                <button class="btn-save" onclick="startPlacement()">בחר מיקום</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isEditMode=false, contentType='text', pendingHTML='', isDirty=false;
+        window.onbeforeunload = function() { if (isDirty) return "שינויים לא נשמרו"; };
+        function markDirty() { isDirty = true; }
+
+        window.initMetaData = function() {
+            const title = document.querySelector("meta[name='lesson-title']").content;
+            const teacher = document.querySelector("meta[name='lesson-teacher']").content;
+            const date = document.querySelector("meta[name='lesson-date']").content;
+            const subEl = document.getElementById('meta-subject');
+            const teachEl = document.getElementById('meta-value-teacher');
+            const dateEl = document.getElementById('meta-value-date');
+            if(!subEl.innerText) subEl.innerText = title;
+            if(!teachEl.innerText) teachEl.innerText = teacher;
+            if(!dateEl.value) dateEl.value = date;
+            updateHeader();
+            subEl.addEventListener('input', () => { markDirty(); updateHeader(); document.querySelector("meta[name='lesson-title']").setAttribute("content", subEl.innerText); });
+            teachEl.addEventListener('input', () => { markDirty(); document.querySelector("meta[name='lesson-teacher']").setAttribute("content", teachEl.innerText); });
+            dateEl.addEventListener('change', () => { markDirty(); document.querySelector("meta[name='lesson-date']").setAttribute("content", dateEl.value); });
+            document.getElementById('glossary-list').addEventListener('input', function(e) {
+                markDirty(); const li = e.target.closest('li');
+                if(li && li.hasAttribute('data-term-id')) {
+                    const tid = li.getAttribute('data-term-id');
+                    const parts = li.innerText.split(':');
+                    if(parts.length>1) {
+                         const newDef = parts.slice(1).join(':').trim();
+                         document.querySelectorAll(`.term[data-term-id="${tid}"]`).forEach(t => t.setAttribute('data-def', newDef));
+                    }
+                }
+            });
+        };
+
+        function updateHeader() {
+            const val = document.getElementById('meta-subject').innerText;
+            document.getElementById('header-title-text').innerText = val || 'סיכום שיעור';
+            document.title = val || 'סיכום שיעור';
+        }
+
+        function toggleSearch() {
+            const el = document.getElementById('searchContainer');
+            el.classList.toggle('active');
+            if(el.classList.contains('active')) {
+                document.getElementById('pageSearch').focus();
+                document.querySelectorAll('mark.found-mark').forEach(m => {
+                    const p = m.parentNode; parent.replaceChild(document.createTextNode(m.innerText), m); parent.normalize();
+                });
+            }
+        }
+
+        function handleSmartSearch(e) {
+            if(e.key !== 'Enter') return;
+            const term = document.getElementById('pageSearch').value.trim();
+            if(!term) return;
+            const walker = document.createTreeWalker(document.querySelector('.main-wrap'), NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            while(node = walker.nextNode()) {
+                if(node.parentElement.tagName === 'SCRIPT' || node.parentElement.tagName === 'STYLE') continue;
+                if(node.nodeValue.includes(term)) {
+                    let det = node.parentElement.closest('details');
+                    while(det) { det.open = true; det = det.parentElement.closest('details'); }
+                    const tab = node.parentElement.closest('.tab-content');
+                    if(tab) switchTab(tab.id);
+                    const range = document.createRange();
+                    const index = node.nodeValue.indexOf(term);
+                    range.setStart(node, index);
+                    range.setEnd(node, index + term.length);
+                    const mark = document.createElement('mark');
+                    mark.className = 'found-mark';
+                    range.surroundContents(mark);
+                    mark.scrollIntoView({behavior: 'smooth', block: 'center'});
+                    return;
+                }
+            }
+            alert('לא נמצא: ' + term);
+        }
+
+        function switchTab(id, btn) {
+            document.querySelectorAll('.tab-content, .tab-link, .nav-item').forEach(e=>e.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            const deskBtn = document.querySelector(`.tab-link[onclick*="'${id}'"]`);
+            if(deskBtn) deskBtn.classList.add('active');
+            const mobBtn = document.querySelector(`.nav-item[onclick*="'${id}'"]`);
+            if(mobBtn) mobBtn.classList.add('active');
+        }
+
+        function addTermToTab(text, def, id) {
+            const list = document.getElementById('glossary-list');
+            const li = document.createElement('li');
+            li.setAttribute('data-term-id', id);
+            const content = `<strong>${text}:</strong> ${def}`;
+            if(isEditMode) li.appendChild(createWrapper(content)); else li.innerHTML = content;
+            list.appendChild(li); markDirty();
+        }
+        window.createTerm = function() {
+            const sel = window.getSelection();
+            if (!sel.rangeCount || !sel.toString().trim()) return alert('סמן מילה');
+            const text = sel.toString();
+            const def = prompt("הגדרה:"); 
+            if (def) { 
+                const id='tid_'+Math.floor(Math.random()*10000);
+                document.execCommand('insertHTML',false,`<span class="term" data-def="${def}" data-term-id="${id}">${text}</span>`);
+                addTermToTab(text,def,id);
+            }
+        }
+        window.createTermFromEditor = function() { window.createTerm(); }
+
+        function openEditor(){ const ed=document.getElementById('richEditor'); ed.innerHTML=''; document.getElementById('editorTitleInput').value=''; document.getElementById('editorModal').style.display='flex'; ed.setAttribute('contenteditable','true'); setTimeout(()=>ed.focus(),100); }
+        function closeEditor(){document.getElementById('editorModal').style.display='none';}
+        function execCmd(c,v=null){document.execCommand(c,false,v);}
+
+        function setType(btn,type){
+            document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); contentType=type;
+            const tInp=document.getElementById('editorTitleInput'); tInp.style.display=(type!=='text')?'block':'none';
+            tInp.placeholder=(type==='accordion')?'כותרת נושא...':(type==='context')?'כותרת ההקשר...':'כותרת...';
+        }
+
+        function startPlacement(){
+            const html=document.getElementById('richEditor').innerHTML; const title=document.getElementById('editorTitleInput').value;
+            if(!html&&contentType!=='accordion')return alert('חסר תוכן');
+            let inner='';
+            if(contentType==='accordion') inner=`<details open><summary>${title||'נושא'}</summary><div class="acc-body content-zone">${html}</div></details>`;
+            else {
+                if(contentType==='text') inner=`<p>${html}</p>`;
+                else {
+                    let cls='',icon='';
+                    if(contentType==='external'){cls='hl-external'; icon='fa-book-open';}
+                    else if(contentType==='example'){cls='hl-example'; icon='fa-lightbulb';}
+                    else if(contentType==='personal'){cls='hl-success'; icon='fa-pen-fancy';}
+                    else if(contentType==='task'){cls='hl-fail'; icon='fa-tasks';}
+                    else if(contentType==='context'){cls='hl-context'; icon='fa-link';}
+                    inner=`<div class="highlight ${cls}"><h4><i class="fas ${icon}"></i> ${title||(contentType==='context'?'הקשר':'הרחבה')}</h4><div class="editable-content">${html}</div></div>`;
+                }
+            }
+            pendingHTML=inner;
+            document.getElementById('editorModal').style.display='none';
+            document.body.classList.add('placing-mode');
+            const t=document.createElement('div'); t.innerText="לחץ למקם"; t.style.cssText="position:fixed;top:80px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px;border-radius:20px;z-index:4000;"; document.body.appendChild(t); setTimeout(()=>t.remove(),3000);
+            document.addEventListener('click',placeHandler,true);
+        }
+        function placeHandler(e){
+            e.preventDefault();e.stopPropagation(); markDirty();
+            let target=e.target.closest('.edit-wrapper,details,li,p,.highlight');
+            let container=e.target.closest('.content-zone,.acc-body');
+            let node=document.createElement('div'); node.innerHTML=pendingHTML; let newEl=node.firstElementChild;
+            if(isEditMode && contentType!=='accordion') newEl=createWrapper(newEl);
+            if(target&&target.parentElement.closest('.content-zone,.acc-body')) target.insertAdjacentElement('afterend',newEl);
+            else if(container) container.appendChild(newEl);
+            else document.getElementById('content').appendChild(newEl);
+            document.body.classList.remove('placing-mode');
+            document.removeEventListener('click',placeHandler,true);
+            if(isEditMode){toggleEditMode();toggleEditMode();}
+        }
+
+        function toggleEditMode(){
+            isEditMode=!isEditMode; const btn=document.getElementById('editToggleBtn');
+            if(isEditMode){
+                document.body.classList.add('editing-mode'); btn.classList.add('active');
+                document.getElementById('meta-subject').setAttribute('contenteditable','true');
+                document.getElementById('meta-value-teacher').setAttribute('contenteditable','true');
+                document.getElementById('meta-value-date').removeAttribute('disabled');
+                document.querySelectorAll('.content-zone, .acc-body').forEach(z=>wrapDeep(z));
+                document.querySelectorAll('.editable-content').forEach(e=>{e.setAttribute('contenteditable','true');e.addEventListener('input',markDirty);});
+            } else {
+                document.body.classList.remove('editing-mode'); btn.classList.remove('active');
+                document.querySelectorAll('[contenteditable]').forEach(e=>e.setAttribute('contenteditable','false'));
+                document.getElementById('meta-value-date').setAttribute('disabled','true');
+            }
+        }
+        function wrapDeep(con){
+            Array.from(con.children).forEach(c=>{
+                if(c.classList.contains('highlight')){const i=c.querySelector('div:not(.wrapper-toolbar)');if(i)wrapDeep(i);}
+                if(c.classList.contains('edit-wrapper')||c.tagName==='BR'||c.tagName==='SUMMARY')return;
+                if(con.tagName==='OL'||con.tagName==='UL'){const w=createWrapper(c.innerHTML);c.innerHTML='';c.appendChild(w);}
+                else{const w=createWrapper(c.cloneNode(true));con.replaceChild(w,c);}
+            });
+        }
+        function createWrapper(inner){
+            const w=document.createElement('div');w.className='edit-wrapper';
+            const ctr=document.createElement('div');ctr.className='wrapper-toolbar';ctr.contentEditable="false";
+            ctr.innerHTML=`<div class="w-btn" onclick="moveBlock(this,-1)">▲</div><div class="w-btn" onclick="moveBlock(this,1)">▼</div><div class="w-btn term" onmousedown="event.preventDefault();termFromRow(this)"><i class="fas fa-book"></i></div><div class="w-btn del" onclick="deleteBlock(this)">✖</div>`;
+            const d=document.createElement('div');d.className='editable-content';d.setAttribute('contenteditable','true');d.addEventListener('input',markDirty);
+            if(typeof inner==='string')d.innerHTML=inner;else d.appendChild(inner);
+            w.appendChild(ctr);w.appendChild(d);return w;
+        }
+        window.moveBlock=function(b,d){let k=b.closest('.edit-wrapper');if(k.parentElement.tagName==='LI')k=k.parentElement;markDirty();if(d===-1&&k.previousElementSibling)k.parentNode.insertBefore(k,k.previousElementSibling);if(d===1&&k.nextElementSibling)k.parentNode.insertBefore(k.nextElementSibling,k);};
+        window.deleteBlock=function(b){if(confirm('למחוק?')){markDirty();let k=b.closest('.edit-wrapper');if(k.parentElement.tagName==='LI')k.parentElement.remove();else k.remove();}};
+        window.termFromRow=function(b){b.closest('.edit-wrapper').querySelector('.editable-content').focus();window.createTerm();};
+        document.getElementById('theme-toggle').addEventListener('click', ()=>document.body.classList.toggle('dark-mode'));
+        function downloadSource(){if(isEditMode)toggleEditMode();isDirty=false;const blob=new Blob([document.documentElement.outerHTML],{type:'text/html'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(document.title||'lesson')+'.html';a.click();}
+
+        if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', window.initMetaData); else window.initMetaData();
+    </script>
+
+</body></html>
